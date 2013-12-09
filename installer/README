@@ -1,0 +1,20 @@
+installer
+===================
+
+This is an installer for loongson system.
+
+It forked from the rfinstaller (an installer for DT7) project.
+
+now, it depends the follow projects:
+
+* libdiskswidget:
+  http://172.16.82.249/svn/redflag/desktop/libdiskswidget
+
+* libinstallerbase:
+  http://172.16.82.249/svn/redflag/desktop/libinstallerbase
+
+* ntregedit:
+  http://172.16.82.249/svn/redflag/desktop/ntregedit
+
+* qtermwidget:
+  http://qtermwidget.sourceforge.net

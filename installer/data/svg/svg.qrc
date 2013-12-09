@@ -1,0 +1,33 @@
+<RCC>
+    <qresource prefix="/svg" >
+        <file>bell.svg</file>
+        <file>book.svg</file>
+        <file>cdr.svg</file>
+        <file>cd.svg</file>
+        <file>clock.svg</file>
+        <file>colors.svg</file>
+        <file>core.svg</file>
+        <file>dvi.svg</file>
+        <file>encrypted.svg</file>
+        <file>file.svg</file>
+        <file>flags.svg</file>
+        <file>house.svg</file>
+        <file>html.svg</file>
+        <file>image.svg</file>
+        <file>kexi.svg</file>
+        <file>mail.svg</file>
+        <file>man.svg</file>
+        <file>metafont.svg</file>
+        <file>mozilla.svg</file>
+        <file>penguin.svg</file>
+        <file>soffice.svg</file>
+        <file>sound.svg</file>
+        <file>star.svg</file>
+        <file>tgz.svg</file>
+        <file>toys.svg</file>
+        <file>txt2.svg</file>
+        <file>vcalendar.svg</file>
+        <file>vcard.svg</file>
+        <file>wizard.svg</file>
+    </qresource>
+</RCC>

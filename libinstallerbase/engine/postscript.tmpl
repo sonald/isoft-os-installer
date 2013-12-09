@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# copy grub files
+#cp -a /usr/share/grub/i386-pc/* /boot/grub/
+
+# disable gpg check
+sed -i 's/gpgcheck=1/gpgcheck=0/' /etc/yum.conf
+
+# set /tmp 1777
+chmod 1777 /tmp
+
+# mkinitrd
+mount /proc
+mount /sys
+/sbin/new-kernel-pkg --package kernel --mkinitrd --depmod --install  `uname -r`
+
+# remove useless services
+chkconfig --del redflag-live
+chkconfig --del redflag-late-live
+rm -f /etc/init.d/redflag-live
+rm -f /etc/init.d/redflag-late-live
+
+# import RPM-GPG-KEY
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY
+
+# remove installer
+rpm -e rfinstaller
+rpm -e grub-install-guide
+
+# set timezone to CST
+/bin/cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+# ln -s grub.conf
+ln -s  /boot/grub/grub.conf  /etc/grub.conf
+
+# root setting
+mkdir -p /root/.kde/share/config/
+cp -fa /etc/skel/.kde/share/config/kdeglobals /root/.kde/share/config/kdeglobals

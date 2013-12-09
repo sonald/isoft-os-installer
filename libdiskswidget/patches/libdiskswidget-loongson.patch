@@ -1,0 +1,13 @@
+Index: libdiskswidget-0.1/libdiskswidget.pro
+===================================================================
+--- libdiskswidget-0.1.orig/libdiskswidget.pro
++++ libdiskswidget-0.1/libdiskswidget.pro
+@@ -6,7 +6,7 @@ TEMPLATE = lib
+ TARGET = diskswidget
+ DEPENDPATH += .
+ INCLUDEPATH += . /usr/include/glib-2.0 /usr/lib/glib-2.0/include /usr/include/parted++
+-LIBS += -lparted++ -lparted -linstallengine -lglib-2.0 -lntreg 
++LIBS += -lparted++ -lparted -linstallengine -lglib-2.0
+ 
+ # Input
+ HEADERS += addpartition.h \

@@ -1,0 +1,253 @@
+<ui version="4.0" >
+ <class>Edit</class>
+ <widget class="QDialog" name="Edit" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>417</width>
+    <height>310</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string/>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout" >
+   <item>
+    <layout class="QVBoxLayout" >
+     <item>
+      <layout class="QHBoxLayout" >
+       <item>
+        <widget class="QLabel" name="label" >
+         <property name="text" >
+          <string>&amp;Mount Point:</string>
+         </property>
+         <property name="buddy" >
+          <cstring>mntPointComboBox</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="mntPointComboBox" >
+         <property name="enabled" >
+          <bool>true</bool>
+         </property>
+         <property name="editable" >
+          <bool>false</bool>
+         </property>
+         <property name="currentIndex" >
+          <number>-1</number>
+         </property>
+         <item>
+          <property name="text" >
+           <string>/</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>/boot</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>/home</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>/tmp</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>/usr</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>/var</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>/usr/local</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>/opt</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" >
+       <item>
+        <widget class="QLabel" name="label_2" >
+         <property name="text" >
+          <string>Original File System Type:  </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="fsTypeLabel" >
+         <property name="text" >
+          <string/>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" >
+       <item>
+        <widget class="QLabel" name="label_4" >
+         <property name="text" >
+          <string>Size(MB): </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="sizeLabel" >
+         <property name="text" >
+          <string/>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="Line" name="line_2" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_6" >
+       <property name="text" >
+        <string>How would you want to deal with this partition?</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="unchangeButton" >
+       <property name="text" >
+        <string>&amp;Unchanged(Persist information)</string>
+       </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" >
+       <item>
+        <widget class="QRadioButton" name="formatButton" >
+         <property name="text" >
+          <string>&amp;Format this partition into:    </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="formatComboBox" >
+         <property name="enabled" >
+          <bool>false</bool>
+         </property>
+         <property name="currentIndex" >
+          <number>1</number>
+         </property>
+         <item>
+          <property name="text" >
+           <string>ext2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>ext3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>reiserfs</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>linux-swap</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>xfs</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="Line" name="line" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons" >
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>Edit</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>Edit</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

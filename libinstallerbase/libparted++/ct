@@ -1,0 +1,3 @@
+g++ -g -lparted -lparted++ testcase001.cpp -o testcase001
+g++ -g -lparted -lparted++ testcase002.cpp -o testcase002
+g++ -g -lparted -lparted++ testcase003.cpp -o testcase003

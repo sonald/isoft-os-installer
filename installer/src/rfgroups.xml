@@ -1,0 +1,2107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE comps PUBLIC "-//Red Hat, Inc.//DTD Comps info//EN" "comps.dtd">
+<comps>
+    <group>
+        <id>admin-tools</id>
+        <name>Administration Tools</name>
+        <name xml:lang="en_GB">Administration Tools</name>
+        <name xml:lang="es">Herramientas de Administración</name>
+        <name xml:lang="pt">Ferramentas de Administração</name>
+        <name xml:lang="pt_BR">Ferramentas Administrativas</name>
+        <name xml:lang="zh_CN">管理工具</name>
+        <name xml:lang="zh_TW">管理工具</name>
+        <description>This group is a collection of graphical administration tools for the system, such as for managing user accounts and configuring system hardware.</description>
+        <description xml:lang="en_GB">This group is a collection of graphical administration tools for the system, such as for managing user accounts and configuring system hardware.</description>
+        <description xml:lang="es">Este grupo es una colección  de herramientas gráficas de administración, tales como administración de cuentas de usuarios  y de configuración del hardware del sistema.</description>
+        <description xml:lang="pt">Este grupo é uma colecção de ferramentas gráficas de administração para o sistema, tal como a gestão das contas de utilizadores e configurar o 'hardware' do sistema.</description>
+        <description xml:lang="pt_BR">Este grupo é uma coleção de ferramentas gráficas de administração para o sistema, como a gestão de contas dos usuários e a configuração do hardware do sistema.</description>
+        <description xml:lang="zh_CN">这组软件包包括一个系统图形化管理工具的集合，譬如：管理用户帐号和配置系统硬件。</description>
+        <description xml:lang="zh_TW">這個群組是系統中圖形管理工具的收集，例如用來管理使用者帳號與設定系統硬體。</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>afrikaans-support</id>
+        <name>Afrikaans Support</name>
+        <name xml:lang="en_GB">Afrikaans Support</name>
+        <name xml:lang="es">Soporte para africano</name>
+        <name xml:lang="pt">Suporte a Afrikaans</name>
+        <name xml:lang="pt_BR">Suporte à Afrikaans</name>
+        <name xml:lang="zh_CN">南非荷兰语支持</name>
+        <name xml:lang="zh_TW">南非荷蘭語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>albanian-support</id>
+        <name>Albanian Support</name>
+        <name xml:lang="es">Soporte para albanés</name>
+        <name xml:lang="pt_BR">Suporte à Albanês</name>
+        <name xml:lang="zh_CN">阿尔巴尼亚语支持</name>
+        <name xml:lang="zh_TW">阿爾班尼亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>arabic-support</id>
+        <name>Arabic Support</name>
+        <name xml:lang="en_GB">Arabic Support</name>
+        <name xml:lang="es">Soporte para árabe</name>
+        <name xml:lang="pt">Suporte a Árabe</name>
+        <name xml:lang="pt_BR">Suporte à Árabe</name>
+        <name xml:lang="zh_CN">阿拉伯语支持</name>
+        <name xml:lang="zh_TW">阿拉伯語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>armenian-support</id>
+        <name>Armenian Support</name>
+        <name xml:lang="es">Soporte para armenio</name>
+        <name xml:lang="pt">Suporte a Arménio</name>
+        <name xml:lang="pt_BR">Suporte à Armênio</name>
+        <name xml:lang="zh_CN">亚美尼亚语支持</name>
+        <name xml:lang="zh_TW">亞美尼亞語支援</name>
+        <description>This group is a collection of tools and resources of Armenian environments.</description>
+        <description xml:lang="es">Este grupo es un conjunto de herramientas y recursos de los entornos en Armenio.</description>
+        <description xml:lang="pt">Este grupo é uma colecção de ferramentas e recursos para ambientes Arménios.</description>
+        <description xml:lang="pt_BR">Este grupo é um coleção de ferramentas e recursos de ambientes armênios.</description>
+        <description xml:lang="zh_CN">这一组是用于亚美尼亚语环境的工具和资源。</description>
+        <description xml:lang="zh_TW">這個群組包括亞美尼亞環境的工具與資源。</description>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>assamese-support</id>
+        <name>Assamese Support</name>
+        <name xml:lang="en_GB">Assamese Support</name>
+        <name xml:lang="es">Soporte para assamés</name>
+        <name xml:lang="pt">Suporte a Assamese</name>
+        <name xml:lang="pt_BR">Suporte à Assamês</name>
+        <name xml:lang="zh_CN">阿萨姆语支持</name>
+        <name xml:lang="zh_TW">阿薩姆語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>authoring-and-publishing</id>
+        <name>Authoring and Publishing</name>
+        <name xml:lang="en_GB">Authoring and Publishing</name>
+        <name xml:lang="es">Autoría y publicación</name>
+        <name xml:lang="pt">Autoria e Publicação</name>
+        <name xml:lang="pt_BR">Autoria e Publicação</name>
+        <name xml:lang="zh_CN">授权和出版</name>
+        <name xml:lang="zh_TW">編寫與出版</name>
+        <description>These tools allow you to create documents in the DocBook format and convert them into HTML, PDF, Postscript, and text.</description>
+        <description xml:lang="es">Estas herramientas le permiten crear documentos en formato DocBook y convertirla a HTML, PDF, Postscript y texto.</description>
+        <description xml:lang="pt">Estas ferramentas permitem-lhe criar a documentação no formato DocBook e convertê-la para HTML, PDF, PostScript e texto.</description>
+        <description xml:lang="pt_BR">Estas ferramentas permitem criar documentos no formato DocBook e convertê-los para HTML, PDF, PostScript e texto.</description>
+        <description xml:lang="zh_CN">这些软件包允许您创建 DocBook 格式的文档，并将它们转换成 HTML, PDF, Postscript 和文本格式。</description>
+        <description xml:lang="zh_TW">這些工具讓您可以建立 DocBook 格式的文件，並將它們轉換為 HTML, PDF, Postscript 與標準文字檔。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>base</id>
+        <name>Base</name>
+        <name xml:lang="en_GB">Base</name>
+        <name xml:lang="es">Base</name>
+        <name xml:lang="pt">Base</name>
+        <name xml:lang="pt_BR">Base</name>
+        <name xml:lang="zh_CN">基本</name>
+        <name xml:lang="zh_TW">基礎</name>
+        <description>This group includes a minimal set of packages. Useful for creating small router/firewall boxes, for example.</description>
+        <description xml:lang="en_GB">This group includes a minimal set of packages. Useful for creating small router/firewall boxes, for example.</description>
+        <description xml:lang="es">Este grupo incluye un conjunto de paquetes mínimo. Muy útil para la creación de pequeñas cajas de enrutadores/cortafuegos, por ejemplo.</description>
+        <description xml:lang="pt">Este grupo incluí um conjunto mínimo de pacotes. Útil para criar pequenos 'routers'/'firewalls', por exemplo.</description>
+        <description xml:lang="pt_BR">Este grupo inclui um conjunto mínimo de pacotes. Útil, por exemplo, para a criação de pequenas caixas de roteadores/firewalls.</description>
+        <description xml:lang="zh_CN">该软件包组包括软件包的最小集。对于安装小型路由器或防火墙机器较有用。</description>
+        <description xml:lang="zh_TW">這群組包括了最少的套件。這對建立小型路由器 / 防火牆電腦特別有用。</description>
+        <default>true</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>base-x</id>
+        <name>X Window System</name>
+        <name xml:lang="en_GB">X Window System</name>
+        <name xml:lang="es">Sistema X Window</name>
+        <name xml:lang="pt">Sistema de Janelas X</name>
+        <name xml:lang="pt_BR">X Window System</name>
+        <name xml:lang="zh_CN">X 窗口系统</name>
+        <name xml:lang="zh_TW">X 視窗系統</name>
+        <description>Install this group of packages to use the base graphical (X) user interface.</description>
+        <description xml:lang="en_GB">Install this group of packages to use the base graphical (X) user interface.</description>
+        <description xml:lang="es">Instalar este grupo de paquetes para usar la interfaz de usuario (X) gráfica.</description>
+        <description xml:lang="pt">Instale este grupo de pacotes para usar a interface gráfica básica de utilizador (o X).</description>
+        <description xml:lang="pt_BR">Instale este grupo de pacotes para usar a interface gráfica base de usuário (X).</description>
+        <description xml:lang="zh_CN">安装这组软件包来使用基础图形化用户界面(X)。</description>
+        <description xml:lang="zh_TW">安裝這個套件群組以使用基礎的圖形 (X) 使用者介面。</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>basque-support</id>
+        <name>Basque Support</name>
+        <name xml:lang="en_GB">Basque Support</name>
+        <name xml:lang="es">Soporte para vascuence</name>
+        <name xml:lang="pt">Suporte a Basco</name>
+        <name xml:lang="pt_BR">Suporte à Basco</name>
+        <name xml:lang="zh_CN">巴斯克语支持</name>
+        <name xml:lang="zh_TW">巴斯克語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>belarusian-support</id>
+        <name>Belarusian Support</name>
+        <name xml:lang="es">Soporte para bielorruso</name>
+        <name xml:lang="pt_BR">Suporte à Bielo-russo</name>
+        <name xml:lang="zh_CN">白俄罗斯语支持</name>
+        <name xml:lang="zh_TW">白俄羅斯語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>bengali-support</id>
+        <name>Bengali Support</name>
+        <name xml:lang="en_GB">Bengali Support</name>
+        <name xml:lang="es">Soporte para bengalí</name>
+        <name xml:lang="pt">Suporte a Bengali</name>
+        <name xml:lang="pt_BR">Suporte à Bengali</name>
+        <name xml:lang="zh_CN">孟加拉语支持</name>
+        <name xml:lang="zh_TW">孟加拉語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>bhutanese-support</id>
+        <name>Bhutanese Support</name>
+        <name xml:lang="es">Soporte para bhutanese</name>
+        <name xml:lang="pt_BR">Suporte à Butanês</name>
+        <name xml:lang="zh_CN">不丹语支持</name>
+        <name xml:lang="zh_TW">不丹語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>bosnian-support</id>
+        <name>Bosnian Support</name>
+        <name xml:lang="es">Soporte para bosnio</name>
+        <name xml:lang="pt_BR">Suporte à Bósnio</name>
+        <name xml:lang="zh_CN">波斯尼亚语支持</name>
+        <name xml:lang="zh_TW">波士尼亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>brazilian-support</id>
+        <name>Brazilian Portuguese Support</name>
+        <name xml:lang="en_GB">Brazilian Portuguese Support</name>
+        <name xml:lang="es">Soporte para portugués brasileño</name>
+        <name xml:lang="pt">Suporte a Português do Brasil</name>
+        <name xml:lang="pt_BR">Suporte à Português Brasileiro</name>
+        <name xml:lang="zh_CN">巴西葡萄牙语支持</name>
+        <name xml:lang="zh_TW">巴西式葡萄牙文支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>breton-support</id>
+        <name>Breton Support</name>
+        <name xml:lang="en_GB">Breton Support</name>
+        <name xml:lang="es">Soporte para bretón</name>
+        <name xml:lang="pt">Suporte a Bretão</name>
+        <name xml:lang="pt_BR">Suporte à Bretão</name>
+        <name xml:lang="zh_CN">布尔吞语支持</name>
+        <name xml:lang="zh_TW">不列塔尼語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>british-support</id>
+        <name>English (UK) Support</name>
+        <name xml:lang="es">Soporte para Inglés (RU)</name>
+        <name xml:lang="pt">Suporte a Inglês (GB)</name>
+        <name xml:lang="pt_BR">Suporte à Inglês (Reino Unido)</name>
+        <name xml:lang="zh_CN">英国英语支持</name>
+        <name xml:lang="zh_TW">英式英語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>buildsys-build</id>
+        <name>Buildsystem building group</name>
+        <name xml:lang="es">Buildsystem construyendo grupo</name>
+        <name xml:lang="pt_BR">Grupo de construção do Buildsystem</name>
+        <name xml:lang="zh_CN">编译系统基本组成</name>
+        <name xml:lang="zh_TW">系統建構群組</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>bulgarian-support</id>
+        <name>Bulgarian Support</name>
+        <name xml:lang="en_GB">Bulgarian Support</name>
+        <name xml:lang="es">Soporte para búlgaro</name>
+        <name xml:lang="pt">Suporte a Búlgaro</name>
+        <name xml:lang="pt_BR">Suporte à Búlgaro</name>
+        <name xml:lang="zh_CN">保加利亚语支持</name>
+        <name xml:lang="zh_TW">保加利亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>catalan-support</id>
+        <name>Catalan Support</name>
+        <name xml:lang="en_GB">Catalan Support</name>
+        <name xml:lang="es">Soporte para catalán</name>
+        <name xml:lang="pt">Suporte a Catalão</name>
+        <name xml:lang="pt_BR">Suporte à Catalão</name>
+        <name xml:lang="zh_CN">加泰隆语支持</name>
+        <name xml:lang="zh_TW">加泰隆語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>chinese-support</id>
+        <name>Chinese Support</name>
+        <name xml:lang="en_GB">Chinese Support</name>
+        <name xml:lang="es">Soporte para chino </name>
+        <name xml:lang="pt">Suporte a Chinês</name>
+        <name xml:lang="pt_BR">Suporte à Chinês</name>
+        <name xml:lang="zh_CN">中文支持</name>
+        <name xml:lang="zh_TW">中文支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>clustering</id>
+        <name>Clustering</name>
+        <name xml:lang="en_GB">Clustering</name>
+        <name xml:lang="es">Agrupamiento (clustering)</name>
+        <name xml:lang="pt">'Clusters'</name>
+        <name xml:lang="pt_BR">Clustering</name>
+        <name xml:lang="zh_CN">集群</name>
+        <name xml:lang="zh_TW">叢集（Clustering）</name>
+        <description>Clustering Support</description>
+        <description xml:lang="en_GB">Clustering Support</description>
+        <description xml:lang="es">Soporte para clustering (agrupamiento).</description>
+        <description xml:lang="pt">Suporte a 'Clusters'.</description>
+        <description xml:lang="pt_BR">Suporte a Clusters</description>
+        <description xml:lang="zh_CN">集群支持</description>
+        <description xml:lang="zh_TW">叢集（Clustering）支援</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>core</id>
+        <name>Core</name>
+        <name xml:lang="en_GB">Core</name>
+        <name xml:lang="es">Núcleo</name>
+        <name xml:lang="pt">Núcleo</name>
+        <name xml:lang="pt_BR">Núcleo</name>
+        <name xml:lang="zh_CN">核心</name>
+        <name xml:lang="zh_TW">主要</name>
+        <description>Smallest possible installation</description>
+        <description xml:lang="en_GB">Smallest possible installation</description>
+        <description xml:lang="es">Instalación lo más pequeña posible</description>
+        <description xml:lang="pt">A mais pequena instalação possível</description>
+        <description xml:lang="pt_BR">Menor instalação possível</description>
+        <description xml:lang="zh_CN">最小安装</description>
+        <description xml:lang="zh_TW">最小安裝</description>
+        <default>true</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>croatian-support</id>
+        <name>Croatian Support</name>
+        <name xml:lang="en_GB">Croatian Support</name>
+        <name xml:lang="es">Soporte para croata</name>
+        <name xml:lang="pt">Suporte a Croata</name>
+        <name xml:lang="pt_BR">Suporte à Croata</name>
+        <name xml:lang="zh_CN">克罗地亚语支持</name>
+        <name xml:lang="zh_TW">克羅埃西亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>czech-support</id>
+        <name>Czech Support</name>
+        <name xml:lang="en_GB">Czech Support</name>
+        <name xml:lang="es">Soporte para checo</name>
+        <name xml:lang="pt">Suporte a Checo</name>
+        <name xml:lang="pt_BR">Suporte à Checo</name>
+        <name xml:lang="zh_CN">捷克语支持</name>
+        <name xml:lang="zh_TW">捷克語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>danish-support</id>
+        <name>Danish Support</name>
+        <name xml:lang="en_GB">Danish Support</name>
+        <name xml:lang="es">Soporte para danés</name>
+        <name xml:lang="pt">Suporte a Dinamarquês</name>
+        <name xml:lang="pt_BR">Suporte à Dinamarquês</name>
+        <name xml:lang="zh_CN">丹麦语支持</name>
+        <name xml:lang="zh_TW">丹麥語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>development-libs</id>
+        <name>Development Libraries</name>
+        <name xml:lang="en_GB">Development Libraries</name>
+        <name xml:lang="es">Bibliotecas de desarrollo</name>
+        <name xml:lang="pt">Bibliotecas de Desenvolvimento</name>
+        <name xml:lang="pt_BR">Bibliotecas de Desenvolvimento</name>
+        <name xml:lang="zh_CN">开发库</name>
+        <name xml:lang="zh_TW">開發函式庫</name>
+        <description>The packages in this group are core libraries needed to develop applications.</description>
+        <description xml:lang="en_GB">The packages in this group are core libraries needed to develop applications.</description>
+        <description xml:lang="es">Este paquete incluye bibliotecas necesarias para desarrollar aplicaciones.</description>
+        <description xml:lang="pt">Os pacotes neste grupo contém bibliotecas de base necessárias para desenvolver aplicações.</description>
+        <description xml:lang="pt_BR">Os pacotes deste grupo são bibliotecas de base necessárias para desenvolver aplicações.</description>
+        <description xml:lang="zh_CN">该组中的软件包是开发应用程序所需的核心库。</description>
+        <description xml:lang="zh_TW">這個群組中的套件是用來開發應用程式所需的主要函式庫。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>development-tools</id>
+        <name>Development Tools</name>
+        <name xml:lang="en_GB">Development Tools</name>
+        <name xml:lang="es">Herramientas de desarrollo</name>
+        <name xml:lang="pt">Ferramentas de Desenvolvimento</name>
+        <name xml:lang="pt_BR">Ferramentas de Desenvolvimento</name>
+        <name xml:lang="zh_CN">开发工具</name>
+        <name xml:lang="zh_TW">開發工具</name>
+        <description>These tools include core development tools such as automake, gcc, perl, python, and debuggers.</description>
+        <description xml:lang="en_GB">These tools include core development tools such as automake, gcc, perl, python and debuggers.</description>
+        <description xml:lang="es">Estas herramientas incluyen las principales  herramientas de desarrollo, como por ejemplo automake, gcc, perl, python y depuradores.</description>
+        <description xml:lang="pt">Estas ferramentas incluem as ferramentas básicas de desenvolvimento como o automake, o gcc, o perl, o python e os depuradores.</description>
+        <description xml:lang="pt_BR">Estas ferramentas incluem ferramentas básicas de desenvolvimento como automake, gcc, perl, python e depuradores.</description>
+        <description xml:lang="zh_CN">这些工具包括 automake、gcc、perl、python 和调试器之类的核心开发工具。</description>
+        <description xml:lang="zh_TW">這些工具包括主要的開發工具，例如 automake, gcc, perl, python 以及 debuggers。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>dial-up</id>
+        <name>Dial-up Networking Support</name>
+        <name xml:lang="es">Soporte de Red por Modem</name>
+        <name xml:lang="pt">Suporte a Redes Telefónicas</name>
+        <name xml:lang="pt_BR">Suporte à Rede Dialup</name>
+        <name xml:lang="zh_CN">拨号网络支持</name>
+        <name xml:lang="zh_TW">撥號網路支援</name>
+        <description/>
+        <default>true</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>dns-server</id>
+        <name>DNS Name Server</name>
+        <name xml:lang="en_GB">DNS Name Server</name>
+        <name xml:lang="es">Servidor de nombres DNS</name>
+        <name xml:lang="pt">Servidor de Nomes DNS</name>
+        <name xml:lang="pt_BR">Servidor de Nomes DNS</name>
+        <name xml:lang="zh_CN">DNS 名称服务器</name>
+        <name xml:lang="zh_TW">DNS 名稱伺服器</name>
+        <description>This package group allows you to run a DNS name server (BIND) on the system.</description>
+        <description xml:lang="en_GB">This package group allows you to run a DNS name server (BIND) on the system.</description>
+        <description xml:lang="es">Este paquete le permite ejecutar un servidor de nombres DNS (BIND) en el sistema.</description>
+        <description xml:lang="pt">Este grupo de pacotes permite-lhe correr um servidor de nomes de DNS (o BIND) no sistema.</description>
+        <description xml:lang="pt_BR">Este grupo de pacotes permite rodar um servidor de nomes DNS (BIND) no sistema.</description>
+        <description xml:lang="zh_CN">该软件包组允许您在系统上运行 DNS 名称服务器(BIND)。</description>
+        <description xml:lang="zh_TW">這個套件群組讓您可以在系統上執行 DNS 名稱伺服器 (BIND)。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>dutch-support</id>
+        <name>Dutch Support</name>
+        <name xml:lang="en_GB">Dutch Support</name>
+        <name xml:lang="es">Soporte para holandés</name>
+        <name xml:lang="pt">Suporte a Holandês</name>
+        <name xml:lang="pt_BR">Suporte à Holandês</name>
+        <name xml:lang="zh_CN">荷兰语支持</name>
+        <name xml:lang="zh_TW">荷蘭語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>eclipse</id>
+        <name>Fedora Eclipse</name>
+        <name xml:lang="es">Fedora Eclipse</name>
+        <name xml:lang="pt_BR">Fedora Eclipse</name>
+        <name xml:lang="zh_CN">Fedora Eclipse</name>
+        <name xml:lang="zh_TW">Fedora Eclipse</name>
+        <description>Integrated Development Environments based on Eclipse.</description>
+        <description xml:lang="es">Entorno de Desarrollo Integrado basado en Eclipse.</description>
+        <description xml:lang="pt_BR">Ambientes Integrados de Desenvolvimento baseados no Eclipse.</description>
+        <description xml:lang="zh_CN">基于 Eclipse 的集成开发环境</description>
+        <description xml:lang="zh_TW">根基於 Eclipse 的整合開發環境。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>editors</id>
+        <name>Editors</name>
+        <name xml:lang="en_GB">Editors</name>
+        <name xml:lang="es">Editores</name>
+        <name xml:lang="pt">Editores</name>
+        <name xml:lang="pt_BR">Editores</name>
+        <name xml:lang="zh_CN">编辑器</name>
+        <name xml:lang="zh_TW">編輯器</name>
+        <description>Sometimes called text editors, these are programs that allow you to create and edit text files. This includes Emacs and Vi.</description>
+        <description xml:lang="es">Estos programas permiten crear y modificar archivos de texto. A veces se los conoce como editores de texto. Estos incluyen Emacs y Vi.</description>
+        <description xml:lang="pt">Normalmente chamados editores de texto, estes programas permitem-lhe criar e editar ficheiros. Inclui o Emacs e o Vi.</description>
+        <description xml:lang="pt_BR">Algumas vezes chamados de editores de texto, estes programas permitem criar e editar arquivos de texto. Isto inclui o Emacs e o Vi.</description>
+        <description xml:lang="zh_CN">有时叫做文本编辑器。它们是允许您创建和编辑文本文件的程序。包括 Emacs 和 Vi。</description>
+        <description xml:lang="zh_TW">這些程式可讓您可以建立、編輯文字檔案，有時候稱為文字編輯器。這包括了 Emacs 與 Vi。</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>education</id>
+        <name>Educational Software</name>
+        <name xml:lang="es">Software Educacional</name>
+        <name xml:lang="pt">'Software' Educativo</name>
+        <name xml:lang="pt_BR">Softwares Educacionais</name>
+        <name xml:lang="zh_CN">教育软件</name>
+        <name xml:lang="zh_TW">教育軟體</name>
+        <description>Educational software for learning</description>
+        <description xml:lang="es">Software educacional para aprendizaje</description>
+        <description xml:lang="pt">Aplicações educativas para a aprendizagem</description>
+        <description xml:lang="pt_BR">Softwares educacionais para aprendizado</description>
+        <description xml:lang="zh_CN">教育软件，适合学习</description>
+        <description xml:lang="zh_TW">教育軟體，供學習之用</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>engineering-and-scientific</id>
+        <name>Engineering and Scientific</name>
+        <name xml:lang="en_GB">Engineering and Scientific</name>
+        <name xml:lang="es">Ingeniería y científico</name>
+        <name xml:lang="pt">Engenharia e Ciência</name>
+        <name xml:lang="pt_BR">Engenharia e Ciência</name>
+        <name xml:lang="zh_CN">工程和科学</name>
+        <name xml:lang="zh_TW">工程與科學</name>
+        <description>This group includes packages for performing mathematical and scientific computations and plotting, as well as unit conversion.</description>
+        <description xml:lang="en_GB">This group includes packages for performing mathematical and scientific computations and plotting, as well as unit conversion.</description>
+        <description xml:lang="es">El grupo incluye paquetes para ejecutar cálculos matemáticos y científicos, así como trazados y conversión de unidades.</description>
+        <description xml:lang="pt">Este grupo inclui os pacotes para efectuar cálculos matemáticos e científicos, apresentá-los e efectuar a conversão de unidades.</description>
+        <description xml:lang="pt_BR">Este grupo inclui pacotes para efetuar cálculos matemáticos e científicos, plotar e efetuar conversões de unidades.</description>
+        <description xml:lang="zh_CN">这组软件包包括用来执行数学和科学计算、绘图、以及计量单位转换的软件包。</description>
+        <description xml:lang="zh_TW">這個群組包括的套件可用來執行數學與科學的計算與繪圖，以及單位的換算。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>esperanto-support</id>
+        <name>Esperanto Support</name>
+        <name xml:lang="es">Soporte para esperanto</name>
+        <name xml:lang="pt_BR">Suporte à Esperanto</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>estonian-support</id>
+        <name>Estonian Support</name>
+        <name xml:lang="en_GB">Estonian Support</name>
+        <name xml:lang="es">Soporte para estonio</name>
+        <name xml:lang="pt">Suporte a Estónio</name>
+        <name xml:lang="pt_BR">Suporte à Estoniano</name>
+        <name xml:lang="zh_CN">爱沙尼亚语支持</name>
+        <name xml:lang="zh_TW">愛沙尼亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>ethiopic-support</id>
+        <name>Ethiopic Support</name>
+        <name xml:lang="en_GB">Ethiopic Support</name>
+        <name xml:lang="es">Soporte para etíope</name>
+        <name xml:lang="pt">Suporte a Etiópio</name>
+        <name xml:lang="pt_BR">Suporte à Etíope</name>
+        <name xml:lang="zh_CN">埃塞俄比亚语支持</name>
+        <name xml:lang="zh_TW">衣索匹亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>faeroese-support</id>
+        <name>Faeroese Support</name>
+        <name xml:lang="en_GB">Faeroese Support</name>
+        <name xml:lang="es">Soporte para faroés</name>
+        <name xml:lang="pt">Suporte a Faroês</name>
+        <name xml:lang="pt_BR">Suporte à Faroês</name>
+        <name xml:lang="zh_CN">法罗斯语支持</name>
+        <name xml:lang="zh_TW">法羅語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>fedora-packager</id>
+        <name>Fedora Packager</name>
+        <name xml:lang="es">Empaquetador de Fedora</name>
+        <name xml:lang="pt_BR">Empacotador do Fedora</name>
+        <name xml:lang="zh_CN">Fedora Packager</name>
+        <name xml:lang="zh_TW">Fedora 套件管理器</name>
+        <description>Tools and Utilities needed by a Fedora Packager</description>
+        <description xml:lang="es">Herramientas y Utilitarios necesarios para un Empaquetador de Fedora</description>
+        <description xml:lang="pt_BR">Ferramentas e utilitários necessários para um Empacotador do Fedora</description>
+        <description xml:lang="zh_CN">Fedora Packager 需要的工具和程序</description>
+        <description xml:lang="zh_TW">Fedora 套件管理程式所需的工具與公用程式</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>filipino-support</id>
+        <name>Filipino Support</name>
+        <name xml:lang="es">Soporte para filipino</name>
+        <name xml:lang="pt_BR">Suporte à Filipino</name>
+        <name xml:lang="zh_CN">菲律宾语支持</name>
+        <name xml:lang="zh_TW">菲律賓語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>finnish-support</id>
+        <name>Finnish Support</name>
+        <name xml:lang="en_GB">Finnish Support</name>
+        <name xml:lang="es">Soporte para finlandés</name>
+        <name xml:lang="pt">Suporte a Finlandês</name>
+        <name xml:lang="pt_BR">Suporte à Finlandês</name>
+        <name xml:lang="zh_CN">芬兰语支持</name>
+        <name xml:lang="zh_TW">芬蘭語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>fonts</id>
+        <name>Fonts</name>
+        <name xml:lang="es">Fuentes</name>
+        <name xml:lang="pt_BR">Fontes</name>
+        <name xml:lang="zh_CN">字体</name>
+        <name xml:lang="zh_TW">字型</name>
+        <description>Fonts packages for rendering text on the desktop.</description>
+        <description xml:lang="es">Paquete de fuentes para renderizar texto en el escritorio</description>
+        <description xml:lang="pt_BR">Pacotes de fontes para renderizar textos no ambiente de trabalho.</description>
+        <description xml:lang="zh_CN">字体软件包用于在桌面环境中渲染字体。</description>
+        <description xml:lang="zh_TW">在桌面上顯示文字的字型套件。</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>french-support</id>
+        <name>French Support</name>
+        <name xml:lang="en_GB">French Support</name>
+        <name xml:lang="es">Soporte para francés</name>
+        <name xml:lang="pt">Suporte a Francês</name>
+        <name xml:lang="pt_BR">Suporte à Francês</name>
+        <name xml:lang="zh_CN">法语支持</name>
+        <name xml:lang="zh_TW">法語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>ftp-server</id>
+        <name>FTP Server</name>
+        <name xml:lang="en_GB">FTP Server</name>
+        <name xml:lang="es">Servidor FTP</name>
+        <name xml:lang="pt">Servidor de FTP</name>
+        <name xml:lang="pt_BR">Servidor FTP</name>
+        <name xml:lang="zh_CN">FTP 服务器</name>
+        <name xml:lang="zh_TW">FTP 伺服器</name>
+        <description>These tools allow you to run an FTP server on the system.</description>
+        <description xml:lang="en_GB">These tools allow you to run an FTP server on the system.</description>
+        <description xml:lang="es">Estas herramientas le permiten ejecutar un servidor FTP en el sistema.</description>
+        <description xml:lang="pt">Estas ferramentas permitem-lhe correr um servidor FTP no seu computador.</description>
+        <description xml:lang="pt_BR">Estas ferramentas permitem rodar um servidor FTP no seu computador.</description>
+        <description xml:lang="zh_CN">这些工具允许您在系统上运行 FTP 服务器。</description>
+        <description xml:lang="zh_TW">這些工具讓您可以在系統上執行 FTP 伺服器。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>gaelic-support</id>
+        <name>Gaelic Support</name>
+        <name xml:lang="en_GB">Gaelic Support</name>
+        <name xml:lang="es">Soporte para galés</name>
+        <name xml:lang="pt">Suporte a Gaélico</name>
+        <name xml:lang="pt_BR">Suporte à Gaélico</name>
+        <name xml:lang="zh_CN">盖尔语支持</name>
+        <name xml:lang="zh_TW">蓋爾語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>galician-support</id>
+        <name>Galician Support</name>
+        <name xml:lang="en_GB">Galician Support</name>
+        <name xml:lang="es">Soporte para gallego</name>
+        <name xml:lang="pt">Suporte a Galego</name>
+        <name xml:lang="pt_BR">Suporte à Galego</name>
+        <name xml:lang="zh_CN">加利西亚语支持</name>
+        <name xml:lang="zh_TW">加利西亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>games</id>
+        <name>Games and Entertainment</name>
+        <name xml:lang="en_GB">Games and Entertainment</name>
+        <name xml:lang="es">Juegos y entretenimiento</name>
+        <name xml:lang="pt">Jogos e Entretenimento</name>
+        <name xml:lang="pt_BR">Jogos e Entretenimento</name>
+        <name xml:lang="zh_CN">游戏和娱乐</name>
+        <name xml:lang="zh_TW">遊戲與娛樂</name>
+        <description>Various ways to relax and spend your free time.</description>
+        <description xml:lang="en_GB">Various ways to relax and spend your free time.</description>
+        <description xml:lang="es">Varias maneras de relajarse y pasar el tiempo libre.</description>
+        <description xml:lang="pt">Várias maneiras de relaxar e passar o seu tempo livre.</description>
+        <description xml:lang="pt_BR">Várias maneiras de relaxar e passar seu tempo livre.</description>
+        <description xml:lang="zh_CN">放松和打发时间的方式。</description>
+        <description xml:lang="zh_TW">許多種讓您放鬆以及消磨時間的方法。</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>georgian-support</id>
+        <name>Georgian Support</name>
+        <name xml:lang="es">Soporte para georgiano</name>
+        <name xml:lang="pt_BR">Suporte à Georgiano</name>
+        <name xml:lang="zh_CN">格鲁吉亚语支持</name>
+        <name xml:lang="zh_TW">喬治亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>german-support</id>
+        <name>German Support</name>
+        <name xml:lang="en_GB">German Support</name>
+        <name xml:lang="es">Soporte para alemán</name>
+        <name xml:lang="pt">Suporte a Alemão</name>
+        <name xml:lang="pt_BR">Suporte à Alemão</name>
+        <name xml:lang="zh_CN">德语支持</name>
+        <name xml:lang="zh_TW">德語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>gnome-desktop</id>
+        <name>GNOME Desktop Environment</name>
+        <name xml:lang="en_GB">GNOME Desktop Environment</name>
+        <name xml:lang="es">Entorno de escritorio de GNOME</name>
+        <name xml:lang="pt">Ambiente de Trabalho GNOME</name>
+        <name xml:lang="pt_BR">Ambiente de Trabalho GNOME</name>
+        <name xml:lang="zh_CN">GNOME 桌面环境</name>
+        <name xml:lang="zh_TW">GNOME 桌面環境</name>
+        <description>GNOME is a powerful graphical user interface which includes a panel, desktop, system icons, and a graphical file manager.</description>
+        <description xml:lang="es">GNOME es una interfase gráfica de usuario potente que incluye un panel, un escritorio, iconos del sistema y administrador de archivos gráficos.</description>
+        <description xml:lang="pt">O GNOME é uma poderosa interface gráfica que inclui um painel, um ambiente de trabalho, ícones de sistema e um gestor de ficheiros gráfico.</description>
+        <description xml:lang="pt_BR">O GNOME é uma poderosa interface gráfica que inclui um painel, uma área de trabalho, ícones de sistema e um gerenciador de arquivos gráfico.</description>
+        <description xml:lang="zh_CN">GNOME 是一个功能强大的图形化用户界面，它包括面板、桌面、系统图标、以及图形化文件管理器。</description>
+        <description xml:lang="zh_TW">GNOME 是個功能強大的圖形使用者介面，它含有面板、桌面、系統圖示以及圖形化的檔案管理員。</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>gnome-software-development</id>
+        <name>GNOME Software Development</name>
+        <name xml:lang="en_GB">GNOME Software Development</name>
+        <name xml:lang="es">Desarrollo de software de GNOME</name>
+        <name xml:lang="pt">Desenvolvimento de Software GNOME</name>
+        <name xml:lang="pt_BR">Desenvolvimento de Software GNOME</name>
+        <name xml:lang="zh_CN">GNOME 软件开发</name>
+        <name xml:lang="zh_TW">GNOME 軟體開發</name>
+        <description>Install these packages in order to develop GTK+ and GNOME graphical applications.</description>
+        <description xml:lang="en_GB">Install these packages in order to develop GTK+ and GNOME graphical applications.</description>
+        <description xml:lang="es">Instalar estos paquetes para desarrollar GTK+ y las aplicaciones gráficas de GNOME. </description>
+        <description xml:lang="pt">Instale estes pacotes se quiser desenvolver aplicações gráficas GTK+ ou GNOME.</description>
+        <description xml:lang="pt_BR">Instale estes pacotes para desenvolver aplicações gráficas do GNOME e em GTK+.</description>
+        <description xml:lang="zh_CN">安装这些软件包来开发 GTK+ 和 GNOME 图形化应用程序。</description>
+        <description xml:lang="zh_TW">安裝這些套件以開發 GTK+ 與 GNOME 圖形應用程式。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>graphical-internet</id>
+        <name>Graphical Internet</name>
+        <name xml:lang="en_GB">Graphical Internet</name>
+        <name xml:lang="es">Internet gráfica</name>
+        <name xml:lang="pt">Internet em Modo Gráfico</name>
+        <name xml:lang="pt_BR">Internet em Modo Gráfico</name>
+        <name xml:lang="zh_CN">图形化互联网</name>
+        <name xml:lang="zh_TW">圖形化網際網路</name>
+        <description>This group includes graphical email, Web, and chat clients.</description>
+        <description xml:lang="en_GB">This group includes graphical email, web, and chat clients.</description>
+        <description xml:lang="es">El grupo incluye clientes gráficos de correo electrónico, Web y chat. </description>
+        <description xml:lang="pt">Este grupo contém clientes gráficos de e-mail, Web e chat.</description>
+        <description xml:lang="pt_BR">Este grupo inclui clientes gráficos de e-mail, Web e chat.</description>
+        <description xml:lang="zh_CN">这组软件包包含图形化电子邮件、万维网和聊天客户。</description>
+        <description xml:lang="zh_TW">這個群組包括圖形的電子郵件、網頁以及聊天用戶端。</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>graphics</id>
+        <name>Graphics</name>
+        <name xml:lang="en_GB">Graphics</name>
+        <name xml:lang="es">Gráficos</name>
+        <name xml:lang="pt">Gráficos</name>
+        <name xml:lang="pt_BR">Gráficos</name>
+        <name xml:lang="zh_CN">图形</name>
+        <name xml:lang="zh_TW">圖形</name>
+        <description>This group includes packages to help you manipulate and scan images.</description>
+        <description xml:lang="en_GB">This group includes packages to help you manipulate and scan images.</description>
+        <description xml:lang="es">Este grupo incluye paquetes que le permitirán manipular y escanear imágenes.</description>
+        <description xml:lang="pt">Este grupo inclui pacotes que o ajudam a manipular e digitalizar imagens.</description>
+        <description xml:lang="pt_BR">Este grupo inclui pacotes que o ajudam a manipular e digitalizar imagens.</description>
+        <description xml:lang="zh_CN">这组软件包包括用来帮助您操作和扫描图像的软件包。</description>
+        <description xml:lang="zh_TW">這個群組包括了幫助您處理與掃描影像的套件。</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>greek-support</id>
+        <name>Greek Support</name>
+        <name xml:lang="en_GB">Greek Support</name>
+        <name xml:lang="es">Soporte para griego</name>
+        <name xml:lang="pt">Suporte a Grego</name>
+        <name xml:lang="pt_BR">Suporte à Grego</name>
+        <name xml:lang="zh_CN">希腊语支持</name>
+        <name xml:lang="zh_TW">希臘語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>gujarati-support</id>
+        <name>Gujarati Support</name>
+        <name xml:lang="en_GB">Gujarati Support</name>
+        <name xml:lang="es">Soporte para gujarati</name>
+        <name xml:lang="pt">Suporte a Gujarati</name>
+        <name xml:lang="pt_BR">Suporte à Gujarati</name>
+        <name xml:lang="zh_CN">古吉拉特语支持</name>
+        <name xml:lang="zh_TW">古吉拉地語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>hardware-support</id>
+        <name>Hardware Support</name>
+        <name xml:lang="es">Soporte para Hardware</name>
+        <name xml:lang="pt">Suporte ao 'Hardware'</name>
+        <name xml:lang="pt_BR">Suporte de Hardware</name>
+        <name xml:lang="zh_CN">硬件支持</name>
+        <name xml:lang="zh_TW">硬體支援</name>
+        <description>This group is a collection of tools for various hardware specific utilities.</description>
+        <description xml:lang="es">Este grupo es un conjunto de herramientas para diversas finalidades específicas al hardware.</description>
+        <description xml:lang="pt">Este grupo é uma colecção de ferramentas para diversos utilitários específicos de 'hardware'.</description>
+        <description xml:lang="pt_BR">Este grupo é uma coleção de ferramentas para vários utilitários de hardwares específicos.</description>
+        <description xml:lang="zh_CN">这一组是处理硬件方面问题的工具。</description>
+        <description xml:lang="zh_TW">這個群組包括多種特定硬體工具程式的工具與資源。</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>hebrew-support</id>
+        <name>Hebrew Support</name>
+        <name xml:lang="en_GB">Hebrew Support</name>
+        <name xml:lang="es">Soporte para hebreo</name>
+        <name xml:lang="pt">Suporte a Hebreu</name>
+        <name xml:lang="pt_BR">Suporte à Hebraico</name>
+        <name xml:lang="zh_CN">希伯来语支持</name>
+        <name xml:lang="zh_TW">希伯來語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>hindi-support</id>
+        <name>Hindi Support</name>
+        <name xml:lang="en_GB">Hindi Support</name>
+        <name xml:lang="es">Soporte para indú</name>
+        <name xml:lang="pt">Suporte a Hindu</name>
+        <name xml:lang="pt_BR">Suporte à Hindi</name>
+        <name xml:lang="zh_CN">印地语支持</name>
+        <name xml:lang="zh_TW">印度語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>hungarian-support</id>
+        <name>Hungarian Support</name>
+        <name xml:lang="en_GB">Hungarian Support</name>
+        <name xml:lang="es">Soporte para húngaro</name>
+        <name xml:lang="pt">Suporte a Húngaro</name>
+        <name xml:lang="pt_BR">Suporte à Húngaro</name>
+        <name xml:lang="zh_CN">匈牙利语支持</name>
+        <name xml:lang="zh_TW">匈牙利語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>icelandic-support</id>
+        <name>Icelandic Support</name>
+        <name xml:lang="en_GB">Icelandic Support</name>
+        <name xml:lang="es">Soporte para islandés</name>
+        <name xml:lang="pt">Suporte a Islandês</name>
+        <name xml:lang="pt_BR">Suporte à Islandês</name>
+        <name xml:lang="zh_CN">冰岛语支持</name>
+        <name xml:lang="zh_TW">冰島語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>indonesian-support</id>
+        <name>Indonesian Support</name>
+        <name xml:lang="en_GB">Indonesian Support</name>
+        <name xml:lang="es">Soporte para indonesio</name>
+        <name xml:lang="pt">Suporte a Indonésio</name>
+        <name xml:lang="pt_BR">Suporte à Indonésio</name>
+        <name xml:lang="zh_CN">印度尼西亚语支持</name>
+        <name xml:lang="zh_TW">印度尼西亞文支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>inuktitut-support</id>
+        <name>Inuktitut Support</name>
+        <name xml:lang="es">Soporte para inuktitut</name>
+        <name xml:lang="pt_BR">Suporte à Inuktitut</name>
+        <name xml:lang="zh_CN">伊努伊特语支持</name>
+        <name xml:lang="zh_TW">因纽特語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>irish-support</id>
+        <name>Irish Support</name>
+        <name xml:lang="en_GB">Irish Support</name>
+        <name xml:lang="es">Soporte para irlandés</name>
+        <name xml:lang="pt">Suporte a Irlandês</name>
+        <name xml:lang="pt_BR">Suporte à Irlandês</name>
+        <name xml:lang="zh_CN">爱尔兰语支持</name>
+        <name xml:lang="zh_TW">愛爾蘭語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>italian-support</id>
+        <name>Italian Support</name>
+        <name xml:lang="en_GB">Italian Support</name>
+        <name xml:lang="es">Soporte para italiano</name>
+        <name xml:lang="pt">Suporte a Italiano</name>
+        <name xml:lang="pt_BR">Suporte à Italiano</name>
+        <name xml:lang="zh_CN">意大利语支持</name>
+        <name xml:lang="zh_TW">義大利文支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>japanese-support</id>
+        <name>Japanese Support</name>
+        <name xml:lang="en_GB">Japanese Support</name>
+        <name xml:lang="es">Soporte para japonés</name>
+        <name xml:lang="pt">Suporte a Japonês</name>
+        <name xml:lang="pt_BR">Suporte à Japonês</name>
+        <name xml:lang="zh_CN">日语支持</name>
+        <name xml:lang="zh_TW">日文支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>java</id>
+        <name>Java</name>
+        <name xml:lang="en_GB">Java</name>
+        <name xml:lang="es">Java</name>
+        <name xml:lang="pt">Java</name>
+        <name xml:lang="pt_BR">Java</name>
+        <name xml:lang="zh_CN">Java</name>
+        <name xml:lang="zh_TW">Java</name>
+        <description>Support for running programs written in the Java programming language.</description>
+        <description xml:lang="en_GB">Support for running programs written in the Java programming language.</description>
+        <description xml:lang="es">Soporte para ejecutar programas escritos en el lenguaje de programación Java.</description>
+        <description xml:lang="pt">Suporte para correr programas escritos na linguagem de programação Java.</description>
+        <description xml:lang="pt_BR">Suporte para a execução de programas escritos na linguagem de programação Java.</description>
+        <description xml:lang="zh_CN">对运行使用 Java 编程语言编写的程序的支持。</description>
+        <description xml:lang="zh_TW">Java 程式語言的執行程式支援。</description>
+        <default>true</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>java-development</id>
+        <name>Java Development</name>
+        <name xml:lang="en_GB">Java Development</name>
+        <name xml:lang="es">Desarrollo en Java</name>
+        <name xml:lang="pt">Desenvolvimento Java</name>
+        <name xml:lang="pt_BR">Desenvolvimento em Java</name>
+        <name xml:lang="zh_CN">Java开发</name>
+        <name xml:lang="zh_TW">Java 程式開發</name>
+        <description>Support for developing programs in the Java programming language.</description>
+        <description xml:lang="en_GB">Support for developing programs in the Java programming language.</description>
+        <description xml:lang="es">Soporte para el desarrollo de programas en el lenguaje de programación Java.</description>
+        <description xml:lang="pt">Suporte para desenvolver programas na linguagem de programação Java.</description>
+        <description xml:lang="pt_BR">Suporte ao desenvolvimento de programas na linguagem de programação Java.</description>
+        <description xml:lang="zh_CN">对使用 Java 编程语言开发程序的支持。</description>
+        <description xml:lang="zh_TW">Java 程式語言的開發程式支援。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>kannada-support</id>
+        <name>Kannada Support</name>
+        <name xml:lang="en_GB">Kannada Support</name>
+        <name xml:lang="es">Soporte para japonés (kannada)</name>
+        <name xml:lang="pt">Suporte a Kannada</name>
+        <name xml:lang="pt_BR">Suporte à Kannada</name>
+        <name xml:lang="zh_CN">坎纳达语支持</name>
+        <name xml:lang="zh_TW">卡納達語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>kashubian-support</id>
+        <name>Kashubian Support</name>
+        <name xml:lang="es">Soporte para casubiano</name>
+        <name xml:lang="pt_BR">Suporte à Kashubian</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>kde-desktop</id>
+        <name>KDE (K Desktop Environment)</name>
+        <name xml:lang="en_GB">KDE (K Desktop Environment)</name>
+        <name xml:lang="es">KDE (K Desktop Environment)</name>
+        <name xml:lang="pt">Ambiente de Trabalho KDE</name>
+        <name xml:lang="pt_BR">Ambiente de Trabalho KDE</name>
+        <name xml:lang="zh_CN">KDE （K 桌面环境）</name>
+        <name xml:lang="zh_TW">KDE 桌面環境</name>
+        <description>KDE is a powerful graphical user interface which includes a panel, desktop, system icons, and a graphical file manager.</description>
+        <description xml:lang="es">KDE es una interfaz de usuario gráfica y potente que incluye un panel, un escritorio, iconos del sistema y un gestor de archivos gráfico. </description>
+        <description xml:lang="pt">O KDE é uma interface gráfica poderosa que inclui um painel, um ambiente de trabalho, os ícones de sistema e um gestor de ficheiros gráfico.</description>
+        <description xml:lang="pt_BR">O KDE é uma poderosa interface gráfica que inclui um painel, uma área de trabalho, ícones de sistema e um gerenciador de arquivos gráfico.</description>
+        <description xml:lang="zh_CN">KDE 是一个功能强大的图形化用户界面，它包括面板、桌面、系统图标以及图形化文件管理器。</description>
+        <description xml:lang="zh_TW">KDE 是個功能強大的圖形使用者介面，它含有面板、桌面、系統圖示以及圖形化的檔案管理員。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>kde-software-development</id>
+        <name>KDE Software Development</name>
+        <name xml:lang="en_GB">KDE Software Development</name>
+        <name xml:lang="es">Desarrollo de software para KDE</name>
+        <name xml:lang="pt">Desenvolvimento de Software KDE</name>
+        <name xml:lang="pt_BR">Desenvolvimento de Software KDE</name>
+        <name xml:lang="zh_CN">KDE 软件开发</name>
+        <name xml:lang="zh_TW">KDE 軟體開發</name>
+        <description>Install these packages to develop QT and KDE graphical applications.</description>
+        <description xml:lang="en_GB">Install these packages to develop QT and KDE graphical applications.</description>
+        <description xml:lang="es">Instalar estos paquetes para desarrollar las aplicaciones gráficas QT y KDE.</description>
+        <description xml:lang="pt">Instale estes pacotes se quiser desenvolver aplicações gráficas QT ou KDE.</description>
+        <description xml:lang="pt_BR">Instale estes pacotes para desenvolver aplicações gráficas do KDE e em QT.</description>
+        <description xml:lang="zh_CN">安装这些软件包来开发 QT 和 KDE 图形化应用程序。</description>
+        <description xml:lang="zh_TW">安裝這些套件以開發 QT 與 KDE 圖形應用程式。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>khmer-support</id>
+        <name>Khmer Support</name>
+        <name xml:lang="es">Soporte para jemer</name>
+        <name xml:lang="pt_BR">Suporte à Khmer</name>
+        <name xml:lang="zh_CN">高棉语支持</name>
+        <name xml:lang="zh_TW">高棉語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>korean-support</id>
+        <name>Korean Support</name>
+        <name xml:lang="en_GB">Korean Support</name>
+        <name xml:lang="es">Soporte para coreano</name>
+        <name xml:lang="pt">Suporte a Coreano</name>
+        <name xml:lang="pt_BR">Suporte à Coreano</name>
+        <name xml:lang="zh_CN">韩文支持</name>
+        <name xml:lang="zh_TW">韓文支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>lao-support</id>
+        <name>Lao Support</name>
+        <name xml:lang="es">Soporte para lao</name>
+        <name xml:lang="pt_BR">Suporte à Laosiano</name>
+        <name xml:lang="zh_CN">老挝语支持</name>
+        <name xml:lang="zh_TW">寮國語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>latvian-support</id>
+        <name>Latvian Support</name>
+        <name xml:lang="es">Soporte para letón</name>
+        <name xml:lang="pt_BR">Suporte à Letão</name>
+        <name xml:lang="zh_CN">拉脱维亚语支持</name>
+        <name xml:lang="zh_TW">拉托維亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>legacy-fonts</id>
+        <name>Legacy Fonts</name>
+        <name xml:lang="es">Fuentes Legacy</name>
+        <name xml:lang="pt_BR">Fontes Legadas</name>
+        <name xml:lang="zh_CN">旧字体</name>
+        <name xml:lang="zh_TW">舊有的字型</name>
+        <description>Older bitmap and vector fonts packages</description>
+        <description xml:lang="es">Paquetes para viejas fuentes de mapas de bit y fuentes vectoriales</description>
+        <description xml:lang="pt_BR">Pacotes de fontes vetoriais e bitmaps antigos</description>
+        <description xml:lang="zh_CN">过去使用的点阵和矢量字体包</description>
+        <description xml:lang="zh_TW">較舊的 bitmap 與向量字型套件</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>legacy-network-server</id>
+        <name>Legacy Network Server</name>
+        <name xml:lang="en_GB">Legacy Network Server</name>
+        <name xml:lang="es">Servidores de red anticuados</name>
+        <name xml:lang="pt">Servidores de Rede Legados</name>
+        <name xml:lang="pt_BR">Servidor de Rede Legada</name>
+        <name xml:lang="zh_CN">老的网络服务器</name>
+        <name xml:lang="zh_TW">舊式網路伺服器</name>
+        <description>These packages include servers for old network protocols such as rsh and telnet.</description>
+        <description xml:lang="en_GB">These packages include servers for old network protocols such as rsh and telnet.</description>
+        <description xml:lang="es">Estos paquetes incluyen servidores para antiguos protocolos de red,  tales como rsh y telnet.</description>
+        <description xml:lang="pt">Estes pacotes incluem servidores de rede para protocolos antigos tais como o rsh e o telnet.</description>
+        <description xml:lang="pt_BR">Estes pacotes incluem servidores para protocolos de rede antigos como rsh e telnet.</description>
+        <description xml:lang="zh_CN">这些软件包包括用于老的网络协议的服务器，例如 rsh 和 telnet。</description>
+        <description xml:lang="zh_TW">這些套件包括舊式網路協定的伺服器，例如 rsh 與 telnet。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>legacy-software-development</id>
+        <name>Legacy Software Development</name>
+        <name xml:lang="en_GB">Legacy Software Development</name>
+        <name xml:lang="es">Desarrollo de software anticuado</name>
+        <name xml:lang="pt">Desenvolvimento de Software Legado</name>
+        <name xml:lang="pt_BR">Desenvolvimento de Software Legado</name>
+        <name xml:lang="zh_CN">老的软件开发</name>
+        <name xml:lang="zh_TW">相容舊式軟體開發</name>
+        <description>These packages provide compatibility with previous releases.</description>
+        <description xml:lang="es">Estos paquetes proporcionan compatibilidad con versiones anteriores.</description>
+        <description xml:lang="pt">Estes pacotes fornecem suporte de compatibilidade com versões anteriores.</description>
+        <description xml:lang="pt_BR">Estes pacotes oferecem compatibilidade com as versões anteriores.</description>
+        <description xml:lang="zh_CN">这些软件包提供对以前发行版的兼容性支持。</description>
+        <description xml:lang="zh_TW">這些套件提供了較早版本的相容性支援。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>legacy-software-support</id>
+        <name>Legacy Software Support</name>
+        <name xml:lang="en_GB">Legacy Software Support</name>
+        <name xml:lang="es">Soporte para software anticuado</name>
+        <name xml:lang="pt">Suporte a Software Legado</name>
+        <name xml:lang="pt_BR">Suporte ao Software Legado</name>
+        <name xml:lang="zh_CN">老的软件支持</name>
+        <name xml:lang="zh_TW">舊式軟體支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>lithuanian-support</id>
+        <name>Lithuanian Support</name>
+        <name xml:lang="en_GB">Lithuanian Support</name>
+        <name xml:lang="es">Soporte para lituano</name>
+        <name xml:lang="pt">Suporte a Lituano</name>
+        <name xml:lang="pt_BR">Suporte à Lituano</name>
+        <name xml:lang="zh_CN">立陶宛语支持</name>
+        <name xml:lang="zh_TW">立陶宛語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>low-saxon-support</id>
+        <name>Low Saxon Support</name>
+        <name xml:lang="es">Soporte para bajo sajón</name>
+        <name xml:lang="pt_BR">Suporte à Baixo Saxão</name>
+        <name xml:lang="zh_CN">低地撒克逊语支持</name>
+        <name xml:lang="zh_TW">低地德语支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>macedonian-support</id>
+        <name>Macedonian Support</name>
+        <name xml:lang="es">Soporte para macedonio</name>
+        <name xml:lang="pt_BR">Suporte à Macedônio</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>mail-server</id>
+        <name>Mail Server</name>
+        <name xml:lang="en_GB">Mail Server</name>
+        <name xml:lang="es">Servidor de correo </name>
+        <name xml:lang="pt">Servidor de Mail</name>
+        <name xml:lang="pt_BR">Servidor de E-mail</name>
+        <name xml:lang="zh_CN">邮件服务器</name>
+        <name xml:lang="zh_TW">郵件伺服器</name>
+        <description>These packages allow you to configure an IMAP or SMTP mail server.</description>
+        <description xml:lang="en_GB">These packages allow you to configure an IMAP or SMTP mail server.</description>
+        <description xml:lang="es">Estos paquetes le permiten configurar un servidor de correo IMAP o SMTP.</description>
+        <description xml:lang="pt">Este pacotes permitem-lhe configurar um servidores de mail IMAP ou SMTP.</description>
+        <description xml:lang="pt_BR">Este pacotes permitem configurar servidores de e-mail IMAP ou SMTP.</description>
+        <description xml:lang="zh_CN">这些软件包允许您配置 IMAP 或 Postfix 邮件服务器。</description>
+        <description xml:lang="zh_TW">這些套件讓您可以設定 IMAP 或 SMTP 郵件伺服器。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>malay-support</id>
+        <name>Malay Support</name>
+        <name xml:lang="en_GB">Malay Support</name>
+        <name xml:lang="es">Soporte para malayo</name>
+        <name xml:lang="pt">Suporte a Malaio</name>
+        <name xml:lang="pt_BR">Suporte à Malaio</name>
+        <name xml:lang="zh_CN">马来语支持</name>
+        <name xml:lang="zh_TW">馬來文支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>malayalam-support</id>
+        <name>Malayalam Support</name>
+        <name xml:lang="en_GB">Malayam Support</name>
+        <name xml:lang="es">Soporte para malayo</name>
+        <name xml:lang="pt">Suporte a Malayalam</name>
+        <name xml:lang="pt_BR">Suporte à Malayalam</name>
+        <name xml:lang="zh_CN">马来语支持</name>
+        <name xml:lang="zh_TW">馬拉雅拉姆語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>maori-support</id>
+        <name>Maori Support</name>
+        <name xml:lang="es">Soporte para maorí</name>
+        <name xml:lang="pt_BR">Suporte à Maori</name>
+        <name xml:lang="zh_CN">毛利语支持</name>
+        <name xml:lang="zh_TW">毛利語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>marathi-support</id>
+        <name>Marathi Support</name>
+        <name xml:lang="en_GB">Marathi Support</name>
+        <name xml:lang="es">Soporte para marathi</name>
+        <name xml:lang="pt">Suporte a Marathi</name>
+        <name xml:lang="pt_BR">Suporte à Marati</name>
+        <name xml:lang="zh_CN">古吉拉特语支持</name>
+        <name xml:lang="zh_TW">馬拉地語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>mongolian-support</id>
+        <name>Mongolian Support</name>
+        <name xml:lang="es">Soporte para mongol</name>
+        <name xml:lang="pt_BR">Suporte à Mongol</name>
+        <name xml:lang="zh_CN">蒙古语支持</name>
+        <name xml:lang="zh_TW">蒙古語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>mysql</id>
+        <name>MySQL Database</name>
+        <name xml:lang="en_GB">MySQL Database</name>
+        <name xml:lang="es">Base de datos MySQL</name>
+        <name xml:lang="pt">Base de Dados MySQL</name>
+        <name xml:lang="pt_BR">Banco de Dados MySQL</name>
+        <name xml:lang="zh_CN">MySQL 数据库</name>
+        <name xml:lang="zh_TW">MySQL 資料庫</name>
+        <description>This package group contains packages useful for use with MySQL.</description>
+        <description xml:lang="en_GB">This package group contains packages useful for use with MySQL.</description>
+        <description xml:lang="es">Este grupo incluye paquetes útiles para usar con MySQL.</description>
+        <description xml:lang="pt">Este grupo inclui pacotes para utilização com o MySQL.</description>
+        <description xml:lang="pt_BR">Este grupo contém pacotes úteis para usar com o MySQL.</description>
+        <description xml:lang="zh_CN">这组软件包包括对 MySQL 有用的软件包。</description>
+        <description xml:lang="zh_TW">這個套件群組包括了幫助您使用 MySQL 的套件。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>nepali-support</id>
+        <name>Nepali Support</name>
+        <name xml:lang="es">Soporte para nepali</name>
+        <name xml:lang="pt_BR">Suporte à Nepalês</name>
+        <name xml:lang="zh_CN">尼泊尔语支持</name>
+        <name xml:lang="zh_TW">尼泊爾語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>network-server</id>
+        <name>Network Servers</name>
+        <name xml:lang="en_GB">Network Servers</name>
+        <name xml:lang="es">Servidores de red</name>
+        <name xml:lang="pt">Servidores de Rede</name>
+        <name xml:lang="pt_BR">Servidores de Rede</name>
+        <name xml:lang="zh_CN">网络服务器</name>
+        <name xml:lang="zh_TW">網路伺服器</name>
+        <description>These packages include network-based servers such as DHCP, Kerberos and NIS.</description>
+        <description xml:lang="en_GB">These packages include network-based servers such as DHCP, Kerberos and NIS.</description>
+        <description xml:lang="es">Estos paquetes incluyen servidores basados en la red tales como DHCP, Kerberos y NIS.</description>
+        <description xml:lang="pt">Estes pacotes incluem servidores de rede como o DHCP, Kerberos e NIS.</description>
+        <description xml:lang="pt_BR">Estes pacotes incluem servidores baseados em rede como o DHCP, Kerberos e NIS.</description>
+        <description xml:lang="zh_CN">这些软件包包括基于网络的服务器，例如 DHCP、Kerberos 和 NIS。</description>
+        <description xml:lang="zh_TW">這些套件包括網路為主的伺服器，例如 DHCP, Kerberos 與 NIS。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>news-server</id>
+        <name>News Server</name>
+        <name xml:lang="en_GB">News Server</name>
+        <name xml:lang="es">Servidor de noticias</name>
+        <name xml:lang="pt">Servidor de News</name>
+        <name xml:lang="pt_BR">Servidor de Notícias</name>
+        <name xml:lang="zh_CN">新闻服务器</name>
+        <name xml:lang="zh_TW">新聞伺服器</name>
+        <description>This group allows you to configure the system as a news server.</description>
+        <description xml:lang="en_GB">This group allows you to configure the system as a news server.</description>
+        <description xml:lang="es">Este grupo le permite configurar el sistema como un servidor de noticias.</description>
+        <description xml:lang="pt">Este grupo permite-lhe configurar o sistema como um servidor de notícias.</description>
+        <description xml:lang="pt_BR">Este grupo permite configurar o sistema como um servidor de notícias.</description>
+        <description xml:lang="zh_CN">这组软件包允许您把系统配置成新闻服务器。</description>
+        <description xml:lang="zh_TW">這個群組讓您可以設定系統為新聞伺服器。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>northern-sami-support</id>
+        <name>Northern Sami Support</name>
+        <name xml:lang="es">Soporte para sami septentrional</name>
+        <name xml:lang="pt_BR">Suporte à Sami do Norte</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>northern-sotho-support</id>
+        <name>Northern Sotho Support</name>
+        <name xml:lang="en_GB">Northern Sotho Support</name>
+        <name xml:lang="es">Soporte para Sotho del Norte</name>
+        <name xml:lang="pt">Suporte a Sotho do Norte</name>
+        <name xml:lang="pt_BR">Suporte à Sotho do Norte</name>
+        <name xml:lang="zh_CN">布尔吞语支持</name>
+        <name xml:lang="zh_TW">北索托語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>norwegian-support</id>
+        <name>Norwegian Support</name>
+        <name xml:lang="en_GB">Norwegian Support</name>
+        <name xml:lang="es">Soporte para noruego</name>
+        <name xml:lang="pt">Suporte a Norueguês</name>
+        <name xml:lang="pt_BR">Suporte à Norueguês</name>
+        <name xml:lang="zh_CN">挪威语支持</name>
+        <name xml:lang="zh_TW">挪威語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>office</id>
+        <name>Office/Productivity</name>
+        <name xml:lang="en_GB">Office/Productivity</name>
+        <name xml:lang="es">Oficina/Productividad</name>
+        <name xml:lang="pt">Escritório/Produtividade</name>
+        <name xml:lang="pt_BR">Escritório/Produtividade</name>
+        <name xml:lang="zh_CN">办公/生产率</name>
+        <name xml:lang="zh_TW">辦公軟體/生產力軟體</name>
+        <description>The applications include office suites, PDF viewers, and more.</description>
+        <description xml:lang="en_GB">These applications include office suites, PDF viewers, and more.</description>
+        <description xml:lang="es">Las aplicaciones incluyen los paquetes de ofimática, los visualizadores de PDF y mucho más.</description>
+        <description xml:lang="pt">As aplicações incluem pacotes de escritório, visualizadores de PDF e outros.</description>
+        <description xml:lang="pt_BR">As aplicações incluem suítes de escritório, visualizadores PDF e mais.</description>
+        <description xml:lang="zh_CN">包括的应用程序有办公套件、PDF 查看器等等。</description>
+        <description xml:lang="zh_TW">應用程式包括了辦公室套裝軟體、PDF 檢視器等等。</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>oriya-support</id>
+        <name>Oriya Support</name>
+        <name xml:lang="en_GB">Oriya Support</name>
+        <name xml:lang="es">Soporte para Oriya</name>
+        <name xml:lang="pt">Suporte a Oriya</name>
+        <name xml:lang="pt_BR">Suporte à Oriya</name>
+        <name xml:lang="zh_CN">叙利亚语支持</name>
+        <name xml:lang="zh_TW">奧利亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>persian-support</id>
+        <name>Persian Support</name>
+        <name xml:lang="es">Soporte para persa</name>
+        <name xml:lang="pt_BR">Suporte à Persa</name>
+        <name xml:lang="zh_CN">波斯语支持</name>
+        <name xml:lang="zh_TW">波斯語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>polish-support</id>
+        <name>Polish Support</name>
+        <name xml:lang="en_GB">Polish Support</name>
+        <name xml:lang="es">Soporte para polaco</name>
+        <name xml:lang="pt">Suporte a Polaco</name>
+        <name xml:lang="pt_BR">Suporte à Polonês</name>
+        <name xml:lang="zh_CN">波兰语支持</name>
+        <name xml:lang="zh_TW">波蘭語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>portuguese-support</id>
+        <name>Portuguese Support</name>
+        <name xml:lang="en_GB">Portuguese Support</name>
+        <name xml:lang="es">Soporte para portugués</name>
+        <name xml:lang="pt">Suporte a Português</name>
+        <name xml:lang="pt_BR">Suporte à Português</name>
+        <name xml:lang="zh_CN">葡萄牙语支持</name>
+        <name xml:lang="zh_TW">葡萄牙語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>printing</id>
+        <name>Printing Support</name>
+        <name xml:lang="en_GB">Printing Support</name>
+        <name xml:lang="es">Soporte para la impresión</name>
+        <name xml:lang="pt">Suporte a Impressão</name>
+        <name xml:lang="pt_BR">Suporte à Impressão</name>
+        <name xml:lang="zh_CN">打印支持</name>
+        <name xml:lang="zh_TW">列印支援</name>
+        <description>Install these tools to enable the system to print or act as a print server.</description>
+        <description xml:lang="en_GB">Install these tools to enable the system to print or act as a print server.</description>
+        <description xml:lang="es">Instalar estas herramientas para habilitar el sistema para imprimir o actuar como un servidor de impresión.</description>
+        <description xml:lang="pt">Instale estas ferramentas se desejar imprimir com o computador ou que este funcione como servidor de impressão.</description>
+        <description xml:lang="pt_BR">Instale estas ferramentas para habilitar o sistema a imprimir ou atuar como um servidor de impressão.</description>
+        <description xml:lang="zh_CN">安装这些工具来启用打印系统或充当打印服务器的系统。</description>
+        <description xml:lang="zh_TW">安裝這些工具以啟用系統的列印功能或當作列印伺服器。</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>punjabi-support</id>
+        <name>Punjabi Support</name>
+        <name xml:lang="en_GB">Punjabi Support</name>
+        <name xml:lang="es">Soporte para punjabi</name>
+        <name xml:lang="pt">Suporte a Punjabi</name>
+        <name xml:lang="pt_BR">Suporte à Punjabi</name>
+        <name xml:lang="zh_CN">旁遮普语支持</name>
+        <name xml:lang="zh_TW">旁遮普語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>romanian-support</id>
+        <name>Romanian Support</name>
+        <name xml:lang="en_GB">Romanian Support</name>
+        <name xml:lang="es">Soporte para rumano</name>
+        <name xml:lang="pt">Suporte a Romeno</name>
+        <name xml:lang="pt_BR">Suporte à Romeno</name>
+        <name xml:lang="zh_CN">罗马尼亚语支持</name>
+        <name xml:lang="zh_TW">羅馬尼亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>ruby</id>
+        <name>Ruby</name>
+        <name xml:lang="en_GB">Ruby</name>
+        <name xml:lang="es">Ruby</name>
+        <name xml:lang="pt">Ruby</name>
+        <name xml:lang="pt_BR">Ruby</name>
+        <name xml:lang="zh_CN">Ruby</name>
+        <name xml:lang="zh_TW">Ruby</name>
+        <description>Basic support for the Ruby programming language.</description>
+        <description xml:lang="en_GB">Basic support for the Ruby programming language.</description>
+        <description xml:lang="es">Soporte básico para el lenguaje de programación Ruby.</description>
+        <description xml:lang="pt">Suporte básico à linguagem de programação Ruby.</description>
+        <description xml:lang="pt_BR">Suporte básico à linguagem de programação Ruby.</description>
+        <description xml:lang="zh_CN">对 Ruby 编程语言的基本支持。</description>
+        <description xml:lang="zh_TW">Ruby 程式語言的基本支援。</description>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>russian-support</id>
+        <name>Russian Support</name>
+        <name xml:lang="en_GB">Russian Support</name>
+        <name xml:lang="es">Soporte para ruso</name>
+        <name xml:lang="pt">Suporte a Russo</name>
+        <name xml:lang="pt_BR">Suporte à Russo</name>
+        <name xml:lang="zh_CN">俄语支持</name>
+        <name xml:lang="zh_TW">俄語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>samoan-support</id>
+        <name>Samoan Support</name>
+        <name xml:lang="es">Soporte para saomano</name>
+        <name xml:lang="pt_BR">Suporte à Samoano</name>
+        <name xml:lang="zh_CN">萨摩亚语支持</name>
+        <name xml:lang="zh_TW">薩摩亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>serbian-support</id>
+        <name>Serbian Support</name>
+        <name xml:lang="en_GB">Serbian Support</name>
+        <name xml:lang="es">Soporte para serbio</name>
+        <name xml:lang="pt">Suporte a Sérvio</name>
+        <name xml:lang="pt_BR">Suporte à Sérvio</name>
+        <name xml:lang="zh_CN">塞尔维亚语支持</name>
+        <name xml:lang="zh_TW">賽爾維亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>server-cfg</id>
+        <name>Server Configuration Tools</name>
+        <name xml:lang="en_GB">Server Configuration Tools</name>
+        <name xml:lang="es">Herramientas de configuración del servidor</name>
+        <name xml:lang="pt">Ferramentas de Configuração de Servidores</name>
+        <name xml:lang="pt_BR">Ferramentas de Configuração de Servidores</name>
+        <name xml:lang="zh_CN">服务器配置工具</name>
+        <name xml:lang="zh_TW">伺服器設定工具</name>
+        <description>This group contains all of Red Hat's custom server configuration tools.</description>
+        <description xml:lang="en_GB">This group contains all of Red Hat's custom server configuration tools.</description>
+        <description xml:lang="es">Este grupo contiene todas las herramientas de configuración del servidor propias de Red Hat.</description>
+        <description xml:lang="pt">Este grupo contém todas as ferramentas de configuração de servidores da Red Hat.</description>
+        <description xml:lang="pt_BR">Este grupo contém todas as ferramentas personalizadas de configuração de servidores da Red Hat.</description>
+        <description xml:lang="zh_CN">这组软件包包含所有红帽的定制服务器配置工具。</description>
+        <description xml:lang="zh_TW">這個群組包括所有 Red Hat 自訂的伺服器設定工具。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>sinhala-support</id>
+        <name>Sinhala Support</name>
+        <name xml:lang="en_GB">Sinhala Support</name>
+        <name xml:lang="es">Soporte para sinhala</name>
+        <name xml:lang="pt">Suporte a Sinhala</name>
+        <name xml:lang="pt_BR">Suporte à Sinhala</name>
+        <name xml:lang="zh_CN">新哈拉语支持</name>
+        <name xml:lang="zh_TW">僧伽羅語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>slovak-support</id>
+        <name>Slovak Support</name>
+        <name xml:lang="en_GB">Slovak Support</name>
+        <name xml:lang="es">Soporte para eslovaco</name>
+        <name xml:lang="pt">Suporte a Eslovaco</name>
+        <name xml:lang="pt_BR">Suporte à Eslovaco</name>
+        <name xml:lang="zh_CN">斯洛伐克语支持</name>
+        <name xml:lang="zh_TW">斯洛伐克語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>slovenian-support</id>
+        <name>Slovenian Support</name>
+        <name xml:lang="en_GB">Slovenian Support</name>
+        <name xml:lang="es">Soporte para esloveno</name>
+        <name xml:lang="pt">Suporte a Esloveno</name>
+        <name xml:lang="pt_BR">Suporte à Esloveno</name>
+        <name xml:lang="zh_CN">斯洛文尼亚语支持</name>
+        <name xml:lang="zh_TW">斯洛法尼亞語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>smb-server</id>
+        <name>Windows File Server</name>
+        <name xml:lang="en_GB">Windows File Server</name>
+        <name xml:lang="es">Servidor de archivos Windows</name>
+        <name xml:lang="pt">Servidor de Ficheiros Windows</name>
+        <name xml:lang="pt_BR">Servidor de Arquivos Windows</name>
+        <name xml:lang="zh_CN">Windows 文件服务器</name>
+        <name xml:lang="zh_TW">Windows 檔案伺服器</name>
+        <description>This package group allows you to share files between Linux and MS Windows(tm) systems.</description>
+        <description xml:lang="en_GB">This package group allows you to share files between Linux and MS Windows(tm) systems.</description>
+        <description xml:lang="es">Este grupo de paquetes le permite compartir archivos entre los sistemas Linux y MS Windows (tm).</description>
+        <description xml:lang="pt">Este grupo de pacotes permite-lhe partilhar os ficheiros entre os sistemas Linux e MS Windows (tm).</description>
+        <description xml:lang="pt_BR">Este grupo de pacotes permite compartilhar arquivos entre os sistemas operacionais Linux e MS Windows(tm).</description>
+        <description xml:lang="zh_CN">该软件包组允许您在 Linux 和 MS Windows(tm) 系统间共享文件。</description>
+        <description xml:lang="zh_TW">這個套件群組使您可以在 Linux 與 MS Windows (tm) 系統間共享檔案。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>somali-support</id>
+        <name>Somali Support</name>
+        <name xml:lang="es">Soporte para somalí</name>
+        <name xml:lang="pt_BR">Suporte à Somali</name>
+        <name xml:lang="zh_CN">索马里语支持</name>
+        <name xml:lang="zh_TW">索馬利語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>sound-and-video</id>
+        <name>Sound and Video</name>
+        <name xml:lang="en_GB">Sound and Video</name>
+        <name xml:lang="es">Sonido y vídeo</name>
+        <name xml:lang="pt">Som e Video</name>
+        <name xml:lang="pt_BR">Som e Vídeo</name>
+        <name xml:lang="zh_CN">视频和音频</name>
+        <name xml:lang="zh_TW">音效與視訊</name>
+        <description>From CD recording to playing audio CDs and multimedia files, this package group allows you to work with sound and video on the system.</description>
+        <description xml:lang="en_GB">From CD recording to playing audio CDs and multimedia files, this package group allows you to work with sound and video on the system.</description>
+        <description xml:lang="es">Desde la grabación de CDs hasta la reproducción de CDs de audio y archivos multimedia, este paquete le permite trabajar con audio y video en su sistema.</description>
+        <description xml:lang="pt">Desde a gravação de CDs até à reprodução de CDs áudio e multimédia, este grupo de pacotes permite-lhe lidar com o som e o vídeo no sistema.</description>
+        <description xml:lang="pt_BR">De gravação de CDs até a reprodução de CDs de áudio e arquivos multimídia, este grupo de pacotes permite lidar com som e vídeo no sistema.</description>
+        <description xml:lang="zh_CN">从光盘录制到播放音频光盘和多媒体文件，该软件包组允许您使用系统上的音频和视频资源。</description>
+        <description xml:lang="zh_TW">從燒錄 CD 到播放音效 CD 與多媒體檔案，這個套件群組讓您可以在系統上使用音效與視訊的功能。</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>southern-ndebele-support</id>
+        <name>Southern Ndebele Support</name>
+        <name xml:lang="es">Soporte para Ndebele Sureño</name>
+        <name xml:lang="pt">Suporte a Ndebele do Sul</name>
+        <name xml:lang="pt_BR">Suporte à Ndebele do Sul</name>
+        <name xml:lang="zh_CN">南 Ndebele 语支持</name>
+        <name xml:lang="zh_TW">北恩德貝勒語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>southern-sotho-support</id>
+        <name>Southern Sotho Support</name>
+        <name xml:lang="es">Soporte para Sotho Sureño</name>
+        <name xml:lang="pt">Suporte a Sotho do Sul</name>
+        <name xml:lang="pt_BR">Suporte à Sotho do Sul</name>
+        <name xml:lang="zh_CN">南索托语支持</name>
+        <name xml:lang="zh_TW">南索托語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>spanish-support</id>
+        <name>Spanish Support</name>
+        <name xml:lang="en_GB">Spanish Support</name>
+        <name xml:lang="es">Soporte para español</name>
+        <name xml:lang="pt">Suporte a Espanhol</name>
+        <name xml:lang="pt_BR">Suporte à Espanhol</name>
+        <name xml:lang="zh_CN">西班牙语支持</name>
+        <name xml:lang="zh_TW">西班牙語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>sql-server</id>
+        <name>PostgreSQL Database</name>
+        <name xml:lang="en_GB">PostgreSQL Database</name>
+        <name xml:lang="es">Base de datos PostgreSQL</name>
+        <name xml:lang="pt">Base de Dados PostgreSQL</name>
+        <name xml:lang="pt_BR">Banco de Dados PostgreSQL</name>
+        <name xml:lang="zh_CN">PostgreSQL 数据库</name>
+        <name xml:lang="zh_TW">PostgreSQL 資料庫</name>
+        <description>This package group includes packages useful for use with Postgresql.</description>
+        <description xml:lang="en_GB">This package group includes packages useful for use with Postgresql.</description>
+        <description xml:lang="es">Este grupo de paquetes incluye paquetes útiles para usar con Postgresql.</description>
+        <description xml:lang="pt">Este grupo inclui pacotes para utilização com o Postgresql.</description>
+        <description xml:lang="pt_BR">Este grupo inclui pacotes úteis para usar com o Postgresql.</description>
+        <description xml:lang="zh_CN">这组软件包包括对 Postgresql 有用的软件包。</description>
+        <description xml:lang="zh_TW">這個套件群組包括了幫助您使用 Postgresql 的套件。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>swati-support</id>
+        <name>Swati Support</name>
+        <name xml:lang="es">Soporte para Swati</name>
+        <name xml:lang="pt">Suporte a Swati</name>
+        <name xml:lang="pt_BR">Suporte à Swati</name>
+        <name xml:lang="zh_CN">Swati 语支持</name>
+        <name xml:lang="zh_TW">史瓦濟語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>swedish-support</id>
+        <name>Swedish Support</name>
+        <name xml:lang="en_GB">Swedish Support</name>
+        <name xml:lang="es">Soporte para sueco</name>
+        <name xml:lang="pt">Suporte a Sueco</name>
+        <name xml:lang="pt_BR">Suporte à Sueco</name>
+        <name xml:lang="zh_CN">瑞典语支持</name>
+        <name xml:lang="zh_TW">瑞典語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>system-tools</id>
+        <name>System Tools</name>
+        <name xml:lang="en_GB">System Tools</name>
+        <name xml:lang="es">Herramientas del sistema </name>
+        <name xml:lang="pt">Ferramentas do Sistema</name>
+        <name xml:lang="pt_BR">Ferramentas do Sistema</name>
+        <name xml:lang="zh_CN">系统工具</name>
+        <name xml:lang="zh_TW">系統工具</name>
+        <description>This group is a collection of various tools for the system, such as the client for connecting to SMB shares and tools to monitor network traffic.</description>
+        <description xml:lang="en_GB">This group is a collection of various tools for the system, such as the client for connecting to SMB shares and tools to monitor network traffic.</description>
+        <description xml:lang="es">Este grupo es una colección de herramientas varias para el sistema, entre ellas se encuentra un cliente para conectarse a particiones SMB, herramientas para monitorear el tráfico de redes, entre otras. </description>
+        <description xml:lang="pt">Este grupo é uma colecção de ferramentas para o sistema, tal como o cliente para se ligar a partilhas de SMB e as ferramentas para monitorizar o tráfego de rede.</description>
+        <description xml:lang="pt_BR">Este grupo é uma coleção de várias ferramentas para o sistema, como o cliente para conectar a compartilhamentos SMB e ferramentas para monitorar o tráfego de rede.</description>
+        <description xml:lang="zh_CN">这组软件包是各类系统工具的集合，如：连接 SMB 共享的客户；监控网络交通的工具。</description>
+        <description xml:lang="zh_TW">這個群組是系統上許多種工具的收集，例如用來連線到網路芳鄰(SAMBA)共享的用戶端，以及用來監視網路流量的工具等等。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>tagalog-support</id>
+        <name>Tagalog Support</name>
+        <name xml:lang="es">Soporte para tagalo</name>
+        <name xml:lang="pt_BR">Suporte à Tagalog</name>
+        <name xml:lang="zh_CN">塔加洛语支持</name>
+        <name xml:lang="zh_TW">塔加拉族語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>tamil-support</id>
+        <name>Tamil Support</name>
+        <name xml:lang="en_GB">Tamil Support</name>
+        <name xml:lang="es">Soporte para tamil</name>
+        <name xml:lang="pt">Suporte a Tamil</name>
+        <name xml:lang="pt_BR">Suporte à Tamil</name>
+        <name xml:lang="zh_CN">泰米尔语支持</name>
+        <name xml:lang="zh_TW">泰米爾語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>telugu-support</id>
+        <name>Telugu Support</name>
+        <name xml:lang="en_GB">Telugu Support</name>
+        <name xml:lang="es">Soporte para telugu</name>
+        <name xml:lang="pt">Suporte a Telugu</name>
+        <name xml:lang="pt_BR">Suporte à Telugu</name>
+        <name xml:lang="zh_CN">泰卢固语支持</name>
+        <name xml:lang="zh_TW">泰盧固語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>text-internet</id>
+        <name>Text-based Internet</name>
+        <name xml:lang="en_GB">Text-based Internet</name>
+        <name xml:lang="es">Internet basada en texto</name>
+        <name xml:lang="pt">Internet em Modo Texto</name>
+        <name xml:lang="pt_BR">Internet em Modo Texto</name>
+        <name xml:lang="zh_CN">基于文本的互联网</name>
+        <name xml:lang="zh_TW">文字介面的網際網路</name>
+        <description>This group includes text-based email, Web, and chat clients. These applications do not require the X Window System.</description>
+        <description xml:lang="en_GB">This group includes text-based email, web, and chat clients. These applications do not require the X Window System.</description>
+        <description xml:lang="es">Este grupo incluye correo electrónico en forma de texto, clientes web y de chat. Estas aplicaciones no necesitan el sistema X Window.</description>
+        <description xml:lang="pt">Este grupo inclui o e-mail em modo texto, a Web e os clientes de conversação. Estas aplicações não necessitam do X Window System.</description>
+        <description xml:lang="pt_BR">Este grupo inclui clientes de e-mail em modo texto, de Web e de chat. Estas aplicações não necessitam do X Window System.</description>
+        <description xml:lang="zh_CN">这组软件包包含基于文本的电子邮件、万维网、和聊天客户的软件包。这些应用程序不需要 X 窗口系统。</description>
+        <description xml:lang="zh_TW">這個群組包括文字介面的電子郵件、網頁與聊天用戶端。 這些應用程式 並不需要 X 視窗系統。</description>
+        <default>true</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>thai-support</id>
+        <name>Thai Support</name>
+        <name xml:lang="en_GB">Thai Support</name>
+        <name xml:lang="es">Soporte para tailandés</name>
+        <name xml:lang="pt">Suporte a Tailandês</name>
+        <name xml:lang="pt_BR">Suporte à Tailandês</name>
+        <name xml:lang="zh_CN">泰语支持</name>
+        <name xml:lang="zh_TW">泰文支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>tibetan-support</id>
+        <name>Tibetan Support</name>
+        <name xml:lang="es">Soporte para tibetáno</name>
+        <name xml:lang="pt_BR">Suporte à Tibetano</name>
+        <name xml:lang="zh_CN">藏语支持</name>
+        <name xml:lang="zh_TW">西藏語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>tonga-support</id>
+        <name>Tonga Support</name>
+        <name xml:lang="es">Soporte para tongano</name>
+        <name xml:lang="pt_BR">Suporte à Tonga</name>
+        <name xml:lang="zh_CN">汤加语支持</name>
+        <name xml:lang="zh_TW">東加語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>tsonga-support</id>
+        <name>Tsonga Support</name>
+        <name xml:lang="en_GB">Tsonga Support</name>
+        <name xml:lang="es">Soporte para tsonga</name>
+        <name xml:lang="pt">Suporte a Tsonga</name>
+        <name xml:lang="pt_BR">Suporte à Tsonga</name>
+        <name xml:lang="zh_CN">宗加语支持</name>
+        <name xml:lang="zh_TW">聰加語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>tswana-support</id>
+        <name>Tswana Support</name>
+        <name xml:lang="en_GB">Tswana Support</name>
+        <name xml:lang="es">Soporte para tswana</name>
+        <name xml:lang="pt">Suporte a Tswana</name>
+        <name xml:lang="pt_BR">Suporte à Tswana</name>
+        <name xml:lang="zh_CN">泰斯文那语支持</name>
+        <name xml:lang="zh_TW">茨瓦納語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>turkish-support</id>
+        <name>Turkish Support</name>
+        <name xml:lang="en_GB">Turkish Support</name>
+        <name xml:lang="es">Soporte para turco</name>
+        <name xml:lang="pt">Suporte a Turco</name>
+        <name xml:lang="pt_BR">Suporte à Turco</name>
+        <name xml:lang="zh_CN">土耳其语支持</name>
+        <name xml:lang="zh_TW">土耳其語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>ukrainian-support</id>
+        <name>Ukrainian Support</name>
+        <name xml:lang="en_GB">Ukrainian Support</name>
+        <name xml:lang="es">Soporte para ucraniano </name>
+        <name xml:lang="pt">Suporte a Ucraniano</name>
+        <name xml:lang="pt_BR">Suporte à Ucraniano</name>
+        <name xml:lang="zh_CN">乌克兰语支持</name>
+        <name xml:lang="zh_TW">烏克蘭語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>urdu-support</id>
+        <name>Urdu Support</name>
+        <name xml:lang="es">Soporte para urdú</name>
+        <name xml:lang="pt_BR">Suporte à Urdu</name>
+        <name xml:lang="zh_CN">乌尔都语支持</name>
+        <name xml:lang="zh_TW">烏都語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>venda-support</id>
+        <name>Venda Support</name>
+        <name xml:lang="es">Soporte para Venda</name>
+        <name xml:lang="pt">Suporte a Venda</name>
+        <name xml:lang="pt_BR">Suporte à Venda</name>
+        <name xml:lang="zh_CN">文达语支持</name>
+        <name xml:lang="zh_TW">文達語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>vietnamese-support</id>
+        <name>Vietnamese Support</name>
+        <name xml:lang="es">Soporte para vietnamita</name>
+        <name xml:lang="pt_BR">Suporte à Vietnamita</name>
+        <name xml:lang="zh_CN">越南语支持</name>
+        <name xml:lang="zh_TW">越南語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>virtualization</id>
+        <name>Virtualization</name>
+        <name xml:lang="en_GB">Virtualisation</name>
+        <name xml:lang="es">Virtualización</name>
+        <name xml:lang="pt">Virtualização</name>
+        <name xml:lang="pt_BR">Virtualização</name>
+        <name xml:lang="zh_CN">虚拟化</name>
+        <name xml:lang="zh_TW">虛擬化</name>
+        <description>These packages provide a virtualization environment.</description>
+        <description xml:lang="es">Estos paquetes proporcionan un entorno de virtualización.</description>
+        <description xml:lang="pt">Estes pacotes oferece um ambiente de virtualização.</description>
+        <description xml:lang="pt_BR">Estes pacotes oferecem um ambiente de virtualização.</description>
+        <description xml:lang="zh_CN">这些软件包提供一个虚拟环境。</description>
+        <description xml:lang="zh_TW">這些套件提供了虛擬化環境。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>web-development</id>
+        <name>Web Development</name>
+        <name xml:lang="es">Desarrollo Web</name>
+        <name xml:lang="pt">Desenvolvimento Web</name>
+        <name xml:lang="pt_BR">Desenvolvimento Web</name>
+        <name xml:lang="zh_CN">网站架设</name>
+        <name xml:lang="zh_TW">網站開發</name>
+        <description>These packages are helpful when developing web applications or web pages.</description>
+        <description xml:lang="es">Estos paquetes son útiles para desarrollar aplicaciones web o páginas web.</description>
+        <description xml:lang="pt">Este pacotes são úteis ao desenvolver aplicações ou páginas Web.</description>
+        <description xml:lang="pt_BR">Estes pacotes são úteis no desenvolvimento de aplicações ou páginas web.</description>
+        <description xml:lang="zh_CN">这些软件包允许您创建网页和基于网页的应用程序。</description>
+        <description xml:lang="zh_TW">這些套件讓您設計網頁或發展網站應用程式。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>web-server</id>
+        <name>Web Server</name>
+        <name xml:lang="en_GB">Web Server</name>
+        <name xml:lang="es">Servidor Web</name>
+        <name xml:lang="pt">Servidor Web</name>
+        <name xml:lang="pt_BR">Servidor Web</name>
+        <name xml:lang="zh_CN">万维网服务器</name>
+        <name xml:lang="zh_TW">網頁伺服器</name>
+        <description>These tools allow you to run a Web server on the system.</description>
+        <description xml:lang="en_GB">These tools allow you to run a web server on the system.</description>
+        <description xml:lang="es">Estas herramientas le permiten ejecutar un servidor Web en el sistema.</description>
+        <description xml:lang="pt">Estas ferramentas permitem-lhe correr um servidor Web no seu computador.</description>
+        <description xml:lang="pt_BR">Estas ferramentas permitem rodar um servidor Web no seu computador.</description>
+        <description xml:lang="zh_CN">这些工具允许您在系统上运行万维网服务器。</description>
+        <description xml:lang="zh_TW">這些工具讓您可以在系統上執行網頁伺服器。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>walloon-support</id>
+        <name>Walloon Support</name>
+        <name xml:lang="es">Soporte para wallonés</name>
+        <name xml:lang="pt_BR">Suporte à Walloon</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>welsh-support</id>
+        <name>Welsh Support</name>
+        <name xml:lang="en_GB">Welsh Support</name>
+        <name xml:lang="es">Soporte para galés</name>
+        <name xml:lang="pt">Suporte a Galês</name>
+        <name xml:lang="pt_BR">Suporte à Galês</name>
+        <name xml:lang="zh_CN">威尔士语支持</name>
+        <name xml:lang="zh_TW">威爾斯語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>window-managers</id>
+        <name>Window Managers</name>
+        <name xml:lang="es">Administradores de Ventana</name>
+        <name xml:lang="pt">Gestores de Janelas</name>
+        <name xml:lang="pt_BR">Gerenciadores de Janelas</name>
+        <name xml:lang="zh_CN">窗口管理器</name>
+        <name xml:lang="zh_TW">視窗管理程式</name>
+        <description>Simple window managers that aren't part of a larger desktop environment.</description>
+        <description xml:lang="es">Administradores de ventanas simple que no son parte de un entorno de escritorio más grande.</description>
+        <description xml:lang="pt">Gestores de janelas simples que não façam parte de ambientes de trabalho.</description>
+        <description xml:lang="pt_BR">Gerenciadores de janelas simples que não fazem parte de um ambiente de trabalho maior.</description>
+        <description xml:lang="zh_CN">简单的窗口管理器，不是某个桌面环境的组成部分。</description>
+        <description xml:lang="zh_TW">簡易的視窗管理程式，並非大型桌面環境的一部分。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>x-software-development</id>
+        <name>X Software Development</name>
+        <name xml:lang="en_GB">X Software Development</name>
+        <name xml:lang="es">Desarrollo de software para X</name>
+        <name xml:lang="pt">Desenvolvimento de Software para X</name>
+        <name xml:lang="pt_BR">Desenvolvimento de Software X</name>
+        <name xml:lang="zh_CN">X 软件开发</name>
+        <name xml:lang="zh_TW">X 軟體開發</name>
+        <description>These packages allow you to develop applications for the X Window System.</description>
+        <description xml:lang="en_GB">These packages allow you to develop applications for the X Window System.</description>
+        <description xml:lang="es">Estos paquetes le permiten desarrollar aplicaciones para el sistema X Window.</description>
+        <description xml:lang="pt">Este pacotes permitem-lhe desenvolver aplicações para o X Window System.</description>
+        <description xml:lang="pt_BR">Estes pacotes permitem desenvolver aplicações para o X Window System.</description>
+        <description xml:lang="zh_CN">这些软件包允许您开发用于 X 窗口系统的应用程序。</description>
+        <description xml:lang="zh_TW">這些套件讓您可以為 X 視窗系統開發應用程式。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>xfce-desktop</id>
+        <name>XFCE</name>
+        <name xml:lang="es">XFCE</name>
+        <name xml:lang="pt">XFCE</name>
+        <name xml:lang="pt_BR">XFCE</name>
+        <name xml:lang="zh_CN">XFCE</name>
+        <name xml:lang="zh_TW">XFCE</name>
+        <description>A lightweight desktop environment that works well on low end machines.</description>
+        <description xml:lang="es">Un entorno de escritorio liviano que funciona bien en máquinas pequeñas.</description>
+        <description xml:lang="pt">Um ambiente de trabalho leve que funciona em máquinas lentas.</description>
+        <description xml:lang="pt_BR">Um ambiente de trabalho leve que funciona bem em máquinas de baixo custo.</description>
+        <description xml:lang="zh_CN">轻量级环境，即使在配置较低的机器上也能胜任。</description>
+        <description xml:lang="zh_TW">輕型的桌面環境，適用於低階電腦。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>xfce-software-development</id>
+        <name>XFCE Software Development</name>
+        <name xml:lang="es">Desarrollo de Software para XFCE</name>
+        <name xml:lang="pt">Desenvolvimento de Software para XFCE</name>
+        <name xml:lang="pt_BR">Desenvolvimento de Software XFCE</name>
+        <name xml:lang="zh_CN">XFCE 软件开发</name>
+        <name xml:lang="zh_TW">XFCE 軟體開發</name>
+        <description>Install these packages in order to develop GTK+ and XFCE graphical applications.</description>
+        <description xml:lang="es">Instale estos paquetes para desarrollar GTK+ y las aplicaciones gráficas de XFCE. </description>
+        <description xml:lang="pt">Instale estes pacotes se quiser desenvolver aplicações gráficas GTK+ e XFCE.</description>
+        <description xml:lang="pt_BR">Instale estes pacotes para desenvolver aplicações gráficas do XFCE e em GTK+.</description>
+        <description xml:lang="zh_CN">安装这些软件包来开发 GTK+ 和 XFCE 图形化应用程序。</description>
+        <description xml:lang="zh_TW">安裝這些套件以開發 GTK+ 與 XFCE 圖形應用程式。</description>
+        <default>false</default>
+        <uservisible>true</uservisible>
+    </group>
+    <group>
+        <id>xhosa-support</id>
+        <name>Xhosa Support</name>
+        <name xml:lang="es">Soporte para Xhosa</name>
+        <name xml:lang="pt">Suporte a Xhosa</name>
+        <name xml:lang="pt_BR">Suporte à Xhosa</name>
+        <name xml:lang="zh_CN">科萨语支持</name>
+        <name xml:lang="zh_TW">科薩語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+    <group>
+        <id>zulu-support</id>
+        <name>Zulu Support</name>
+        <name xml:lang="en_GB">Zulu Support</name>
+        <name xml:lang="es">Soporte para zulú</name>
+        <name xml:lang="pt">Suporte a Zulu</name>
+        <name xml:lang="pt_BR">Suporte à Zulu</name>
+        <name xml:lang="zh_CN">祖鲁语支持</name>
+        <name xml:lang="zh_TW">祖魯語支援</name>
+        <description/>
+        <default>false</default>
+        <uservisible>false</uservisible>
+    </group>
+</comps>

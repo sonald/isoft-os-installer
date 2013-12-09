@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Rfinstaller
+Name[zh_CN]=安装程序
+GenericName=Rfinstaller
+GenericName[zh_CN]=安装程序
+Comment=Red Flag Linux DT7.0 Installer
+Comment[zh_CN]=红旗Linux桌面版7.0安装程序
+Exec=kdesu rfinstaller
+Terminal=false
+Type=Application
+Icon=/usr/share/rfinstaller/images/rfinstaller.png
+Categories=Application;System;

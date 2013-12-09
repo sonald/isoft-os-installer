@@ -1,0 +1,234 @@
+2009-07-28  yetist  <yetist@gmail.com>
+
+	* src/wizardpage_mach_type.cpp: 
+	* makedist.sh: 
+	add loongson 2f pc support.
+
+2009-07-28  yetist  <yetist@gmail.com>
+
+	* translations/installer_pt.ts: 
+	* translations/installer_zh_CN.qm: 
+	* translations/installer_zh_TW.ts: 
+	* translations/installer_zh_CN.ts: 
+	* translations/installer_en.ts: 
+	* translations/installer_es.ts: 
+	* makets.sh: 
+	update translation for chinese.
+
+2009-07-27  yetist  <yetist@gmail.com>
+
+	* src/wizardpage_mach_type.h: 
+	* src/wizardpage_mach_type.cpp: 
+	add loongson 2f pc support.
+
+2009-03-24  yetist  <wuxiaotian@redflag-linux.com>
+	* translations/installer_zh_CN.ts:
+	modify chinese translate of the yeeloong.
+
+2009-03-5  yetist  <wuxiaotian@redflag-linux.com>
+
+	* translations/licence_zh_TW.html:
+	* translations/licence_zh_CN.html:
+	update licence copyright from "2000-2008" to "2000-2009"
+
+2009-02-16  yetist  <wuxiaotian@redflag-linux.com>
+
+	* translations/installer_zh_TW.qm: 
+	* translations/installer_pt.ts: 
+	* translations/installer_zh_CN.qm: 
+	* translations/installer_en.qm: 
+	* translations/installer_zh_TW.ts: 
+	* translations/installer_es.qm: 
+	* translations/installer_zh_CN.ts: 
+	* translations/installer_en.ts: 
+	* translations/installer_es.ts: 
+	* translations/installer_pt.qm: 
+	* src/wizardpage_welcome.cpp: 
+	* src/wizardpage_summary.cpp: 
+	* src/wizardpage_mach_type.cpp: 
+	* data/images/installer-background.png: 
+	remove "Desktop 7" from UI(change msgstr and image).
+
+2008-12-26  yetist  <wuxiaotian@redflag-linux.com>
+
+	* src/wizardpage_finish.h: 
+	* src/wizardpage_finish.cpp: 
+	remove restart check button.after done, we must reboot.
+
+2008-12-26  yetist  <wuxiaotian@redflag-linux.com>
+
+	* translations/installer_zh_TW.qm: 
+	* translations/installer_pt.ts: 
+	* translations/installer_zh_CN.qm: 
+	* translations/installer_en.qm: 
+	* translations/installer_zh_TW.ts: 
+	* translations/installer_es.qm: 
+	* translations/installer_zh_CN.ts: 
+	* translations/installer_en.ts: 
+	* translations/installer_es.ts: 
+	* translations/installer_pt.qm: 
+	update translation.
+	* games/game.cpp: 
+	use full width for game.
+
+2008-12-26  yetist  <wuxiaotian@redflag-linux.com>
+
+	* translations/installer_zh_TW.qm: 
+	* translations/installer_zh_CN.qm: 
+	* translations/installer_en.qm: 
+	* translations/installer_es.qm: 
+	* translations/installer_pt.qm: 
+	update translation.
+
+2008-12-24  yetist  <wuxiaotian@redflag-linux.com>
+
+	* src/wizardpage_progress.h: 
+	* src/wizardpage_progress.cpp: 
+	add a time indicator label.
+
+2008-12-24  yetist  <wuxiaotian@redflag-linux.com>
+
+	* translations/installer_pt.ts: 
+	* translations/installer_zh_TW.ts: 
+	* translations/installer_zh_CN.ts: 
+	* translations/installer_en.ts: 
+	* translations/installer_es.ts: 
+	* src/wizardpage_progress.cpp: 
+	update translation.
+
+2008-12-24  yetist  <wuxiaotian@redflag-linux.com>
+
+	* makedist.sh: use correct package name.
+	* rfinstaller.spec:  add lost file when packaging.
+
+2008-12-24  yetist  <wuxiaotian@redflag-linux.com>
+
+	* makedist.sh: add for distribute source code.
+	* rfinstaller.spec:  change version number.
+	* makets.sh: rename from updatets.sh.
+
+2008-12-23  yetist  <wuxiaotian@redflag-linux.com>
+
+	* projects.pro: add lost license.html files for install.
+
+2008-12-23  yetist  <wuxiaotian@redflag-linux.com>
+
+	* projects.pro:
+	install rflocale.xml rule is not correct.
+
+2008-12-23  yetist  <wuxiaotian@redflag-linux.com>
+
+	* projects.pro:
+	install rflocale.xml.
+
+2008-12-23  yetist  <wuxiaotian@redflag-linux.com>
+
+	* rfinstaller.spec:
+	add files for game support.
+
+2008-12-23  yetist  <wuxiaotian@redflag-linux.com>
+
+	* src/wizardpage_partition_mode.cpp:
+	fixed compile error on mips.
+
+2008-12-23  yetist  <wuxiaotian@redflag-linux.com>
+
+	* src/src.pro: remove some .h .cpp file from HEADER and SOURCES.
+	* src/wizard_installer.cpp: remove some page.
+	* src/wizardpage_progress.cpp: change progress bar style.
+	* games/games.pro: remove svg install target.
+
+2008-12-23  yetist  <wuxiaotian@redflag-linux.com>
+
+	* src/wizardpage_mach_type.cpp: 
+	call engine to process machine type.
+
+2008-12-23  yetist  <wuxiaotian@redflag-linux.com>
+
+	* games/*: 
+	* data/svg/*: 
+	add a game.
+	* updatets.sh:  update ts files.
+	* projects.pro: project file for project.
+	* data/rflocale.xml: locale for UI.
+
+2008-12-23  yetist  <wuxiaotian@redflag-linux.com>
+
+	* translations/*: 
+	* src/translations/*: 
+	* src/images/*: 
+	* data/images/*: 
+	* src/rfinstaller.spec: 
+	* rfinstaller.spec: 
+	* src/rfinstaller.desktop: 
+	* data/rfinstaller.desktop: 
+	put them to a new place.
+	* src/rfinstaller.pro: 
+	* src/src.pro: 
+	rename.
+	* src/tools/*: 
+	remove them.
+	* src/wizardpage_progress.h: 
+	* src/wizardpage_summary.cpp: 
+	* src/wizardpage_progress.cpp: 
+	* src/wizardpage_mach_type.cpp: 
+	remove partition select page, remove Advance button(for grub).
+	add a button to call game on progress page.
+
+2008-12-19  yetist  <wuxiaotian@redflag-linux.com>
+
+	* src/wizard_installer.cpp: 
+	* src/wizardpage_finish.cpp: 
+	* src/wizardpage_summary.cpp: 
+	* src/wizardpage_progress.cpp: 
+	* src/installer_global.h: 
+	remove adduser page.
+
+2008-12-18  yetist  <wuxiaotian@redflag-linux.com>
+
+	* src/wizard_installer.cpp: 
+	* src/translations/installer_zh_TW.qm: 
+	* src/translations/installer_pt.ts: 
+	* src/translations/installer_zh_CN.qm: 
+	* src/translations/installer_en.qm: 
+	* src/translations/installer_zh_TW.ts: 
+	* src/translations/installer_es.qm: 
+	* src/translations/installer_zh_CN.ts: 
+	* src/translations/installer_en.ts: 
+	* src/translations/installer_es.ts: 
+	* src/translations/installer_pt.qm: 
+	* src/wizardpage_mach_type.cpp: 
+	update translations.
+
+2008-12-18  yetist  <wuxiaotian@redflag-linux.com>
+
+	* src/wizardpage_mach_type.h: 
+	* src/wizardpage_mach_type.cpp: 
+	add WizardPage to select machine type.
+
+2008-12-18  yetist  <wuxiaotian@redflag-linux.com>
+
+	* src/rfinstaller.pro: 
+	* src/wizard_installer.cpp: 
+	* src/wizardpage_licence.cpp: 
+	* src/installer_global.h: 
+	* src/wizardpage_partition_mode.cpp: 
+	add machine select page.
+
+2008-12-18  yetist  <wuxiaotian@redflag-linux.com>
+
+	* README: add README.
+
+2008-12-18  yetist  <wuxiaotian@redflag-linux.com>
+
+	* src/rfinstaller.pro: 
+	* src/wizard_installer.cpp: 
+	link qtermwidget lib, so we can get a shell from installer ui.
+
+2008-12-17  yetist  <wuxiaotian@redflag-linux.com>
+
+	* src/wizard_installer.cpp: 
+	* src/wizard_installer.h: 
+	add a Term buttonto launch the TermWiget.
+	* ChangeLog: 
+	add Changelog file.
