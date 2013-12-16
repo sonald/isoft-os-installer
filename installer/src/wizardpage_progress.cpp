@@ -22,6 +22,7 @@
 InstallThread* InstallThread::s_this = NULL;
 void InstallThread::s_setProgressByEngine(int value)
 {
+    qDebug() << "setProgress: " << value;
     emit s_this->updateProgress(value);
 }
 
@@ -48,7 +49,7 @@ WizardPage_Progress::WizardPage_Progress(QWidget *parent)
     m_time_label = new QLabel(this);
     m_bar = new QProgressBar(this);
     m_picture->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
-    
+
     m_layout = new QVBoxLayout();
     m_layout->addWidget(m_picture);
     m_layout->addWidget(m_bar);
@@ -58,6 +59,7 @@ WizardPage_Progress::WizardPage_Progress(QWidget *parent)
 
     // load the pictures.
     QDir dir( g_appImgPath );
+    qDebug() << g_appImgPath;
     m_picsNameList = dir.entryList( QStringList("installer-0*.jpg") );
     assert( !m_picsNameList.isEmpty() );
 
@@ -67,11 +69,11 @@ WizardPage_Progress::WizardPage_Progress(QWidget *parent)
 
     m_timer_progress = new QTimer(this);
     connect(m_timer_progress, SIGNAL(timeout()), this, SLOT(updateProgress()));
-    
+
     // hard code the range ( 0, 100 )
     m_max_value = 100;
     m_min_value = 0;
-    
+
     // create the thread, and set connect.
     m_thread = new InstallThread();
     connect( m_thread, SIGNAL( updateProgress(int) ), this, SLOT( updateProgress(int) ) );
@@ -85,9 +87,9 @@ void WizardPage_Progress::initializePage()
     setTitle( tr("Installation Progress") );
     setSubTitle( tr("Please wait for a while. Enjoy a cup of coffee maybe a good idea.") );
 
-    //m_bar->setRange( m_min_value, m_max_value );
-    //m_bar->setValue( m_min_value );
-    m_bar->setMaximum(0);
+    m_bar->setRange( m_min_value, m_max_value );
+    m_bar->setValue( m_min_value );
+//    m_bar->setMaximum(0);
 
     wizard()->button( QWizard::CancelButton )->setEnabled( false );
     wizard()->setOption(QWizard::HaveCustomButton2);
@@ -103,8 +105,8 @@ void WizardPage_Progress::initializePage()
     m_indexPic = 0;
 
     // set the interval of timer of picture to 8 seconds.
-    m_timerPic->setInterval(8000); 
-    m_timer_progress->setInterval(1100); 
+    m_timerPic->setInterval(8000);
+    m_timer_progress->setInterval(1100);
     m_timer_progress->start();
     // start the progress after 1 second.
     QTimer::singleShot( 1000, this, SLOT(startProgress()) );
@@ -112,22 +114,22 @@ void WizardPage_Progress::initializePage()
 
 void WizardPage_Progress::onGame(int num)
 {
-	if (num == QWizard::CustomButton2)
-	{
-		game_start();
-		/*
-		qsrand(QDateTime::currentDateTime().toTime_t());
+    if (num == QWizard::CustomButton2)
+    {
+        game_start();
+        /*
+        qsrand(QDateTime::currentDateTime().toTime_t());
 
-		if (m_game_window) 
-		{
-			m_game_window->show();
-			return;
-		}
-		m_game_window = new MainWindow();
-		m_game_window->setFixedSize(780, 460);
-		m_game_window->show();
-		*/
-	}
+        if (m_game_window)
+        {
+            m_game_window->show();
+            return;
+        }
+        m_game_window = new MainWindow();
+        m_game_window->setFixedSize(780, 460);
+        m_game_window->show();
+        */
+    }
 }
 
 void WizardPage_Progress::updatePic()
@@ -139,8 +141,8 @@ void WizardPage_Progress::updatePic()
 
 void WizardPage_Progress::updateProgress()
 {
-	m_time_elapse = m_time_elapse.addSecs(1);
-	m_time_label->setText(tr("Elapsed: ") +  m_time_elapse.toString("hh:mm:ss"));
+    m_time_elapse = m_time_elapse.addSecs(1);
+    m_time_label->setText(tr("Elapsed: ") +  m_time_elapse.toString("hh:mm:ss"));
 }
 
 int WizardPage_Progress::nextId() const
@@ -173,15 +175,15 @@ void WizardPage_Progress::endProgress(bool state, QString error)
     m_bar->setRange( m_min_value, m_max_value );
     m_bar->setValue( m_max_value );
     if ( !state ) {
-	QMessageBox::critical(this, tr("Installation Error"), error);
-	wizard()->setButtonText( QWizard::CancelButton, tr("Finish") );
-	//wizard()->button( QWizard::NextButton )->setEnabled( false );
-	m_end = false;
+        QMessageBox::critical(this, tr("Installation Error"), error);
+        wizard()->setButtonText( QWizard::CancelButton, tr("Finish") );
+        //wizard()->button( QWizard::NextButton )->setEnabled( false );
+        m_end = false;
     } else {
-	QString locale = field("locale").toString();
-	QPixmap pic( g_appImgPath + "/installer-end-" + locale + ".jpg");
-	m_picture->setPixmap( pic );
-	m_end = true;
+        QString locale = field("locale").toString();
+        QPixmap pic( g_appImgPath + "/installer-end-" + locale + ".jpg");
+        m_picture->setPixmap( pic );
+        m_end = true;
     }
     wizard()->button( QWizard::CancelButton )->setEnabled( true );
     wizard()->setOption(QWizard::HaveCustomButton2, false);

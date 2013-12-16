@@ -15,7 +15,6 @@ class WizardPage_Licence : public QWizardPage
 public:
     WizardPage_Licence(QWidget* parent =0);
     void initializePage();
-    int nextId() const;
 
 private:
     QTextBrowser	* m_browserLicence;

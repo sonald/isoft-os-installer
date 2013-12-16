@@ -78,7 +78,7 @@ void WizardPage_Finish::restorePage()
 
 bool WizardPage_Finish::validatePage()
 {
-	system("reboot");
+//	system("reboot");
 	return true;
 }
 

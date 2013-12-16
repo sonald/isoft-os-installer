@@ -6,6 +6,7 @@
 #include "wizardpage_partition_auto.h"
 #include "wizardpage_partition_simple.h"
 #include "wizardpage_partition_advanced.h"
+#include "wizardpage_choosegroup.h"
 #include "wizardpage_summary.h"
 #include "wizardpage_progress.h"
 #include "wizardpage_useradd.h"
@@ -27,15 +28,14 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     WizardPage_Welcome * 	page_welcome		= new WizardPage_Welcome;
     WizardPage_Licence * 	page_licence 		= new WizardPage_Licence;
 
-    WizardPage_Mach_Type*		page_mach_type 	= new WizardPage_Mach_Type;
+//    WizardPage_Mach_Type*		page_mach_type 	= new WizardPage_Mach_Type;
 
 //    WizardPage_Partition_Mode*		page_partition_mode = new WizardPage_Partition_Mode;
 //    WizardPage_Partition_Auto*		page_partition_auto = new WizardPage_Partition_Auto;
 //    WizardPage_Partition_Simple*	page_partition_simple = new WizardPage_Partition_Simple;
     WizardPage_Partition_Advanced * 	page_partition_advanced = new WizardPage_Partition_Advanced;
 
-    //    WizardPage_Packages_Query * page_packages_query	= new WizardPage_Packages_Query;
-    //    WizardPage_Packages *	page_packages		= new WizardPage_Packages;
+    WizardPage_chooseGroup * page_choosegroup = new WizardPage_chooseGroup;
     WizardPage_Summary * 	page_summary		= new WizardPage_Summary;
     WizardPage_Progress *	page_progress		= new WizardPage_Progress;
 
@@ -43,14 +43,13 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     WizardPage_Finish * page_finish = new WizardPage_Finish;
     
     setPage(Page_Welcome, page_welcome);
-    setPage(Page_Licence, page_licence);
-    setPage(Page_Mach_Type, page_mach_type);
+//    setPage(Page_Licence, page_licence);
+//    setPage(Page_Mach_Type, page_mach_type);
 //    setPage(Page_Partition_Mode, page_partition_mode);
 //    setPage(Page_Partition_Auto, page_partition_auto);
 //    setPage(Page_Partition_Simple, page_partition_simple);
     setPage(Page_Partition_Advanced, page_partition_advanced);
-    //    setPage(Page_Packages_Query, page_packages_query);
-    //    setPage(Page_Packages, page_packages);
+    setPage(Page_ChooseGroup, page_choosegroup);
     setPage(Page_Summary, page_summary);
     setPage(Page_Progress, page_progress);
 //    setPage(Page_UserAdd, page_useradd);
@@ -136,23 +135,23 @@ void WizardInstaller::reject()
     int curId = currentId();
 
     if( !m_exitstate ) { // error
-	QWizard::reject();
+        QWizard::reject();
     } else if ( curId == Page_Finish ) {
-	QWizard::accept();
+        QWizard::accept();
     } else {
-	DialogReject reject(this);
+        DialogReject reject(this);
 
-	if ( curId >= Page_Welcome && curId <= Page_Summary ) {
-	    reject.setWarning( tr("The installation is not start yet, anything is not \
-happened on your computer, you can quit the installer safely in this moment.") );
-	} else if ( ( curId == Page_Progress ) || ( curId == Page_Finish ) ) {
-	    reject.setWarning( tr("The system already had been installed but not configured.\
-The system will be unusable if you quit now.") );	
-	} 
-   
-	int ret = reject.exec();
-	if ( ret == QDialog::Accepted ) {
-	    QWizard::reject();
-	}
+        if ( curId >= Page_Welcome && curId <= Page_Summary ) {
+            reject.setWarning( tr("The installation is not start yet, anything is not "
+                                  "happened on your computer, you can quit the installer safely in this moment.") );
+        } else if ( ( curId == Page_Progress ) || ( curId == Page_Finish ) ) {
+            reject.setWarning( tr("The system already had been installed but not configured.\
+                                  The system will be unusable if you quit now.") );
+        }
+
+        int ret = reject.exec();
+        if ( ret == QDialog::Accepted ) {
+            QWizard::reject();
+        }
     }
 }

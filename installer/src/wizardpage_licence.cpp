@@ -41,8 +41,3 @@ void WizardPage_Licence::initializePage()
     QString licenceFilename = "licence_" + locale + ".html" ;
     m_browserLicence->setSource( licenceFilename );
 }
-
-int WizardPage_Licence::nextId() const
-{
-    return Page_Mach_Type;
-}

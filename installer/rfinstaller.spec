@@ -1,5 +1,5 @@
 Summary : Redflag Desktop 7.0 LiveCD Installer.
-Name : rfinstaller
+Name : cetcosinstaller
 Version : 0.0.9
 Release : 1
 License : RedFlag License
@@ -29,12 +29,12 @@ make install INSTALL_ROOT=$RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_DIR/%{name}
 
 %files
-/usr/bin/rfinstaller
-/usr/share/rfinstaller/translations/*
-/usr/share/rfinstaller/images/*
-/usr/share/applications/rfinstaller.desktop
+/usr/bin/cetcosinstaller
+/usr/share/cetcosinstaller/translations/*
+/usr/share/cetcosinstaller/images/*
+/usr/share/applications/cetcosinstaller.desktop
 /usr/lib/librfinsgame.so*
-/usr/share/rfinstaller/svg/*
+/usr/share/cetcosinstaller/svg/*
 /etc/*.xml
 
 %changelog
@@ -384,7 +384,7 @@ rm -rf $RPM_BUILD_DIR/%{name}
 - fix spec files
 
 * Fri May 23 2008 leojiang <leojiang@redflag-linux.com> 0.9-8 #r1129  
-- add rfinstaller.desktop file into repository. modify the spec.
+- add cetcosinstaller.desktop file into repository. modify the spec.
 
 * Fri May 23 2008 leojiang <leojiang@redflag-linux.com> 0.9-8 #r1128  
 - add the installer icon file
@@ -429,7 +429,7 @@ rm -rf $RPM_BUILD_DIR/%{name}
 - remove -L path in LIBS
 
 * Mon May 19 2008 leojiang <leojiang@redflag-linux.com> 2- #r1035  
-- change InstallWizard to rfinstaller
+- change InstallWizard to cetcosinstaller
 
 * Mon May 19 2008 leojiang <leojiang@redflag-linux.com> 2- #r1033  
 - change profile

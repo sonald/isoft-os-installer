@@ -2,3 +2,6 @@ build
 *~
 .*~
 .svn
+.zcache
+*.swp
+tags

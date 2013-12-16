@@ -99,12 +99,12 @@
 2008-12-24  yetist  <wuxiaotian@redflag-linux.com>
 
 	* makedist.sh: use correct package name.
-	* rfinstaller.spec:  add lost file when packaging.
+	* cetcosinstaller.spec:  add lost file when packaging.
 
 2008-12-24  yetist  <wuxiaotian@redflag-linux.com>
 
 	* makedist.sh: add for distribute source code.
-	* rfinstaller.spec:  change version number.
+	* cetcosinstaller.spec:  change version number.
 	* makets.sh: rename from updatets.sh.
 
 2008-12-23  yetist  <wuxiaotian@redflag-linux.com>
@@ -123,7 +123,7 @@
 
 2008-12-23  yetist  <wuxiaotian@redflag-linux.com>
 
-	* rfinstaller.spec:
+	* cetcosinstaller.spec:
 	add files for game support.
 
 2008-12-23  yetist  <wuxiaotian@redflag-linux.com>
@@ -158,12 +158,12 @@
 	* src/translations/*: 
 	* src/images/*: 
 	* data/images/*: 
-	* src/rfinstaller.spec: 
-	* rfinstaller.spec: 
-	* src/rfinstaller.desktop: 
-	* data/rfinstaller.desktop: 
+	* src/cetcosinstaller.spec: 
+	* cetcosinstaller.spec: 
+	* src/cetcosinstaller.desktop: 
+	* data/cetcosinstaller.desktop: 
 	put them to a new place.
-	* src/rfinstaller.pro: 
+	* src/cetcosinstaller.pro: 
 	* src/src.pro: 
 	rename.
 	* src/tools/*: 
@@ -208,7 +208,7 @@
 
 2008-12-18  yetist  <wuxiaotian@redflag-linux.com>
 
-	* src/rfinstaller.pro: 
+	* src/cetcosinstaller.pro: 
 	* src/wizard_installer.cpp: 
 	* src/wizardpage_licence.cpp: 
 	* src/installer_global.h: 
@@ -221,7 +221,7 @@
 
 2008-12-18  yetist  <wuxiaotian@redflag-linux.com>
 
-	* src/rfinstaller.pro: 
+	* src/cetcosinstaller.pro: 
 	* src/wizard_installer.cpp: 
 	link qtermwidget lib, so we can get a shell from installer ui.
 

@@ -70,7 +70,7 @@ void CardData::initImages(int size)
 	QString	g_appPath;
 	QString g_svg_dir;
 	g_appPath = QApplication::applicationDirPath();
-	g_svg_dir = g_appPath + "/../share/rfinstaller/svg";
+	g_svg_dir = g_appPath + "/../share/cetcosinstaller/svg";
 	QDir dir(g_svg_dir);
 	QStringList files;
 	files=dir.entryList(QStringList("*.svg"), QDir::Files|QDir::Readable);

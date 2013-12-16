@@ -17,7 +17,7 @@ WizardPage_Packages_Query::WizardPage_Packages_Query(QWidget *parent)
     m_customizeLabel = new QLabel(this);
 
     m_layout = new QVBoxLayout(this);
-    
+
     m_minLabel->setWordWrap(true);
     m_completeLabel->setWordWrap(true);
     m_customizeLabel->setWordWrap(true);
@@ -48,7 +48,7 @@ WizardPage_Packages_Query::WizardPage_Packages_Query(QWidget *parent)
     m_layout->addWidget(m_completeLabel);
     m_layout->addWidget(m_customizeButton);
     m_layout->addWidget(m_customizeLabel);
-    
+
     registerField( "packageMode", this, "packageMode", SIGNAL(modeChanged()) );
     connect( m_minButton, SIGNAL( clicked() ), this, SLOT( buttonChecked() ) );
     connect( m_completeButton, SIGNAL( clicked() ), this, SLOT( buttonChecked() ) );
@@ -61,9 +61,9 @@ WizardPage_Packages_Query::WizardPage_Packages_Query(QWidget *parent)
 void WizardPage_Packages_Query::initializePage()
 {
     buttonChecked();			// restore the field.
-    					// Since the field is created in this page, if back to page before this,
-					// field will be set to default value, so should set the field according to 
-					// checked status.
+    // Since the field is created in this page, if back to page before this,
+    // field will be set to default value, so should set the field according to
+    // checked status.
     setTitle( tr("Packages Set") );
     setSubTitle( tr("Select the different set of packages to install.") );
 
@@ -72,27 +72,27 @@ void WizardPage_Packages_Query::initializePage()
     m_customizeButton->setText( tr("Customize") );
 
     m_minLabel->setText( tr("All necessary packages to run a basic system is installed.") );
-    
+
     m_completeLabel->setText( tr("All packages in install disc is installed.") );
-    
+
     m_customizeLabel->setText( tr("You can customize the packages to be installed.") );
 }
 
 int WizardPage_Packages_Query::nextId() const
 {
     if ( m_minButton->isChecked() )
-	return Page_Summary;
+        return Page_Summary;
     else if ( m_completeButton->isChecked() )
-	return Page_Summary;
-    else 
-	return Page_Packages;
+        return Page_Summary;
+    else
+        return QWizardPage::nextId();
 }
 
 void WizardPage_Packages_Query::setPackageMode(const QString& mode)
 {
     if ( m_packageMode != mode ) {
-	m_packageMode = mode;
-	setField("packageMode", m_packageMode);
+        m_packageMode = mode;
+        setField("packageMode", m_packageMode);
     }
 }
 
@@ -104,9 +104,9 @@ const QString& WizardPage_Packages_Query::packageMode() const
 void WizardPage_Packages_Query::buttonChecked() 
 {
     if ( m_minButton->isChecked() )
-	setPackageMode("minimum");
+        setPackageMode("minimum");
     else if ( m_completeButton->isChecked() )
-	setPackageMode("complete");
-    else 
-	setPackageMode("customize");
+        setPackageMode("complete");
+    else
+        setPackageMode("customize");
 }

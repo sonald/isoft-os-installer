@@ -75,7 +75,7 @@ void Scene::init(int count)
 	QString	g_appPath;
 	QString g_svg_dir;
 	g_appPath = QApplication::applicationDirPath();
-	g_svg_dir = g_appPath + "/../share/rfinstaller/svg";
+	g_svg_dir = g_appPath + "/../share/cetcosinstaller/svg";
 	QDir dir(g_svg_dir);
 	int anz=dir.count();
 	

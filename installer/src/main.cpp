@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
     } else {
 	// unique the application.
 	char pid[16];
-	FILE* fpPID = fopen( "/tmp/rfinstaller.pid", "r" );
+	FILE* fpPID = fopen( "/tmp/cetcosinstaller.pid", "r" );
 	if ( fpPID != NULL ) { // pid file is existed.
 	    fscanf( fpPID, "%s\n", pid );
 	    char path[PATH_MAX];
@@ -49,16 +49,16 @@ int main(int argc, char* argv[])
 	    if ( fpProg != NULL ) { // process is existed.
 		fscanf( fpProg, "%s\n", progname );
 		qDebug() << progname;
-		if ( !strcmp( "rfinstaller", basename(progname) ) ) { // and is rfinstaller 
-		    qDebug() << "rfinstaller is already running.";
+		if ( !strcmp( "cetcosinstaller", basename(progname) ) ) { // and is cetcosinstaller 
+		    qDebug() << "cetcosinstaller is already running.";
 		    exit(0);
-		} // not the rfinstaller.
+		} // not the cetcosinstaller.
 		fclose( fpProg );
 	    } else { // process is not existed. 
 	    qDebug() << "process not exist.";
 	    }
 	} // file is not existed.
-	fpPID = fopen( "/tmp/rfinstaller.pid", "w+" );
+	fpPID = fopen( "/tmp/cetcosinstaller.pid", "w+" );
 	fprintf( fpPID, "%d\n", getpid() );
 	fclose( fpPID );
 	
@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
 	g_qtQmPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 
 	g_appPath = app.applicationDirPath();
-	g_appResPath = g_appPath + "/../share/rfinstaller";
+	g_appResPath = g_appPath + "/../share/cetcosinstaller";
 	g_appQmPath = g_appResPath + "/translations";
 	g_appImgPath = g_appResPath + "/images";
     
@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
 	// else just install.
 	QFile confflag("/etc/install.conf");
 	if ( confflag.exists() )
-	    g_engine = Engine::instance(Engine::WriteConf, "/tmp/dt7_conf.xml");
+        g_engine = Engine::instance(Engine::WriteConf, "/tmp/isoft_conf.xml");
 	else
 	    g_engine = Engine::instance(Engine::Install);
 
@@ -96,7 +96,7 @@ int main(int argc, char* argv[])
 
 	// clean the app.
 	delete g_engine;
-	remove("/tmp/rfinstaller.pid");
+	remove("/tmp/cetcosinstaller.pid");
 
 	return ret;
     }

@@ -3,6 +3,13 @@
 PROJECT_ROOT=`pwd`
 BUILD_ROOT=$PROJECT_ROOT/build
 
+function check_status () {
+    if [ $? -ne 0 ]; then
+        echo -e "\033[31m${1} build error\033[0m"
+        exit $?
+    fi
+}
+
 mkdir -p $BUILD_ROOT
 
 for sub in libdiskswidget libinstallerbase installer; do
@@ -19,7 +26,9 @@ for sub in libdiskswidget libinstallerbase installer; do
             qmake-qt4 ../../$sub
         fi
     fi
-    make -j2
+    make -j2 > /dev/null
+    check_status $sub
+    sudo make install > /dev/null
     popd
 done
 

@@ -62,7 +62,7 @@ public:
 	// if it's windows return 0 else -1
 	int judge_windows(const char *device);
 
-	// get an os type string, for rfinstaller use
+	// get an os type string, for cetcosinstaller use
 	// if find, return 0, and store os type info into char *os_type;
 	// else return -1
 	int get_os_type_str(const char *device, char *os_type);

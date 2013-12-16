@@ -47,11 +47,9 @@ void EditPartition::accept()
 			return ;
 		}
 
-		if ( !( (formatButton->isChecked() && formatComboBox->currentText() == "ext3") 
-				|| (formatButton->isChecked() && formatComboBox->currentText() == "ext2")
-				|| (unchangeButton->isChecked() && fsTypeLabel->text() == "ext3")))
-		{
-			QMessageBox::warning(this, tr("Warning"), QString(tr("The '/' partition needs to be formatted to \"ext3\" or \"ext2\".")));
+        if (!((formatButton->isChecked() && formatComboBox->currentText().startsWith("ext")) 
+                || (unchangeButton->isChecked() && fsTypeLabel->text().startsWith("ext")))) {
+			QMessageBox::warning(this, tr("Warning"), QString(tr("The '/' partition needs to be formatted to one of ext filesystem.")));
 			return ;
 		}
 			
@@ -102,9 +100,8 @@ void EditPartition::checkMountPoint(const QString &mntPoint)
 	if (mntPoint == "/") {
 		unchangeButton->setEnabled(false);
 		formatButton->setChecked(true);
-		formatComboBox->setCurrentIndex(formatComboBox->findText("ext3"));
+		formatComboBox->setCurrentIndex(formatComboBox->findText("ext4"));
 	} else {
 		unchangeButton->setEnabled(true);
-//		unchangeButton->setChecked(true);
 	}
 }

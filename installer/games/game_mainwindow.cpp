@@ -100,7 +100,7 @@ void MainWindow::newLevel()
 	QString	g_appPath;
 	QString g_svg_dir;
 	g_appPath = QApplication::applicationDirPath();
-	g_svg_dir = g_appPath + "/../share/rfinstaller/svg";
+	g_svg_dir = g_appPath + "/../share/cetcosinstaller/svg";
 	QDir dir(g_svg_dir);
 	if (m_level>dir.count()) {	
 		m_level=1;

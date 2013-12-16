@@ -21,6 +21,7 @@
 #include "gen_grub_conf.h"
 #include "os_identify.h"
 #include "yumshell.h"
+#include "rpminstaller.h"
 #include "installengine.h"
 
 #define DEBUG_MODE        
@@ -32,6 +33,9 @@
 
 using namespace std;
 
+const char *debug_file = "/tmp/cetcosinstaller_debug.txt";
+const char *default_conf_xml = "/tmp/isoft_conf.xml";
+
 Engine *Engine::s_self = NULL;
 extern const char *conf_tag[];
 vector<Engine::Cmd> Engine::s_installcmds;
@@ -42,7 +46,7 @@ Engine* Engine::instance(WorkMode mode, const char *conf_file)
 {
     if(s_self == NULL) {
         if((mode == WriteConf || mode == Install) && conf_file == NULL){
-            s_self = new Engine(mode, "/tmp/dt7_conf.xml");
+            s_self = new Engine(mode, default_conf_xml);
         }else{
             s_self = new Engine(mode, conf_file);
         }
@@ -65,6 +69,7 @@ Engine::Engine(WorkMode mode, const char *conf_file)
     s_tags[PARTITION_RMALLPART]      = "PARTITION_RMALLPART";
     s_tags[PARTITION_MKFS]           = "PARTITION_MKFS";
     s_tags[PARTITION_SET_MOUNTPOINT] = "PARTITION_SET_MOUNTPOINT";
+    s_tags[CHOOSE_GROUPS]            = "CHOOSE_GROUPS";
     s_tags[ADD_PACKAGE]              = "ADD_PACKAGE";
     s_tags[ADD_GROUP]                = "ADD_GROUP";
     s_tags[SET_BOOT_ENTRY]           = "SET_BOOT_ENTRY";
@@ -89,7 +94,7 @@ Engine::Engine(WorkMode mode, const char *conf_file)
         ofstream out(_filename.c_str(), ios::trunc); // empty the file
     }
     
-    ofstream out("/tmp/rfinstall_debug.txt", ios::trunc);
+    ofstream out(debug_file, ios::trunc);
     out.close();
 }
 
@@ -158,7 +163,7 @@ void Engine::xmlText(GMarkupParseContext *context,
 			GError **error
 			)
 {
-    debuglog(text);
+    debuglog("%s", text);
 }
 
 void Engine::xmlError(	GMarkupParseContext *context,
@@ -347,7 +352,7 @@ bool Engine::postscript(void)
 
 		// set default label
 		string label = "e2label " + _rootdev + " ";
-		label += "RedFlag-";
+		label += "iSoft-";
 		int index = _rootdev.find_last_of('/');	
 		string tmp = _rootdev.substr(index+1);
 		label += tmp;
@@ -361,9 +366,11 @@ bool Engine::postscript(void)
 		// create the postscript.sh from template, append cmds from _postscript.
 		string post = _rootdir+"postscript.sh";
 		//XXX rewrite
-		cmd = "cp /usr/share/apps/libinstallerbase/postscript.tmpl "+post;
+		cmd = "cp /usr/local/share/apps/libinstallerbase/postscript.tmpl "+post;
 		system(cmd.c_str());
 		chmod(post.c_str(), 0755);
+
+        mkdir((_rootdir + "tmp").c_str(), 01777);
     
 		ofstream script(post.c_str(), ios::app);
 		if(!script) {
@@ -432,8 +439,8 @@ bool Engine::postscript(void)
     if( _workmode == Install || _workmode == ReadConf )	
 	{
     	//XXX copy .xml file to installed system
-		string cmd_copy = "/bin/cp /tmp/dt7_conf.xml ";
-		cmd_copy += _rootdir + "root/";
+		string cmd_copy = string("/bin/cp ") + default_conf_xml;
+		cmd_copy += " " + _rootdir + "root/";
 		ret = system(cmd_copy.c_str());
 	}
 
@@ -508,6 +515,13 @@ bool Engine::runCmd(const vector<Cmd> &cmds)
             break;
         case PARTITION_SET_MOUNTPOINT:
             ret = do_set_mountpoint(currcmd.args[0], currcmd.args[1], currcmd.args[2]);
+            if(!ret){
+                _errstr = "Run mountpoint Failed.";
+                return false;
+            }
+            break;
+        case CHOOSE_GROUPS:
+            ret = do_choosegroups(currcmd.args[0]);
             if(!ret){
                 _errstr = "Run mountpoint Failed.";
                 return false;
@@ -621,7 +635,7 @@ bool Engine::realWork(void (*progress)(int))
 {
     static int percent = 0;
     // output debug log
-    ofstream out("/tmp/rfinstall_debug.txt", ios::app);
+    ofstream out(debug_file, ios::app);
     for(int i = 0; i < s_installcmds.size(); ++i){
         const Cmd currcmd = s_installcmds[i];
         out << s_tags[currcmd.id] << "(" << currcmd.id << ") ";
@@ -657,19 +671,28 @@ bool Engine::realWork(void (*progress)(int))
     fscanf(fp, "%d", &installed_num);
     pclose(fp);
 
-    // will install num
-	
-    YumShell yum(_package_list, _rootdir);
-    double willinstall_num = yum.getInstallNumber();
-    yum.setProgressRange(100 - willinstall_num/(installed_num+willinstall_num)*100, 100);
-    
-    // start to install
-    bool ret = copy_files(progress, installed_num/(installed_num+willinstall_num)*100);
-    if(!ret){
-        return false;
+
+    bool yum_install_mode = _rpm_groups.size() == 0; 
+    bool ret;
+    if (yum_install_mode) {
+        YumShell yum(_package_list, _rootdir);
+        // will install num
+        double willinstall_num = yum.getInstallNumber();
+        yum.setProgressRange(100 - willinstall_num/(installed_num+willinstall_num)*100, 100);
+
+        // start to install
+        if (copy_files(progress, installed_num/(installed_num+willinstall_num)*99)) {
+            return false;
+        }
+
+        ret = yum.install(progress);
+
+    } else {
+        prepareFileSystem();
+        RpmInstaller grpInstaller(_rpm_groups, _rootdir);
+        ret = grpInstaller.install(progress);
     }
 
-    ret = yum.install(progress);
     if(!ret){
         _errstr = "yum install failed.";
         return false;
@@ -709,6 +732,10 @@ void Engine::cmdMakeFileSystem(const char *partpath, const char *fstype)
 void Engine::cmdSetMountPoint(const char *devpath, const char *mountpoint, const char *fstype)
 {
     appendCmd(INSTALL, PARTITION_SET_MOUNTPOINT, devpath, mountpoint, fstype);
+}
+void Engine::cmdChooseGroups(const char *groups)
+{
+    appendCmd(INSTALL, CHOOSE_GROUPS, groups);
 }
 void Engine::cmdAddPackage(const char *package)
 {
@@ -1017,7 +1044,7 @@ bool Engine::do_mkfs(const string &partpath, const string &fstype)
 
     if (fstype == "swap" || fstype == "linux-swap") {
         cmd += "82";
-    } else if (fstype == "ext2" || fstype == "ext3") {
+    } else if (fstype == "ext2" || fstype == "ext3" || fstype == "ext4") {
         cmd += "83";
     } else if (fstype == "fat32") {
         cmd += "c";
@@ -1111,6 +1138,26 @@ bool Engine::do_set_mountpoint(const string &devpath, const string &mountpoint, 
     return true;
 }
 
+// groups is in form 'basic,kde,devel' etc
+bool Engine::do_choosegroups(const string &groups)
+{
+    _rpm_groups.clear();
+    string::size_type idx = groups.find(',');
+    string::size_type start = 0;
+    while (idx != string::npos) {
+        string s = groups.substr(start, idx-start);
+        if (!s.empty()) 
+            _rpm_groups.push_back(s);
+        debuglog("add group: %s\n", s.c_str());
+        start = idx+1;
+        idx = groups.find(',', start);
+    }
+    
+    string s = groups.substr(start);
+    if (!s.empty()) 
+        _rpm_groups.push_back(s);
+}
+
 bool Engine::do_add_package(const string package)
 {
     _package_list.push_back(package);
@@ -1125,7 +1172,7 @@ bool Engine::do_add_group(const string group)
 
 bool Engine::do_boot_install(const string &devpath)
 {
-    if (install_grub("Redflag linux dt7 beta", _rootdev.c_str(), devpath.c_str(), 
+    if (install_grub("CETC OS ", _rootdev.c_str(), devpath.c_str(), 
 		     _boot_partition.c_str()) == -1) 
 	{
 	    debuglog("install grub error\n");
@@ -1328,9 +1375,9 @@ bool Engine::copy_files(void (*progress)(int), double range)
     int root_dev_fd;
     
     // open the debug log file.
-    ofstream out("/tmp/rfinstall_debug.txt", ios::app);
+    ofstream out(debug_file, ios::app);
     if (out == NULL){
-        _errstr = "open /tmp/rfinstall_debug.txt error, pls check it!";
+        _errstr = string("open ") + debug_file + " error, pls check it!";
         return false;
     }
 
@@ -1465,72 +1512,89 @@ bool Engine::copy_files(void (*progress)(int), double range)
 	
     // move the subdirectory into independent partitions, like /usr /home. ---------------------   start  ----------
     out<<"adjust other partition start"<<endl;
-	
+    return prepareFileSystem();	
+}
+
+bool Engine::prepareFileSystem()
+{
+    bool yum_install_mode = _rpm_groups.size() == 0; 
+    ofstream out(debug_file, ios::app);
+    if (out == NULL){
+        _errstr = string("open ") + debug_file + " error, pls check it!";
+        return false;
+    }
+
+    FILE *fp = NULL;
+
     _boot_partition = _rootdev;
     mkdir(_rootdir.c_str(), 0755);
     
-    cmd = "/bin/mount " + _rootdev + " " + _rootdir; 
+    string cmd = "/bin/mount " + _rootdev + " " + _rootdir; 
     if (system(cmd.c_str()) != 0) {
         _errstr = "mount root device error";
         return false;	
     }
 
-    char temp[] = "/tmp/engine.XXXXXX";
-    char *tmp_mountpoint = mkdtemp(temp);
-	
-    if (tmp_mountpoint == NULL)	{
-        _errstr = "mkdir /tmp/engine.XXXXXX error";
-        return false;	
-    }
+    if (yum_install_mode) {
+        char temp[] = "/tmp/engine.XXXXXX";
+        char *tmp_mountpoint = mkdtemp(temp);
 
-    for(list<fstab_struct> ::iterator fstab_it = _fstablist.begin(); fstab_it != _fstablist.end(); ++fstab_it) {
-        if (fstab_it->mountpoint == "/boot")
-            _boot_partition = fstab_it->devpath;
-	
-        if ( fstab_it->mountpoint == "/" 
-             || fstab_it->mountpoint == "/mnt" 
-             || fstab_it->mountpoint == "swap" 
-             || fstab_it->mountpoint == "/sys"
-             || fstab_it->mountpoint == "/proc" 
-             || fstab_it->mountpoint == "/dev/pts"
-             || fstab_it->mountpoint == "/dev/shm" ) {
-            continue;
-        }
-		
-        cmd = "/bin/mount -t " + fstab_it->fstype + " " + fstab_it->devpath + " " + tmp_mountpoint;
-        if (system(cmd.c_str()) != 0) {
-            _errstr = "mount " + fstab_it->devpath + " error";
+        if (tmp_mountpoint == NULL)	{
+            _errstr = "mkdir /tmp/engine.XXXXXX error";
             return false;	
         }
 
-//        cmd = "mv -f " + _rootdir + fstab_it->mountpoint.substr(1) + "/* " + tmp_mountpoint; 	
-        cmd = "cp -a " + _rootdir + fstab_it->mountpoint.substr(1) + "/* " + tmp_mountpoint; 	
-        system(cmd.c_str());
-	
-        cmd = "/bin/umount ";
-        cmd += tmp_mountpoint;
-        if (system(cmd.c_str()) != 0) {
-            _errstr = "umount tmp_mountpoint error";
-            return false;	
-        }
-    }
-	
-    errno = 0;
-    if (rmdir(tmp_mountpoint) != 0) {
-        perror(strerror(errno));
-        cerr << "rmdir " << tmp_mountpoint <<  "error" << endl;
-    }
+        for(list<fstab_struct> ::iterator fstab_it = _fstablist.begin(); fstab_it != _fstablist.end(); ++fstab_it) {
+            if (fstab_it->mountpoint == "/boot")
+                _boot_partition = fstab_it->devpath;
 
-    out<<"adjust other partition end"<<endl; 
-    // move the subdirectory into independent partitions, like /usr /home. ----------------------   end   ----------
+            if ( fstab_it->mountpoint == "/" 
+                    || fstab_it->mountpoint == "/mnt" 
+                    || fstab_it->mountpoint == "swap" 
+                    || fstab_it->mountpoint == "/sys"
+                    || fstab_it->mountpoint == "/proc" 
+                    || fstab_it->mountpoint == "/dev/pts"
+                    || fstab_it->mountpoint == "/dev/shm" ) {
+                continue;
+            }
+
+            cmd = "/bin/mount -t " + fstab_it->fstype + " " + fstab_it->devpath + " " + tmp_mountpoint;
+            if (system(cmd.c_str()) != 0) {
+                _errstr = "mount " + fstab_it->devpath + " error";
+                return false;	
+            }
+
+            //        cmd = "mv -f " + _rootdir + fstab_it->mountpoint.substr(1) + "/* " + tmp_mountpoint; 	
+            cmd = "cp -a " + _rootdir + fstab_it->mountpoint.substr(1) + "/* " + tmp_mountpoint; 	
+            system(cmd.c_str());
+
+            cmd = "/bin/umount ";
+            cmd += tmp_mountpoint;
+            if (system(cmd.c_str()) != 0) {
+                _errstr = "umount tmp_mountpoint error";
+                return false;	
+            }
+        }
+
+        errno = 0;
+        if (rmdir(tmp_mountpoint) != 0) {
+            perror(strerror(errno));
+            cerr << "rmdir " << tmp_mountpoint <<  "error" << endl;
+        }
+
+        out<<"adjust other partition end"<<endl; 
+        // move the subdirectory into independent partitions, like /usr /home. ----------------------   end   ----------
+
+    }
 
     // create /etc/fstab with uuid.  ------------------------------------------------------------  start  ----------
     out<<"create /etc/fstab using uuid start"<<endl;
     // create fstab	
     string fstab_str = _rootdir + "etc/fstab";
+    mkdir((_rootdir + "etc").c_str(), 0755);
     ofstream out_fstab(fstab_str.c_str(), ios::trunc);
 	
-    if(!out) {
+    if(!out_fstab) {
         _errstr = "create /etc/fstab error";
         return false;
     }
@@ -1573,7 +1637,7 @@ bool Engine::copy_files(void (*progress)(int), double range)
 		uuid = uu;
 
 		string uuid_cmd;
-		if (fstab_it->fstype == "ext2" || fstab_it->fstype == "ext3")
+        if (fstab_it->fstype.find("ext") == 0)
 			uuid_cmd = "tune2fs -U ";
 		else if (fstab_it->fstype == "xfs")
 				uuid_cmd = "xfs_admin -U ";
@@ -1697,6 +1761,5 @@ bool Engine::copy_files(void (*progress)(int), double range)
 		
     out_fstab.close();
     out<<"create /etc/fstab using uuid end"<<endl;
-    // create /etc/fstab with uuid.  ------------------------------------------------------------  end    ----------
     return true;
 }

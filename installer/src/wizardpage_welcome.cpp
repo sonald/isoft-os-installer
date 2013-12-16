@@ -60,6 +60,7 @@ void WizardPage_Welcome::reTranslateUi()
 
 void WizardPage_Welcome::initializePage()
 {
+    qDebug() << field("selectedGroups").toStringList();
     QString localeDefault = m_localeParser.localeMatched( QLocale::system() );
     QList<QString> list = m_localeParser.listLocaleEnabled();
 
@@ -83,8 +84,7 @@ void WizardPage_Welcome::initializePage()
 
 int WizardPage_Welcome::nextId() const
 {
-    return Page_Licence;
-    //return Page_KeyboardLayout;
+    return QWizardPage::nextId();
 }
 
 // Load the new translate files, update the field "locale".

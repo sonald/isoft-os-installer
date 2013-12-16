@@ -1,7 +1,7 @@
 Name:	libinstallerbase
 Version:	0.1
 Release: 190
-Summary:	Base libraries of rfinstaller
+Summary:	Base libraries of cetcosinstaller
 License:	RedFlag License
 Vendor:	RedFlag Linux
 Url:	http://www.redflag-linux.com
@@ -11,7 +11,7 @@ Requires:	parted, ntregedit
 BuildRoot : /var/tmp/%{name}-%{version}-root
 Source:	%{name}-%{version}.tar.bz2
 %description
-Base libraries of rfinstaller, including libparted++, libinstallengin
+Base libraries of cetcosinstaller, including libparted++, libinstallengin
 and rfinstall_console
 
 %prep
@@ -37,7 +37,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/rfinstaller_console
+%{_bindir}/cetcosinstaller_console
 %{_libdir}/libinstallengine.so
 %{_libdir}/libparted++.so
 %{_datadir}/apps/libinstallerbase/*
@@ -521,7 +521,7 @@ rm -rf $RPM_BUILD_ROOT
 - not use uuid for swap
 
 * Wed Jul 30 2008 jianxing <jianxing@redflag-linux.com> 0.1-85 #r1677  
-- #8534 remove rfinstaller in installed system
+- #8534 remove cetcosinstaller in installed system
 
 * Mon Jul 28 2008 wppan <wppan@redflag-linux.com> 0.1-84 #r1658  
 - use sfdisk to change partition type
@@ -905,7 +905,7 @@ rm -rf $RPM_BUILD_ROOT
 - rename fix
 
 * Wed May 21 2008 jianxing <jianxing@redflag-linux.com> 0.1-8 #r1102  
-- rename rfinstall to rfinstaller
+- rename rfinstall to cetcosinstaller
 
 * Wed May 21 2008 wppan <wppan@redflag-linux.com> 0.1-7 #r1099  
 - add progress

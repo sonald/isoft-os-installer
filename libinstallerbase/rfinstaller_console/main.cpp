@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
     }else if(argc == 2){
         peng = Engine::instance(Engine::ReadConf, argv[1]);
     }else{
-        cout << "\n\tUsage: rfinstaller_console <conf_file>\n\n" << endl;
+        cout << "\n\tUsage: cetcosinstaller_console <conf_file>\n\n" << endl;
     }
 
     if(peng->install(progress)){

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PACKAGE=rfinstaller
+PACKAGE=cetcosinstaller
 VERSION=0.1.0
 DIR=$PACKAGE-$VERSION
 

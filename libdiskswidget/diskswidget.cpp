@@ -1098,7 +1098,7 @@ void DisksWidget::writeXML()
 	}
 }
 
-//k current partition, whatever it is before, transfer to ext3, set /,
+//k current partition, whatever it is before, transfer to ext4, set /,
 void DisksWidget::doSimpleInstall()
 {
 /* k move to warning info
@@ -1133,11 +1133,11 @@ void DisksWidget::doSimpleInstall()
 		if (isPrimary(m_simpleInstallItem)) {
 			//k XXX if the partition is the fourth Primary??
 			newPartNo = partList->add_by_whole(index, "primary", 0);
-			tmp << disk << QString::number(index) << "primary" << "ext3";
+			tmp << disk << QString::number(index) << "primary" << "ext4";
 			m_commandList.push_back(QPair<QString, QList<QString> >("conf_set_mkpart_whole", tmp));
 		} else {
 			newPartNo = partList->add_by_whole(index, "logical", 0);
-			tmp << disk << QString::number(index) << "logical" << "ext3";
+			tmp << disk << QString::number(index) << "logical" << "ext4";
 			m_commandList.push_back(QPair<QString, QList<QString> >("conf_set_mkpart_whole", tmp));
 		}
 
@@ -1182,7 +1182,7 @@ void DisksWidget::doSimpleInstall()
 
 	Q_ASSERT (m_simpleInstallItem !=  0);
 
-	m_simpleInstallItem->setText(colFs, "ext3");
+	m_simpleInstallItem->setText(colFs, "ext4");
 	m_simpleInstallItem->setText(colMount, "/");
 	m_simpleInstallItem->setText(colFormat, checkMark);
 }
@@ -1357,7 +1357,7 @@ QString DisksWidget::finalPartitionsInfo()
 	QString info;
 	if (m_mode == Simple) {
 		QString partPath = m_simpleInstallItem->text(colDev);
-		info = QString(tr("%1 will be formatted to ext3 as / directory\n")).arg(partPath);
+		info = QString(tr("%1 will be formatted to ext4 as / directory\n")).arg(partPath);
 	}
 	
 	for (int i = 0; i < m_tree->topLevelItemCount(); ++i) {

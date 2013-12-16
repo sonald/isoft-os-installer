@@ -56,3 +56,8 @@ void WizardPage_Partition_Advanced::writeConf()
 {
     m_advanced->writeXML();
 }
+
+int WizardPage_Partition_Advanced::nextId() const
+{
+    return QWizardPage::nextId();
+}

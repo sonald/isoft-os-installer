@@ -254,7 +254,7 @@ bool OSIdentify::mount_fs(const char *device, string& mountPath)
 	return true;
 }
 
-// find linux by issue file, just for rfinstaller diaplay.
+// find linux by issue file, just for cetcosinstaller diaplay.
 int OSIdentify::find_linux_by_issue(char *os_type, const string &mountPath)
 {
 	FILE *fp;
@@ -292,7 +292,7 @@ int OSIdentify::find_linux_by_issue(char *os_type, const string &mountPath)
 	}
 }
 
-// find windows by registry, just for rfinstaller to display.
+// find windows by registry, just for cetcosinstaller to display.
 int OSIdentify::find_windows_by_register(char *os_type, string mountPath)
 {
     const char *kern_path = "/windows/system32/kernel32.dll";

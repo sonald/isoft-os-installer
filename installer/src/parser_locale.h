@@ -13,7 +13,7 @@ class QLocale;
 /* 
  * Rflocale Parser: parser the rflocale.xml into dom and give some relative 
  * service about rflocale.
- * rflocale.xml describe the all locale used for rfinstaller I18n. 
+ * rflocale.xml describe the all locale used for cetcosinstaller I18n. 
  * Rflocale is not real locale, is just some string same as language or
  * language_territory.
  */

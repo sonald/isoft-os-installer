@@ -49,7 +49,9 @@ void WizardPage_Summary::initializePage()
     setSubTitle( tr("Please read the pre-install summary carefully before starting installation progress." ) );
 
     //m_advanced->setText( tr("Advanced") );
-    m_warning->setText( tr( "Notice: Please confirm the pre-install summary. You can't go back to previous page after this step. You still can back to the previous wizard page for re-setup now.") );
+    m_warning->setText( tr( "Notice: Please confirm the pre-install summary."
+                            "You can't go back to previous page after this step."
+                            "You still can back to the previous wizard page for re-setup now.") );
 
     // init the flags about grub install
     m_instBootLoader = true;
@@ -59,7 +61,7 @@ void WizardPage_Summary::initializePage()
     m_summary->clear();
 
     // Version
-    m_summary->append( tr("Red Flag Linux For Loongson") );
+    m_summary->append( tr("CETC OS installer") );
     m_summary->append( "" );
 
     // Lang
@@ -85,13 +87,13 @@ void WizardPage_Summary::initializePage()
     m_mode = field("partitionMode").toString();
     enum Page_ID pageId;
     if ( m_mode == "auto" )
-	pageId = Page_Partition_Auto;
+    pageId = Page_Partition_Auto;
     else if ( m_mode == "simple" )
-	pageId = Page_Partition_Simple;
+    pageId = Page_Partition_Simple;
     else if ( m_mode == "advanced" )
-	pageId = Page_Partition_Advanced;
+    pageId = Page_Partition_Advanced;
     else
-	pageId = Page_Error;
+    pageId = Page_Error;
     assert( pageId != Page_Error );
     */
 
@@ -99,6 +101,11 @@ void WizardPage_Summary::initializePage()
 
     m_summary->append( tr("Partition Information:") );
     m_summary->append( m_page->finalPartInfo() );
+    m_summary->append( "" );
+
+    // install group
+    m_summary->append( tr("Install Groups:") );
+    m_summary->append( field("selectedGroups").toStringList().join(", ") );
     m_summary->append( "" );
 
     // set the init value of field "pathGrub".

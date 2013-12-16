@@ -58,6 +58,7 @@ class Engine
     void cmdRemoveAllPart(const char *devpath);
     void cmdMakeFileSystem(const char *partpath, const char *fstype);
     void cmdSetMountPoint(const char *devpath, const char *mountpoint, const char *fstype);
+    void cmdChooseGroups(const char *groups);
     void cmdAddPackage(const char *package);
     void cmdAddGroup(const char *group);
     void cmdSetBootEntry(const char *todevpath);
@@ -111,6 +112,7 @@ class Engine
         PARTITION_RMALLPART,
         PARTITION_MKFS,
         PARTITION_SET_MOUNTPOINT,
+        CHOOSE_GROUPS, // choose rpm groups, this is for cetcos
         ADD_PACKAGE,
         ADD_GROUP,
         SET_BOOT_ENTRY,
@@ -144,6 +146,7 @@ class Engine
     bool do_rmallpart(const string &devpath);
     bool do_mkfs(const string &partpath, const string &fstype);
     bool do_set_mountpoint(const string &devpath, const string &mountpoint, const string &fstype);
+    bool do_choosegroups(const string &groups);
     bool do_add_package(const string package);
     bool do_add_group(const string group);
     bool do_boot_install(const string &devpath);
@@ -159,6 +162,7 @@ class Engine
     list<string> _postscript;    // postscript commands and args.
 
     bool copy_files(void (*progress)(int percent), double range);
+    bool prepareFileSystem();
 
     string _rootdir;
     string _rootdev;
@@ -166,6 +170,7 @@ class Engine
 
     list<fstab_struct> _fstablist;
     list<string> _package_list;
+    list<string> _rpm_groups; // for cetcos
     string _boot_partition;
     string _locale;
 };

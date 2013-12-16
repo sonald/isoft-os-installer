@@ -3,7 +3,7 @@ installer
 
 This is an installer for loongson system.
 
-It forked from the rfinstaller (an installer for DT7) project.
+It forked from the cetcosinstaller (an installer for DT7) project.
 
 now, it depends the follow projects:
 
