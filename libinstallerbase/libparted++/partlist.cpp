@@ -4,6 +4,7 @@
 #include "devices.h"
 #include <cassert>
 #include <parted/debug.h>
+#include <assert.h>
 
 /////////////////////////////////////////////////////////////////////////////
 // static declarations. 
@@ -830,7 +831,7 @@ matched_type(const char* part_type_name)
 static int
 snap (PedSector* sector, PedSector new_sector, PedGeometry* range)
 {
-        PED_ASSERT (ped_geometry_test_sector_inside (range, *sector), return 0);
+        //PED_ASSERT (ped_geometry_test_sector_inside (range, *sector), return 0);
         if (!ped_geometry_test_sector_inside (range, new_sector))
                 return 0;
         *sector = new_sector;
@@ -854,7 +855,7 @@ prefer_snap (PedSector s, int what, PedGeometry* range, EMoves* allow,
         PedSector new_sect;
         EMoves move;
 
-        PED_ASSERT (what == SECT_START || what == SECT_END, return 0);
+        //PED_ASSERT (what == SECT_START || what == SECT_END, return 0);
 
         if (!(*allow & (MOVE_UP | MOVE_DOWN))) {
                 *dist = 0;
@@ -886,7 +887,8 @@ prefer_snap (PedSector s, int what, PedGeometry* range, EMoves* allow,
                                                  && what == SECT_END) )
                         move = MOVE_UP;
                 else
-                        PED_ASSERT (0, return 0);
+                        assert(0);
+                        //PED_ASSERT (0, return 0);
         } else if (*allow & MOVE_UP)
                 move = MOVE_UP;
         else if (*allow & MOVE_DOWN)
@@ -948,7 +950,7 @@ snap_to_boundaries (PedGeometry* new_geom, PedGeometry* old_geom,
         end_want = prefer_snap (end, SECT_END, end_range, &end_allow,
                                 end_part, &end_dist );
 
-        PED_ASSERT (start_dist >= 0 && end_dist >= 0, return);
+        //PED_ASSERT (start_dist >= 0 && end_dist >= 0, return);
 
         /* If start and end are on adjacent partitions,    */
         /* and if they would prefer crossing, then refrain */
@@ -959,13 +961,13 @@ snap_to_boundaries (PedGeometry* new_geom, PedGeometry* old_geom,
                         start_want = prefer_snap (start, SECT_START,
                                                   start_range, &start_allow,
                                                   start_part, &start_dist );
-                        PED_ASSERT (start_dist >= 0, return);
+                        //PED_ASSERT (start_dist >= 0, return);
                 } else {
                         end_allow &= ~MOVE_DOWN;
                         end_want = prefer_snap (end, SECT_END,
                                                 end_range, &end_allow,
                                                 end_part, &end_dist );
-                        PED_ASSERT (end_dist >= 0, return);
+                        //PED_ASSERT (end_dist >= 0, return);
                 }
         }
 
@@ -976,9 +978,9 @@ snap_to_boundaries (PedGeometry* new_geom, PedGeometry* old_geom,
         end = ( end_want == MOVE_DOWN ? end_part->geom.start - 1 :
               ( end_want == MOVE_UP ? end_part->geom.end :
                 end ) );
-        PED_ASSERT (ped_geometry_test_sector_inside(start_range,start), return);
-        PED_ASSERT (ped_geometry_test_sector_inside (end_range, end), return);
-        PED_ASSERT (start <= end,
-                    PED_DEBUG (0, "start = %d, end = %d\n", start, end));
+        //PED_ASSERT (ped_geometry_test_sector_inside(start_range,start), return);
+        //PED_ASSERT (ped_geometry_test_sector_inside (end_range, end), return);
+        //PED_ASSERT (start <= end,
+                    //PED_DEBUG (0, "start = %d, end = %d\n", start, end));
         ped_geometry_set (new_geom, start, end - start + 1);
 }

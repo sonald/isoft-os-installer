@@ -366,7 +366,7 @@ bool Engine::postscript(void)
 		// create the postscript.sh from template, append cmds from _postscript.
 		string post = _rootdir+"postscript.sh";
 		//XXX rewrite
-		cmd = "cp /usr/local/share/apps/libinstallerbase/postscript.tmpl "+post;
+		cmd = "cp /usr/share/apps/libinstallerbase/postscript.tmpl "+post;
 		system(cmd.c_str());
 		chmod(post.c_str(), 0755);
 
@@ -1068,6 +1068,7 @@ bool Engine::do_set_mountpoint(const string &devpath, const string &mountpoint, 
     static bool firsttime = true;
     fstab_struct tmp;
     
+    /*
     if(firsttime) {	
         tmp.devpath = "/dev/devpts";
         tmp.mountpoint = "/dev/pts";
@@ -1101,7 +1102,8 @@ bool Engine::do_set_mountpoint(const string &devpath, const string &mountpoint, 
         tmp.self_test 	= no_self_test;
         _fstablist.push_back(tmp);
         firsttime = false;
-    }
+    }  
+    */
 
     tmp.devpath = devpath;
     tmp.mountpoint = mountpoint;

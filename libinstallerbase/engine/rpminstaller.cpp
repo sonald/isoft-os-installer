@@ -97,8 +97,9 @@ void *_rpm_callback(const void * h, const rpmCallbackType what,
 
             //case RPMCALLBACK_SCRIPT_START:
             //case RPMCALLBACK_SCRIPT_STOP:
-        case RPMCALLBACK_INST_STOP:
-            cerr << "install " << rpmname << "stop\n"; break;
+        //FIXME: rpm 4.9 does not contain this enum
+        //case RPMCALLBACK_INST_STOP:
+            //cerr << "install " << rpmname << "stop\n"; break;
                 
         default: 
             break;
@@ -136,7 +137,7 @@ bool RpmInstaller::install(void (*progress)(int percent))
 
     cerr << "begin to run transaction\n";
     rc = rpmtsRun(_rpmts, NULL, RPMPROB_FILTER_IGNOREARCH|RPMPROB_FILTER_IGNOREOS);
-    cerr << "transaction run done with " << rc << endl;
+    cerr << "transaction done with " << rc << endl;
 
     _reporter(100);
     return true;

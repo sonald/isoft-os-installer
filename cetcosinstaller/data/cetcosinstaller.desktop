@@ -1,11 +1,11 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=Rfinstaller
-Name[zh_CN]=安装程序
-GenericName=Rfinstaller
+Name=CETC OS Installer
+Name[zh_CN]=CETC OS 安装程序
+GenericName=CETC OS Installer
 GenericName[zh_CN]=安装程序
-Comment=Red Flag Linux DT7.0 Installer
-Comment[zh_CN]=红旗Linux桌面版7.0安装程序
+Comment=CETC OS Installer
+Comment[zh_CN]=CETC OS 安装程序
 Exec=kdesu cetcosinstaller
 Terminal=false
 Type=Application
