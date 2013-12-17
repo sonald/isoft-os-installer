@@ -14,9 +14,12 @@ mkdir /sys
 mkdir /dev
 
 # mkinitrd
-mount /dev
-mount /proc
-mount /sys
+mount -t sysfs sysfs /sys
+mount -t proc procfs /proc
+mount -t devtmpfs udev /dev
+##mount /dev
+##mount /proc
+##mount /sys
 ##/sbin/new-kernel-pkg --package kernel --mkinitrd --depmod --install  `uname -r`
 
 # remove useless services

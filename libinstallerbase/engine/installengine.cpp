@@ -359,9 +359,6 @@ bool Engine::postscript(void)
 		_postscript.push_back(label);
 
 		string cmd;
-		// delete firstconfig package
-		cmd = "rpm -e firstconfig --nodeps";
-		_postscript.push_back(cmd);
 
 		// create the postscript.sh from template, append cmds from _postscript.
 		string post = _rootdir+"postscript.sh";
@@ -690,6 +687,7 @@ bool Engine::realWork(void (*progress)(int))
     } else {
         prepareFileSystem();
         RpmInstaller grpInstaller(_rpm_groups, _rootdir);
+        grpInstaller.setupTransactions();
         ret = grpInstaller.install(progress);
     }
 

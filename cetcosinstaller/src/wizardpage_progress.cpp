@@ -92,10 +92,10 @@ void WizardPage_Progress::initializePage()
 //    m_bar->setMaximum(0);
 
     wizard()->button( QWizard::CancelButton )->setEnabled( false );
-    wizard()->setOption(QWizard::HaveCustomButton2);
-    wizard()->setButtonText(QWizard::CustomButton2, tr("&Game"));
-    wizard()->button( QWizard::CustomButton2)->setToolTip(tr("Play game"));
-    connect( wizard(), SIGNAL( customButtonClicked (int) ), this, SLOT( onGame(int)));
+//    wizard()->setOption(QWizard::HaveCustomButton2);
+//    wizard()->setButtonText(QWizard::CustomButton2, tr("&Game"));
+//    wizard()->button( QWizard::CustomButton2)->setToolTip(tr("Play game"));
+//    connect( wizard(), SIGNAL( customButtonClicked (int) ), this, SLOT( onGame(int)));
     m_end = false;
 
     // set the beginning picture.

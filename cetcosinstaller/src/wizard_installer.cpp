@@ -19,10 +19,11 @@
 WizardInstaller::WizardInstaller(QWidget* parent) 
 	: QWizard(parent)
 {
+    setWindowFlags(Qt::FramelessWindowHint);
     setOption(NoBackButtonOnStartPage);
     setOption(NoBackButtonOnLastPage);
-    setOption(HaveCustomButton1);
-    setWizardStyle(MacStyle);
+//    setOption(HaveCustomButton1);
+//    setWizardStyle(MacStyle);
 
     // create all wizard page now.
     WizardPage_Welcome * 	page_welcome		= new WizardPage_Welcome;
@@ -80,8 +81,8 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     QPixmap background( g_appImgPath + "/installer-background.png" );
     setPixmap( QWizard::BackgroundPixmap, background );
 
-    QSize wizard_size(780, 560);
-    setFixedSize( wizard_size );
+//    QSize wizard_size(780, 560);
+//    setFixedSize( wizard_size );
     // showFullScreen();
 }
 
@@ -95,7 +96,7 @@ void WizardInstaller::reTranslateUi()
     setButtonText( QWizard::CommitButton, tr("&Next >") );
     setButtonText( QWizard::FinishButton, tr("&Finish") );
     setButtonText( QWizard::CancelButton, tr("&Cancel") );
-    setButtonText( QWizard::CustomButton1, tr("&Terminal") );
+//    setButtonText( QWizard::CustomButton1, tr("&Terminal") );
     //QAbstractButton * term_btn = button (QWizard::CustomButton1);
     //term_btn->setToolTip(tr("Give me a shell, Please!"));
 }

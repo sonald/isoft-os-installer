@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <algorithm>
+#include <set>
 #include <rpm/rpmlog.h>
 
 using namespace std;
@@ -112,11 +113,101 @@ void *_rpm_callback(const void * h, const rpmCallbackType what,
 RpmInstaller::RpmInstaller(const list<string> &groups, const string &rootdir)
     :_groups(groups), _rootdir(rootdir), _rpmts(NULL)
 {
-    setupRpm();
+}
+
+bool RpmInstaller::setupTransactions()
+{
+    if (!sanitizeGroupPath()) {
+        return false;
+    }
+    processPrivileged();
+    return setupRpm();
+}
+
+
+#define pkg_name(rpmname) ({ \
+        string _pkgname(rpmname); \
+        int idx = rpmname.rfind('-', rpmname.rfind('-')); \
+        if (idx != string::npos) { \
+            _pkgname = rpmname.substr(0, idx);  \
+        } \
+        _pkgname; \
+        })
+
+bool RpmInstaller::processPrivileged()
+{
+#ifdef DEBUG
+    rpmlogSetMask(RPMLOG_MASK(RPMLOG_DEBUG));
+#endif
+
+    rpmts ts = rpmtsCreate();
+    rpmtsSetNotifyCallback(ts, _rpm_callback, this);
+
+    rpmtsSetRootDir(ts, _rootdir.c_str());
+    rpmInitMacros(rpmGlobalMacroContext, "/usr/lib/rpm/macros");
+    delMacro(rpmGlobalMacroContext, g_macro_dbpath);
+    addMacro(rpmGlobalMacroContext, g_macro_dbpath, NULL, g_default_dbpath, 0);
+
+    char sbuf[512] = "%{_dbpath}"; 
+    if (expandMacros(NULL, NULL, sbuf, sizeof sbuf - 1) != 0) {
+        cerr << "_dbpath expand failed, need to set it\n";
+        addMacro(NULL, g_macro_dbpath, NULL, g_default_dbpath, 0);
+    }
+
+    cerr << "_dbpath " << sbuf << endl;
+    //rpmDumpMacroTable(NULL, stderr);
+
+    rpmtsSetDBMode(ts, O_RDWR);
+    rpmtsInitDB(ts, O_RDWR);
+
+    _privilegedRpms.insert("setup");
+    _privilegedRpms.insert("filesystem");
+
+    list<string> rpms;
+
+    string core_group_dir = _groupPath + "/core";
+    DIR *dir = opendir(core_group_dir.c_str());
+    if (!dir) {
+        perror("opendir");
+        return false;
+    }
+
+    struct dirent *entry = NULL;
+    do {
+        entry = readdir(dir);
+        if (entry) {
+            if (entry->d_type != DT_REG)
+                continue;
+
+            string fname(entry->d_name);
+            if (_privilegedRpms.find(pkg_name(fname)) != _privilegedRpms.end()) {
+                rpms.push_back(core_group_dir + "/" + fname);
+                _escapedRpms.insert(fname);
+                cerr << "add escape rpm" << fname << endl;
+            }
+
+            if (rpms.size() == _privilegedRpms.size()) 
+                break; //search done
+        }
+    } while (entry);
+    closedir(dir);
+
+    list<string>::const_iterator i = rpms.begin();
+    while (i != rpms.end()) {
+        addRpmToTs(ts, *i);
+        ++i;
+    }
+
+    int rc = rpmtsRun(ts, NULL, RPMPROB_FILTER_IGNOREARCH|RPMPROB_FILTER_IGNOREOS);
+    rpmtsFree(ts);
+    cerr << "install privileged done with " << rc << endl;
+
+    return true;
 }
 
 bool RpmInstaller::install(void (*progress)(int percent))
 {
+
     _reporter = progress;
     rpmps ps;
 
@@ -139,16 +230,13 @@ bool RpmInstaller::install(void (*progress)(int percent))
     rc = rpmtsRun(_rpmts, NULL, RPMPROB_FILTER_IGNOREARCH|RPMPROB_FILTER_IGNOREOS);
     cerr << "transaction done with " << rc << endl;
 
-    _reporter(100);
+    if (_reporter)
+        _reporter(100);
     return true;
 }
 
 bool RpmInstaller::setupRpm()
 {
-    if (!sanitizeGroupPath()) {
-        return false;
-    }
-
 #ifdef DEBUG
     rpmlogSetMask(RPMLOG_MASK(RPMLOG_DEBUG));
 #endif
@@ -170,13 +258,13 @@ bool RpmInstaller::setupRpm()
     //rpmDumpMacroTable(NULL, stderr);
 
     rpmtsSetDBMode(_rpmts, O_RDWR);
-    rpmtsInitDB(_rpmts, O_RDWR);
+    //rpmtsInitDB(_rpmts, O_RDWR);
 
     prepareGroupRpms();
 
     list<string>::const_iterator i = _rpms.begin();
     while (i != _rpms.end()) {
-        addRpmToTs(*i);
+        addRpmToTs(_rpmts, *i);
         ++i;
     }
 
@@ -215,7 +303,7 @@ list<string> RpmInstaller::enumerateRpmsInGroupDir(const string &groupdir)
                 continue;
 
             string fname(entry->d_name);
-            if (fname.size()) {
+            if (fname.size() && _escapedRpms.find(fname) == _escapedRpms.end()) {
                 l.push_back(groupdir + "/" + fname);
                 //cerr << "add " << l.back() << endl;
             }
@@ -260,7 +348,7 @@ bool RpmInstaller::sanitizeGroupPath()
     return true;
 }
 
-void RpmInstaller::addRpmToTs(const string &rpmfile)
+void RpmInstaller::addRpmToTs(rpmts ts, const string &rpmfile)
 {
     cerr << "addRpmToTs " << rpmfile << endl;
     FD_t fd = Fopen(rpmfile.c_str(), "r.ufdio");
@@ -273,13 +361,13 @@ void RpmInstaller::addRpmToTs(const string &rpmfile)
         goto _finished;
     }
 
-    ret = rpmReadPackageFile(_rpmts, fd, rpmfile.c_str(), &h);
+    ret = rpmReadPackageFile(ts, fd, rpmfile.c_str(), &h);
     if (ret != RPMRC_OK) {
         cerr << "rpmReadPackageFile failed\n";
         goto _finished;
     }
 
-    rc = rpmtsAddInstallElement(_rpmts, h, rpmfile.c_str(), 1, NULL);
+    rc = rpmtsAddInstallElement(ts, h, rpmfile.c_str(), 1, NULL);
     if (rc) {
         cerr << "rpmtsAddInstallElement failed with" << rc << "\n";
         goto _finished;

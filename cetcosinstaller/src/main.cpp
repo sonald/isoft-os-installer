@@ -1,9 +1,5 @@
-#include <QApplication>
-#include <QDebug>
-#include <QFile>
-#include <QLibraryInfo>
-#include <QLocale>
-#include <QTranslator>
+#include <QtCore>
+#include <QtGui>
 
 #include <cstdio>
 #include <unistd.h>
@@ -68,8 +64,13 @@ int main(int argc, char* argv[])
 	g_qtQmPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 
 	g_appPath = app.applicationDirPath();
-	g_appResPath = g_appPath + "/../share/cetcosinstaller";
-	g_appQmPath = g_appResPath + "/translations";
+    if (QDir("/usr/share/cetcosinstaller").exists()) {
+        g_appResPath = "/usr/share/cetcosinstaller";
+    } else if (QDir("/usr/local/share/cetcosinstaller").exists()) {
+        g_appResPath = "/usr/local/share/cetcosinstaller";
+    } else
+        g_appResPath = "/../share/cetcosinstaller";
+    g_appQmPath = g_appResPath + "/translations";
 	g_appImgPath = g_appResPath + "/images";
     
 	g_appTranslator.load( g_transPrefix + "_" + localeName, g_appQmPath );
@@ -88,7 +89,11 @@ int main(int argc, char* argv[])
 
 	// show the app.
 	WizardInstaller wizard_installer; 
-	wizard_installer.show();
+    wizard_installer.setFixedSize(780, 560);
+    QRect dr = qApp->desktop()->geometry();
+    wizard_installer.move((dr.width()-wizard_installer.width())/2,
+                          (dr.height()-wizard_installer.height())/2);
+    wizard_installer.show();
 
 	// run the app.
 	int ret;

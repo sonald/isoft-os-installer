@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <set>
 #include <list>
 
 #include <rpm/rpmcli.h>
@@ -20,6 +21,7 @@ public:
     RpmInstaller(const list<string> &groups, const string &rootdir);
     ~RpmInstaller();
     bool install(void (*progress)(int percent) = NULL);
+    bool setupTransactions();
 
     void reportUpstream(const string &rpm, int order, rpm_loff_t amount, rpm_loff_t total);
 
@@ -30,6 +32,8 @@ private:
     string _groupPath; // when to find group config file in livecd
 
     list<string> _rpms; // to be installed
+    set<string> _privilegedRpms;  // that need to be installed at very first
+    set<string> _escapedRpms; // that won't be installed (may be privileged which already installed at the first)
     upstream_report_t _reporter;
 
     bool setupRpm();
@@ -42,7 +46,8 @@ private:
      */
     bool sanitizeGroupPath();
     list<string> enumerateRpmsInGroupDir(const string &groupdir);
-    void addRpmToTs(const string &rpmfile);
+    void addRpmToTs(rpmts ts, const string &rpmfile);
+    bool processPrivileged();
 };
 
 #endif
