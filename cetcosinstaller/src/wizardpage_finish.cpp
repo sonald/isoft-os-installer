@@ -47,14 +47,14 @@ void WizardPage_Finish::initializePage()
     g_engine->cmdSetLang( locale.toLatin1() );
 
     // grub
-    //QString pathGrub = field("pathGrub").toString();
-    //if( !pathGrub.isEmpty() ) {
-    //    qDebug() << "install grub on:" << pathGrub;
-    //    g_engine->cmdSetBootEntry( pathGrub.toLatin1() );
-    //}
+    QString pathGrub = field("pathGrub").toString();
+    if( !pathGrub.isEmpty() ) {
+        qDebug() << "install grub on:" << pathGrub;
+        g_engine->cmdSetBootEntry( pathGrub.toLatin1() );
+    }
 
     // useradd
-    //( static_cast<WizardPage_UserAdd*>(wizard()->page(Page_UserAdd)) )->setPasswdUser();
+    ( static_cast<WizardPage_UserAdd*>(wizard()->page(Page_UserAdd)) )->setPasswdUser();
     
     //TODO: install new kernel here.
 

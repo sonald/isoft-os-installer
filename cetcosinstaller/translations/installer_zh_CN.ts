@@ -142,78 +142,56 @@
         <translation type="obsolete">创建扩展分区：%1
 			</translation>
     </message>
-    <message>
-        <location filename="../src/partition_automode.cpp" line="80"/>
-        <source>Create the partition table on disk %1.
-</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/partition_automode.cpp" line="397"/>
-        <source>create the swap partition: %1.
-</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/partition_automode.cpp" line="433"/>
-        <source>create the root partition: %1.
-</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/partition_automode.cpp" line="446"/>
-        <source>create the extended partition: %1.
-</source>
-        <translation></translation>
-    </message>
 </context>
 <context>
     <name>WizardInstaller</name>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="93"/>
+        <location filename="../src/wizard_installer.cpp" line="92"/>
         <source>Installer Wizard</source>
         <translation>安装程序向导</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="95"/>
+        <location filename="../src/wizard_installer.cpp" line="94"/>
         <source>&lt; &amp;Back</source>
         <translation>后退(&amp;B)</translation>
     </message>
     <message>
+        <location filename="../src/wizard_installer.cpp" line="95"/>
         <location filename="../src/wizard_installer.cpp" line="96"/>
-        <location filename="../src/wizard_installer.cpp" line="97"/>
         <source>&amp;Next &gt;</source>
         <translation>下一步(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="98"/>
+        <location filename="../src/wizard_installer.cpp" line="97"/>
         <source>&amp;Finish</source>
         <translation>完成(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="99"/>
+        <location filename="../src/wizard_installer.cpp" line="98"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="147"/>
+        <location filename="../src/wizard_installer.cpp" line="146"/>
         <source>The installation is not start yet, anything is not happened on your computer, you can quit the installer safely in this moment.</source>
         <translation>安装过程还没有开始，在你的计算机上没有发生任何改变，此刻你可以安全的退出安装程序。</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="150"/>
-        <source>The system already had been installed but not configured.The system will be unusable if you quit now.</source>
+        <location filename="../src/wizard_installer.cpp" line="149"/>
+        <source>The system already had been installed but not configured.                                  The system will be unusable if you quit now.</source>
         <translation>系统已经被安装而没有配置，如果现在退出，系统将不可用。</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="100"/>
-        <source>&amp;Terminal</source>
-        <translation>终端(&amp;T)</translation>
+        <source>The system already had been installed but not configured.The system will be unusable if you quit now.</source>
+        <translation type="obsolete">系统已经被安装而没有配置，如果现在退出，系统将不可用。</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="102"/>
+        <source>&amp;Terminal</source>
+        <translation type="obsolete">终端(&amp;T)</translation>
+    </message>
+    <message>
         <source>Give me a shell, Please!</source>
-        <translation>嗨，请给我一个终端, 谢谢！</translation>
+        <translation type="obsolete">嗨，请给我一个终端, 谢谢！</translation>
     </message>
 </context>
 <context>
@@ -274,7 +252,7 @@
 <context>
     <name>WizardPage_Mach_Type</name>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="83"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="90"/>
         <source>Machine Type</source>
         <translation>机器类型</translation>
     </message>
@@ -283,22 +261,22 @@
         <translation type="obsolete">龙芯2E</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="87"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="94"/>
         <source>Loongson 2F Box</source>
         <translation>龙芯2F</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="88"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="95"/>
         <source>Loongson Notebook</source>
         <translation>龙芯笔记本</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="89"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="96"/>
         <source>Loongson PC</source>
         <translation>龙芯台式机</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="96"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="103"/>
         <source>PC with Loongson cpu</source>
         <translation>具有台式机外观的龙芯电脑</translation>
     </message>
@@ -307,32 +285,19 @@
         <translation type="obsolete">使用龙芯2E处理器的机器，例如福珑2E迷你电脑</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="93"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="100"/>
         <source>Machine with Loongson 2F cpu, like Fuloong 2F Box.</source>
         <translation>使用龙芯2F处理器的机器，例如福珑2F迷你电脑</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="95"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="102"/>
         <source>Notebook with Loongson cpu, like 8.9 inch YeeLoong Notebook</source>
         <translation>使用龙芯处理器的笔记本，例如逸珑笔记本计算机</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="84"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="91"/>
         <source>Please select your hardware type:</source>
         <translation>请选择你的硬件类型：</translation>
-    </message>
-</context>
-<context>
-    <name>WizardPage_Packages</name>
-    <message>
-        <location filename="../src/wizardpage_packages.cpp" line="68"/>
-        <source>Install Packages</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_packages.cpp" line="69"/>
-        <source>Select the packages which you want to install.</source>
-        <translation></translation>
     </message>
 </context>
 <context>
@@ -395,49 +360,40 @@
 <context>
     <name>WizardPage_Partition_Mode</name>
     <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="74"/>
         <source>Partition Mode</source>
-        <translation>分区方式</translation>
+        <translation type="obsolete">分区方式</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="77"/>
         <source>Auto Mode</source>
-        <translation>自动方式</translation>
+        <translation type="obsolete">自动方式</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="78"/>
         <source>Simple Mode</source>
-        <translation>简易方式</translation>
+        <translation type="obsolete">简易方式</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="79"/>
         <source>Advanced Mode</source>
-        <translation>高级方式</translation>
+        <translation type="obsolete">高级方式</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="81"/>
         <source>In this mode, a free partition will be used to install, swap partition will be create if necessary. Only appropriate size of space will be used if the partition is too big. Any existed partition will not be affected. You can check the result in summary page.</source>
-        <translation>在这种方式下，一个空闲分区被用来安装系统，如果需要会创建交换分区。如果这个分区太大，只会使用其中部分空间。任何已存在分区不会受影响。你可以在总结页面查看结果。</translation>
+        <translation type="obsolete">在这种方式下，一个空闲分区被用来安装系统，如果需要会创建交换分区。如果这个分区太大，只会使用其中部分空间。任何已存在分区不会受影响。你可以在总结页面查看结果。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="83"/>
         <source>This mode give you a quick and simple way to install. Just select the partition on which you want to install, then press &quot;next&quot; button, all is done.</source>
-        <translation>这种方式下，您可以简单快速的来安装。只需选择您要安装的分区，然后按下“下一步”按钮，一切就会完成。</translation>
+        <translation type="obsolete">这种方式下，您可以简单快速的来安装。只需选择您要安装的分区，然后按下“下一步”按钮，一切就会完成。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="85"/>
         <source>In this mode, you can partition the disk manually. You can view the contents of partition, add and delete partition, edit partition to change the mountpoint, file system and format.</source>
-        <translation>这种方式下，你可以手工进行磁盘分区。你可以查看分区的内容，添加和删除分区，编辑分区的挂载点、文件系统以及格式化。</translation>
+        <translation type="obsolete">这种方式下，你可以手工进行磁盘分区。你可以查看分区的内容，添加和删除分区，编辑分区的挂载点、文件系统以及格式化。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="75"/>
         <source>Red Flag Linux Installer support three partition mode: auto, simple and advanced.</source>
-        <translation>红旗Linux安装程序支持三种分区方式：自动，简易和高级。</translation>
+        <translation type="obsolete">红旗Linux安装程序支持三种分区方式：自动，简易和高级。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="112"/>
         <source>LiveCD hard disk mode</source>
-        <translation>LiveCD硬盘安装模式</translation>
+        <translation type="obsolete">LiveCD硬盘安装模式</translation>
     </message>
     <message>
         <source>You has launched the LiveCD with hard disk mode. 
@@ -445,65 +401,54 @@
         <translation type="obsolete">你已经启动LiveCD的硬盘安装模式。
 				存放有LiveCD光盘镜像(ISO)文件的分区(%1)不能用于系统安装。</translation>
     </message>
-    <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="113"/>
-        <source>You has launched the LiveCD with hard disk mode. 
-The partition(%1) on which LiveCD iso file put must not be used.</source>
-        <translation></translation>
-    </message>
 </context>
 <context>
     <name>WizardPage_Partition_Simple</name>
     <message>
-        <location filename="../src/wizardpage_partition_simple.cpp" line="17"/>
-        <location filename="../src/wizardpage_partition_simple.cpp" line="54"/>
         <source>Partition: Simple Mode</source>
-        <translation>分区：简单方式</translation>
+        <translation type="obsolete">分区：简单方式</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_partition_simple.cpp" line="18"/>
         <source>Select the partition on which you want to install Red Flag Linux system. You can get the OS type of partitions directly, and view the directory tree through &quot;detail&quot; button.</source>
-        <translation>选择你要安装红旗Linux的分区。你可以获知分区上的操作系统类型，通过“详细”按钮可以查看分区目录树。</translation>
+        <translation type="obsolete">选择你要安装红旗Linux的分区。你可以获知分区上的操作系统类型，通过“详细”按钮可以查看分区目录树。</translation>
     </message>
 </context>
 <context>
     <name>WizardPage_Progress</name>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="85"/>
+        <location filename="../src/wizardpage_progress.cpp" line="87"/>
         <source>Installation Progress</source>
         <translation>安装进度</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="86"/>
+        <location filename="../src/wizardpage_progress.cpp" line="88"/>
         <source>Please wait for a while. Enjoy a cup of coffee maybe a good idea.</source>
         <translation>请等待一段时间。享受一杯咖啡也许是一个好主意。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="176"/>
+        <location filename="../src/wizardpage_progress.cpp" line="183"/>
         <source>Installation Error</source>
         <translation>安装过程错误</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="177"/>
+        <location filename="../src/wizardpage_progress.cpp" line="184"/>
         <source>Finish</source>
         <translation>完成</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="94"/>
         <source>&amp;Game</source>
-        <translation>游戏(&amp;G)</translation>
+        <translation type="obsolete">游戏(&amp;G)</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="95"/>
         <source>Play game</source>
-        <translation>玩一会游戏</translation>
+        <translation type="obsolete">玩一会游戏</translation>
     </message>
     <message>
         <source>Please wait for a while. Play a game maybe a good idea.</source>
         <translation type="obsolete">请等待一段时间。享受一杯咖啡也许是一个好主意。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="143"/>
+        <location filename="../src/wizardpage_progress.cpp" line="150"/>
         <source>Elapsed: </source>
         <translation>已安装时间：</translation>
     </message>
@@ -516,7 +461,22 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation>安装前的总结</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="119"/>
+        <location filename="../src/wizardpage_summary.cpp" line="52"/>
+        <source>Notice: Please confirm the pre-install summary.You can&apos;t go back to previous page after this step.You still can back to the previous wizard page for re-setup now.</source>
+        <translation>注意：请确认安装总结。这一步之后无法返回到前面页面。现在你还可以返回到前面页面进行重新设置。</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_summary.cpp" line="64"/>
+        <source>CETC Client OS installer</source>
+        <translation>中科电普华终端操作系统</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_summary.cpp" line="107"/>
+        <source>Install Groups:</source>
+        <translation>安装下列组别：</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_summary.cpp" line="126"/>
         <source>Installation Information</source>
         <translation>安装信息</translation>
     </message>
@@ -526,21 +486,21 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation>开始安装前请认真阅读安装前的总结。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="52"/>
         <source>Notice: Please confirm the pre-install summary. You can&apos;t go back to previous page after this step. You still can back to the previous wizard page for re-setup now.</source>
-        <translation>注意：请确认安装总结。这一步之后无法返回到前面页面。现在你还可以返回到前面页面进行重新设置。</translation>
+        <translation type="obsolete">注意：请确认安装总结。这一步之后无法返回到前面页面。现在你还可以返回到前面页面进行重新设置。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="100"/>
+        <location filename="../src/wizardpage_summary.cpp" line="102"/>
         <source>Partition Information:</source>
         <translation>分区信息：</translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_summary.cpp" line="51"/>
         <source>Advanced</source>
-        <translation type="obsolete">高级</translation>
+        <translation>高级</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="67"/>
+        <location filename="../src/wizardpage_summary.cpp" line="69"/>
         <source>Language: </source>
         <translation>语言：</translation>
     </message>
@@ -553,9 +513,8 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation type="obsolete">红旗Linux龙芯版</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="62"/>
         <source>Red Flag Linux For Loongson</source>
-        <translation>红旗Linux龙芯版</translation>
+        <translation type="obsolete">红旗Linux龙芯版</translation>
     </message>
 </context>
 <context>
@@ -567,42 +526,52 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 				超级用户必须设置一个密码。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="171"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="172"/>
         <source>Add new users:</source>
         <translation>添加新用户：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="193"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
+        <source>Root password needed</source>
+        <translation>必须输入root密码</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
+        <source>Root password should not be empty.</source>
+        <translation>root密码不能为空。</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
         <source>Root password</source>
         <translation>超级用户密码：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="193"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
         <source>Please input password correctly twice.</source>
         <translation>两次输入密码要一致。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="164"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="165"/>
         <source>Set password and add users</source>
         <translation>设置密码和添加用户</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
         <source>Password:</source>
         <translation>密码：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="170"/>
         <source>Confirm:</source>
         <translation>确认：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="165"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="166"/>
         <source>Password for user &quot;root&quot; must be set. You can add new user also, at least one new user account should be created.</source>
         <translation>超级用户(root)密码必须设置。你也可以添加新用户，至少要创建一个新用户。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="248"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="250"/>
         <source>The username ( %1 ) had existed.</source>
         <translation>用户名(%1)已经存在。</translation>
     </message>
@@ -619,7 +588,7 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 			</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="167"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
         <source>User &quot;root&quot; can control everything on the entire computer.
 A password MUST be set for user &quot;root&quot;.</source>
         <translation></translation>
@@ -630,13 +599,7 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="222"/>
-        <source>At least create the first user account.
-</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="225"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="227"/>
         <source>Please not fill the dulplicate name.
 </source>
         <translation></translation>
@@ -650,18 +613,39 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation>欢迎</translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_welcome.cpp" line="57"/>
+        <source>Welcome to CETC Client OS. You can select the language of installer now.</source>
+        <translation>欢迎使用中科电普华终端操作系统。你现在可以选择安装程序的界面语言。</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_welcome.cpp" line="58"/>
+        <source>CETC Client OS support Simplified-Chinese, Traditional-Chinese, English. You can select the language which will be the language of installer. And the selected language will be the default language of installed system.</source>
+        <translation>中科电普华终端操作系统支持简体中文，繁体中文，英文。你可以选择其中一种作为安装程序的语言，你所选择的语言也将是系统安装后的默认语言。</translation>
+    </message>
+    <message>
         <source>Welcome to Red Flag Linux Desktop 7.0. You can select the language of installer now.</source>
         <translation type="obsolete">欢迎使用红旗Linux桌面版7.0。你现在可以选择安装程序的界面语言。</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/wizardpage_welcome.cpp" line="58"/>
         <source>Red Flag Linux for Loongson support Simplified-Chinese, Traditional-Chinese, English, Españoal and Português. You can select the language which will be the language of installer. And the selected language will be the default language of installed system.</source>
-        <translation>红旗Linux龙芯版支持简体中文，繁体中文，英文，西班牙文和葡萄牙文。你可以选择其中一种作为安装程序的语言，你所选择的语言也将是系统安装后的默认语言。</translation>
+        <translation type="obsolete">红旗Linux龙芯版支持简体中文，繁体中文，英文，西班牙文和葡萄牙文。你可以选择其中一种作为安装程序的语言，你所选择的语言也将是系统安装后的默认语言。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_welcome.cpp" line="57"/>
         <source>Welcome to Red Flag Linux for Loongson. You can select the language of installer now.</source>
-        <translation>欢迎使用红旗Linux龙芯版。你现在可以选择安装程序的界面语言。</translation>
+        <translation type="obsolete">欢迎使用红旗Linux龙芯版。你现在可以选择安装程序的界面语言。</translation>
+    </message>
+</context>
+<context>
+    <name>WizardPage_chooseGroup</name>
+    <message>
+        <location filename="../src/wizardpage_choosegroup.ui" line="14"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_choosegroup.ui" line="20"/>
+        <source>Choose groups to install</source>
+        <translation>选择要安装的组别</translation>
     </message>
 </context>
 </TS>

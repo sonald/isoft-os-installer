@@ -20,17 +20,17 @@ WizardPage_Summary::WizardPage_Summary(QWidget *parent)
     m_summary->setReadOnly(true);
 
     m_spacerItem = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
-    //m_advanced = new QPushButton( this );
-    //m_buttonLayout = new QHBoxLayout();
-    //m_buttonLayout->addItem( m_spacerItem );
-    //m_buttonLayout->addWidget( m_advanced, 0, Qt::AlignRight );
+    m_advanced = new QPushButton( this );
+    m_buttonLayout = new QHBoxLayout();
+    m_buttonLayout->addItem( m_spacerItem );
+    m_buttonLayout->addWidget( m_advanced, 0, Qt::AlignRight );
 
     m_warning = new QLabel(this);
     m_warning->setWordWrap(true);
 
     m_layout = new QVBoxLayout(this);
     m_layout->addWidget(m_summary);
-    //m_layout->addLayout(m_buttonLayout);
+    m_layout->addLayout(m_buttonLayout);
     m_layout->addWidget(m_warning);
     setLayout(m_layout);
 
@@ -39,7 +39,7 @@ WizardPage_Summary::WizardPage_Summary(QWidget *parent)
 
     registerField( "pathGrub", this, "pathGrub", SIGNAL(pathGrubChanged()) );
 
-    //connect( m_advanced, SIGNAL( clicked() ), this, SLOT( advancedDialog() ) );
+    connect( m_advanced, SIGNAL( clicked() ), this, SLOT( advancedDialog() ) );
 }
 
 void WizardPage_Summary::initializePage()
@@ -48,7 +48,7 @@ void WizardPage_Summary::initializePage()
     setTitle( tr("Pre-Install Summary") );
     setSubTitle( tr("Please read the pre-install summary carefully before starting installation progress." ) );
 
-    //m_advanced->setText( tr("Advanced") );
+    m_advanced->setText( tr("Advanced") );
     m_warning->setText( tr( "Notice: Please confirm the pre-install summary."
                             "You can't go back to previous page after this step."
                             "You still can back to the previous wizard page for re-setup now.") );
@@ -61,7 +61,7 @@ void WizardPage_Summary::initializePage()
     m_summary->clear();
 
     // Version
-    m_summary->append( tr("CETC OS installer") );
+    m_summary->append( tr("CETC Client OS installer") );
     m_summary->append( "" );
 
     // Lang

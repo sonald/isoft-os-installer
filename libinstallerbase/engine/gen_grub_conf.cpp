@@ -26,7 +26,7 @@ static const char *dt7_gfxmenu_sc 		= "/boot/message";
 static const char *dt7_splashimage_sc 		= "/boot/grub/splash.xpm.gz";
 static const char *dt7_gfxmenu_boot_sc 		= "/message";
 static const char *dt7_splashimage_boot_sc 	= "/grub/splash.xpm.gz";
-static const char *dt7_title_sc		        = "RedFlag Linux Desktop 7.0";
+static const char *dt7_title_sc		        = "CETC OS";
 static char dt7_vmlinuz_name_sc[STRING_LENGTH]  = "\0";
 static char dt7_kernel_release_sc[STRING_LENGTH]= "\0";
 static char dt7_initrd_name_sc[STRING_LENGTH]   = "\0";
@@ -37,6 +37,7 @@ static const char *dt7_kernel_splash_sc 	= "quiet rhgb";
 static const char *windows_makeactive_sc	= "makeactive";
 static const char *windows_chainloader_sc	= "chainloader +1";
 static const char *grub_install_sc		= "/sbin/grub-install --no-floppy --root-directory=/tmp/rootdir ";
+static const char *grub2_install_sc		= "/sbin/grub2-install --root-directory=/tmp/rootdir ";
 
 static struct partition *partition_head_g 	= NULL;		// partition list head
 
@@ -110,27 +111,41 @@ int set_grub_args(const char *grub_args)
 	strncpy(dt7_grub_args_sc, grub_args, STRING_LENGTH);
 	return 0;
 }
+
+//TODO: honor boot_partition and root_partition 
+int install_grub2(const char *title, const char *root_partition, const char *towhere, const char *boot_partition)
+{
+    char cmd[STRING_LENGTH];
+    snprintf(cmd, sizeof cmd - 1, "%s %s", grub2_install_sc, towhere);
+    cerr << cmd << endl;
+    if (system(cmd) < 0) {
+        cerr << "grub install failed\n";
+        return -1;
+    }
+    return 0;
+}
+
 int install_grub(const char *title, const char *root_partition, const char *towhere, const char *boot_partition)
 {
     char cmd[STRING_LENGTH];
 
     if (init() != 0)
     {
-	fprintf(stderr, "init error\n");
-	return -1;
+        fprintf(stderr, "init error\n");
+        return -1;
     }
 
     if (generate_grub_conf_file(title, root_partition, boot_partition) != 0)
     {
-	fprintf(stderr, "generate grub.conf.redflag error\n");
-	return -1;
+        fprintf(stderr, "generate grub.conf.redflag error\n");
+        return -1;
     }
 
     // install grub(location)
     if (towhere == NULL)
     {
-	fprintf(stderr, "grub install towhere is NULL\n");
-	return -1;
+        fprintf(stderr, "grub install towhere is NULL\n");
+        return -1;
     }
 
     sprintf(cmd, "%s", grub_install_sc);	
@@ -139,8 +154,8 @@ int install_grub(const char *title, const char *root_partition, const char *towh
 
     if (system(cmd) == -1)
     {
-	fprintf(stderr, "grub install error\n");
-	return -1;
+        fprintf(stderr, "grub install error\n");
+        return -1;
     }
 
     free_partition_list(partition_head_g);

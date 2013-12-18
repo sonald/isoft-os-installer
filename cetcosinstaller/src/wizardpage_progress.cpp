@@ -135,7 +135,12 @@ void WizardPage_Progress::onGame(int num)
 void WizardPage_Progress::updatePic()
 {
     m_indexPic = ( m_indexPic + 1 ) % m_picsNameList.size();
+    qDebug() << ( g_appImgPath + "/" + m_picsNameList.at( m_indexPic ) );
     QPixmap pic( g_appImgPath + "/" + m_picsNameList.at( m_indexPic ) );
+    if (pic.isNull()) {
+        qDebug() << m_picsNameList[m_indexPic] << "is null";
+        return;
+    }
     m_picture->setPixmap(pic);
 }
 
@@ -147,7 +152,7 @@ void WizardPage_Progress::updateProgress()
 
 int WizardPage_Progress::nextId() const
 {
-    return Page_Finish;
+    return QWizardPage::nextId();
 }
 
 void WizardPage_Progress::updateProgress(int value)

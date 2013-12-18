@@ -117,78 +117,41 @@
     </message>
 </context>
 <context>
-    <name>PartitionAutoMode</name>
-    <message>
-        <location filename="../src/partition_automode.cpp" line="80"/>
-        <source>Create the partition table on disk %1.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/partition_automode.cpp" line="397"/>
-        <source>create the swap partition: %1.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/partition_automode.cpp" line="433"/>
-        <source>create the root partition: %1.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/partition_automode.cpp" line="446"/>
-        <source>create the extended partition: %1.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>WizardInstaller</name>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="93"/>
+        <location filename="../src/wizard_installer.cpp" line="92"/>
         <source>Installer Wizard</source>
         <translation type="unfinished">Wizard-Installer</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="95"/>
+        <location filename="../src/wizard_installer.cpp" line="94"/>
         <source>&lt; &amp;Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/wizard_installer.cpp" line="95"/>
         <location filename="../src/wizard_installer.cpp" line="96"/>
-        <location filename="../src/wizard_installer.cpp" line="97"/>
         <source>&amp;Next &gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="98"/>
+        <location filename="../src/wizard_installer.cpp" line="97"/>
         <source>&amp;Finish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="99"/>
+        <location filename="../src/wizard_installer.cpp" line="98"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="100"/>
-        <source>&amp;Terminal</source>
+        <location filename="../src/wizard_installer.cpp" line="149"/>
+        <source>The system already had been installed but not configured.                                  The system will be unusable if you quit now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="102"/>
-        <source>Give me a shell, Please!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizard_installer.cpp" line="147"/>
+        <location filename="../src/wizard_installer.cpp" line="146"/>
         <source>The installation is not start yet, anything is not happened on your computer, you can quit the installer safely in this moment.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizard_installer.cpp" line="150"/>
-        <source>The system already had been installed but not configured.The system will be unusable if you quit now.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -246,56 +209,43 @@
 <context>
     <name>WizardPage_Mach_Type</name>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="83"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="90"/>
         <source>Machine Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="84"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="91"/>
         <source>Please select your hardware type:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="87"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="94"/>
         <source>Loongson 2F Box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="88"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="95"/>
         <source>Loongson Notebook</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="89"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="96"/>
         <source>Loongson PC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="93"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="100"/>
         <source>Machine with Loongson 2F cpu, like Fuloong 2F Box.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="95"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="102"/>
         <source>Notebook with Loongson cpu, like 8.9 inch YeeLoong Notebook</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_mach_type.cpp" line="96"/>
+        <location filename="../src/wizardpage_mach_type.cpp" line="103"/>
         <source>PC with Loongson cpu</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>WizardPage_Packages</name>
-    <message>
-        <location filename="../src/wizardpage_packages.cpp" line="68"/>
-        <source>Install Packages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_packages.cpp" line="69"/>
-        <source>Select the packages which you want to install.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -357,107 +307,29 @@
     </message>
 </context>
 <context>
-    <name>WizardPage_Partition_Mode</name>
-    <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="74"/>
-        <source>Partition Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="75"/>
-        <source>Red Flag Linux Installer support three partition mode: auto, simple and advanced.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="77"/>
-        <source>Auto Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="78"/>
-        <source>Simple Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="79"/>
-        <source>Advanced Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="81"/>
-        <source>In this mode, a free partition will be used to install, swap partition will be create if necessary. Only appropriate size of space will be used if the partition is too big. Any existed partition will not be affected. You can check the result in summary page.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="83"/>
-        <source>This mode give you a quick and simple way to install. Just select the partition on which you want to install, then press &quot;next&quot; button, all is done.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="85"/>
-        <source>In this mode, you can partition the disk manually. You can view the contents of partition, add and delete partition, edit partition to change the mountpoint, file system and format.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="112"/>
-        <source>LiveCD hard disk mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_partition_mode.cpp" line="113"/>
-        <source>You has launched the LiveCD with hard disk mode. 
-The partition(%1) on which LiveCD iso file put must not be used.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>WizardPage_Partition_Simple</name>
-    <message>
-        <location filename="../src/wizardpage_partition_simple.cpp" line="17"/>
-        <location filename="../src/wizardpage_partition_simple.cpp" line="54"/>
-        <source>Partition: Simple Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_partition_simple.cpp" line="18"/>
-        <source>Select the partition on which you want to install Red Flag Linux system. You can get the OS type of partitions directly, and view the directory tree through &quot;detail&quot; button.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>WizardPage_Progress</name>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="85"/>
+        <location filename="../src/wizardpage_progress.cpp" line="87"/>
         <source>Installation Progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="86"/>
+        <location filename="../src/wizardpage_progress.cpp" line="88"/>
         <source>Please wait for a while. Enjoy a cup of coffee maybe a good idea.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="94"/>
-        <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_progress.cpp" line="95"/>
-        <source>Play game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_progress.cpp" line="143"/>
+        <location filename="../src/wizardpage_progress.cpp" line="150"/>
         <source>Elapsed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="176"/>
+        <location filename="../src/wizardpage_progress.cpp" line="183"/>
         <source>Installation Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="177"/>
+        <location filename="../src/wizardpage_progress.cpp" line="184"/>
         <source>Finish</source>
         <translation type="unfinished"></translation>
     </message>
@@ -475,27 +347,37 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_summary.cpp" line="51"/>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/wizardpage_summary.cpp" line="52"/>
-        <source>Notice: Please confirm the pre-install summary. You can&apos;t go back to previous page after this step. You still can back to the previous wizard page for re-setup now.</source>
+        <source>Notice: Please confirm the pre-install summary.You can&apos;t go back to previous page after this step.You still can back to the previous wizard page for re-setup now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="62"/>
-        <source>Red Flag Linux For Loongson</source>
+        <location filename="../src/wizardpage_summary.cpp" line="64"/>
+        <source>CETC Client OS installer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="67"/>
+        <location filename="../src/wizardpage_summary.cpp" line="69"/>
         <source>Language: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="100"/>
+        <location filename="../src/wizardpage_summary.cpp" line="102"/>
         <source>Partition Information:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="119"/>
+        <location filename="../src/wizardpage_summary.cpp" line="107"/>
+        <source>Install Groups:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_summary.cpp" line="126"/>
         <source>Installation Information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -503,43 +385,53 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 <context>
     <name>WizardPage_UserAdd</name>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="164"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="165"/>
         <source>Set password and add users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="165"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="166"/>
         <source>Password for user &quot;root&quot; must be set. You can add new user also, at least one new user account should be created.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="167"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
         <source>User &quot;root&quot; can control everything on the entire computer.
 A password MUST be set for user &quot;root&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
         <source>Password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="170"/>
         <source>Confirm:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="171"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="172"/>
         <source>Add new users:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="193"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
+        <source>Root password needed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
+        <source>Root password should not be empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
         <source>Root password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="193"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
         <source>Please input password correctly twice.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -549,19 +441,13 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="222"/>
-        <source>At least create the first user account.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="225"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="227"/>
         <source>Please not fill the dulplicate name.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="248"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="250"/>
         <source>The username ( %1 ) had existed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -573,14 +459,27 @@ A password MUST be set for user &quot;root&quot;.</source>
         <source>Welcome</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
-        <location filename="../src/wizardpage_welcome.cpp" line="58"/>
-        <source>Red Flag Linux for Loongson support Simplified-Chinese, Traditional-Chinese, English, Españoal and Português. You can select the language which will be the language of installer. And the selected language will be the default language of installed system.</source>
+    <message>
+        <location filename="../src/wizardpage_welcome.cpp" line="57"/>
+        <source>Welcome to CETC Client OS. You can select the language of installer now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_welcome.cpp" line="57"/>
-        <source>Welcome to Red Flag Linux for Loongson. You can select the language of installer now.</source>
+        <location filename="../src/wizardpage_welcome.cpp" line="58"/>
+        <source>CETC Client OS support Simplified-Chinese, Traditional-Chinese, English. You can select the language which will be the language of installer. And the selected language will be the default language of installed system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>WizardPage_chooseGroup</name>
+    <message>
+        <location filename="../src/wizardpage_choosegroup.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_choosegroup.ui" line="20"/>
+        <source>Choose groups to install</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

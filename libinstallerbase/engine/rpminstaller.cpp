@@ -38,7 +38,6 @@ void *_rpm_callback(const void * h, const rpmCallbackType what,
             {
                 float p =  (total ? ((float)amount / total) * 100 : 100.0);
                 cerr << rpmname << " " << p << "%" << endl; 
-                //installer->reportUpstream(100.0);
                 break;
             }
 
@@ -111,7 +110,7 @@ void *_rpm_callback(const void * h, const rpmCallbackType what,
 
 
 RpmInstaller::RpmInstaller(const list<string> &groups, const string &rootdir)
-    :_groups(groups), _rootdir(rootdir), _rpmts(NULL)
+    :_groups(groups), _rootdir(rootdir), _rpmts(NULL), _reporter(NULL)
 {
 }
 
@@ -127,9 +126,12 @@ bool RpmInstaller::setupTransactions()
 
 #define pkg_name(rpmname) ({ \
         string _pkgname(rpmname); \
-        int idx = rpmname.rfind('-', rpmname.rfind('-')); \
+        int idx = rpmname.rfind('-'); \
         if (idx != string::npos) { \
-            _pkgname = rpmname.substr(0, idx);  \
+            idx = rpmname.rfind('-', idx-1); \
+            if (idx != string::npos) { \
+                _pkgname = rpmname.substr(0, idx);  \
+            } \
         } \
         _pkgname; \
         })
@@ -367,7 +369,7 @@ void RpmInstaller::addRpmToTs(rpmts ts, const string &rpmfile)
         goto _finished;
     }
 
-    rc = rpmtsAddInstallElement(ts, h, rpmfile.c_str(), 1, NULL);
+    rc = rpmtsAddInstallElement(ts, h, rpmfile.c_str(), 0, NULL);
     if (rc) {
         cerr << "rpmtsAddInstallElement failed with" << rc << "\n";
         goto _finished;
@@ -379,6 +381,8 @@ _finished:
 
 void RpmInstaller::reportUpstream(const string &rpm, int order, rpm_loff_t amount, rpm_loff_t total)
 {
+    if (!_reporter) return;
+
     int nr_elems = rpmtsNElements(_rpmts);
     float p =  (nr_elems ? ((float)order / nr_elems) * 100 : 100.0);
     //float p =  (total ? ((float)amount / total) * 100 : 100.0);

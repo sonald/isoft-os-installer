@@ -23,11 +23,11 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     setOption(NoBackButtonOnStartPage);
     setOption(NoBackButtonOnLastPage);
 //    setOption(HaveCustomButton1);
-//    setWizardStyle(MacStyle);
+    setWizardStyle(MacStyle);
 
     // create all wizard page now.
     WizardPage_Welcome * 	page_welcome		= new WizardPage_Welcome;
-    WizardPage_Licence * 	page_licence 		= new WizardPage_Licence;
+//    WizardPage_Licence * 	page_licence 		= new WizardPage_Licence;
 
 //    WizardPage_Mach_Type*		page_mach_type 	= new WizardPage_Mach_Type;
 
@@ -40,7 +40,7 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     WizardPage_Summary * 	page_summary		= new WizardPage_Summary;
     WizardPage_Progress *	page_progress		= new WizardPage_Progress;
 
-//    WizardPage_UserAdd * page_useradd = new WizardPage_UserAdd;
+    WizardPage_UserAdd * page_useradd = new WizardPage_UserAdd;
     WizardPage_Finish * page_finish = new WizardPage_Finish;
     
     setPage(Page_Welcome, page_welcome);
@@ -53,7 +53,7 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     setPage(Page_ChooseGroup, page_choosegroup);
     setPage(Page_Summary, page_summary);
     setPage(Page_Progress, page_progress);
-//    setPage(Page_UserAdd, page_useradd);
+    setPage(Page_UserAdd, page_useradd);
     setPage(Page_Finish, page_finish);
     
     connect( page_welcome, SIGNAL( localeChanged() ), this, SLOT( reTranslateUi() ) );

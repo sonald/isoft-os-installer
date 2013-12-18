@@ -36,7 +36,6 @@ private:
     void readSysUsers(QStringList* list);
 
     QStringList         m_listSysUsers;
-    bool                m_empty;
     int                 m_illegal;
     bool                m_dual;
 

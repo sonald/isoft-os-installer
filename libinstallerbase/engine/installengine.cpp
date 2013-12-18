@@ -111,6 +111,7 @@ Engine::~Engine()
         string umount = "umount ";
         umount += target;
         umount += " 2>> /tmp/install.log";
+        cerr << umount << endl;
         system(umount.c_str());
     }
 }
@@ -367,7 +368,7 @@ bool Engine::postscript(void)
 		system(cmd.c_str());
 		chmod(post.c_str(), 0755);
 
-        mkdir((_rootdir + "tmp").c_str(), 01777);
+        //mkdir((_rootdir + "tmp").c_str(), 01777);
     
 		ofstream script(post.c_str(), ios::app);
 		if(!script) {
@@ -379,7 +380,9 @@ bool Engine::postscript(void)
         // trans postscript to real script.
 		for(list<string>::iterator it = _postscript.begin(); it != _postscript.end(); ++it) {
 			script << *it << endl;
+            cerr << "append [" << *it << "]\n";
 		}
+
 		script.close();
     
 		// run postscript
@@ -401,6 +404,11 @@ bool Engine::postscript(void)
         //		copyKxkbrc();
         //		copyKtimezonedrc();
         //		copyXorgConf();
+
+        // umount /dev /sys /proc
+        system(("umount " + _rootdir + "/sys").c_str());
+        system(("umount " + _rootdir + "/proc").c_str());
+        system(("umount " + _rootdir + "/dev").c_str());
 
     }// run post cmds end
     
@@ -692,7 +700,7 @@ bool Engine::realWork(void (*progress)(int))
     }
 
     if(!ret){
-        _errstr = "yum install failed.";
+        _errstr = "install failed.";
         return false;
     }
     
@@ -818,6 +826,7 @@ void Engine::appendCmd(int type, int cmdid, const char *arg0, const char *arg1, 
     cmd.id = cmdid;
     cmd.args = arglist;
 
+    cerr << "appendCmd: " << s_tags[cmdid] << endl;
     if(type == INSTALL){
         s_installcmds.push_back(cmd);
     }else{
@@ -1172,7 +1181,7 @@ bool Engine::do_add_group(const string group)
 
 bool Engine::do_boot_install(const string &devpath)
 {
-    if (install_grub("CETC OS ", _rootdev.c_str(), devpath.c_str(), 
+    if (install_grub2("CETC OS ", _rootdev.c_str(), devpath.c_str(), 
 		     _boot_partition.c_str()) == -1) 
 	{
 	    debuglog("install grub error\n");
@@ -1238,7 +1247,7 @@ bool Engine::do_add_user(const string &username)
 {
     static bool setPreUser_flag = false;
 
-    _postscript.push_back(string("/usr/sbin/luseradd ") + username);
+    _postscript.push_back(string("/usr/sbin/useradd -D -m ") + username);
     _postscript.push_back(string("passwd -d ") + username);
 
     if (setPreUser_flag == false) {    

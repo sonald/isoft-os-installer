@@ -32,7 +32,7 @@ enum Page_ID {
 //    Page_Packages,
     Page_Summary,
     Page_Progress,
-    //Page_UserAdd,
+    Page_UserAdd,
     Page_Finish,
     Page_ID_END=Page_Finish,
     Page_Error

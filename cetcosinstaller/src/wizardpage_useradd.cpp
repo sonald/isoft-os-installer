@@ -20,23 +20,24 @@ const int USERNAME_LENGTH =32;	// this magic number is relative to KDM.
 
 QValidator::State NameValidator::validate(QString& input, int& pos) const
 {
+    Q_UNUSED(pos)
     int size = input.size();
     int index = 0;
 
     // limit the length of username.
     if ( input.toUtf8().size() >= USERNAME_LENGTH )
-	return QValidator::Invalid;
+        return QValidator::Invalid;
 
     // not begin with -
     if ( input.at(0) == 0x002D )
-	return QValidator::Invalid;
-    
+        return QValidator::Invalid;
+
     // validate the username.
     while( index < size ) {
-	QChar ch = input.at(index);
-	if ( !isValid(ch) )
-	    return QValidator::Invalid;
-	index++;
+        QChar ch = input.at(index);
+        if ( !isValid(ch) )
+            return QValidator::Invalid;
+        index++;
     }
     return QValidator::Acceptable;
 }
@@ -48,16 +49,16 @@ QValidator::State NameValidator::validate(QString& input, int& pos) const
 bool NameValidator::isValid(const QChar& ch) const
 {
     if( ch >= 0x0030 && ch <= 0x0039 ) // 0-9
-	return true;
+        return true;
     if( ch >= 0x0041 && ch <= 0x005A ) // A-Z
-	return true;
+        return true;
     if( ch >= 0x0061 && ch <= 0x007A ) // a-z
-	return true;
+        return true;
     if( ch == 0x002D || ch == 0x002E || ch == 0x005F ) // - . _
-	return true;
+        return true;
     if( ch >= 0x4E00 && ch <= 0x9FFF ) // CJK Unified Ideographs: Common
-	return true;
-    return false;    
+        return true;
+    return false;
 }
 
 
@@ -69,7 +70,7 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     QPixmap rootPicture( g_appImgPath + "/root.png");
     m_rootPicture->setPixmap(rootPicture);
     m_rootPicture->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
-    
+
     m_rootDescript = new QLabel(this);
     m_descriptLayout = new QHBoxLayout();
     m_descriptLayout->addWidget( m_rootPicture );
@@ -79,7 +80,7 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     m_passwd->setDragEnabled(false);
     m_passwd->setEchoMode(QLineEdit::Password);
     m_passwd->setMaxLength(PASSWORD_LENGTH);
-    
+
     m_confirm = new QLineEdit(this);
     m_confirm->setDragEnabled(false);
     m_confirm->setEchoMode(QLineEdit::Password);
@@ -112,7 +113,7 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     m_labelLayout = new QHBoxLayout();
     m_labelLayout->addWidget(m_userPicture);
     m_labelLayout->addWidget(m_userLabel);
-    
+
     m_user1 = new QLineEdit(this);
     m_user2 = new QLineEdit(this);
     m_user3 = new QLineEdit(this);
@@ -130,8 +131,8 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     m_userLayout = new QGridLayout();
     m_userLayout->addLayout(m_labelLayout, 0, 0, 1, 2);
     m_userLayout->addWidget(m_user1, 1, 0);
-    m_star = new QLabel("*");
-    m_userLayout->addWidget(m_star, 1, 1);
+//    m_star = new QLabel("*");
+//    m_userLayout->addWidget(m_star, 1, 1);
     m_userLayout->addWidget(m_user2, 2, 0);
     m_userLayout->addWidget(m_user3, 3, 0);
     m_userLayout->addWidget(m_warningLabel, 4, 0, 1, 2);
@@ -176,7 +177,6 @@ void WizardPage_UserAdd::initializePage()
     readSysUsers(&m_listSysUsers);
 
     // m_legal: 0 all ok; 1, user1; 2, user2; 4 user3; 3, user1 and user2.
-    m_empty = true;
     m_illegal = 0;
     m_dual = false;
 }
@@ -188,12 +188,17 @@ int WizardPage_UserAdd::nextId() const
 
 bool WizardPage_UserAdd::validatePage()
 {
+    if (m_passwd->text().isEmpty()) {
+        QMessageBox::warning(this, tr("Root password needed"), tr("Root password should not be empty."));
+        return false;
+    }
+
     bool passwdSame = ( m_passwd->text() == m_confirm->text() );
     if ( !passwdSame ) {
-	QMessageBox::warning(this, tr("Root password"), tr("Please input password correctly twice.") );
-	m_passwd->setText( QString("") );
-	m_confirm->setText( QString("") );
-	return false;
+        QMessageBox::warning(this, tr("Root password"), tr("Please input password correctly twice.") );
+        m_passwd->setText( QString("") );
+        m_confirm->setText( QString("") );
+        return false;
     }
 
     return true;
@@ -202,54 +207,51 @@ bool WizardPage_UserAdd::validatePage()
 void WizardPage_UserAdd::setPasswdUser()
 {
     g_engine->cmdSetRootPassword( m_passwd->text().toLatin1() );
-    g_engine->cmdAddUser( m_user1->text().toUtf8() );
-    if ( !m_user2->text().isEmpty() ) g_engine->cmdAddUser(m_user2->text().toUtf8() );
-    if ( !m_user3->text().isEmpty() ) g_engine->cmdAddUser(m_user3->text().toUtf8() );
+    if (!m_user1->text().isEmpty()) g_engine->cmdAddUser( m_user1->text().toUtf8() );
+    if (!m_user2->text().isEmpty()) g_engine->cmdAddUser(m_user2->text().toUtf8() );
+    if (!m_user3->text().isEmpty()) g_engine->cmdAddUser(m_user3->text().toUtf8() );
 }
 
 bool WizardPage_UserAdd::isComplete() const
 {
-    if ( !m_empty && !m_illegal && !m_dual )
-	return true;
+    if ( !m_illegal && !m_dual )
+        return true;
     else
-	return false;
+        return false;
 }
 
 void WizardPage_UserAdd::showWarningLabel()
 {
     QString warning = tr("");
-    if ( m_empty ) 
-	warning += tr("At least create the first user account.\n");
-
     if ( m_dual ) {
-	warning += tr("Please not fill the dulplicate name.\n");
-	if ( m_user1->text() == m_user2->text() 
-	     || m_user1->text() == m_user3->text() )
-	    m_illegal = m_illegal & 0xFFFE ;
-	if ( m_user2->text() == m_user3->text() )
-	    m_illegal = m_illegal & 0xFFFD ;
+        warning += tr("Please not fill the dulplicate name.\n");
+        if ( m_user1->text() == m_user2->text()
+             || m_user1->text() == m_user3->text() )
+            m_illegal = m_illegal & 0xFFFE ;
+        if ( m_user2->text() == m_user3->text() )
+            m_illegal = m_illegal & 0xFFFD ;
     }
 
     QString name = tr("");
     if ( m_illegal & 0x0001 ) {
-	name += m_user1->text();
-	name += " ";
+        name += m_user1->text();
+        name += " ";
     }
     if ( m_illegal & 0x0002 ) {
-	name += m_user2->text();
-	name += " ";
+        name += m_user2->text();
+        name += " ";
     }
     if ( m_illegal & 0x0004 ) {
-	name += m_user3->text();
-	name += " ";
+        name += m_user3->text();
+        name += " ";
     }
     if ( !name.isEmpty() ) {
-	name = " " + name;
-	warning += QString( tr("The username ( %1 ) had existed.") ).arg(name);
+        name = " " + name;
+        warning += QString( tr("The username ( %1 ) had existed.") ).arg(name);
     }
     if ( !warning.isEmpty() ) {
-	m_warningLabel->setText(warning);
-	m_warningLabel->show();
+        m_warningLabel->setText(warning);
+        m_warningLabel->show();
     }
 }
 
@@ -257,14 +259,11 @@ void WizardPage_UserAdd::checkUser1(const QString& name)
 {
     m_warningLabel->hide();
 
-    m_empty = false;
     m_illegal = m_illegal & 0xFFFE ;
 
-    if ( name.isEmpty() ) {
-	m_empty = true;
-    } else if ( m_listSysUsers.contains( name ) ) {
-	m_illegal = m_illegal | 0x0001 ;
-    } 
+    if ( m_listSysUsers.contains( name ) ) {
+        m_illegal = m_illegal | 0x0001 ;
+    }
     m_dual = checkUserNameDual();
 
     emit completeChanged();
@@ -278,7 +277,7 @@ void WizardPage_UserAdd::checkUser2(const QString& name)
     m_dual = m_dual & 0xFFFD ;
 
     if ( m_listSysUsers.contains( name ) ) {
-	m_illegal = m_illegal | 0x0002 ;
+        m_illegal = m_illegal | 0x0002 ;
     }
     m_dual = checkUserNameDual();
 
@@ -293,7 +292,7 @@ void WizardPage_UserAdd::checkUser3(const QString& name)
     m_dual = m_dual & 0xFFFB ;
 
     if ( m_listSysUsers.contains( name ) ) {
-	m_illegal = m_illegal | 0x0004 ;
+        m_illegal = m_illegal | 0x0004 ;
     }
     m_dual = checkUserNameDual();
 
@@ -305,23 +304,25 @@ bool WizardPage_UserAdd::checkUserNameDual()
     bool ret = false;
 
     if ( m_user1->text() == m_user2->text() || m_user1->text() == m_user3->text() )
-	if ( !m_user1->text().isEmpty() )
-	    ret = true;
+        if ( !m_user1->text().isEmpty() )
+            ret = true;
     if ( m_user2->text() == m_user3->text() )
-	if ( !m_user2->text().isEmpty() )
-	    ret = true;
+        if ( !m_user2->text().isEmpty() )
+            ret = true;
     return ret;
 }
 
 void WizardPage_UserAdd::readSysUsers(QStringList* list)
 {
     QFile filePasswd("/etc/passwd");
-    filePasswd.open( QIODevice::ReadOnly | QIODevice::Text );
+    if (!filePasswd.open( QIODevice::ReadOnly | QIODevice::Text ))
+        return;
+
     QTextStream inPasswd( &filePasswd );
     while( !inPasswd.atEnd() ) {
-	QString line = inPasswd.readLine();
-	line.truncate( line.indexOf(':') );
-	*list << line;
+        QString line = inPasswd.readLine();
+        line.truncate( line.indexOf(':') );
+        *list << line;
     }
     filePasswd.close();
 }

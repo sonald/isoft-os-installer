@@ -54,8 +54,10 @@ WizardPage_Welcome::WizardPage_Welcome(QWidget *parent)
 void WizardPage_Welcome::reTranslateUi()
 {
     setTitle( tr("Welcome") );
-    setSubTitle( tr("Welcome to Red Flag Linux for Loongson. You can select the language of installer now.") );
-    m_label->setText( trUtf8("Red Flag Linux for Loongson support Simplified-Chinese, Traditional-Chinese, English, Españoal and Português. You can select the language which will be the language of installer. And the selected language will be the default language of installed system.") );
+    setSubTitle( tr("Welcome to CETC Client OS. You can select the language of installer now.") );
+    m_label->setText( trUtf8("CETC Client OS support Simplified-Chinese, Traditional-Chinese, English. "
+                "You can select the language which will be the language of installer. And the selected "
+                "language will be the default language of installed system.") );
 }
 
 void WizardPage_Welcome::initializePage()
