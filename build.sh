@@ -42,10 +42,11 @@ function do_makedist() {
 
     for sub in libinstallerbase libdiskswidget cetcosinstaller; do
         echo makedist $sub
-        cp -r ../$sub $sub-0.1
-        tar jcf ${sub}-0.1.tar.bz2 $sub-0.1
-        cp $sub-0.1/${sub}.spec .
-        rm -rf $sub-0.1
+        VERSION=$( awk -v IGNORECASE=1  '$1 ~ /version/ { print $NF; exit}' ../$sub/$sub.spec)
+        cp -r ../$sub $sub-$VERSION
+        tar jcf ${sub}-$VERSION.tar.bz2 $sub-$VERSION
+        cp $sub-$VERSION/${sub}.spec .
+        rm -rf $sub-$VERSION
     done
     popd
 }

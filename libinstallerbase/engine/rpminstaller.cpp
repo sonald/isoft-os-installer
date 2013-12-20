@@ -10,7 +10,7 @@
 
 using namespace std;
 
-static const string g_default_group_path = "/var/lib/cetcosinstaller";
+static const string g_default_group_path = "/var/lib/cetcosinstaller/RPMS";
 static const char *g_macro_dbpath = "_dbpath";
 static const char *g_default_dbpath = "/var/lib/rpm";
 
@@ -116,6 +116,7 @@ RpmInstaller::RpmInstaller(const list<string> &groups, const string &rootdir)
 
 bool RpmInstaller::setupTransactions()
 {
+    cerr << "setupTransactions\n";
     if (!sanitizeGroupPath()) {
         return false;
     }
@@ -167,7 +168,7 @@ bool RpmInstaller::processPrivileged()
 
     list<string> rpms;
 
-    string core_group_dir = _groupPath + "/core";
+    string core_group_dir = _groupPath + "/RPMS.core";
     DIR *dir = opendir(core_group_dir.c_str());
     if (!dir) {
         perror("opendir");
@@ -324,7 +325,7 @@ void RpmInstaller::prepareGroupRpms()
     cerr << "totally " << _groups.size() << " groups to install\n";
     list<string>::const_iterator i = _groups.begin();
     while (i != _groups.end()) {
-        string groupdir = _groupPath + "/" + *i;
+        string groupdir = _groupPath + "/RPMS." + *i;
         struct stat statbuf;
         if (stat(groupdir.c_str(), &statbuf) < 0) {
             perror("stat");

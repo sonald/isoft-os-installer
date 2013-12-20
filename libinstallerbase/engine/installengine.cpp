@@ -660,26 +660,29 @@ bool Engine::realWork(void (*progress)(int))
     
     // run commands from XML.
     if(!runCmd(s_installcmds)){
+        out << "runCmd return false" << endl;
+        out << _errstr << endl;
+        cerr << "runCmd with err: " << _errstr << endl;
         return false;
     }
 
     // prepare to install
-    FILE *fp = NULL;
-    int installed_num = 0;
-    list<string> package_list;
-
-    if ((fp = popen("rpm -qa | wc -l", "r")) == NULL) {
-        debuglog("install grub error: can not get num of rpm\n");
-        return false;
-    }
-
-    fscanf(fp, "%d", &installed_num);
-    pclose(fp);
-
+    out << "prepare to install" << endl;    
 
     bool yum_install_mode = _rpm_groups.size() == 0; 
     bool ret;
     if (yum_install_mode) {
+        FILE *fp = NULL;
+        int installed_num = 0;
+
+        if ((fp = popen("rpm -qa | wc -l", "r")) == NULL) {
+            debuglog("install grub error: can not get num of rpm\n");
+            return false;
+        }
+
+        fscanf(fp, "%d", &installed_num);
+        pclose(fp);
+
         YumShell yum(_package_list, _rootdir);
         // will install num
         double willinstall_num = yum.getInstallNumber();
@@ -1247,7 +1250,7 @@ bool Engine::do_add_user(const string &username)
 {
     static bool setPreUser_flag = false;
 
-    _postscript.push_back(string("/usr/sbin/useradd -D -m ") + username);
+    _postscript.push_back(string("/usr/sbin/useradd -m ") + username);
     _postscript.push_back(string("passwd -d ") + username);
 
     if (setPreUser_flag == false) {    
