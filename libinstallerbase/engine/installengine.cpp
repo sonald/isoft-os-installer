@@ -279,67 +279,6 @@ bool Engine::install(void (*progress)(int))
     return ret;
 }
 
-/*
-void Engine::copyKxkbrc()
-{
-    string commandLine ;
-    struct stat sbuf;
-    string file;
-    string source_dir = "/usr/share/kde-settings/kde-profile/default/share/config/";
-    string target_dir = _rootdir + "usr/share/kde-settings/kde-profile/default/share/config/";
-    file = source_dir + "kxkbrc";
-
-    if (lstat(file.c_str(), &sbuf) == 0) {
-        commandLine = "cp " + file + " " + target_dir;	
-        int ret = system(commandLine.c_str());
-
-        if( ret != 0 ) {
-            debuglog("run cmd %s FAILED.\n", commandLine.c_str());
-        }
-        cerr << "copy kxkbrc cmd:" << commandLine << endl;
-    } else
-        cerr << "don't need copy kxkbrc" << endl;
-}
-
-void Engine::copyKtimezonedrc()
-{
-    string commandLine ;
-    struct stat sbuf;
-    string file;
-    string source_dir = "/usr/share/kde-settings/kde-profile/default/share/config/";
-    string target_dir = _rootdir + "usr/share/kde-settings/kde-profile/default/share/config/";
-    file = source_dir + "ktimezonedrc";
-
-    if (lstat(file.c_str(), &sbuf) == 0) {
-		commandLine = "cp " + file + " " + target_dir;	
-		int ret = system(commandLine.c_str());
-
-		if(ret != 0) {
-			debuglog("run cmd %s FAILED.\n", commandLine.c_str());
-		}
-		cerr << "copy ktimezonedrc cmd:" << commandLine << endl;
-    } else
-		cerr << "don't need copy ktimezonedrc" << endl;
-}
-
-void Engine::copyXorgConf()
-{
-    struct stat sbuf;
-    string cmd;
-
-    // copy xorg.conf to installed system
-    if (lstat("/etc/X11/xorg.conf", &sbuf) == 0) {
-		cmd = "/bin/cp -fr /etc/X11/xorg.conf ";
-		cmd += _rootdir;
-		cmd += "etc/X11/";
-
-		if(system(cmd.c_str()) != 0) {
-			debuglog("run cmd %s FAILED.\n", cmd.c_str());
-		}
-    }
-}
-*/
-
 bool Engine::postscript(void)
 {
     int ret = 0;
@@ -352,38 +291,52 @@ bool Engine::postscript(void)
 		}
 
 		// set default label
-		string label = "e2label " + _rootdev + " ";
-		label += "iSoft-";
-		int index = _rootdev.find_last_of('/');	
-		string tmp = _rootdev.substr(index+1);
-		label += tmp;
-		_postscript.push_back(label);
+		//string label = "e2label " + _rootdev + " ";
+		//label += "iSoft-";
+		//int index = _rootdev.find_last_of('/');	
+		//string tmp = _rootdev.substr(index+1);
+		//label += tmp;
+		//_postscript.push_back(label);
 
 		string cmd;
 
 		// create the postscript.sh from template, append cmds from _postscript.
 		string post = _rootdir+"postscript.sh";
-		//XXX rewrite
-		cmd = "cp /usr/share/apps/libinstallerbase/postscript.tmpl "+post;
+        {
+            //PRESTAGE
+            ofstream script(post.c_str(), ios::out);
+            script << "#!/bin/bash" << endl;
+            script << "export GRUB_DEVICE=" << _grub_install_device << endl;
+            list<string>::const_iterator ci = _new_user_names.begin();
+            int i = 1;
+            while (ci != _new_user_names.end()) {
+                script << "export USER_NAME" << i++ << "=" << *ci << endl;
+                ++ci;
+            }
+            script.close();
+        }
+
+		cmd = "cat /usr/share/apps/libinstallerbase/postscript.tmpl >> " + post;
 		system(cmd.c_str());
 		chmod(post.c_str(), 0755);
 
-        //mkdir((_rootdir + "tmp").c_str(), 01777);
-    
-		ofstream script(post.c_str(), ios::app);
-		if(!script) {
-			_errstr = "open postscript.sh file failederror";
-			return false;
-		}
+        {
+            //POSTSTAGE
+            ofstream script(post.c_str(), ios::app);
+            if(!script) {
+                _errstr = "open postscript.sh file failederror";
+                return false;
+            }
 
-		script << endl;
-        // trans postscript to real script.
-		for(list<string>::iterator it = _postscript.begin(); it != _postscript.end(); ++it) {
-			script << *it << endl;
-            cerr << "append [" << *it << "]\n";
-		}
+            script << endl;
+            // trans postscript to real script.
+            for(list<string>::iterator it = _postscript.begin(); it != _postscript.end(); ++it) {
+                script << *it << endl;
+                cerr << "append [" << *it << "]\n";
+            }
 
-		script.close();
+            script.close();
+        }
     
 		// run postscript
 		cmd = "chroot ";
@@ -395,20 +348,17 @@ bool Engine::postscript(void)
 			debuglog("run cmd %s FAILED.\n", cmd.c_str());
 		}
 
-		// delete postscript
-		cmd = "rm -rf " + _rootdir + "postscript.sh";
-		if ( system(cmd.c_str()) != 0) {
-			debuglog("delete postscript failed: %s\n", cmd.c_str() );
-		}
-		// copy kxkbrc ktimezonedrc Xorg.conf
-        //		copyKxkbrc();
-        //		copyKtimezonedrc();
-        //		copyXorgConf();
+         //delete postscript
+        cmd = "rm -rf " + _rootdir + "postscript.sh";
+        if ( system(cmd.c_str()) != 0) {
+            debuglog("delete postscript failed: %s\n", cmd.c_str() );
+        }
 
         // umount /dev /sys /proc
+        system(("umount " + _rootdir + "/dev").c_str());
+        system(("umount " + _rootdir + "/sys/fs/fuse/connections").c_str());
         system(("umount " + _rootdir + "/sys").c_str());
         system(("umount " + _rootdir + "/proc").c_str());
-        system(("umount " + _rootdir + "/dev").c_str());
 
     }// run post cmds end
     
@@ -656,7 +606,7 @@ bool Engine::realWork(void (*progress)(int))
     }
 
     // umount all partitions.
-    system("awk '/^\\/dev\\/sd[abcd]/ {print $1}' /etc/mtab | xargs umount");
+    //system("awk '/^\\/dev\\/sd[abcd]/ {print $1}' /etc/mtab | xargs umount");
     
     // run commands from XML.
     if(!runCmd(s_installcmds)){
@@ -696,9 +646,10 @@ bool Engine::realWork(void (*progress)(int))
         ret = yum.install(progress);
 
     } else {
-        prepareFileSystem();
+        doMountRoot();
         RpmInstaller grpInstaller(_rpm_groups, _rootdir);
-        grpInstaller.setupTransactions();
+        grpInstaller.preprocess();
+        doSetupFstab();
         ret = grpInstaller.install(progress);
     }
 
@@ -1045,6 +996,7 @@ bool Engine::do_mkfs(const string &partpath, const string &fstype)
         dev = partpath.substr(0, size-1);
     }
 
+    /*FIXME: sfdisk does not suppor GPT
     cmd = "sfdisk --id ";
     cmd += dev;
     cmd += " ";
@@ -1068,52 +1020,14 @@ bool Engine::do_mkfs(const string &partpath, const string &fstype)
         cerr<<"sfdisk error"<<endl;
         return false;
     }
-
+  */
     return true;
 }
 
 
 bool Engine::do_set_mountpoint(const string &devpath, const string &mountpoint, const string &fstype)
 {
-    static bool firsttime = true;
     fstab_struct tmp;
-    
-    /*
-    if(firsttime) {	
-        tmp.devpath = "/dev/devpts";
-        tmp.mountpoint = "/dev/pts";
-        tmp.fstype = "devpts";
-        tmp.mount_para 	= mount_para_def;
-        tmp.backup 		= no_backup;
-        tmp.self_test 	= no_self_test;
-        _fstablist.push_back(tmp);
-		
-        tmp.devpath = "/dev/shm";
-        tmp.mountpoint = "/dev/shm";
-        tmp.fstype = "tmpfs";
-        tmp.mount_para 	= mount_para_def;
-        tmp.backup 		= no_backup;
-        tmp.self_test 	= no_self_test;
-        _fstablist.push_back(tmp);
-		
-        tmp.devpath = "proc";
-        tmp.mountpoint = "/proc";
-        tmp.fstype = "proc";
-        tmp.mount_para 	= mount_para_def;
-        tmp.backup 		= no_backup;
-        tmp.self_test 	= no_self_test;
-        _fstablist.push_back(tmp);
-		
-        tmp.devpath = "sysfs";
-        tmp.mountpoint = "/sys";
-        tmp.fstype = "sysfs";
-        tmp.mount_para 	= mount_para_def;
-        tmp.backup 		= no_backup;
-        tmp.self_test 	= no_self_test;
-        _fstablist.push_back(tmp);
-        firsttime = false;
-    }  
-    */
 
     tmp.devpath = devpath;
     tmp.mountpoint = mountpoint;
@@ -1140,7 +1054,14 @@ bool Engine::do_set_mountpoint(const string &devpath, const string &mountpoint, 
         tmp.backup 		= backup;
         tmp.self_test 	= self_test_root;
         _fstablist.push_front(tmp);
-    }else{
+
+    } else if (mountpoint == "/boot/efi") {
+        tmp.mount_para = "umask=0077,shortname=winnt";
+        tmp.backup 		= no_backup;
+        tmp.self_test 	= no_self_test;
+        _fstablist.push_back(tmp);
+
+    } else {
         tmp.mount_para 	= mount_para_def;
         tmp.backup 		= no_backup;
         tmp.self_test 	= no_self_test;
@@ -1184,12 +1105,15 @@ bool Engine::do_add_group(const string group)
 
 bool Engine::do_boot_install(const string &devpath)
 {
-    if (install_grub2("CETC OS ", _rootdev.c_str(), devpath.c_str(), 
-		     _boot_partition.c_str()) == -1) 
-	{
-	    debuglog("install grub error\n");
-	    return false;
-	}
+    _grub_install_device = devpath;
+
+    // postpone grub install at postscript stage to handle EFI
+    //if (install_grub2("CETC OS ", _rootdev.c_str(), devpath.c_str(), 
+			 //_boot_partition.c_str()) == -1) 
+	//{
+		//debuglog("install grub error\n");
+		//return false;
+	//}
 
     return true;
 }
@@ -1250,8 +1174,9 @@ bool Engine::do_add_user(const string &username)
 {
     static bool setPreUser_flag = false;
 
-    _postscript.push_back(string("/usr/sbin/useradd -m ") + username);
+    _postscript.push_back(string("/usr/sbin/useradd -G wheel,sys,video,audio,disk -m ") + username);
     _postscript.push_back(string("passwd -d ") + username);
+    _new_user_names.push_back(username);
 
     if (setPreUser_flag == false) {    
 	    setPreUser_flag = true;
@@ -1530,6 +1455,8 @@ bool Engine::copy_files(void (*progress)(int), double range)
 bool Engine::prepareFileSystem()
 {
     bool yum_install_mode = _rpm_groups.size() == 0; 
+    doMountRoot();
+
     ofstream out(debug_file, ios::app);
     if (out == NULL){
         _errstr = string("open ") + debug_file + " error, pls check it!";
@@ -1537,15 +1464,7 @@ bool Engine::prepareFileSystem()
     }
 
     FILE *fp = NULL;
-
-    _boot_partition = _rootdev;
-    mkdir(_rootdir.c_str(), 0755);
-    
-    string cmd = "/bin/mount " + _rootdev + " " + _rootdir; 
-    if (system(cmd.c_str()) != 0) {
-        _errstr = "mount root device error";
-        return false;	
-    }
+    string cmd;
 
     if (yum_install_mode) {
         char temp[] = "/tmp/engine.XXXXXX";
@@ -1599,7 +1518,37 @@ bool Engine::prepareFileSystem()
 
     }
 
-    // create /etc/fstab with uuid.  ------------------------------------------------------------  start  ----------
+    doSetupFstab();
+    return true;
+}
+
+bool Engine::doMountRoot()
+{
+
+    _boot_partition = _rootdev;
+    mkdir(_rootdir.c_str(), 0755);
+
+    string cmd = "/bin/mount " + _rootdev + " " + _rootdir; 
+    if (system(cmd.c_str()) != 0) {
+        _errstr = "mount root device error";
+        return false;	
+    }
+    return true;
+}
+
+bool Engine::doSetupFstab()
+{
+    
+    ofstream out(debug_file, ios::app);
+    if (out == NULL){
+        _errstr = string("open ") + debug_file + " error, pls check it!";
+        return false;
+    }
+
+    FILE *fp = NULL;
+    string cmd;
+
+
     out<<"create /etc/fstab using uuid start"<<endl;
     // create fstab	
     string fstab_str = _rootdir + "etc/fstab";
@@ -1615,27 +1564,18 @@ bool Engine::prepareFileSystem()
 
     string uuid = "";
     char uu[BUF_LENGTH_LINE] = {'\0'};
-    bool swap_find = false;
 
     for(list<fstab_struct> ::iterator fstab_it = _fstablist.begin(); fstab_it != _fstablist.end(); ++fstab_it) 
 	{
-        if ( strcmp(fstab_it->mountpoint.c_str(), "swap") == 0 )
-            swap_find = true;
-	
         if ( fstab_it->mountpoint == "/sys" 
              || fstab_it->mountpoint == "/proc" 
              || fstab_it->mountpoint == "/dev/pts" 
              || fstab_it->mountpoint == "/dev/shm"
              || fstab_it->mountpoint == "swap") {
-            out_fstab << setw(50) << fstab_it->devpath;
-            out_fstab << setw(20) << fstab_it->mountpoint;
-            out_fstab << setw(20) << fstab_it->fstype;
-            out_fstab << setw(20) << fstab_it->mount_para;
-            out_fstab << setw(20) << fstab_it->backup;
-            out_fstab << setw(20) << fstab_it->self_test<<endl;
             continue;
         }
    	
+        /*
 		//XXX only ext2/3 can work with uuid
 		cmd = "/usr/bin/uuidgen -t "; 
 		if ((fp = popen(cmd.c_str(), "r")) == NULL) {
@@ -1648,28 +1588,28 @@ bool Engine::prepareFileSystem()
 		pclose(fp);
 		uuid = uu;
 
-		string uuid_cmd;
+        string uuid_cmd;
         if (fstab_it->fstype.find("ext") == 0)
-			uuid_cmd = "tune2fs -U ";
-		else if (fstab_it->fstype == "xfs")
-				uuid_cmd = "xfs_admin -U ";
-			else if (fstab_it->fstype == "reiserfs")
-					uuid_cmd = "reiserfstune -u ";
-				else if (fstab_it->fstype == "vfat")
-					{	// vfat only support 32 bits uuid
-						string uuid_tmp( uuid, 0, 8 );
-						uuid = uuid_tmp;
-						uuid_cmd = "mkdosfs -i ";
-					}
-					else
-					{
-						_errstr = "unsupported file system!";
-						return false;
-					}	
+            uuid_cmd = "tune2fs -U ";
+        else if (fstab_it->fstype == "xfs")
+            uuid_cmd = "xfs_admin -U ";
+        else if (fstab_it->fstype == "reiserfs")
+            uuid_cmd = "reiserfstune -u ";
+        else if (fstab_it->fstype == "vfat")
+        {	// vfat only support 32 bits uuid
+            string uuid_tmp( uuid, 0, 8 );
+            uuid = uuid_tmp;
+            uuid_cmd = "mkdosfs -i ";
+        }
+        else
+        {
+            _errstr = "unsupported file system!";
+            return false;
+        }	
 
-		cmd = uuid_cmd + uuid + " " + fstab_it->devpath;
-		if ((fp = popen(cmd.c_str(), "r")) == NULL) {
-				_errstr = "tune2fs " + fstab_it->devpath + " error";
+        cmd = uuid_cmd + uuid + " " + fstab_it->devpath;
+        if ((fp = popen(cmd.c_str(), "r")) == NULL) {
+            _errstr = "tune2fs " + fstab_it->devpath + " error";
 				return false;	
 		}
 		pclose(fp);
@@ -1694,14 +1634,27 @@ bool Engine::prepareFileSystem()
 			
 			uuid_47 = tmp;
 			uuid = uuid_03 + "-" + uuid_47;
+            uuid_cmd = "mkdosfs -i ";
 		}
 
+        */
+ 
+		cmd = "/sbin/blkid -s UUID -o value " + fstab_it->devpath; 
+		if ((fp = popen(cmd.c_str(), "r")) == NULL) {
+				_errstr = "uuidgen " + fstab_it->devpath + " error";
+				return false;	
+		}
+
+		memset(uu, '\0', BUF_LENGTH_LINE);	
+		fscanf(fp, "%s", uu);
+		pclose(fp);
+		uuid = uu;
 		string dev = "UUID=" + uuid;
 
 		out_fstab << setw(50) << dev; 
 		out_fstab << setw(20) << fstab_it->mountpoint;
 		out_fstab << setw(20) << fstab_it->fstype;
-		out_fstab << setw(20) << fstab_it->mount_para;
+		out_fstab << setw(30) << fstab_it->mount_para;
 		out_fstab << setw(20) << fstab_it->backup;
 		out_fstab << setw(20) << fstab_it->self_test<<endl;
     } 
@@ -1712,9 +1665,10 @@ bool Engine::prepareFileSystem()
     for(list<fstab_struct> ::iterator fstab_it = _fstablist.begin(); fstab_it != _fstablist.end(); ++fstab_it) {
         if (fstab_it->mountpoint == "/" || fstab_it->mountpoint == "swap")
             continue;
-	
-        cmd = "/bin/mount -t " + fstab_it->fstype + " " + fstab_it->devpath + " " 
-            + _rootdir + fstab_it->mountpoint.substr(1);
+        
+        string mnt_path = _rootdir + fstab_it->mountpoint.substr(1);
+        cmd = "mkdir -p " + mnt_path + " && /bin/mount -t " + fstab_it->fstype 
+            + " " + fstab_it->devpath + " " + mnt_path;
 		
         if ((fp = popen(cmd.c_str(), "r")) == NULL) {
             _errstr = "/bin/mount " + fstab_it->devpath + " error";
@@ -1724,53 +1678,6 @@ bool Engine::prepareFileSystem()
         pclose(fp);
     }		
 
-    // create swap file if needed.
-    if (!swap_find) {
-        PartedDevices *disks = new PartedDevices;
-        string swap;
-        for (int i=0; i < disks->count(); ++i) {
-            Device *disk = disks->device(i);
-            if (!disk)
-                continue;
-
-            PartitionTable *table = disk->parttable();
-            if (!table->read())
-                continue;
-
-            PartitionList *partList = table->partlist();
-            for (int j=0; j < partList->count(); ++j) {
-                Partition *part = partList->part_index(j);
-                if (part->fs_type_name() == "linux-swap") {
-                    swap_find = true;
-                    swap = part->path();
-                    break;
-                }
-            }
-
-            if (swap_find) {
-                out_fstab << swap << "\t" << "swap\tswap\tdefaults\t0\t0" << endl;
-                //k find first swap, use it
-                break;
-            } else { // create swapfile for simple mode and anvanced mode
-                cmd = "dd if=/dev/zero of=" + _rootdir + "etc/swapfile" + "  bs=1024 count=1048576";
-                if ((fp = popen(cmd.c_str(), "r")) == NULL) {
-                    _errstr = "make swap file error";
-                    return false;	
-                }
-                pclose(fp);
-
-                cmd ="/sbin/mkswap " + _rootdir + "etc/swapfile";
-                if ((fp = popen(cmd.c_str(), "r")) == NULL) {
-                    _errstr = "mkswap swapfile error";
-                    return false;	
-                }
-                pclose(fp);
-
-                out_fstab << "/etc/swapfile" << "\t" << "swap\tswap\tdefaults\t0\t0" << endl;
-            }
-        }
-    }
-		
     out_fstab.close();
     out<<"create /etc/fstab using uuid end"<<endl;
     return true;

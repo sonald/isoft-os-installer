@@ -18,8 +18,11 @@ HEADERS += dialog_reject.h \
            wizardpage_error.h \
            wizardpage_finish.h \
            wizardpage_licence.h \
-	   wizardpage_partition.h\
+           wizardpage_partition.h\
            wizardpage_partition_advanced.h \
+           wizardpage_partition_auto.h \
+           wizardpage_partition_mode.h \
+           partition_automode.h \
            wizardpage_progress.h \
            wizardpage_summary.h \
            wizardpage_welcome.h	\
@@ -38,6 +41,9 @@ SOURCES += dialog_reject.cpp \
            wizardpage_finish.cpp \
            wizardpage_licence.cpp \
            wizardpage_partition_advanced.cpp \
+           wizardpage_partition_auto.cpp \
+           wizardpage_partition_mode.cpp \
+           partition_automode.cpp \
            wizardpage_progress.cpp \
            wizardpage_summary.cpp \
            wizardpage_welcome.cpp \

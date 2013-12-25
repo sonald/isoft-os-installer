@@ -67,7 +67,7 @@ void AddPartition::accept()
 
 		//if (fsType->currentText() != "ext3" && fsType->currentText() != "ext2") {
         if (!fsType->currentText().startsWith("ext")) {
-			QMessageBox::warning(this, tr("Warning"), QString(tr("The '/' partition needs to be formatted to \"ext3\" or \"ext2\".")));
+			QMessageBox::warning(this, tr("Warning"), QString(tr("The '/' partition needs to be formatted to one of the ext filesystems.")));
 			return ;
 		}
 	}

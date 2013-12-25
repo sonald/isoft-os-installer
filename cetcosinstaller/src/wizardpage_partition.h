@@ -15,6 +15,6 @@ public:
     virtual const QString 	warningInfo()	=0;
     virtual const QString 	rootPartPath()	=0;
     virtual void 		writeConf()	=0;
-    int nextId() const { return Page_Summary; }
+    int nextId() const { return Page_ChooseGroup; }
 };
 #endif // RFINSTALLER_WIZARDPAGE_PARTITION_H_

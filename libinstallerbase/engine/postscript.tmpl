@@ -1,5 +1,3 @@
-#!/bin/bash
-
 set -x
 # copy grub files
 #cp -a /usr/share/grub/i386-pc/* /boot/grub/
@@ -7,24 +5,76 @@ set -x
 # disable gpg check
 # sed -i 's/gpgcheck=1/gpgcheck=0/' /etc/yum.conf
 
-# set /tmp 1777
-mkdir /dev
-
-# mkinitrd
-mount -t devtmpfs udev /dev
-mount -t sysfs sysfs /sys
-mount -t proc procfs /proc
-##/sbin/new-kernel-pkg --package kernel --mkinitrd --depmod --install  `uname -r`
 
 # remove useless services
 
 # import RPM-GPG-KEY
 # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY
 
-# remove installer
-# rpm -e cetcosinstaller
-
 # set timezone to CST
 /bin/cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
+mkinitrd /boot/initrd-$(uname -r).img $(uname -r) --force
+
+#i18n configuration
+echo "LANG=zh_CN.utf8" >/etc/locale.conf
+
+#network configuration
+echo "NETWORKING=yes" >/etc/sysconfig/network
+echo "HOSTNAME=$HOSTNAME" >>/etc/sysconfig/network
+
+
+cat >/etc/hosts <<EOF
+# Do not remove the following line, or various programs
+# that require network functionality will fail.
+127.0.0.1       localhost.localdomain localhost
+127.0.0.1       $HOSTNAME $HOSTNAME
+EOF
+
+#Remember Run pwconv
+pwconv
+
+
 # root setting
+# removese setup EFI_SUPPORT=true or false
+EFI_SUPPORT=false
+if [ -d "/sys/firmware/efi" ]; then
+    EFI_SUPPORT=true
+else
+    EFI_SUPPORT=false
+fi
+
+if [ ${EFI_SUPPORT} = true ]; then
+    export GRUB_DISTRIBUTOR="CETC Client OS"
+    export GRUB_DISABLE_RECOVERY=true
+    export GRUB_FONT=/usr/share/grub/unicode.pf2
+    export GRUB_GFXPAYLOAD_LINUX=keep
+    bootloader_id="CETC Client OS"
+    efi_distributor=pure64
+    efi_file=grubx64.efi
+    efidisk="$(df /boot/efi/ | grep dev | cut -c1-8)"
+    efipart="$(df /boot/efi/ | grep dev | cut -c9-9)"
+    grubdir="/boot/efi/EFI/$efi_distributor"
+    localedir="/usr/share/locale"
+    modprobe dm-mod
+    grub2-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="$efi_distributor" --boot-directory=/boot/efi/EFI --recheck
+    str=`efibootmgr | grep "$efi_distributor"`
+    efibootmgr -b ${str:4:4} -B
+    efibootmgr -c -q -d "$efidisk" -p "$efipart" -w \
+        -L "$bootloader_id" -l "\\EFI\\$efi_distributor\\$efi_file"
+    grub2-mkconfig > "${grubdir}"/grub.cfg
+    sed -i -e 's%lang=%lang=zh_CN%g' "${grubdir}"/grub.cfg
+    mkdir -p "${grubdir}"/locale/
+    for dir in "${localedir}"/*; do
+        if test -f "$dir/LC_MESSAGES/grub.mo"; then
+           cp -vf "$dir/LC_MESSAGES/grub.mo" "${grubdir}/locale/${dir##*/}.mo"
+        fi
+    done
+else 
+    # when no efi
+    grub2-install $GRUB_DEVICE
+    export GRUB_DISTRIBUTOR="CETC Client OS"
+    export GRUB_DISABLE_RECOVERY=true
+    grub2-mkconfig > /boot/grub2/grub.cfg
+fi
+

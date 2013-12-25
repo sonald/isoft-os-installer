@@ -25,6 +25,8 @@ SOURCES += addpartition.cpp \
            itembutton.cpp
 RESOURCES = diskswidget.qrc
 
+TRANSLATIONS += libdiskswidget_zh_CN.ts
+
 target.path = /usr/lib
 sources.files = diskswidget.h
 sources.path  = /usr/include

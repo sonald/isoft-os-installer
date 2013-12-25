@@ -36,6 +36,8 @@ public:
 	QString		warningInfo();	
 	QString		rootPartitionPath();
 	bool		existMntPoint(const QString &mnt, QTreeWidgetItem *current = 0);
+	bool		existMntPointWithFstype(const QString &mnt, const QString &fstype);
+    bool hasEfipart(); // check if efi partition exists in GPT mode
 	void		setCurrentIndex(int index);
 	QString		currentDevPath()	{ return m_tree->currentItem()->text(0); }
 	QTreeWidgetItem *getCurrentItem() { return m_tree->currentItem(); }

@@ -142,6 +142,41 @@
         <translation type="obsolete">创建扩展分区：%1
 			</translation>
     </message>
+    <message>
+        <location filename="../src/partition_automode.cpp" line="96"/>
+        <source>create efi boot partition: %1.
+</source>
+        <translation>创建efi启动分区：%1</translation>
+    </message>
+    <message>
+        <location filename="../src/partition_automode.cpp" line="106"/>
+        <location filename="../src/partition_automode.cpp" line="480"/>
+        <source>create the root partition: %1.
+</source>
+        <translation>创建根分区：%1
+			</translation>
+    </message>
+    <message>
+        <location filename="../src/partition_automode.cpp" line="127"/>
+        <source>Create the partition table on disk %1.
+</source>
+        <translation>在磁盘%1上创建分区表。
+			</translation>
+    </message>
+    <message>
+        <location filename="../src/partition_automode.cpp" line="444"/>
+        <source>create the swap partition: %1.
+</source>
+        <translation>创建交换分区：%1
+			</translation>
+    </message>
+    <message>
+        <location filename="../src/partition_automode.cpp" line="493"/>
+        <source>create the extended partition: %1.
+</source>
+        <translation>创建扩展分区：%1
+			</translation>
+    </message>
 </context>
 <context>
     <name>WizardInstaller</name>
@@ -360,40 +395,53 @@
 <context>
     <name>WizardPage_Partition_Mode</name>
     <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="71"/>
         <source>Partition Mode</source>
-        <translation type="obsolete">分区方式</translation>
+        <translation>分区方式</translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="74"/>
         <source>Auto Mode</source>
-        <translation type="obsolete">自动方式</translation>
+        <translation>自动方式</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="103"/>
+        <source>You has launched the LiveCD with hard disk mode. 
+The partition(%1) on which LiveCD iso file put must not be used.</source>
+        <translation></translation>
     </message>
     <message>
         <source>Simple Mode</source>
         <translation type="obsolete">简易方式</translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="76"/>
         <source>Advanced Mode</source>
-        <translation type="obsolete">高级方式</translation>
+        <translation>高级方式</translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="78"/>
         <source>In this mode, a free partition will be used to install, swap partition will be create if necessary. Only appropriate size of space will be used if the partition is too big. Any existed partition will not be affected. You can check the result in summary page.</source>
-        <translation type="obsolete">在这种方式下，一个空闲分区被用来安装系统，如果需要会创建交换分区。如果这个分区太大，只会使用其中部分空间。任何已存在分区不会受影响。你可以在总结页面查看结果。</translation>
+        <translation>在这种方式下，一个空闲分区被用来安装系统，如果需要会创建交换分区。如果这个分区太大，只会使用其中部分空间。任何已存在分区不会受影响。你可以在总结页面查看结果。</translation>
     </message>
     <message>
         <source>This mode give you a quick and simple way to install. Just select the partition on which you want to install, then press &quot;next&quot; button, all is done.</source>
         <translation type="obsolete">这种方式下，您可以简单快速的来安装。只需选择您要安装的分区，然后按下“下一步”按钮，一切就会完成。</translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="82"/>
         <source>In this mode, you can partition the disk manually. You can view the contents of partition, add and delete partition, edit partition to change the mountpoint, file system and format.</source>
-        <translation type="obsolete">这种方式下，你可以手工进行磁盘分区。你可以查看分区的内容，添加和删除分区，编辑分区的挂载点、文件系统以及格式化。</translation>
+        <translation>这种方式下，你可以手工进行磁盘分区。你可以查看分区的内容，添加和删除分区，编辑分区的挂载点、文件系统以及格式化。</translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="72"/>
         <source>Red Flag Linux Installer support three partition mode: auto, simple and advanced.</source>
-        <translation type="obsolete">红旗Linux安装程序支持三种分区方式：自动，简易和高级。</translation>
+        <translation>红旗Linux安装程序支持三种分区方式：自动，简易和高级。</translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="102"/>
         <source>LiveCD hard disk mode</source>
-        <translation type="obsolete">LiveCD硬盘安装模式</translation>
+        <translation>LiveCD硬盘安装模式</translation>
     </message>
     <message>
         <source>You has launched the LiveCD with hard disk mode. 
@@ -456,22 +504,22 @@
 <context>
     <name>WizardPage_Summary</name>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="48"/>
+        <location filename="../src/wizardpage_summary.cpp" line="49"/>
         <source>Pre-Install Summary</source>
         <translation>安装前的总结</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="52"/>
+        <location filename="../src/wizardpage_summary.cpp" line="53"/>
         <source>Notice: Please confirm the pre-install summary.You can&apos;t go back to previous page after this step.You still can back to the previous wizard page for re-setup now.</source>
         <translation>注意：请确认安装总结。这一步之后无法返回到前面页面。现在你还可以返回到前面页面进行重新设置。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="64"/>
+        <location filename="../src/wizardpage_summary.cpp" line="65"/>
         <source>CETC Client OS installer</source>
         <translation>中科电普华终端操作系统</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="107"/>
+        <location filename="../src/wizardpage_summary.cpp" line="106"/>
         <source>Install Groups:</source>
         <translation>安装下列组别：</translation>
     </message>
@@ -481,7 +529,7 @@
         <translation>安装信息</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="49"/>
+        <location filename="../src/wizardpage_summary.cpp" line="50"/>
         <source>Please read the pre-install summary carefully before starting installation progress.</source>
         <translation>开始安装前请认真阅读安装前的总结。</translation>
     </message>
@@ -490,17 +538,16 @@
         <translation type="obsolete">注意：请确认安装总结。这一步之后无法返回到前面页面。现在你还可以返回到前面页面进行重新设置。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="102"/>
+        <location filename="../src/wizardpage_summary.cpp" line="101"/>
         <source>Partition Information:</source>
         <translation>分区信息：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="51"/>
         <source>Advanced</source>
-        <translation>高级</translation>
+        <translation type="obsolete">高级</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="69"/>
+        <location filename="../src/wizardpage_summary.cpp" line="70"/>
         <source>Language: </source>
         <translation>语言：</translation>
     </message>
@@ -571,7 +618,17 @@
         <translation>超级用户(root)密码必须设置。你也可以添加新用户，至少要创建一个新用户。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="250"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="205"/>
+        <source>User</source>
+        <translation>用户</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_useradd.cpp" line="205"/>
+        <source>Please at least add one normal user.</source>
+        <translation>请至少创建一个普通用户。</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_useradd.cpp" line="255"/>
         <source>The username ( %1 ) had existed.</source>
         <translation>用户名(%1)已经存在。</translation>
     </message>
@@ -599,7 +656,7 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="227"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="232"/>
         <source>Please not fill the dulplicate name.
 </source>
         <translation></translation>
@@ -615,12 +672,12 @@ A password MUST be set for user &quot;root&quot;.</source>
     <message>
         <location filename="../src/wizardpage_welcome.cpp" line="57"/>
         <source>Welcome to CETC Client OS. You can select the language of installer now.</source>
-        <translation>欢迎使用中科电普华终端操作系统。你现在可以选择安装程序的界面语言。</translation>
+        <translation>欢迎使用中电科普华终端操作系统。你现在可以选择安装程序的界面语言。</translation>
     </message>
     <message>
         <location filename="../src/wizardpage_welcome.cpp" line="58"/>
         <source>CETC Client OS support Simplified-Chinese, Traditional-Chinese, English. You can select the language which will be the language of installer. And the selected language will be the default language of installed system.</source>
-        <translation>中科电普华终端操作系统支持简体中文，繁体中文，英文。你可以选择其中一种作为安装程序的语言，你所选择的语言也将是系统安装后的默认语言。</translation>
+        <translation>中电科普华终端操作系统支持简体中文，繁体中文，英文。你可以选择其中一种作为安装程序的语言，你所选择的语言也将是系统安装后的默认语言。</translation>
     </message>
     <message>
         <source>Welcome to Red Flag Linux Desktop 7.0. You can select the language of installer now.</source>

@@ -23,7 +23,6 @@ public:
     const QString warningInfo();
     const QString rootPartPath();
     void writeConf();
-    int nextId() const;
 
 private:
     DisksWidget* m_advanced;

@@ -20,6 +20,7 @@ class PartitionAutoMode : public QObject {
     QString rootPath()                  { return m_rootpath; }
     QString partitionInfo()             { return m_partinfo; }
 
+    bool autoPartFulldisk(const QString &disk);
     // write the result of partition into xml.
     void writeXML();
     

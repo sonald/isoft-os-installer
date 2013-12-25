@@ -117,6 +117,40 @@
     </message>
 </context>
 <context>
+    <name>PartitionAutoMode</name>
+    <message>
+        <location filename="../src/partition_automode.cpp" line="96"/>
+        <source>create efi boot partition: %1.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/partition_automode.cpp" line="106"/>
+        <location filename="../src/partition_automode.cpp" line="480"/>
+        <source>create the root partition: %1.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/partition_automode.cpp" line="127"/>
+        <source>Create the partition table on disk %1.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/partition_automode.cpp" line="444"/>
+        <source>create the swap partition: %1.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/partition_automode.cpp" line="493"/>
+        <source>create the extended partition: %1.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>WizardInstaller</name>
     <message>
         <location filename="../src/wizard_installer.cpp" line="92"/>
@@ -307,6 +341,50 @@
     </message>
 </context>
 <context>
+    <name>WizardPage_Partition_Mode</name>
+    <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="71"/>
+        <source>Partition Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="72"/>
+        <source>Red Flag Linux Installer support three partition mode: auto, simple and advanced.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="74"/>
+        <source>Auto Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="76"/>
+        <source>Advanced Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="78"/>
+        <source>In this mode, a free partition will be used to install, swap partition will be create if necessary. Only appropriate size of space will be used if the partition is too big. Any existed partition will not be affected. You can check the result in summary page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="82"/>
+        <source>In this mode, you can partition the disk manually. You can view the contents of partition, add and delete partition, edit partition to change the mountpoint, file system and format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="102"/>
+        <source>LiveCD hard disk mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_partition_mode.cpp" line="103"/>
+        <source>You has launched the LiveCD with hard disk mode. 
+The partition(%1) on which LiveCD iso file put must not be used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>WizardPage_Progress</name>
     <message>
         <location filename="../src/wizardpage_progress.cpp" line="184"/>
@@ -337,42 +415,37 @@
 <context>
     <name>WizardPage_Summary</name>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="48"/>
+        <location filename="../src/wizardpage_summary.cpp" line="49"/>
         <source>Pre-Install Summary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="49"/>
+        <location filename="../src/wizardpage_summary.cpp" line="50"/>
         <source>Please read the pre-install summary carefully before starting installation progress.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="51"/>
-        <source>Advanced</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/wizardpage_summary.cpp" line="52"/>
+        <location filename="../src/wizardpage_summary.cpp" line="53"/>
         <source>Notice: Please confirm the pre-install summary.You can&apos;t go back to previous page after this step.You still can back to the previous wizard page for re-setup now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="64"/>
+        <location filename="../src/wizardpage_summary.cpp" line="65"/>
         <source>CETC Client OS installer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="69"/>
+        <location filename="../src/wizardpage_summary.cpp" line="70"/>
         <source>Language: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="102"/>
+        <location filename="../src/wizardpage_summary.cpp" line="101"/>
         <source>Partition Information:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="107"/>
+        <location filename="../src/wizardpage_summary.cpp" line="106"/>
         <source>Install Groups:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -436,18 +509,28 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_useradd.cpp" line="205"/>
+        <source>User</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_useradd.cpp" line="205"/>
+        <source>Please at least add one normal user.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/wizardpage_useradd.cpp" line="233"/>
         <source></source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="227"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="232"/>
         <source>Please not fill the dulplicate name.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="250"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="255"/>
         <source>The username ( %1 ) had existed.</source>
         <translation type="unfinished"></translation>
     </message>

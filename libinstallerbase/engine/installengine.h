@@ -163,6 +163,8 @@ class Engine
 
     bool copy_files(void (*progress)(int percent), double range);
     bool prepareFileSystem();
+    bool doMountRoot();
+    bool doSetupFstab();
 
     string _rootdir;
     string _rootdev;
@@ -173,5 +175,7 @@ class Engine
     list<string> _rpm_groups; // for cetcos
     string _boot_partition;
     string _locale;
+    string _grub_install_device;
+    list<string> _new_user_names;
 };
 #endif // LIBINSTALLERBASE_ENGINE_INSTALLENGINE_H_

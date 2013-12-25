@@ -131,8 +131,8 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     m_userLayout = new QGridLayout();
     m_userLayout->addLayout(m_labelLayout, 0, 0, 1, 2);
     m_userLayout->addWidget(m_user1, 1, 0);
-//    m_star = new QLabel("*");
-//    m_userLayout->addWidget(m_star, 1, 1);
+    m_star = new QLabel("*");
+    m_userLayout->addWidget(m_star, 1, 1);
     m_userLayout->addWidget(m_user2, 2, 0);
     m_userLayout->addWidget(m_user3, 3, 0);
     m_userLayout->addWidget(m_warningLabel, 4, 0, 1, 2);
@@ -198,6 +198,11 @@ bool WizardPage_UserAdd::validatePage()
         QMessageBox::warning(this, tr("Root password"), tr("Please input password correctly twice.") );
         m_passwd->setText( QString("") );
         m_confirm->setText( QString("") );
+        return false;
+    }
+
+    if (m_user1->text().isEmpty()) {
+        QMessageBox::warning(this, tr("User"), tr("Please at least add one normal user.") );
         return false;
     }
 

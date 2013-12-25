@@ -1465,15 +1465,61 @@ bool DisksWidget::validate(QString &err)
 	}
 
 	if (m_mode == Advanced) {
-		if (existMntPoint("/"))
-			return true;
-		else {
+		if (!existMntPoint("/")) {
 			err = tr("You have to set a \"/\" mount point.");
 			return false;
+        }
+
+        if (!existMntPointWithFstype("/boot/efi", "vfat")) {
+			err = tr("You need to set a \"/boot/efi\" mount point for a fat32 partition.");
+			return false;
+        }
+	}
+
+	return true; 
+}
+
+/**
+ * TODO: what if multiple disks has been modified, what to do?
+ * right now, only take care of situation where only one disk's been modified,
+ * so / and efi partition are at the same disk.
+ */
+bool DisksWidget::hasEfipart()
+{
+	for (int i = 0; i < m_tree->topLevelItemCount(); ++i) {
+		QTreeWidgetItem *parent = m_tree->topLevelItem(i);
+		for (int j = 0; j < parent->childCount(); ++j) {
+			QTreeWidgetItem *item = parent->child(j);
+			if (item->text(colMount) == "/boot/efi") {
+				return true;
+			}
 		}
 	}
 
-	return true; //k will not reach here
+    return false;
+}
+
+//needs to check only primary partition
+bool DisksWidget::existMntPointWithFstype(const QString &mnt, const QString &fstype)
+{
+    QStringList sl;
+    if (fstype == "vfat") {
+        sl << "fat32";
+        sl << "fat16";
+    } else {
+        sl << fstype;
+    }
+	for (int i = 0; i < m_tree->topLevelItemCount(); ++i) {
+		QTreeWidgetItem *parent = m_tree->topLevelItem(i);
+		for (int j = 0; j < parent->childCount(); ++j) {
+			QTreeWidgetItem *item = parent->child(j);
+			if ((item->text(colMount) == mnt) && sl.indexOf(item->text(colFs)) >= 0) {
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
 
 bool DisksWidget::existMntPoint(const QString &mnt, QTreeWidgetItem *current)
