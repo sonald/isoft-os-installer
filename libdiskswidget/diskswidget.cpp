@@ -28,6 +28,9 @@
 #include <QSpacerItem>
 #include <QTranslator>
 
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <sys/vfs.h>
 #include <sys/mount.h>
 #include <cassert>
@@ -1470,15 +1473,26 @@ bool DisksWidget::validate(QString &err)
 			return false;
         }
 
-        if (!existMntPointWithFstype("/boot/efi", "vfat")) {
-			err = tr("You need to set a \"/boot/efi\" mount point for a fat32 partition.");
-			return false;
+        if (isEfiEnabled()) {
+            if (!existMntPointWithFstype("/boot/efi", "vfat")) {
+                err = tr("You need to set a \"/boot/efi\" mount point for a fat32 partition.");
+                return false;
+            }
         }
 	}
 
 	return true; 
 }
 
+bool DisksWidget::isEfiEnabled()
+{
+    struct stat statbuf;
+    if (lstat("/sys/firmware/efi", &statbuf) < 0) {
+        return false; 
+    }
+
+    return S_ISDIR(statbuf.st_mode);
+}
 /**
  * TODO: what if multiple disks has been modified, what to do?
  * right now, only take care of situation where only one disk's been modified,

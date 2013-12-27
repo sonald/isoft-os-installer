@@ -15,17 +15,28 @@ WizardPage_chooseGroup::WizardPage_chooseGroup(QWidget *parent) :
 void WizardPage_chooseGroup::initializePage()
 {
     loadGroupInfo();
+    emit completeChanged();
 }
 
 bool WizardPage_chooseGroup::validatePage()
 {
-    if (m_selectedGroups.contains("core")) {
-        qDebug() << (m_selectedGroups.join(",").toUtf8().constData());
-        g_engine->cmdChooseGroups(m_selectedGroups.join(",").toUtf8().constData());
-        return true;
-    }
+    QStringList result;
 
-    return false;
+    QStringList prios;
+    prios << "desktop" << "base" << "core";
+    for (int i = 0; i < prios.length(); ++i) {
+        if (m_chkBoxes.value(prios[i])->isChecked()) {
+            QStringList sl = groupsRequired(prios[i]);
+            foreach(const QString &g, sl) {
+                if (!result.contains(g))
+                    result.append(g);
+            }
+        }
+    }
+    qDebug() << "final groups chosen: " << result;
+    m_selectedGroups = result;
+    g_engine->cmdChooseGroups(m_selectedGroups.join(",").toUtf8().constData());
+    return true;
 }
 
 WizardPage_chooseGroup::~WizardPage_chooseGroup()
@@ -43,7 +54,7 @@ void WizardPage_chooseGroup::loadGroupInfo()
 {
     QVBoxLayout *lay = qobject_cast<QVBoxLayout*>(ui->groupBox->layout());
     QStringList sl, exists;
-    sl << "core" << "base" << "extra";
+    sl << "core" << "base" << "desktop";
 
     QDir dir("/var/lib/cetcosinstaller/RPMS");
     QStringList dirs = dir.entryList(QStringList() << "RPMS.*", QDir::Dirs);
@@ -56,6 +67,7 @@ void WizardPage_chooseGroup::loadGroupInfo()
         if (exists.indexOf(grp) == -1) continue;
 
         QCheckBox *chkBox = new QCheckBox(grp);
+        m_chkBoxes.insert(grp, chkBox);
         chkBox->setProperty("groupName", grp);
         connect(chkBox, SIGNAL(clicked()), &m_sigMap, SLOT(map()));
         m_sigMap.setMapping(chkBox, chkBox);
@@ -70,15 +82,38 @@ void WizardPage_chooseGroup::loadGroupInfo()
     connect(&m_sigMap, SIGNAL(mapped(QWidget*)), this, SLOT(handleGroupSelection(QWidget*)));
 }
 
+QStringList WizardPage_chooseGroup::groupsRequired(const QString &group)
+{
+    QStringList sl;
+    if (group == "core")
+        return sl << "core";
+    else if (group == "base")
+        return sl << "core" << "base";
+    else if (group == "desktop")
+        return sl << "core" << "base" << "desktop";
+    return sl;
+}
+
 void WizardPage_chooseGroup::handleGroupSelection(QWidget *w)
 {
-    qDebug() << __PRETTY_FUNCTION__;
     QCheckBox *chkBox = qobject_cast<QCheckBox*>(w);
     QString val = chkBox->property("groupName").toString();
     if (chkBox->isChecked()) {
-        m_selectedGroups << val;
+        QStringList required = groupsRequired(val);
+        foreach (const QString &g, required) {
+            m_chkBoxes[g]->setChecked(true);
+        }
+
+        m_selectedGroups = required;
     } else {
         m_selectedGroups.removeAll(val);
     }
+    emit completeChanged();
+    qDebug() << __PRETTY_FUNCTION__ << m_selectedGroups;
+}
 
+
+bool WizardPage_chooseGroup::isComplete() const
+{
+    return m_selectedGroups.contains("core");
 }
