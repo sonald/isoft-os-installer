@@ -1282,79 +1282,6 @@ void DisksWidget::installOnPartition()
 	m_simpleInstallItem = cur;
 }
 
-//	QString disk = belongedDisk(cur);
-//	QString begin = cur->text(colBeginBlock);
-//	QString end = cur->text(colEndBlock);
-//
-//	//k XXX why reset? for re-entrance; don't do them for twice
-//	reset();
-//
-//	//k find disk
-//	QTreeWidgetItem *diskItem = 0;
-//	for (int i = 0; i < m_tree->topLevelItemCount(); ++i) {
-//		if (m_tree->topLevelItem(i)->text(colDev) == disk) {
-//			diskItem = m_tree->topLevelItem(i);
-//			break;
-//		}
-//	}
-//
-//	assert (diskItem != 0);
-//
-//	cur = 0;
-//	for (int i = 0; i < diskItem->childCount(); ++i) {
-//		QTreeWidgetItem *parent = diskItem->child(i);
-//		if (parent->text(colBeginBlock) == begin &&
-//			parent->text(colEndBlock) == end) 
-//		{
-//			cur = diskItem->child(i);
-//			break;
-//		}
-//
-//		if (parent->text(colPartType) == "extended") {
-//			for (int j = 0; j < parent->childCount(); ++j) {
-//				if (parent->child(j)->text(colBeginBlock) == begin &&
-//					parent->child(j)->text(colEndBlock) == end)
-//				{
-//					cur = parent->child(j);
-//					break;
-//				}
-//			}
-//		//	break;
-//		}
-//	}
-//
-//	assert (cur != 0);
-//	QTreeWidgetItem *item = cur;
-//
-//	item->setText(colFs, "ext3");
-//	item->setText(colMount, "/"); //this
-//	item->setText(colFormat, checkMark);
-//
-//	QList<QString> tmp;
-//	tmp << item->text(colDev) << item->text(colFs);
-//	m_commandList.push_back(QPair<QString, QList<QString> >("conf_set_mkfs", tmp));
-//	m_commandList.push_back(QPair<QString, QList<QString> >("conf_set_rmpart", tmp));
-//
-//	tmp.clear();
-//	int index = itemIndex(item);
-//	if ( !isPrimary(item))
-//		index += itemIndex(item->parent()) + 1;
-//	tmp << item->text(colDev) << QString::number(index)
-//		<< item->text(colPartType) << item->text(colFs);
-//	m_commandList.push_back(QPair<QString, QList<QString > >("conf_set_mkpart_whole", tmp));
-
-	//k record partition changes
-//	OriginalPartsChanges change;
-//	change.disk = disk;
-//	change.devPath = item->text(colDev);
-//	change.begBlock = item->text(colBeginBlock);
-//	change.endBlock = item->text(colEndBlock);
-//	change.original = false;
-//	change.info = "formatted";
-//	m_partsChangeList.push_back(change);
-//}
-
-//k exist mount point, show it
 QString DisksWidget::finalPartitionsInfo()
 {
 	QString info;
@@ -1453,19 +1380,15 @@ QString DisksWidget::warningInfo()
 	return result;
 }
 
-bool DisksWidget::validate(QString &err)
+bool DisksWidget::validate(QString &err, int requiredSizeMB)
 {
-	if (m_mode == Simple) {
-		//k find the "/" mount point
-		QTreeWidgetItem *root = m_tree->currentItem();
-		QString size = root->text(colSize);
-		if (!isEnoughForSlash(size)) {
-			err = tr("You need to select a partition at least has 4GB disk capacity!");
-			return false;
-		} else {
-			return true;
-		} 
-	}
+    int size = targetRootSize();
+    if (size < requiredSizeMB) {
+        err = tr("You need to select a partition which at least has %1MB!").arg(requiredSizeMB);
+        return false;
+    } else {
+        return true;
+    } 
 
 	if (m_mode == Advanced) {
 		if (!existMntPoint("/")) {
@@ -1534,6 +1457,33 @@ bool DisksWidget::existMntPointWithFstype(const QString &mnt, const QString &fst
 	}
 
 	return false;
+}
+
+//TODO: consider all mountpoints from all disks
+//this is gpt-disk compatible
+int DisksWidget::targetRootSize()
+{
+    int target_size = 0;
+	for (int i = 0; i < m_tree->topLevelItemCount(); ++i) {
+		QTreeWidgetItem *parent = m_tree->topLevelItem(i);
+		for (int j = 0; j < parent->childCount(); ++j) {
+			QTreeWidgetItem *item = parent->child(j);
+			if (item->text(colMount) == "/") {
+                target_size = humanToSizeMB(item->text(colSize));
+			}
+
+			if (item->text(colPartType) == "extended") {
+				for (int k = 0; k < item->childCount(); ++k) {
+					QTreeWidgetItem *grand = item->child(k);
+					if (grand->text(colMount) == "/") {
+                        target_size = humanToSizeMB(item->text(colSize));
+					}
+				}
+			}
+		}
+	}
+
+    return target_size;
 }
 
 bool DisksWidget::existMntPoint(const QString &mnt, QTreeWidgetItem *current)
@@ -1656,41 +1606,25 @@ int DisksWidget::partitionCount(const QString &diskName)
 	return count;
 }
 
-bool DisksWidget::isEnoughForSlash(QString size)
+int DisksWidget::humanToSizeMB(QString size)
 {
+    double realSize = 0.0;
 	QChar unit = size.at(size.size() - 2);
 	if (unit.isLetter()) {
-		double realSize = size.left(size.size() - 2).toDouble();
+		realSize = size.left(size.size() - 2).toDouble();
 		if (unit == 'K' || unit == 'k') {
-			if (realSize / 1024 >= PrerequisiteSize)
-				return true;
-			else
-				return false;
-		}
-
-		if (unit == 'M' || unit == 'm') {
-			if (realSize >= PrerequisiteSize)
-				return true;
-			else
-				return false;
+            realSize /= 1024;
 		}
 
 		if (unit == 'G' || unit == 'g') {
-			if (realSize * 1024 >= PrerequisiteSize)
-				return true;
-			else
-				return false;
+            realSize *= 1024;
 		}
-	} else { //k XXB
-		double realSize = size.left(size.size() - 1).toDouble();
-		if (realSize / (1024 * 1024) >= PrerequisiteSize)
-			return true;
-		else
-			return false;
+	} else {
+		realSize = size.left(size.size() - 1).toDouble();
+	    realSize /= (1024 * 1024);
 	}
 		
-	//k will not reach here
-	return false;
+	return realSize;
 }
 
 void DisksWidget::create_fs_table(QTreeWidgetItem *current, int )

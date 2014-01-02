@@ -41,12 +41,6 @@ void EditPartition::accept()
 	}
 
 	if (mnt == "/") {
-		QString total = sizeLabel->text();
-		if (!DisksWidget::isEnoughForSlash(total)) {
-			QMessageBox::warning(this, tr("Warning"), QString(tr("The '/' partition at least need 4GB disk capacity.")));
-			return ;
-		}
-
         if (!((formatButton->isChecked() && formatComboBox->currentText().startsWith("ext")) 
                 || (unchangeButton->isChecked() && fsTypeLabel->text().startsWith("ext")))) {
 			QMessageBox::warning(this, tr("Warning"), QString(tr("The '/' partition needs to be formatted to one of ext filesystem.")));

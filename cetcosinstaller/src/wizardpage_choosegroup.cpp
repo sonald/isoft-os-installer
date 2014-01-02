@@ -9,7 +9,13 @@ WizardPage_chooseGroup::WizardPage_chooseGroup(QWidget *parent) :
     ui(new Ui::WizardPage_chooseGroup)
 {
     ui->setupUi(this);
+    //unit MB
+    m_groupCapacities.insert("core", 1500);
+    m_groupCapacities.insert("base", 4000);
+    m_groupCapacities.insert("desktop", 2000);
+
     registerField("selectedGroups", this, "selectedGroups");
+    registerField("requiredSize", this, "requiredSize");
 }
 
 void WizardPage_chooseGroup::initializePage()
@@ -18,7 +24,7 @@ void WizardPage_chooseGroup::initializePage()
     emit completeChanged();
 }
 
-bool WizardPage_chooseGroup::validatePage()
+void WizardPage_chooseGroup::sanitizeChoices()
 {
     QStringList result;
 
@@ -28,13 +34,22 @@ bool WizardPage_chooseGroup::validatePage()
         if (m_chkBoxes.value(prios[i])->isChecked()) {
             QStringList sl = groupsRequired(prios[i]);
             foreach(const QString &g, sl) {
-                if (!result.contains(g))
+                if (!result.contains(g)) {
+                    if (m_chkBoxes.value(g)->checkState() == Qt::Unchecked)
+                        m_chkBoxes.value(g)->setCheckState(Qt::PartiallyChecked);
                     result.append(g);
+                }
             }
         }
     }
     qDebug() << "final groups chosen: " << result;
     m_selectedGroups = result;
+    recalculateCapacity();
+}
+
+bool WizardPage_chooseGroup::validatePage()
+{
+    sanitizeChoices();
     g_engine->cmdChooseGroups(m_selectedGroups.join(",").toUtf8().constData());
     return true;
 }
@@ -67,6 +82,7 @@ void WizardPage_chooseGroup::loadGroupInfo()
         if (exists.indexOf(grp) == -1) continue;
 
         QCheckBox *chkBox = new QCheckBox(grp);
+        chkBox->setTristate(true);
         m_chkBoxes.insert(grp, chkBox);
         chkBox->setProperty("groupName", grp);
         connect(chkBox, SIGNAL(clicked()), &m_sigMap, SLOT(map()));
@@ -79,6 +95,7 @@ void WizardPage_chooseGroup::loadGroupInfo()
         }
     }
 
+    recalculateCapacity();
     connect(&m_sigMap, SIGNAL(mapped(QWidget*)), this, SLOT(handleGroupSelection(QWidget*)));
 }
 
@@ -108,10 +125,22 @@ void WizardPage_chooseGroup::handleGroupSelection(QWidget *w)
     } else {
         m_selectedGroups.removeAll(val);
     }
+
+    sanitizeChoices();
     emit completeChanged();
     qDebug() << __PRETTY_FUNCTION__ << m_selectedGroups;
 }
 
+void WizardPage_chooseGroup::recalculateCapacity()
+{
+    int capacity = 0;
+    foreach(const QString &grp, m_selectedGroups) {
+        capacity += m_groupCapacities.value(grp);
+    }
+
+    m_requiredSize = capacity;
+    ui->capacityLabel->setText(tr("minimal disk space required now is %1MB").arg(capacity));
+}
 
 bool WizardPage_chooseGroup::isComplete() const
 {

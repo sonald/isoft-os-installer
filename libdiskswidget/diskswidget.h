@@ -21,7 +21,6 @@ enum Columns {
 };
 
 const QString checkMark(QChar(0x2713));
-const int PrerequisiteSize = 4096;
 const QString AppPath = "/usr/share/libdiskswidget/";
 
 class DisksWidget : public QWidget
@@ -37,6 +36,7 @@ public:
 	QString		rootPartitionPath();
 	bool		existMntPoint(const QString &mnt, QTreeWidgetItem *current = 0);
 	bool		existMntPointWithFstype(const QString &mnt, const QString &fstype);
+    int         targetRootSize();
     bool hasEfipart(); // check if efi partition exists in GPT mode
 	void		setCurrentIndex(int index);
 	QString		currentDevPath()	{ return m_tree->currentItem()->text(0); }
@@ -48,8 +48,7 @@ public:
 	//k really modify the widget item, need to be called right after waning info
 	void 	doSimpleInstall();
 
-	//k check / size, incoming parameter is XXB, XXKB, XXMB, XXGB
-	static bool	isEnoughForSlash(QString size);
+    int humanToSizeMB(QString size);
 
 	QString osOnDevice(const QString &device);
 
@@ -60,7 +59,7 @@ public slots:
 	//k just remember the currentItem
 	void 	installOnPartition();
 
-	bool	validate(QString &err);
+	bool	validate(QString &err, int requiredSizeMB);
 
 signals:
 //	void	sigLinuxInfo(QString dev, QString fsType);

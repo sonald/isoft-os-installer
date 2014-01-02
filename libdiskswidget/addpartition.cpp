@@ -11,9 +11,6 @@ AddPartition::AddPartition(DisksWidget *parent) : QDialog(parent), _tree(parent)
 	connect(userButton, SIGNAL(toggled(bool)), userSize, SLOT(setEnabled(bool)));
 	connect(fsType, SIGNAL(currentIndexChanged(const QString &)), 
 		this, SLOT(judgeMountEnable(const QString &)));
-//
-//	DisksWidget *dw = dynamic_cast<DisksWidget *>(parent);
-//	_tree = dw->getTree();
 }
 
 void AddPartition::accept()
@@ -50,25 +47,10 @@ void AddPartition::accept()
 	qDebug() << mnt;
 		
 	if (mnt == "/") {
-		if ((fixedButton->isChecked() && fixedSize->value() < PrerequisiteSize)
-			|| (userButton->isChecked() && userSize->value() < PrerequisiteSize))
-		{
-			QMessageBox::warning(this, tr("Warning"), QString(tr("The '/' partition at least need 4GB disk capacity.")));
-			return ;
-		}
-
-		if (allButton->isChecked()) {
-			QString size =  _tree->getCurrentItem()->text(colSize);
-			if (!DisksWidget::isEnoughForSlash(size)) {
-				QMessageBox::warning(this, tr("Warning"), QString(tr("The '/' partition at least need 4GB disk capacity.")));
-				return ;
-			}
-		}
-
-		//if (fsType->currentText() != "ext3" && fsType->currentText() != "ext2") {
         if (!fsType->currentText().startsWith("ext")) {
-			QMessageBox::warning(this, tr("Warning"), QString(tr("The '/' partition needs to be formatted to one of the ext filesystems.")));
-			return ;
+			QMessageBox::warning(this, tr("Warning"), 
+                    tr("The '/' partition needs to be formatted to one of the ext filesystems."));
+			return;
 		}
 	}
 			

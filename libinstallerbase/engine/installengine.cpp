@@ -290,14 +290,6 @@ bool Engine::postscript(void)
 			return false;
 		}
 
-		// set default label
-		//string label = "e2label " + _rootdev + " ";
-		//label += "iSoft-";
-		//int index = _rootdev.find_last_of('/');	
-		//string tmp = _rootdev.substr(index+1);
-		//label += tmp;
-		//_postscript.push_back(label);
-
 		string cmd;
 
 		// create the postscript.sh from template, append cmds from _postscript.
@@ -1105,16 +1097,8 @@ bool Engine::do_add_group(const string group)
 
 bool Engine::do_boot_install(const string &devpath)
 {
-    _grub_install_device = devpath;
-
     // postpone grub install at postscript stage to handle EFI
-    //if (install_grub2("CETC OS ", _rootdev.c_str(), devpath.c_str(), 
-			 //_boot_partition.c_str()) == -1) 
-	//{
-		//debuglog("install grub error\n");
-		//return false;
-	//}
-
+    _grub_install_device = devpath;
     return true;
 }
 
@@ -1129,43 +1113,9 @@ bool Engine::do_set_kernel_param(const string &param)
 
 bool Engine::do_set_lang(const string &locale)
 {
-    //add by pwp for setting LANG for kdm
     _locale = locale;
-    string lang = "Language=";
-    lang += _locale;
-    string cmd = "sed -i s/^Language.*/" + lang + "/  " + "/etc/kde/kdm/kdmrc";
+    string cmd = "echo \"LANG=" + _locale + "\" > /etc/locale.conf";
     _postscript.push_back(cmd);
-    //add by pwp for setting LANG for kdm end
-
-    lang = "echo 'LANG=";
-    lang += locale + "' > /etc/sysconfig/i18n";
-    _postscript.push_back(lang);
-
-    //add by pwp for setting LANG for kdeglobals
-	string Country = "Country=";
-	string Language = "Language=";
-	string::size_type end = 0;
-
-	end = locale.find('_', 0);
-	if(end != string::npos )
-	{
-		Country += string(locale, 0, end); 
-		string cmd = "sed -i s/^Country.*/" + Country + "/  " + "/usr/share/kde-settings/kde-profile/default/share/config/kdeglobals";
-		_postscript.push_back(cmd);
-	}
-	else
-		cerr << "Didn't find Country" << endl;
-
-	end = locale.find('.', 0);
-	if(end != string::npos )
-	{
-		Language += string(locale, 0, end); 
-		string cmd = "sed -i s/^Language.*/" + Language + "/  " + "/usr/share/kde-settings/kde-profile/default/share/config/kdeglobals";
-		_postscript.push_back(cmd);
-	}
-	else
-		cerr << "Didn't find Language" << endl;
-    //add by pwp for setting LANG for kdeglobals end
 
     return true;
 }
