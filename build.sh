@@ -13,7 +13,7 @@ function do_build() {
 
     mkdir -p $BUILD_ROOT
 
-    for sub in libdiskswidget libinstallerbase cetcosinstaller; do
+    for sub in libinstallerbase libdiskswidget cetcosinstaller; do
         echo build $sub
         mkdir -p $BUILD_ROOT/$sub
         pushd $BUILD_ROOT/$sub
@@ -22,7 +22,7 @@ function do_build() {
             cmake ../../$sub
         else
             if which qtchooser > /dev/null; then
-                qmake -qt=qt4 ../../$sub
+                qmake -qt=4 ../../$sub
             else
                 qmake-qt4 ../../$sub
             fi

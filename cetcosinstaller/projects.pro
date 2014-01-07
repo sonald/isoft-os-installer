@@ -1,5 +1,5 @@
 TEMPLATE = subdirs
-SUBDIRS = games src
+SUBDIRS = src
 RESOURCES += data/svg/svg.qrc
 
 TRANSLATIONS += translations/installer_en.ts \
