@@ -91,29 +91,16 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../games/game_mainwindow.cpp" line="57"/>
         <source>&amp;File</source>
-        <translation>文件(&amp;F)</translation>
+        <translation type="obsolete">文件(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../games/game_mainwindow.cpp" line="58"/>
         <source>&amp;New Game</source>
-        <translation>新游戏(&amp;N)</translation>
+        <translation type="obsolete">新游戏(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../games/game_mainwindow.cpp" line="59"/>
-        <source>Ctrl+N</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../games/game_mainwindow.cpp" line="62"/>
         <source>&amp;Quit</source>
-        <translation>退出(&amp;Q)</translation>
-    </message>
-    <message>
-        <location filename="../games/game_mainwindow.cpp" line="63"/>
-        <source>Ctrl+Q</source>
-        <translation></translation>
+        <translation type="obsolete">退出(&amp;Q)</translation>
     </message>
 </context>
 <context>
@@ -181,44 +168,44 @@
 <context>
     <name>WizardInstaller</name>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="92"/>
+        <location filename="../src/wizard_installer.cpp" line="87"/>
         <source>Installer Wizard</source>
         <translation>安装程序向导</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="94"/>
+        <location filename="../src/wizard_installer.cpp" line="89"/>
         <source>&lt; &amp;Back</source>
         <translation>后退(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="95"/>
-        <location filename="../src/wizard_installer.cpp" line="96"/>
+        <location filename="../src/wizard_installer.cpp" line="90"/>
+        <location filename="../src/wizard_installer.cpp" line="91"/>
         <source>&amp;Next &gt;</source>
         <translation>下一步(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="97"/>
+        <location filename="../src/wizard_installer.cpp" line="92"/>
         <source>&amp;Finish</source>
         <translation>完成(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="98"/>
+        <location filename="../src/wizard_installer.cpp" line="93"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="146"/>
+        <location filename="../src/wizard_installer.cpp" line="114"/>
         <source>The installation is not start yet, anything is not happened on your computer, you can quit the installer safely in this moment.</source>
         <translation>安装过程还没有开始，在你的计算机上没有发生任何改变，此刻你可以安全的退出安装程序。</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="149"/>
         <source>The system already had been installed but not configured.                                  The system will be unusable if you quit now.</source>
-        <translation>系统已经被安装而没有配置，如果现在退出，系统将不可用。</translation>
+        <translation type="obsolete">系统已经被安装而没有配置，如果现在退出，系统将不可用。</translation>
     </message>
     <message>
+        <location filename="../src/wizard_installer.cpp" line="117"/>
         <source>The system already had been installed but not configured.The system will be unusable if you quit now.</source>
-        <translation type="obsolete">系统已经被安装而没有配置，如果现在退出，系统将不可用。</translation>
+        <translation>系统已经被安装而没有配置，如果现在退出，系统将不可用。</translation>
     </message>
     <message>
         <source>&amp;Terminal</source>
@@ -382,7 +369,7 @@
     <name>WizardPage_Partition_Advanced</name>
     <message>
         <location filename="../src/wizardpage_partition_advanced.cpp" line="17"/>
-        <location filename="../src/wizardpage_partition_advanced.cpp" line="36"/>
+        <location filename="../src/wizardpage_partition_advanced.cpp" line="37"/>
         <source>Partition: Advanced Mode</source>
         <translation>分区：高级方式</translation>
     </message>
@@ -474,12 +461,12 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation>请等待一段时间。享受一杯咖啡也许是一个好主意。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="183"/>
+        <location filename="../src/wizardpage_progress.cpp" line="163"/>
         <source>Installation Error</source>
         <translation>安装过程错误</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="184"/>
+        <location filename="../src/wizardpage_progress.cpp" line="164"/>
         <source>Finish</source>
         <translation>完成</translation>
     </message>
@@ -496,7 +483,7 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation type="obsolete">请等待一段时间。享受一杯咖啡也许是一个好主意。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="150"/>
+        <location filename="../src/wizardpage_progress.cpp" line="130"/>
         <source>Elapsed: </source>
         <translation>已安装时间：</translation>
     </message>
@@ -573,62 +560,62 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 				超级用户必须设置一个密码。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="172"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="170"/>
         <source>Add new users:</source>
         <translation>添加新用户：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="190"/>
         <source>Root password needed</source>
         <translation>必须输入root密码</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="190"/>
         <source>Root password should not be empty.</source>
         <translation>root密码不能为空。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="196"/>
         <source>Root password</source>
         <translation>超级用户密码：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="196"/>
         <source>Please input password correctly twice.</source>
         <translation>两次输入密码要一致。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="165"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="163"/>
         <source>Set password and add users</source>
         <translation>设置密码和添加用户</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="167"/>
         <source>Password:</source>
         <translation>密码：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="170"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
         <source>Confirm:</source>
         <translation>确认：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="166"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="164"/>
         <source>Password for user &quot;root&quot; must be set. You can add new user also, at least one new user account should be created.</source>
         <translation>超级用户(root)密码必须设置。你也可以添加新用户，至少要创建一个新用户。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="205"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="203"/>
         <source>User</source>
         <translation>用户</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="205"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="203"/>
         <source>Please at least add one normal user.</source>
         <translation>请至少创建一个普通用户。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="255"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="253"/>
         <source>The username ( %1 ) had existed.</source>
         <translation>用户名(%1)已经存在。</translation>
     </message>
@@ -645,7 +632,7 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 			</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="166"/>
         <source>User &quot;root&quot; can control everything on the entire computer.
 A password MUST be set for user &quot;root&quot;.</source>
         <translation></translation>
@@ -656,7 +643,7 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="232"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="230"/>
         <source>Please not fill the dulplicate name.
 </source>
         <translation></translation>
@@ -676,8 +663,12 @@ A password MUST be set for user &quot;root&quot;.</source>
     </message>
     <message>
         <location filename="../src/wizardpage_welcome.cpp" line="58"/>
+        <source>CETC Client OS support Simplified-Chinese, English. You can select the language which will be the language of installer. And the selected language will be the default language of installed system.</source>
+        <translation>中电科普华终端操作系统支持简体中文，英文。你可以选择其中一种作为安装程序的语言，你所选择的语言也将是系统安装后的默认语言。</translation>
+    </message>
+    <message>
         <source>CETC Client OS support Simplified-Chinese, Traditional-Chinese, English. You can select the language which will be the language of installer. And the selected language will be the default language of installed system.</source>
-        <translation>中电科普华终端操作系统支持简体中文，繁体中文，英文。你可以选择其中一种作为安装程序的语言，你所选择的语言也将是系统安装后的默认语言。</translation>
+        <translation type="obsolete">中电科普华终端操作系统支持简体中文，繁体中文，英文。你可以选择其中一种作为安装程序的语言，你所选择的语言也将是系统安装后的默认语言。</translation>
     </message>
     <message>
         <source>Welcome to Red Flag Linux Desktop 7.0. You can select the language of installer now.</source>
@@ -703,6 +694,16 @@ A password MUST be set for user &quot;root&quot;.</source>
         <location filename="../src/wizardpage_choosegroup.ui" line="20"/>
         <source>Choose groups to install</source>
         <translation>选择要安装的组别</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_choosegroup.ui" line="28"/>
+        <source>minimal disk space required now is</source>
+        <translation>现在安装所需要的最小磁盘空间为</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_choosegroup.cpp" line="143"/>
+        <source>minimal disk space required now is %1MB</source>
+        <translation>现在安装所需要的最小磁盘空间为%1MB</translation>
     </message>
 </context>
 </TS>

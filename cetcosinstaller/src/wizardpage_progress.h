@@ -6,7 +6,6 @@
 #include <QWizardPage>
 #include <QTime>
 #include "installer_global.h"
-#include "game.h"
 
 class InstallThread;
 class QLabel;
@@ -29,7 +28,6 @@ public slots:
     void updateProgress(int value);
     void startProgress();
     void endProgress(bool state, QString error);
-    void onGame(int num);
 
 signals:
     void exitstate(bool state);
@@ -54,7 +52,6 @@ private:
     int 		m_max_value;
     int 		m_min_value;
     InstallThread*	m_thread;
-//    MainWindow*		m_game_window;
 };
 
 class InstallThread : public QThread 

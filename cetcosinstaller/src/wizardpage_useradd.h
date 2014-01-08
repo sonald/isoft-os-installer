@@ -63,6 +63,14 @@ private:
     QVBoxLayout*	m_formLayout;
 };
 
+class StrictNameValidator : public QValidator
+{
+    Q_OBJECT
+public:
+    StrictNameValidator(QObject* parent) : QValidator(parent) {}
+    State validate(QString& input, int& pos) const;
+};
+
 class NameValidator : public QValidator
 {
     Q_OBJECT

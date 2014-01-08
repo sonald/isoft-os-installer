@@ -20,7 +20,8 @@ WizardPage_chooseGroup::WizardPage_chooseGroup(QWidget *parent) :
 
 void WizardPage_chooseGroup::initializePage()
 {
-    loadGroupInfo();
+    if (!m_selectedGroups.count())
+        loadGroupInfo();
     emit completeChanged();
 }
 
@@ -52,6 +53,15 @@ bool WizardPage_chooseGroup::validatePage()
     sanitizeChoices();
     g_engine->cmdChooseGroups(m_selectedGroups.join(",").toUtf8().constData());
     return true;
+}
+
+void WizardPage_chooseGroup::cleanupPage()
+{
+    m_selectedGroups.clear();
+    foreach(QCheckBox *box, m_chkBoxes) {
+        box->deleteLater();
+    }
+    m_chkBoxes.clear();
 }
 
 WizardPage_chooseGroup::~WizardPage_chooseGroup()

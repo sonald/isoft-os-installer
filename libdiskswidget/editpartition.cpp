@@ -1,6 +1,7 @@
 #include <QTreeWidgetItem>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QtGui>
 #include <QDebug>
 
 #include "editpartition.h"
@@ -30,6 +31,14 @@ EditPartition::EditPartition(QTreeWidgetItem *currentItem, DisksWidget *parent)
 		int index = mntPointComboBox->findText(mount);
 		mntPointComboBox->setCurrentIndex(index);
 	}
+
+    if (!m_parent->isEfiEnabled()) {
+        //remove efi mount point
+        int idx = this->mntPointComboBox->findText("/boot/efi");
+        if (idx != -1) {
+            this->mntPointComboBox->removeItem(idx);
+        }
+    }
 }
 
 void EditPartition::accept()

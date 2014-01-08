@@ -38,6 +38,7 @@
 #include <parted++/parted++.h>
 #include <installengine.h>
 #include <os_identify.h>
+#include <QtCore>
 
 #include "diskswidget.h"
 #include "directorytree.h"
@@ -53,7 +54,13 @@ DisksWidget::DisksWidget(QWidget *parent, const Modes &mode, QString locale)
 
 	QTranslator *translator = new QTranslator;
 	translator->load("libdiskswidget_" + locale, AppPath + "/translations");
+
+    QTranslator *qtTran = new QTranslator;
+    QString qtQmPath(QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    qtTran->load("qt_"+locale, qtQmPath);
+
 	QApplication::installTranslator(translator);
+	QApplication::installTranslator(qtTran);
 
 	m_osIdent = new OSIdentify;
 

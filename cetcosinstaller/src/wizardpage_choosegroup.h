@@ -27,6 +27,7 @@ public:
 
     bool validatePage();
     virtual bool isComplete() const;
+    void cleanupPage();
 
 signals:
     void selectedGroupsChanged(const QStringList &);

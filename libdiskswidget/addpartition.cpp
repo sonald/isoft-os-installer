@@ -11,6 +11,14 @@ AddPartition::AddPartition(DisksWidget *parent) : QDialog(parent), _tree(parent)
 	connect(userButton, SIGNAL(toggled(bool)), userSize, SLOT(setEnabled(bool)));
 	connect(fsType, SIGNAL(currentIndexChanged(const QString &)), 
 		this, SLOT(judgeMountEnable(const QString &)));
+
+    if (!_tree->isEfiEnabled()) {
+        //remove efi mount point
+        int idx = this->mntPoint->findText("/boot/efi");
+        if (idx != -1) {
+            this->mntPoint->removeItem(idx);
+        }
+    }
 }
 
 void AddPartition::accept()

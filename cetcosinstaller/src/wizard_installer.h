@@ -15,8 +15,8 @@ public slots:
 
 private slots:
     void reTranslateUi();
-    //void onTerm(int);
- private:
+
+private:
     bool m_exitstate;
 };
 #endif // RFINSTALLER_WIZARD_INSTALLER_H_

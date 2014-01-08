@@ -1,17 +1,5 @@
-#include <QDebug>
-#include <QFile>
-#include <QGridLayout>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QLineEdit>
-#include <QMessageBox>
-#include <QRegExp>
-#include <QRegExpValidator>
-#include <QSpacerItem>
-#include <QStringList>
-#include <QTextStream>
-#include <QVBoxLayout>
-#include <QVariant>
+#include <QtCore>
+#include <QtGui>
 #include <installengine.h>
 #include "wizardpage_useradd.h"
 
@@ -61,6 +49,20 @@ bool NameValidator::isValid(const QChar& ch) const
     return false;
 }
 
+//validation rule according to `man useradd`
+QValidator::State StrictNameValidator::validate(QString& input, int& pos) const
+{
+    Q_UNUSED(pos)
+    // limit the length of username.
+    if ( input.toUtf8().size() >= USERNAME_LENGTH )
+        return QValidator::Invalid;
+
+    QRegExp reName("[a-z_][a-z0-9_]*[$]?");
+    if (reName.exactMatch(input))
+        return QValidator::Acceptable;
+
+    return QValidator::Invalid;
+}
 
 WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     : QWizardPage(parent)
@@ -85,11 +87,6 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     m_confirm->setDragEnabled(false);
     m_confirm->setEchoMode(QLineEdit::Password);
     m_confirm->setMaxLength(PASSWORD_LENGTH);
-
-    QRegExp passwdSyntax("[a-zA-Z0-9]*");
-    QValidator* passwdValidator = new QRegExpValidator(passwdSyntax, this);
-    m_passwd->setValidator( passwdValidator );
-    m_confirm->setValidator( passwdValidator );
 
     m_passwdLabel = new QLabel(this);
     m_confirmLabel = new QLabel(this);
@@ -121,7 +118,7 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     m_user2->setMaxLength(USERNAME_LENGTH);
     m_user3->setMaxLength(USERNAME_LENGTH);
 
-    NameValidator* nameValidator = new NameValidator(this);
+    QValidator* nameValidator = new StrictNameValidator(this);
     m_user1->setValidator( nameValidator );
     m_user2->setValidator( nameValidator );
     m_user3->setValidator( nameValidator );
@@ -158,6 +155,7 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
 
 void WizardPage_UserAdd::initializePage()
 {
+    wizard()->button( QWizard::CancelButton )->setEnabled( false );
     // set the text.
     m_passwd->setText( QString("") );
     m_confirm->setText( QString("") );

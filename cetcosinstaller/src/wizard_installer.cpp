@@ -59,7 +59,6 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     connect( page_welcome, SIGNAL( localeChanged() ), this, SLOT( reTranslateUi() ) );
     connect( page_progress, SIGNAL( exitstate(bool) ), this, SLOT( setExitState(bool) ) );
     connect( page_finish, SIGNAL( exitstate(bool) ), this, SLOT( setExitState(bool) ) );
-    //connect( this, SIGNAL( customButtonClicked (int) ), this, SLOT( onTerm(int)));
     
     m_exitstate = true;
 
@@ -80,10 +79,6 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     
     QPixmap background( g_appImgPath + "/installer-background.png" );
     setPixmap( QWizard::BackgroundPixmap, background );
-
-//    QSize wizard_size(780, 560);
-//    setFixedSize( wizard_size );
-    // showFullScreen();
 }
 
 // retranslate text of UI element.
@@ -96,9 +91,6 @@ void WizardInstaller::reTranslateUi()
     setButtonText( QWizard::CommitButton, tr("&Next >") );
     setButtonText( QWizard::FinishButton, tr("&Finish") );
     setButtonText( QWizard::CancelButton, tr("&Cancel") );
-//    setButtonText( QWizard::CustomButton1, tr("&Terminal") );
-    //QAbstractButton * term_btn = button (QWizard::CustomButton1);
-    //term_btn->setToolTip(tr("Give me a shell, Please!"));
 }
 
 // exitstate: false stand for error exit.
@@ -106,30 +98,6 @@ void WizardInstaller::setExitState(bool state)
 {
     m_exitstate = state ;
 }
-
-//void WizardInstaller::onTerm(int num)
-//{
-	//if (num == QWizard::CustomButton1)
-	//{
-		//QMainWindow *mainWindow = new QMainWindow();
-
-		//QTermWidget *console = new QTermWidget();
-		//QFont font = QApplication::font();
-		//font.setFamily("Terminus");
-		//font.setPointSize(10);
-		//console->setTerminalFont(font);
-
-		//console->setColorScheme(COLOR_SCHEME_BLACK_ON_LIGHT_YELLOW);
-		//console->setScrollBarPosition(QTermWidget::ScrollBarRight);
-
-		//mainWindow->setCentralWidget(console);
-		//QDesktopWidget* desktop= QApplication::desktop ();
-		//mainWindow->resize(desktop->width(), desktop->height());
-		//QObject::connect(console, SIGNAL(finished()), mainWindow, SLOT(close()));
-		//mainWindow->show();
-
-	//}
-//}
 
 void WizardInstaller::reject()
 {
@@ -146,12 +114,14 @@ void WizardInstaller::reject()
             reject.setWarning( tr("The installation is not start yet, anything is not "
                                   "happened on your computer, you can quit the installer safely in this moment.") );
         } else if ( ( curId == Page_Progress ) || ( curId == Page_Finish ) ) {
-            reject.setWarning( tr("The system already had been installed but not configured.\
-                                  The system will be unusable if you quit now.") );
+            reject.setWarning( tr("The system already had been installed but not configured."
+                                  "The system will be unusable if you quit now.") );
         }
 
         int ret = reject.exec();
         if ( ret == QDialog::Accepted ) {
+            system("eject");
+            system("reboot");
             QWizard::reject();
         }
     }

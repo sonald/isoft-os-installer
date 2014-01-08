@@ -112,26 +112,6 @@ void WizardPage_Progress::initializePage()
     QTimer::singleShot( 1000, this, SLOT(startProgress()) );
 }
 
-void WizardPage_Progress::onGame(int num)
-{
-    if (num == QWizard::CustomButton2)
-    {
-        game_start();
-        /*
-        qsrand(QDateTime::currentDateTime().toTime_t());
-
-        if (m_game_window)
-        {
-            m_game_window->show();
-            return;
-        }
-        m_game_window = new MainWindow();
-        m_game_window->setFixedSize(780, 460);
-        m_game_window->show();
-        */
-    }
-}
-
 void WizardPage_Progress::updatePic()
 {
     m_indexPic = ( m_indexPic + 1 ) % m_picsNameList.size();
@@ -182,7 +162,7 @@ void WizardPage_Progress::endProgress(bool state, QString error)
     if ( !state ) {
         QMessageBox::critical(this, tr("Installation Error"), error);
         wizard()->setButtonText( QWizard::CancelButton, tr("Finish") );
-        //wizard()->button( QWizard::NextButton )->setEnabled( false );
+        wizard()->button( QWizard::CancelButton )->setEnabled( true );
         m_end = false;
     } else {
         QString locale = field("locale").toString();
@@ -190,12 +170,7 @@ void WizardPage_Progress::endProgress(bool state, QString error)
         m_picture->setPixmap( pic );
         m_end = true;
     }
-    wizard()->button( QWizard::CancelButton )->setEnabled( true );
     wizard()->setOption(QWizard::HaveCustomButton2, false);
-    //m_game_window->close();
-    //m_game_window->deleteLater();
-    game_destroy();
-    //m_end = true;
     emit completeChanged();
 }
 

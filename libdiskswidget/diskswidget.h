@@ -51,6 +51,7 @@ public:
     int humanToSizeMB(QString size);
 
 	QString osOnDevice(const QString &device);
+    bool isEfiEnabled();
 
 public slots:
 	void 	reset();
@@ -82,7 +83,6 @@ private:
 	bool	isLinux(const QString &dev);
 	QString	belongedDisk(QTreeWidgetItem *item);
 	void	doRecord(QTreeWidgetItem *cur);
-    bool isEfiEnabled();
 
 private slots:
 	void	sendPartInfo(QTreeWidgetItem *current, QTreeWidgetItem *previous);
