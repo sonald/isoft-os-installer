@@ -39,7 +39,8 @@ PartitionList::PartitionList(PartitionTable* ptable)
     disk_ = ptable->pdisk();
     dev_ = ptable->owner_dev()->pdev();
     // unit_ = PED_UNIT_COMPACT;
-    unit_ = PED_UNIT_MEGABYTE;
+    //unit_ = PED_UNIT_MEGABYTE;
+    unit_ = PED_UNIT_KILOBYTE;
     build_list();
 }
 
@@ -377,7 +378,7 @@ int PartitionList::add_by_length(int index,
     char* str_end_sector = NULL;
 
     // get the string of start location.
-    str_start_sector = ped_unit_format_custom( dev_, part->start(), unit );
+    str_start_sector = ped_unit_format_custom( dev_, part->start(), unit_ );
 
     // transfer length from string to sector.
     PedSector sector_length;
@@ -630,13 +631,13 @@ int PartitionList::add_by_whole(int index,
     PedSector start_sector =0, end_sector =0;
     PedGeometry *range_start =NULL, *range_end =NULL;
 
-    int valid = ped_unit_parse_custom( str_start_sector, dev_, unit_, &start_sector, &range_start);
+    int valid = ped_unit_parse_custom(str_start_sector, dev_, unit_, &start_sector, &range_start);
     if (!valid) { // maybe unit is too large
-        ped_unit_parse( str_start_sector, dev_, &start_sector, &range_start);
+        ped_unit_parse(str_start_sector, dev_, &start_sector, &range_start);
     }
-    valid = ped_unit_parse_custom( str_end_sector, dev_, unit_, &end_sector, &range_end);
+    valid = ped_unit_parse_custom(str_end_sector, dev_, unit_, &end_sector, &range_end);
     if (!valid) {
-        ped_unit_parse( str_end_sector, dev_, &end_sector, &range_end);
+        ped_unit_parse(str_end_sector, dev_, &end_sector, &range_end);
     }
 
     /*** print the detail info of add operation. ***/
