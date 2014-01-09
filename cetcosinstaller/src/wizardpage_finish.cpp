@@ -78,6 +78,7 @@ void WizardPage_Finish::restorePage()
 
 bool WizardPage_Finish::validatePage()
 {
+    system("eject");
     system("reboot");
 	return true;
 }

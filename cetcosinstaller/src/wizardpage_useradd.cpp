@@ -94,8 +94,10 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     m_passwdLayout = new QGridLayout();
     m_passwdLayout->addWidget( m_passwdLabel, 0,0,1,1 );
     m_passwdLayout->addWidget( m_passwd, 0,1,1,1 );
+    m_passwdLayout->addWidget( new QLabel("*"), 0,2,1,1 );
     m_passwdLayout->addWidget( m_confirmLabel, 1,0,1,1 );
     m_passwdLayout->addWidget( m_confirm, 1,1,1,1 );
+    m_passwdLayout->addWidget( new QLabel("*"), 1,2,1,1 );
 
     m_rootLayout = new QVBoxLayout();
     m_rootLayout->addLayout( m_descriptLayout );
@@ -194,8 +196,6 @@ bool WizardPage_UserAdd::validatePage()
     bool passwdSame = ( m_passwd->text() == m_confirm->text() );
     if ( !passwdSame ) {
         QMessageBox::warning(this, tr("Root password"), tr("Please input password correctly twice.") );
-        m_passwd->setText( QString("") );
-        m_confirm->setText( QString("") );
         return false;
     }
 

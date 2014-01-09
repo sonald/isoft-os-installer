@@ -635,7 +635,8 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <location filename="../src/wizardpage_useradd.cpp" line="166"/>
         <source>User &quot;root&quot; can control everything on the entire computer.
 A password MUST be set for user &quot;root&quot;.</source>
-        <translation></translation>
+        <translation>超级用户可以控制整台计算机的所有事情。
+超级用户必须设置一个密码。</translation>
     </message>
     <message>
         <location filename="../src/wizardpage_useradd.cpp" line="233"/>
@@ -646,7 +647,7 @@ A password MUST be set for user &quot;root&quot;.</source>
         <location filename="../src/wizardpage_useradd.cpp" line="230"/>
         <source>Please not fill the dulplicate name.
 </source>
-        <translation></translation>
+        <translation>请不要重复填写用户名。</translation>
     </message>
 </context>
 <context>
