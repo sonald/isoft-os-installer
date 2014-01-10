@@ -33,7 +33,6 @@ rm -rf $RPM_BUILD_DIR/%{name}
 /usr/share/cetcosinstaller/translations/*
 /usr/share/cetcosinstaller/images/*
 /usr/share/applications/cetcosinstaller.desktop
-/usr/lib/librfinsgame.so*
 /usr/share/cetcosinstaller/svg/*
 /etc/*.xml
 

@@ -20,6 +20,7 @@ WizardPage_chooseGroup::WizardPage_chooseGroup(QWidget *parent) :
 
 void WizardPage_chooseGroup::initializePage()
 {
+    ui->retranslateUi(this);
     if (!m_selectedGroups.count())
         loadGroupInfo();
     emit completeChanged();

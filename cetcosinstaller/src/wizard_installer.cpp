@@ -120,8 +120,7 @@ void WizardInstaller::reject()
 
         int ret = reject.exec();
         if ( ret == QDialog::Accepted ) {
-            system("eject");
-            system("reboot");
+            system("systemctl reboot");
             QWizard::reject();
         }
     }

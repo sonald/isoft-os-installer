@@ -3,8 +3,8 @@ TARGET = cetcosinstaller
 CONFIG += link_pkgconfig
 PKGCONFIG = glib-2.0
 DEPENDPATH += . 
-INCLUDEPATH += . /usr/include/parted++ ../games
-LIBS += -lparted -lparted++ -lglib-2.0 -linstallengine -ldiskswidget -L../games -lrfinsgame
+INCLUDEPATH += . /usr/include/parted++ 
+LIBS += -lparted -lparted++ -lglib-2.0 -linstallengine -ldiskswidget
 QT += xml
 
 # Input

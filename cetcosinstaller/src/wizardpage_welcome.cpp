@@ -98,6 +98,7 @@ void WizardPage_Welcome::updateLocale(const QString & currentText)
     g_appTranslator.load( g_transPrefix + "_" + locale, g_appQmPath );
     g_qtTranslator.load( "qt_" + locale, g_qtQmPath );
     setField("locale", locale);
+    setlocale(LC_MESSAGES, locale.toUtf8().constData());
 }
 
 // Get the value of property "locale"
