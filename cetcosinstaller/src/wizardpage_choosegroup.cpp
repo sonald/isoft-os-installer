@@ -33,7 +33,7 @@ void WizardPage_chooseGroup::sanitizeChoices()
     QStringList prios;
     prios << "desktop" << "base" << "core";
     for (int i = 0; i < prios.length(); ++i) {
-        if (m_chkBoxes.value(prios[i])->isChecked()) {
+        if (m_chkBoxes[prios[i]] && m_chkBoxes.value(prios[i])->isChecked()) {
             QStringList sl = groupsRequired(prios[i]);
             foreach(const QString &g, sl) {
                 if (!result.contains(g)) {

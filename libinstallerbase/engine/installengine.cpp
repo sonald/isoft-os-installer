@@ -1160,7 +1160,7 @@ bool Engine::do_set_root_passwd(const string &passwd)
     char cmd[1024];
 
     //XXX FIXME: bad code
-    sprintf(cmd, "( echo '%s'; echo '%s'; ) | passwd root", passwd.c_str(), passwd.c_str());
+    sprintf(cmd, "echo -e '%s\n%s' | passwd root", passwd.c_str(), passwd.c_str());
     _postscript.push_back(cmd);
     return true;
 }

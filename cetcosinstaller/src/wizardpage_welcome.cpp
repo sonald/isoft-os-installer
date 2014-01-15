@@ -5,6 +5,7 @@
 #include <QListWidget>
 #include <QTranslator>
 #include <QVariant>
+#include <QApplication>
 
 #include <cassert>
 
@@ -97,6 +98,8 @@ void WizardPage_Welcome::updateLocale(const QString & currentText)
     QString locale = m_localeParser.localeWithName( currentText );
     g_appTranslator.load( g_transPrefix + "_" + locale, g_appQmPath );
     g_qtTranslator.load( "qt_" + locale, g_qtQmPath );
+    qApp->installTranslator(&g_appTranslator);
+    qApp->installTranslator(&g_qtTranslator);
     setField("locale", locale);
     setlocale(LC_MESSAGES, locale.toUtf8().constData());
 }

@@ -46,21 +46,16 @@
 #include "editpartition.h"
 #include "addpartition.h"
 
+QTranslator translator;
 DisksWidget::DisksWidget(QWidget *parent, const Modes &mode, QString locale) 
 	: QWidget(parent), m_mode(mode)
 {
 	if (locale.isEmpty())
 		locale = QLocale::system().name();
+    QLocale::setDefault(locale);
 
-	QTranslator *translator = new QTranslator;
-	translator->load("libdiskswidget_" + locale, AppPath + "/translations");
-
-    QTranslator *qtTran = new QTranslator;
-    QString qtQmPath(QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    qtTran->load("qt_"+locale, qtQmPath);
-
-	QApplication::installTranslator(translator);
-	QApplication::installTranslator(qtTran);
+	translator.load("libdiskswidget_" + locale, AppPath + "/translations");
+    QApplication::installTranslator(&translator);
 
 	m_osIdent = new OSIdentify;
 

@@ -8,6 +8,8 @@
 AddPartition::AddPartition(DisksWidget *parent) : QDialog(parent), _tree(parent)
 {
 	setupUi(this);
+    this->retranslateUi(this);
+
 	connect(userButton, SIGNAL(toggled(bool)), userSize, SLOT(setEnabled(bool)));
 	connect(fsType, SIGNAL(currentIndexChanged(const QString &)), 
 		this, SLOT(judgeMountEnable(const QString &)));

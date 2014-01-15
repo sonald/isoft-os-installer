@@ -13,6 +13,8 @@ EditPartition::EditPartition(QTreeWidgetItem *currentItem, DisksWidget *parent)
 	  m_cur(currentItem) 
 {
 	setupUi(this);
+    this->retranslateUi(this);
+
 	fsTypeLabel->setText(currentItem->text(colFs));
 	sizeLabel->setText(currentItem->text(colSize));
 	
