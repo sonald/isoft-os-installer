@@ -79,19 +79,15 @@ void WizardPage_chooseGroup::setSelectedGroups(const QStringList &sl)
 void WizardPage_chooseGroup::loadGroupInfo()
 {
     QVBoxLayout *lay = qobject_cast<QVBoxLayout*>(ui->groupBox->layout());
-    QStringList sl, exists;
+    QStringList sl;
+
+    // this is actually a map
+    // core -> base  base-devel
+    // base -> xorg
+    // desktop -> kde
     sl << "core" << "base" << "desktop";
 
-    QDir dir("/var/lib/cetcosinstaller/RPMS");
-    QStringList dirs = dir.entryList(QStringList() << "RPMS.*", QDir::Dirs);
-    for (int i = 0; i < dirs.length(); ++i) {
-        QString dirname = dirs.at(i);
-        exists << dirname.replace("RPMS.", "");
-    }
-
     foreach(const QString &grp, sl) {
-        if (exists.indexOf(grp) == -1) continue;
-
         QCheckBox *chkBox = new QCheckBox(grp);
         chkBox->setTristate(true);
         m_chkBoxes.insert(grp, chkBox);

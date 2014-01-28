@@ -20,8 +20,7 @@
 #include "parted++.h"
 #include "gen_grub_conf.h"
 #include "os_identify.h"
-#include "yumshell.h"
-#include "rpminstaller.h"
+#include "alpminstaller.h"
 #include "installengine.h"
 
 #define DEBUG_MODE        
@@ -611,39 +610,11 @@ bool Engine::realWork(void (*progress)(int))
     // prepare to install
     out << "prepare to install" << endl;    
 
-    bool yum_install_mode = _rpm_groups.size() == 0; 
-    bool ret;
-    if (yum_install_mode) {
-        FILE *fp = NULL;
-        int installed_num = 0;
-
-        if ((fp = popen("rpm -qa | wc -l", "r")) == NULL) {
-            debuglog("install grub error: can not get num of rpm\n");
-            return false;
-        }
-
-        fscanf(fp, "%d", &installed_num);
-        pclose(fp);
-
-        YumShell yum(_package_list, _rootdir);
-        // will install num
-        double willinstall_num = yum.getInstallNumber();
-        yum.setProgressRange(100 - willinstall_num/(installed_num+willinstall_num)*100, 100);
-
-        // start to install
-        if (copy_files(progress, installed_num/(installed_num+willinstall_num)*99)) {
-            return false;
-        }
-
-        ret = yum.install(progress);
-
-    } else {
-        doMountRoot();
-        RpmInstaller grpInstaller(_rpm_groups, _rootdir);
-        grpInstaller.preprocess();
-        doSetupFstab();
-        ret = grpInstaller.install(progress);
-    }
+    doMountRoot();
+    AlpmInstaller grpInstaller(_rpm_groups, _rootdir);
+    grpInstaller.preprocess();
+    doSetupFstab();
+    bool ret = grpInstaller.install(progress);
 
     if(!ret){
         _errstr = "install failed.";
