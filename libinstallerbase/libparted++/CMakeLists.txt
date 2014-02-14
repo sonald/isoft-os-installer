@@ -3,6 +3,7 @@
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} )
 
 ADD_LIBRARY(parted++ SHARED  parttable.cpp partlist.cpp partition.cpp parted_devices.cpp devices.cpp device_unit.cpp)
+TARGET_LINK_LIBRARIES(parted++ parted)
 
 INSTALL(TARGETS parted++ DESTINATION lib)
 INSTALL(FILES device_unit.h DESTINATION include/parted++)
