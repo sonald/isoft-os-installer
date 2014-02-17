@@ -1,5 +1,7 @@
 #include <cstring>
+#include <vector>
 #include <map>
+#include <unordered_map>
 #include "alpminstaller.h"  
 #include <regex.h>
 #include "ipacman.h"
@@ -8,35 +10,46 @@ using namespace std;
 
 static AlpmInstaller* g_alpm_installer = NULL;
 
-const char* needed[] = {
-    "amarok",
-    "cpio",
-    "firefox",
-    "firefox-i18n-zh-cn",
-    "fuse",
-    "git",
-    "gpm",
-    "gvim",
-    "kde-l10n-zh_cn",
-    "net-tools",
-    "networkmanager",
-    "ntfs-3g",
-    "openssh",
-    "p7zip",
-    "parted",
-    "thunderbird",
-    "thunderbird-i18n-zh-cn",
-    "ttf-ubuntu-font-family",
-    "unrar",
-    "virtualbox-guest-dkms",
-    "virtualbox-guest-utils",
-    "wqy-microhei",
-    "vlc",
-    "xorg-xinit",
-    "xterm",
-    "yaourt",
-    "zip",
-    "grub",
+::unordered_map<string, vector<string>> needed {
+    {"core", 
+        {
+            "cpio",
+            "fuse",
+            "gpm",
+            "net-tools",
+            "ntfs-3g",
+            "openssh",
+            "p7zip",
+            "parted",
+            "grub",
+        }
+    }, 
+    {"base", 
+        {
+            "git",
+            "networkmanager",
+            "xterm",
+            "xorg-xinit",
+            "zip",
+            "gvim",
+        }
+    }, 
+    {"desktop", 
+        {
+            "amarok",
+            "firefox",
+            "firefox-i18n-zh-cn",
+            "kde-l10n-zh_cn",
+            "thunderbird",
+            "thunderbird-i18n-zh-cn",
+            "ttf-ubuntu-font-family",
+            "unrar",
+            "virtualbox-guest-dkms",
+            "virtualbox-guest-utils",
+            "wqy-microhei",
+            "vlc",
+        }
+    }, 
 };
 
 AlpmInstaller::AlpmInstaller(const list<string> &groups, const string &rootdir)
@@ -72,16 +85,25 @@ bool AlpmInstaller::reportUpstream(int percent)
 bool AlpmInstaller::preprocess()
 {
     ipacman_init(_rootdir.c_str(), cb_progress);
-    ipacman_add_server("isoft", "file:///mnt/iso/PKGS/isoft/os/x86_64");
+    //ipacman_add_server("isoft", "file:///mnt/iso/PKGS/isoft/os/x86_64");
+    ipacman_add_server("isoft", "file:///mnt/iso/PKGS/");
 
     char buf[1024];
     snprintf(buf, sizeof buf - 1,
-            "mkdir -m 0755 -p %s/var/{cache/pacman/pkg,lib/pacman,log} "
-            " %s/{dev,run,etc}"
+            "mkdir -m 0755 -p %s/var/cache/pacman/pkg"
+            " && mkdir -m 0755 -p %s/var/lib/pacman"
+            " && mkdir -m 0755 -p %s/var/log"
+            " && mkdir -m 0755 -p %s/dev"
+            " && mkdir -m 0755 -p %s/run"
+            " && mkdir -m 0755 -p %s/etc"
             " && mkdir -m 1777 -p %s/tmp "
-            " && mkdir -m 0555 -p %s/{sys,proc}", 
+            " && mkdir -m 0555 -p %s/sys" 
+            " && mkdir -m 0555 -p %s/proc", 
             _rootdir.c_str(), _rootdir.c_str(),
-            _rootdir.c_str(), _rootdir.c_str());
+            _rootdir.c_str(), _rootdir.c_str(),
+            _rootdir.c_str(), _rootdir.c_str(),
+            _rootdir.c_str(), _rootdir.c_str(),
+            _rootdir.c_str());
     
     if (system(buf) < 0) {
         cerr << string(buf) << " failed\n";
@@ -130,10 +152,10 @@ bool AlpmInstaller::install(void (*progress)(int percent))
             cerr << "add group" << s << endl;
             _targets = alpm_list_add(_targets, strdup(s.c_str()));
         }
-    }
-    
-    for (int i = 0; i < sizeof(needed)/sizeof(needed[0]); ++i) {
-        _targets = alpm_list_add(_targets, strdup(needed[i]));
+
+        for (const auto& s: needed[x]) {
+            _targets = alpm_list_add(_targets, strdup(s.c_str()));
+        }
     }
 
     int ret = ipacman_refresh_databases();

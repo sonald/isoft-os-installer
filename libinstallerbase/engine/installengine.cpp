@@ -340,10 +340,10 @@ bool Engine::postscript(void)
 		}
 
          //delete postscript
-        cmd = "rm -rf " + _rootdir + "postscript.sh";
-        if ( system(cmd.c_str()) != 0) {
-            debuglog("delete postscript failed: %s\n", cmd.c_str() );
-        }
+        //cmd = "rm -rf " + _rootdir + "postscript.sh";
+        //if ( system(cmd.c_str()) != 0) {
+            //debuglog("delete postscript failed: %s\n", cmd.c_str() );
+        //}
 
         // umount /dev /sys /proc
         system(("umount " + _rootdir + "/dev").c_str());
