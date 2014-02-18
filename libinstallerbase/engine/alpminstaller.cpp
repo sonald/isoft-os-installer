@@ -31,6 +31,8 @@ static AlpmInstaller* g_alpm_installer = NULL;
             "xterm",
             "xorg-xinit",
             "zip",
+            "wget",
+            "bash-completion",
             "gvim",
         }
     }, 
@@ -49,6 +51,7 @@ static AlpmInstaller* g_alpm_installer = NULL;
             "wqy-microhei",
             "vlc",
 
+            "kdemultimedia-kmix", 
             "kdegames-bovo",
             "kdegames-kapman",
             "kdegames-katomic",
@@ -65,6 +68,14 @@ static AlpmInstaller* g_alpm_installer = NULL;
             "kdegames-ksudoku",
             "kdegames-ksnakeduel",
             "kdegames-palapeli",
+            "isoft-artwork",
+            "kdeplasma-addons-applets-showdesktop",
+            "fcitx",
+            "kdesdk-kate",
+            "fcitx-libpinyin",
+            "kcm-fcitx",
+            "thunderbird-firetray",
+            "plymouth-theme-cetc",
         }
     }, 
 };
@@ -162,7 +173,7 @@ bool AlpmInstaller::install(void (*progress)(int percent))
     map<string, vector<string> > m = {
         {"core", {"base", "base-devel"}},
         {"base", {"xorg"}},
-        {"desktop", {"kde"}},
+        {"desktop", {"kdebase", "kdeutils", "kdenetwork", "kdegraphics"}},
     };
     for (const auto& x: _groups) {
         for (const auto& s: m[x]) {
