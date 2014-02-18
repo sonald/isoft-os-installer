@@ -469,7 +469,7 @@ bool Engine::runCmd(const vector<Cmd> &cmds)
         case CHOOSE_GROUPS:
             ret = do_choosegroups(currcmd.args[0]);
             if(!ret){
-                _errstr = "Run mountpoint Failed.";
+                _errstr = "Run choosegroups Failed.";
                 return false;
             }
             break;
@@ -1052,6 +1052,8 @@ bool Engine::do_choosegroups(const string &groups)
     string s = groups.substr(start);
     if (!s.empty()) 
         _rpm_groups.push_back(s);
+
+    return true;
 }
 
 bool Engine::do_add_package(const string package)

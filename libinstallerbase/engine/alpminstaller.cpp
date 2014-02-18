@@ -48,6 +48,23 @@ static AlpmInstaller* g_alpm_installer = NULL;
             "virtualbox-guest-utils",
             "wqy-microhei",
             "vlc",
+
+            "kdegames-bovo",
+            "kdegames-kapman",
+            "kdegames-katomic",
+            "kdegames-kblocks",
+            "kdegames-kdiamond",
+            "kdegames-klickety",
+            "kdegames-klines",
+            "kdegames-kmahjongg",
+            "kdegames-kmines",
+            "kdegames-knetwalk",
+            "kdegames-kpatience",
+            "kdegames-kreversi",
+            "kdegames-klickety",
+            "kdegames-ksudoku",
+            "kdegames-ksnakeduel",
+            "kdegames-palapeli",
         }
     }, 
 };
