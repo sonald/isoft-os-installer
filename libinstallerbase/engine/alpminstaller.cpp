@@ -114,7 +114,7 @@ bool AlpmInstaller::preprocess()
 {
     ipacman_init(_rootdir.c_str(), cb_progress);
     //ipacman_add_server("isoft", "file:///mnt/iso/PKGS/isoft/os/x86_64");
-    ipacman_add_server("isoft", "file:///mnt/iso/PKGS/");
+    ipacman_add_server("isoft", "file:///PKGS/");
 
     char buf[1024];
     snprintf(buf, sizeof buf - 1,
