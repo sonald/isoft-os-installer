@@ -5,6 +5,7 @@
 #include "alpminstaller.h"  
 #include <regex.h>
 #include "ipacman.h"
+#include "pkgmeta.h"
 
 using namespace std;
 
@@ -170,18 +171,26 @@ bool AlpmInstaller::preprocess()
 bool AlpmInstaller::install(void (*progress)(int percent))
 {
     _reporter = progress;
-    map<string, vector<string> > m = {
-        {"core", {"base", "base-devel"}},
-        {"base", {"xorg"}},
-        {"desktop", {"kdebase", "kdeutils", "kdenetwork", "kdegraphics"}},
-    };
-    for (const auto& x: _groups) {
-        for (const auto& s: m[x]) {
-            cerr << "add group" << s << endl;
-            _targets = alpm_list_add(_targets, strdup(s.c_str()));
-        }
+    //map<string, vector<string> > m = {
+        //{"core", {"base", "base-devel"}},
+        //{"base", {"xorg"}},
+        //{"desktop", {"kdebase", "kdeutils", "kdenetwork", "kdegraphics"}},
+    //};
+    //for (const auto& x: _groups) {
+        //for (const auto& s: m[x]) {
+            //cerr << "add group" << s << endl;
+            //_targets = alpm_list_add(_targets, strdup(s.c_str()));
+        //}
 
-        for (const auto& s: needed[x]) {
+        //for (const auto& s: needed[x]) {
+            //_targets = alpm_list_add(_targets, strdup(s.c_str()));
+        //}
+    //}
+
+    PkgsMeta meta{"/PKGS/packages.install"};
+    for(const auto& x: _groups) {
+        cerr << "add group " << x << endl;
+        for(const auto& s: meta(x)) {
             _targets = alpm_list_add(_targets, strdup(s.c_str()));
         }
     }

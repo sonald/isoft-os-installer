@@ -1,7 +1,7 @@
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ggdb")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb")
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ggdb")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb")
 
-set(SRCS os_identify.cpp gen_grub_conf.cpp installengine.cpp)
+set(SRCS os_identify.cpp gen_grub_conf.cpp installengine.cpp pkgmeta.cpp)
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}
     ../libparted++ 
@@ -22,6 +22,7 @@ INSTALL(FILES installengine.h DESTINATION include)
 INSTALL(FILES gen_grub_conf.h DESTINATION include)
 INSTALL(FILES os_identify.h DESTINATION include)
 INSTALL(FILES alpminstaller.h DESTINATION include)
+INSTALL(FILES pkgmeta.h DESTINATION include)
 INSTALL(FILES ipacman.h DESTINATION include)
 INSTALL(FILES postscript.tmpl DESTINATION share/apps/libinstallerbase)
 
