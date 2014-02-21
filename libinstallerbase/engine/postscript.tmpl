@@ -40,7 +40,7 @@ if [ ${EFI_SUPPORT} = true ]; then
     export GRUB_FONT=/usr/share/grub/unicode.pf2
     export GRUB_GFXPAYLOAD_LINUX=keep
     bootloader_id="CETC Client OS"
-    efi_distributor=pure64
+    efi_distributor=grub
     efi_file=grubx64.efi
     efidisk="$(df /boot/efi/ | grep dev | cut -c1-8)"
     efipart="$(df /boot/efi/ | grep dev | cut -c9-9)"
@@ -50,10 +50,12 @@ if [ ${EFI_SUPPORT} = true ]; then
     grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="$efi_distributor" --boot-directory=/boot/efi/EFI --recheck
     str=`efibootmgr | grep "$efi_distributor"`
     efibootmgr -b ${str:4:4} -B
+    str1=`efibootmgr | grep "$bootloader_id"`
+    efibootmgr -b ${str1:4:4} -B
     efibootmgr -c -q -d "$efidisk" -p "$efipart" -w \
         -L "$bootloader_id" -l "\\EFI\\$efi_distributor\\$efi_file"
     grub-mkconfig > "${grubdir}"/grub.cfg
-    sed -i -e 's%lang=%lang=zh_CN%g' "${grubdir}"/grub.cfg
+    sed -i -e 's%lang=en_US%lang=zh_CN%g' "${grubdir}"/grub.cfg
     mkdir -p "${grubdir}"/locale/
     for dir in "${localedir}"/*; do
         if test -f "$dir/LC_MESSAGES/grub.mo"; then
