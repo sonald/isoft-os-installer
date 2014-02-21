@@ -616,8 +616,8 @@ bool Engine::realWork(void (*progress)(int))
     doMountRoot();
     AlpmInstaller grpInstaller(_rpm_groups, _rootdir);
     grpInstaller.preprocess();
-    doSetupFstab();
     bool ret = grpInstaller.install(progress);
+    doSetupFstab();
 
     if(!ret){
         _errstr = "install failed.";
@@ -1500,70 +1500,6 @@ bool Engine::doSetupFstab()
              || fstab_it->mountpoint == "swap") {
             continue;
         }
-   	
-        /*
-		//XXX only ext2/3 can work with uuid
-		cmd = "/usr/bin/uuidgen -t "; 
-		if ((fp = popen(cmd.c_str(), "r")) == NULL) {
-				_errstr = "uuidgen " + fstab_it->devpath + " error";
-				return false;	
-		}
-
-		memset(uu, '\0', BUF_LENGTH_LINE);	
-		fscanf(fp, "%s", uu);		
-		pclose(fp);
-		uuid = uu;
-
-        string uuid_cmd;
-        if (fstab_it->fstype.find("ext") == 0)
-            uuid_cmd = "tune2fs -U ";
-        else if (fstab_it->fstype == "xfs")
-            uuid_cmd = "xfs_admin -U ";
-        else if (fstab_it->fstype == "reiserfs")
-            uuid_cmd = "reiserfstune -u ";
-        else if (fstab_it->fstype == "vfat")
-        {	// vfat only support 32 bits uuid
-            string uuid_tmp( uuid, 0, 8 );
-            uuid = uuid_tmp;
-            uuid_cmd = "mkdosfs -i ";
-        }
-        else
-        {
-            _errstr = "unsupported file system!";
-            return false;
-        }	
-
-        cmd = uuid_cmd + uuid + " " + fstab_it->devpath;
-        if ((fp = popen(cmd.c_str(), "r")) == NULL) {
-            _errstr = "tune2fs " + fstab_it->devpath + " error";
-				return false;	
-		}
-		pclose(fp);
-
-		if (fstab_it->fstype == "vfat")
-		{   // vfat only support 32 bits uuid
-			string uuid_03( uuid, 0, 4 );
-			string uuid_47( uuid, 4, 4 );
-			string tmp = "";
-			for (int i=0; i<4; i++)
-			{
-				tmp += toupper(uuid_03[i]);
-			}
-			
-			uuid_03 = tmp;
-
-			tmp = "";
-			for (int i=0; i<4; i++)
-			{
-				tmp += toupper(uuid_47[i]);
-			}
-			
-			uuid_47 = tmp;
-			uuid = uuid_03 + "-" + uuid_47;
-            uuid_cmd = "mkdosfs -i ";
-		}
-
-        */
  
 		cmd = "/sbin/blkid -s UUID -o value " + fstab_it->devpath; 
 		if ((fp = popen(cmd.c_str(), "r")) == NULL) {
