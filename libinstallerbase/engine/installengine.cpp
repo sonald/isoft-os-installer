@@ -297,6 +297,7 @@ bool Engine::postscript(void)
             //PRESTAGE
             ofstream script(post.c_str(), ios::out);
             script << "#!/bin/bash" << endl;
+            script << "set -x" << endl;
             script << "export GRUB_DEVICE=" << _grub_install_device << endl;
             list<string>::const_iterator ci = _new_user_names.begin();
             int i = 1;
@@ -304,6 +305,13 @@ bool Engine::postscript(void)
                 script << "export USER_NAME" << i++ << "=" << *ci << endl;
                 ++ci;
             }
+
+            // trans postscript to real script.
+            for(list<string>::iterator it = _postscript.begin(); it != _postscript.end(); ++it) {
+                script << *it << endl;
+                cerr << "append [" << *it << "]\n";
+            }
+
             script.close();
         }
 
@@ -320,12 +328,7 @@ bool Engine::postscript(void)
             }
 
             script << endl;
-            // trans postscript to real script.
-            for(list<string>::iterator it = _postscript.begin(); it != _postscript.end(); ++it) {
-                script << *it << endl;
-                cerr << "append [" << *it << "]\n";
-            }
-
+            script << "echo postscript done" << endl;
             script.close();
         }
     

@@ -1,12 +1,15 @@
-set -x
+## this template is assumed to run after all installer generated scripts have finished.
+## so any changes in this script can override effects of builtin.
+
 # set timezone to CST
 /bin/cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 #mkinitrd /boot/initrd-$(uname -r).img $(uname -r) --force
 mkinitrd /boot/$(ls /boot/ | grep initrd) $(ls /boot/ | grep initrd | sed "s%.img%%; s%initrd-%%") --force
 
+## locale has been handled by installer
 #i18n configuration
-echo "LANG=zh_CN.utf8" >/etc/locale.conf
+##echo "LANG=zh_CN.utf8" >/etc/locale.conf
 
 #network configuration
 echo "NETWORKING=yes" >/etc/sysconfig/network
