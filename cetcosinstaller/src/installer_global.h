@@ -1,9 +1,11 @@
 #ifndef RFINSTALLER_INSTALLER_GLOBAL_H_
 #define RFINSTALLER_INSTALLER_GLOBAL_H_
 
+#include <QObject>
 #include <QString>
 #include <QTranslator>
 #include <installengine.h>
+#include <sys/utsname.h>
 
 extern const QString 	g_transPrefix;
 extern QString 		g_appPath;
@@ -37,4 +39,5 @@ enum Page_ID {
     Page_ID_END=Page_Finish,
     Page_Error
 };
+
 #endif // RFINSTALLER_INSTALLER_GLOBAL_H_

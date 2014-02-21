@@ -29,7 +29,8 @@ HEADERS += dialog_reject.h \
            wizardpage_mach_type.h \
            wizardpage_packages_query.h \
            wizardpage_useradd.h \
-           wizardpage_choosegroup.h
+           wizardpage_choosegroup.h \
+           archinfo.h
 
 SOURCES += dialog_reject.cpp \
            dialog_root.cpp \
@@ -50,7 +51,8 @@ SOURCES += dialog_reject.cpp \
            wizardpage_mach_type.cpp \
            wizardpage_packages_query.cpp \
            wizardpage_useradd.cpp \
-           wizardpage_choosegroup.cpp
+           wizardpage_choosegroup.cpp \
+           archinfo.cpp
 
 target.path = /usr/bin
 INSTALLS += target

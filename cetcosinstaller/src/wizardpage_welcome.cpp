@@ -11,6 +11,7 @@
 
 #include "wizardpage_welcome.h"
 #include "installer_global.h"
+#include "archinfo.h"
 
 WizardPage_Welcome::WizardPage_Welcome(QWidget *parent)
     : QWizardPage(parent)
@@ -54,11 +55,13 @@ WizardPage_Welcome::WizardPage_Welcome(QWidget *parent)
 
 void WizardPage_Welcome::reTranslateUi()
 {
+    ArchInfo ai;
+    qDebug() << ai.os();
     setTitle( tr("Welcome") );
-    setSubTitle( tr("Welcome to CETC Client OS. You can select the language of installer now.") );
-    m_label->setText( trUtf8("CETC Client OS support Simplified-Chinese, English. "
+    setSubTitle( tr("Welcome to %1. You can select the language of installer now.").arg(ai.os()) );
+    m_label->setText( trUtf8("%1 support Simplified-Chinese, English. "
                 "You can select the language which will be the language of installer. And the selected "
-                "language will be the default language of installed system.") );
+                "language will be the default language of installed system.").arg(ai.os()) );
 }
 
 void WizardPage_Welcome::initializePage()

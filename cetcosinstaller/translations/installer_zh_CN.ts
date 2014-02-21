@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="zh">
 <context>
+    <name>ArchInfo</name>
+    <message>
+        <location filename="../src/archinfo.cpp" line="22"/>
+        <source>iSoft Client OS for Loongson V1.0</source>
+        <translation>普华桌面操作系统 龙芯版V1.0</translation>
+    </message>
+    <message>
+        <location filename="../src/archinfo.cpp" line="23"/>
+        <source>iSoft Client OS V3.0</source>
+        <translation>普华桌面操作系统V3.0</translation>
+    </message>
+</context>
+<context>
     <name>DialogPostscript</name>
     <message>
         <location filename="../src/dialog_postscript.cpp" line="43"/>
@@ -491,32 +504,36 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 <context>
     <name>WizardPage_Summary</name>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="49"/>
+        <location filename="../src/wizardpage_summary.cpp" line="50"/>
         <source>Pre-Install Summary</source>
         <translation>安装前的总结</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="53"/>
+        <location filename="../src/wizardpage_summary.cpp" line="54"/>
         <source>Notice: Please confirm the pre-install summary.You can&apos;t go back to previous page after this step.You still can back to the previous wizard page for re-setup now.</source>
         <translation>注意：请确认安装总结。这一步之后无法返回到前面页面。现在你还可以返回到前面页面进行重新设置。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="65"/>
-        <source>CETC Client OS installer</source>
-        <translation>中科电普华终端操作系统</translation>
+        <location filename="../src/wizardpage_summary.cpp" line="67"/>
+        <source>%1 installer</source>
+        <translation>%1安装程序</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="106"/>
+        <source>CETC Client OS installer</source>
+        <translation type="obsolete">中科电普华终端操作系统</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_summary.cpp" line="108"/>
         <source>Install Groups:</source>
         <translation>安装下列组别：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="126"/>
+        <location filename="../src/wizardpage_summary.cpp" line="128"/>
         <source>Installation Information</source>
         <translation>安装信息</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="50"/>
+        <location filename="../src/wizardpage_summary.cpp" line="51"/>
         <source>Please read the pre-install summary carefully before starting installation progress.</source>
         <translation>开始安装前请认真阅读安装前的总结。</translation>
     </message>
@@ -525,7 +542,7 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation type="obsolete">注意：请确认安装总结。这一步之后无法返回到前面页面。现在你还可以返回到前面页面进行重新设置。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="101"/>
+        <location filename="../src/wizardpage_summary.cpp" line="103"/>
         <source>Partition Information:</source>
         <translation>分区信息：</translation>
     </message>
@@ -534,7 +551,7 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation type="obsolete">高级</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="70"/>
+        <location filename="../src/wizardpage_summary.cpp" line="72"/>
         <source>Language: </source>
         <translation>语言：</translation>
     </message>
@@ -560,47 +577,47 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 				超级用户必须设置一个密码。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="170"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="172"/>
         <source>Add new users:</source>
         <translation>添加新用户：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="190"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
         <source>Root password needed</source>
         <translation>必须输入root密码</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="190"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
         <source>Root password should not be empty.</source>
         <translation>root密码不能为空。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="196"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
         <source>Root password</source>
         <translation>超级用户密码：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="196"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
         <source>Please input password correctly twice.</source>
         <translation>两次输入密码要一致。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="163"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="165"/>
         <source>Set password and add users</source>
         <translation>设置密码和添加用户</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="167"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
         <source>Password:</source>
         <translation>密码：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="170"/>
         <source>Confirm:</source>
         <translation>确认：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="164"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="166"/>
         <source>Password for user &quot;root&quot; must be set. You can add new user also, at least one new user account should be created.</source>
         <translation>超级用户(root)密码必须设置。你也可以添加新用户，至少要创建一个新用户。</translation>
     </message>
@@ -632,7 +649,7 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 			</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="166"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
         <source>User &quot;root&quot; can control everything on the entire computer.
 A password MUST be set for user &quot;root&quot;.</source>
         <translation>超级用户可以控制整台计算机的所有事情。
@@ -653,19 +670,27 @@ A password MUST be set for user &quot;root&quot;.</source>
 <context>
     <name>WizardPage_Welcome</name>
     <message>
-        <location filename="../src/wizardpage_welcome.cpp" line="56"/>
+        <location filename="../src/wizardpage_welcome.cpp" line="60"/>
         <source>Welcome</source>
         <translation>欢迎</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_welcome.cpp" line="57"/>
-        <source>Welcome to CETC Client OS. You can select the language of installer now.</source>
-        <translation>欢迎使用中电科普华终端操作系统。你现在可以选择安装程序的界面语言。</translation>
+        <location filename="../src/wizardpage_welcome.cpp" line="61"/>
+        <source>Welcome to %1. You can select the language of installer now.</source>
+        <translation>欢迎使用%1。你现在可以选择安装程序的界面语言。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_welcome.cpp" line="58"/>
+        <location filename="../src/wizardpage_welcome.cpp" line="62"/>
+        <source>%1 support Simplified-Chinese, English. You can select the language which will be the language of installer. And the selected language will be the default language of installed system.</source>
+        <translation>%1支持简体中文，英文。你可以选择其中一种作为安装程序的语言，你所选择的语言也将是系统安装后的默认语言。</translation>
+    </message>
+    <message>
+        <source>Welcome to CETC Client OS. You can select the language of installer now.</source>
+        <translation type="obsolete">欢迎使用中电科普华终端操作系统。你现在可以选择安装程序的界面语言。</translation>
+    </message>
+    <message>
         <source>CETC Client OS support Simplified-Chinese, English. You can select the language which will be the language of installer. And the selected language will be the default language of installed system.</source>
-        <translation>中电科普华终端操作系统支持简体中文，英文。你可以选择其中一种作为安装程序的语言，你所选择的语言也将是系统安装后的默认语言。</translation>
+        <translation type="obsolete">中电科普华终端操作系统支持简体中文，英文。你可以选择其中一种作为安装程序的语言，你所选择的语言也将是系统安装后的默认语言。</translation>
     </message>
     <message>
         <source>CETC Client OS support Simplified-Chinese, Traditional-Chinese, English. You can select the language which will be the language of installer. And the selected language will be the default language of installed system.</source>
@@ -702,7 +727,7 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation>现在安装所需要的最小磁盘空间为</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_choosegroup.cpp" line="143"/>
+        <location filename="../src/wizardpage_choosegroup.cpp" line="149"/>
         <source>minimal disk space required now is %1MB</source>
         <translation>现在安装所需要的最小磁盘空间为%1MB</translation>
     </message>

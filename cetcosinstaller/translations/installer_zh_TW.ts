@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.0">
 <context>
+    <name>ArchInfo</name>
+    <message>
+        <location filename="../src/archinfo.cpp" line="22"/>
+        <source>iSoft Client OS for Loongson V1.0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/archinfo.cpp" line="23"/>
+        <source>iSoft Client OS V3.0</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogPostscript</name>
     <message>
         <location filename="../src/dialog_postscript.cpp" line="42"/>
@@ -387,42 +400,42 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 <context>
     <name>WizardPage_Summary</name>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="49"/>
+        <location filename="../src/wizardpage_summary.cpp" line="50"/>
         <source>Pre-Install Summary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="50"/>
+        <location filename="../src/wizardpage_summary.cpp" line="51"/>
         <source>Please read the pre-install summary carefully before starting installation progress.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="53"/>
+        <location filename="../src/wizardpage_summary.cpp" line="54"/>
         <source>Notice: Please confirm the pre-install summary.You can&apos;t go back to previous page after this step.You still can back to the previous wizard page for re-setup now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="65"/>
-        <source>CETC Client OS installer</source>
+        <location filename="../src/wizardpage_summary.cpp" line="67"/>
+        <source>%1 installer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="70"/>
+        <location filename="../src/wizardpage_summary.cpp" line="72"/>
         <source>Language: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="101"/>
+        <location filename="../src/wizardpage_summary.cpp" line="103"/>
         <source>Partition Information:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="106"/>
+        <location filename="../src/wizardpage_summary.cpp" line="108"/>
         <source>Install Groups:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_summary.cpp" line="126"/>
+        <location filename="../src/wizardpage_summary.cpp" line="128"/>
         <source>Installation Information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -430,53 +443,53 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 <context>
     <name>WizardPage_UserAdd</name>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="163"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="165"/>
         <source>Set password and add users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="164"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="166"/>
         <source>Password for user &quot;root&quot; must be set. You can add new user also, at least one new user account should be created.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="166"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
         <source>User &quot;root&quot; can control everything on the entire computer.
 A password MUST be set for user &quot;root&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="167"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
         <source>Password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="170"/>
         <source>Confirm:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="170"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="172"/>
         <source>Add new users:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="190"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
         <source>Root password needed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="190"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
         <source>Root password should not be empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="196"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
         <source>Root password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="196"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
         <source>Please input password correctly twice.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -510,18 +523,18 @@ A password MUST be set for user &quot;root&quot;.</source>
 <context>
     <name>WizardPage_Welcome</name>
     <message>
-        <location filename="../src/wizardpage_welcome.cpp" line="56"/>
+        <location filename="../src/wizardpage_welcome.cpp" line="60"/>
         <source>Welcome</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_welcome.cpp" line="57"/>
-        <source>Welcome to CETC Client OS. You can select the language of installer now.</source>
+        <location filename="../src/wizardpage_welcome.cpp" line="61"/>
+        <source>Welcome to %1. You can select the language of installer now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_welcome.cpp" line="58"/>
-        <source>CETC Client OS support Simplified-Chinese, English. You can select the language which will be the language of installer. And the selected language will be the default language of installed system.</source>
+        <location filename="../src/wizardpage_welcome.cpp" line="62"/>
+        <source>%1 support Simplified-Chinese, English. You can select the language which will be the language of installer. And the selected language will be the default language of installed system.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -543,7 +556,7 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_choosegroup.cpp" line="143"/>
+        <location filename="../src/wizardpage_choosegroup.cpp" line="149"/>
         <source>minimal disk space required now is %1MB</source>
         <translation type="unfinished"></translation>
     </message>

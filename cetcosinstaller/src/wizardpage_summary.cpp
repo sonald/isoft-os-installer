@@ -11,6 +11,7 @@
 #include "wizardpage_summary.h"
 #include "dialog_summary.h"
 #include "parser_locale.h"
+#include "archinfo.h"
 
 WizardPage_Summary::WizardPage_Summary(QWidget *parent)
     : QWizardPage(parent)
@@ -62,7 +63,8 @@ void WizardPage_Summary::initializePage()
     m_summary->clear();
 
     // Version
-    m_summary->append( tr("CETC Client OS installer") );
+    ArchInfo ai;
+    m_summary->append( tr("%1 installer").arg(ai.os()) );
     m_summary->append( "" );
 
     // Lang
