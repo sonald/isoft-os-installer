@@ -78,6 +78,9 @@ chmod 440 /etc/sudoers
 sed -i 's/#zh_CN/zh_CN/g' /etc/locale.gen
 locale-gen
 
+sed -i 's/#Server = http://ftp/Server = http://ftp
+sed -i 's%#Server = http://ftp%Server = http://ftp%g' server
+
 systemctl enable kdm
 systemctl enable pacman-init
 systemctl enable NetworkManager
