@@ -1,6 +1,4 @@
-## this template is assumed to run after all installer generated scripts have finished.
-## so any changes in this script can override effects of builtin.
-
+set -x
 # set timezone to CST
 /bin/cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
@@ -70,3 +68,12 @@ else
     grub-mkconfig > /boot/grub/grub.cfg
 fi
 
+#set lang, kdm, sudoers
+chmod 640 /etc/sudoers
+sed -i 's/# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/g' /etc/sudoers
+chmod 440 /etc/sudoers
+
+sed -i 's/#zh_CN/zh_CN/g' /etc/locale.gen
+locale-gen
+
+systemctl enable kdm
