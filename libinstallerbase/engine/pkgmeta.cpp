@@ -6,6 +6,49 @@
 #include <algorithm>
 #include <cctype>
 
+ostream& operator<<(ostream& os, const Token& t)
+{
+    return os << t.val;
+}
+
+istream& operator>>(istream& is, Token& t)
+{
+    static string sep = "=()";
+
+    string val;
+    bool start = true;
+    int c;
+    while (is) {
+        c = is.get();
+        if (isspace(c)) {
+            if (start) continue;
+            else {
+                t.val = val;
+                break;
+            }
+        }
+
+        if (c == '#') {
+            while ((c = is.get()) != '\n');
+            continue;
+
+        } else if (::find(sep.begin(), sep.end(), c) != sep.end()) {
+            if (!val.empty()) {
+                is.unget();
+            } else 
+                val = c;
+
+            t.val = val;
+            break;
+        }
+
+        val += c;
+        start = false;
+    }
+
+    return is;
+}
+
 template<typename T>
 ostream& operator<<(ostream& os, const vector<T>& v)
 {
@@ -23,44 +66,7 @@ PkgsMeta::PkgsMeta(const string& config)
         return;
     }
 
-    string buf, line;
-    while (getline(is, line)) {
-        if (line.empty() || line.at(0) == '#') 
-            continue;
-        
-        buf += line;
-    }
-
-    line.clear();
-    for (int i = 0, sz = buf.length(); i < sz; i++) {
-        switch(buf[i]) {
-            case '=': 
-            case '(':
-            case ')':
-                if (line.size()) {
-                    _tokens.push_back(line);
-                    line.clear();
-                }
-                _tokens.push_back(string{buf[i]});
-                break;
-
-            default:
-                if (::isspace(buf[i])) {
-                    if (line.size()) {
-                        _tokens.push_back(line);
-                        line.clear();
-                    }
-
-                    while (::isspace(buf[i++])) ;
-                    i--;
-                }
-
-                line += buf[i];
-                break;
-        }
-    }
-
-    if (!line.empty()) _tokens.push_back(line);
+    _tokens = {::istream_iterator<Token>{is}, ::istream_iterator<Token>{}};
     cerr << _tokens;
     parse();
 }
@@ -99,10 +105,10 @@ bool PkgsMeta::eot() const
 
 string PkgsMeta::next() const
 {
-    return _tokens[_cursor++];
+    return _tokens[_cursor++].val;
 }
 
 string PkgsMeta::peek() const
 {
-    return _tokens[_cursor];
+    return _tokens[_cursor].val;
 }

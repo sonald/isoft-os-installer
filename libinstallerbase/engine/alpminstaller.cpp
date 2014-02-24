@@ -11,76 +11,6 @@ using namespace std;
 
 static AlpmInstaller* g_alpm_installer = NULL;
 
-::unordered_map<string, vector<string>> needed {
-    {"core", 
-        {
-            "cpio",
-            "fuse",
-            "gpm",
-            "net-tools",
-            "ntfs-3g",
-            "openssh",
-            "p7zip",
-            "parted",
-            "grub",
-        }
-    }, 
-    {"base", 
-        {
-            "git",
-            "networkmanager",
-            "xterm",
-            "xorg-xinit",
-            "zip",
-            "wget",
-            "bash-completion",
-            "gvim",
-        }
-    }, 
-    {"desktop", 
-        {
-            "amarok",
-            "firefox",
-            "firefox-i18n-zh-cn",
-            "kde-l10n-zh_cn",
-            "thunderbird",
-            "thunderbird-i18n-zh-cn",
-            "ttf-ubuntu-font-family",
-            "unrar",
-            "virtualbox-guest-dkms",
-            "virtualbox-guest-utils",
-            "wqy-microhei",
-            "vlc",
-
-            "kdemultimedia-kmix", 
-            "kdegames-bovo",
-            "kdegames-kapman",
-            "kdegames-katomic",
-            "kdegames-kblocks",
-            "kdegames-kdiamond",
-            "kdegames-klickety",
-            "kdegames-klines",
-            "kdegames-kmahjongg",
-            "kdegames-kmines",
-            "kdegames-knetwalk",
-            "kdegames-kpatience",
-            "kdegames-kreversi",
-            "kdegames-klickety",
-            "kdegames-ksudoku",
-            "kdegames-ksnakeduel",
-            "kdegames-palapeli",
-            "isoft-artwork",
-            "kdeplasma-addons-applets-showdesktop",
-            "fcitx",
-            "kdesdk-kate",
-            "fcitx-libpinyin",
-            "kcm-fcitx",
-            "thunderbird-firetray",
-            "plymouth-theme-cetc",
-        }
-    }, 
-};
-
 AlpmInstaller::AlpmInstaller(const list<string> &groups, const string &rootdir)
     :_groups(groups), _rootdir(rootdir), _targets(NULL), _nr_total_pkgs(0), _reporter(NULL)
 {
@@ -114,7 +44,6 @@ bool AlpmInstaller::reportUpstream(int percent)
 bool AlpmInstaller::preprocess()
 {
     ipacman_init(_rootdir.c_str(), cb_progress);
-    //ipacman_add_server("isoft", "file:///mnt/iso/PKGS/isoft/os/x86_64");
     ipacman_add_server("isoft", "file:///PKGS/");
 
     char buf[1024];
@@ -171,21 +100,6 @@ bool AlpmInstaller::preprocess()
 bool AlpmInstaller::install(void (*progress)(int percent))
 {
     _reporter = progress;
-    //map<string, vector<string> > m = {
-        //{"core", {"base", "base-devel"}},
-        //{"base", {"xorg"}},
-        //{"desktop", {"kdebase", "kdeutils", "kdenetwork", "kdegraphics"}},
-    //};
-    //for (const auto& x: _groups) {
-        //for (const auto& s: m[x]) {
-            //cerr << "add group" << s << endl;
-            //_targets = alpm_list_add(_targets, strdup(s.c_str()));
-        //}
-
-        //for (const auto& s: needed[x]) {
-            //_targets = alpm_list_add(_targets, strdup(s.c_str()));
-        //}
-    //}
 
     PkgsMeta meta{"/PKGS/packages.install"};
     for(const auto& x: _groups) {

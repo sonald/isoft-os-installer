@@ -7,6 +7,10 @@
 
 using namespace std;
 
+struct Token {
+    string val;
+};
+
 /** 
  * stores info about meta groups and pkg names in each groups 
  */
@@ -18,7 +22,7 @@ class PkgsMeta {
     private:
         unordered_map<string, vector<string>> _meta;
         string _config;
-        vector<string> _tokens;
+        vector<Token> _tokens;
         mutable int _cursor{0};
 
         //helper
