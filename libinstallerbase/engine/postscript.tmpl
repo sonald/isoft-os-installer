@@ -76,9 +76,11 @@ sed -i 's/# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/g' /et
 chmod 440 /etc/sudoers
 
 sed -i 's/#zh_CN/zh_CN/g' /etc/locale.gen
+sed -i 's/#en_US/en_US/g' /etc/locale.gen
 locale-gen
 
 sed -i 's%#Server = http://ftp%Server = http://ftp%g' /etc/pacman.d/mirrorlist
+sed -i '/#\[multilib\]/{N;s/#//g}' /etc/pacman.conf
 
 systemctl enable kdm
 systemctl enable pacman-init
