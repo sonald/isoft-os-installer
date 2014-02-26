@@ -1100,7 +1100,7 @@ bool Engine::do_add_user(const string &username)
 {
     static bool setPreUser_flag = false;
 
-    _postscript.push_back(string("/usr/sbin/useradd -G wheel,sys,video,audio,disk -m ") + username);
+    _postscript.push_back(string("/usr/bin/useradd -g users -G wheel,sys,video,audio,disk -m ") + username);
     _postscript.push_back(string("passwd -d ") + username);
     _new_user_names.push_back(username);
 
