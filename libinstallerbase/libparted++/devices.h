@@ -21,6 +21,7 @@ class Device
     // PedDevice Property
     bool  is_busy() const 			{ return ped_device_is_busy( dev_ ) ? true: false; }
     char* model() const 			{ return dev_->model; }
+    PedDeviceType type() const { return dev_->type; }
     char* path() const 				{ return dev_->path; }
     PedSector length() const 			{ return dev_->length; }
     long long sector_size() const 		{ return dev_->sector_size; }
