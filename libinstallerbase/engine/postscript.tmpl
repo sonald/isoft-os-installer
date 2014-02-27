@@ -84,7 +84,10 @@ sed -i '/#\[multilib\]/{N;s/#//g}' /etc/pacman.conf
 
 ln -sf vim /usr/bin/vi
 
-/usr/bin/usermod -a -G users nobody
+usermod -a -G users nobody
+mkdir -p /srv/smb
+chown root:users /srv/smb
+chmod 1775  /srv/smb
 
 systemctl enable kdm
 systemctl enable pacman-init
