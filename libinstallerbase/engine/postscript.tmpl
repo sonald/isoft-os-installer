@@ -84,6 +84,8 @@ sed -i '/#\[multilib\]/{N;s/#//g}' /etc/pacman.conf
 
 ln -sf vim /usr/bin/vi
 
+sed -i 's/SystemGroup sys root/SystemGroup sys root users/' /etc/cups/cups-file.conf 
+
 usermod -a -G users nobody
 mkdir -p /srv/smb
 chown root:users /srv/smb
@@ -93,3 +95,5 @@ systemctl enable kdm
 systemctl enable pacman-init
 systemctl enable NetworkManager
 systemctl enable smbd
+systemctl enable cups
+
