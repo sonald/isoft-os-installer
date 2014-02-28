@@ -387,7 +387,12 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="130"/>
+        <location filename="../src/wizardpage_progress.cpp" line="126"/>
+        <source>preparing for installation...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_progress.cpp" line="129"/>
         <source>Elapsed: </source>
         <translation type="unfinished"></translation>
     </message>
