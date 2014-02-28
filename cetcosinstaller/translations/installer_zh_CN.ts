@@ -474,6 +474,11 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation>请等待一段时间。享受一杯咖啡也许是一个好主意。</translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_progress.cpp" line="126"/>
+        <source>preparing for installation...</source>
+        <translation>正在准备安装...</translation>
+    </message>
+    <message>
         <location filename="../src/wizardpage_progress.cpp" line="163"/>
         <source>Installation Error</source>
         <translation>安装过程错误</translation>
@@ -496,7 +501,7 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation type="obsolete">请等待一段时间。享受一杯咖啡也许是一个好主意。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="130"/>
+        <location filename="../src/wizardpage_progress.cpp" line="129"/>
         <source>Elapsed: </source>
         <translation>已安装时间：</translation>
     </message>

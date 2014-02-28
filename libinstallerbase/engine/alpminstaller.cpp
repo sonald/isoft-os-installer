@@ -28,7 +28,7 @@ static void cb_progress(alpm_progress_t event, const char *pkgname, int percent,
                        size_t howmany, size_t current)
 {
     printf("pkgname=%s, percent=%d, howmany=%ld, current=%ld\n", pkgname, percent, howmany, current);
-    if (pkgname) {
+    if (pkgname && pkgname[0] != '\0') {
         g_alpm_installer->reportUpstream(current*100/howmany);
     }
 
