@@ -3,7 +3,11 @@ set -x
 /bin/cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 #mkinitrd /boot/initrd-$(uname -r).img $(uname -r) --force
-mkinitrd /boot/$(ls /boot/ | grep initrd) $(ls /boot/ | grep initrd | sed "s%.img%%; s%initrd-%%") --force
+#mkinitrd /boot/$(ls /boot/ | grep initrd) $(ls /boot/ | grep initrd | sed "s%.img%%; s%initrd-%%") --force
+#use mkinitcpio instead
+sed -i 's/MODULES="/MOUDLES="i915/g' /etc/mkinitcpio.conf
+sed -i 's/HOOKS="base udev/HOOKS="base udev plymouth/g' /etc/mkinitcpio.conf
+mkinitcpio -p linux
 
 ## locale has been handled by installer
 #i18n configuration
@@ -18,7 +22,10 @@ cat >/etc/hosts <<EOF
 # Do not remove the following line, or various programs
 # that require network functionality will fail.
 127.0.0.1       localhost.localdomain localhost
-127.0.0.1       $HOSTNAME $HOSTNAME
+EOF
+
+cat >/etc/hostname <<EOF
+isoft
 EOF
 
 #Remember Run pwconv
@@ -91,8 +98,11 @@ mkdir -p /srv/smb
 chown root:users /srv/smb
 chmod 1775  /srv/smb
 
-systemctl enable kdm
-systemctl enable pacman-init
+pacman-key --init && pacman-key --populate archlinux
+
+systemctl enable kdm-plymouth
+##no pacman-init.service file
+##systemctl enable pacman-init
 systemctl enable NetworkManager
 systemctl enable smbd
 systemctl enable cups

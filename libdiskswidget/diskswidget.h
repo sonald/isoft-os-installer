@@ -73,6 +73,7 @@ private:
 
 	//k is it primary partition
 	bool 	isPrimary(const QTreeWidgetItem *item);
+    bool    maybeGPT(const QString& disk);
 	int 	primaryCount(const QString &disk);
 	int 	itemIndex(QTreeWidgetItem *item);
 	int 	createPrimary(QTreeWidgetItem *item, const QString &fsType, const QString &length, const QString &type);

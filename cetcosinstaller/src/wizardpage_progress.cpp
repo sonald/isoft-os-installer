@@ -92,10 +92,6 @@ void WizardPage_Progress::initializePage()
 //    m_bar->setMaximum(0);
 
     wizard()->button( QWizard::CancelButton )->setEnabled( false );
-//    wizard()->setOption(QWizard::HaveCustomButton2);
-//    wizard()->setButtonText(QWizard::CustomButton2, tr("&Game"));
-//    wizard()->button( QWizard::CustomButton2)->setToolTip(tr("Play game"));
-//    connect( wizard(), SIGNAL( customButtonClicked (int) ), this, SLOT( onGame(int)));
     m_end = false;
 
     // set the beginning picture.
@@ -126,8 +122,12 @@ void WizardPage_Progress::updatePic()
 
 void WizardPage_Progress::updateProgress()
 {
-    m_time_elapse = m_time_elapse.addSecs(1);
-    m_time_label->setText(tr("Elapsed: ") +  m_time_elapse.toString("hh:mm:ss"));
+    if (m_bar->value() < 1) {
+        m_time_label->setText(tr("preparing for installation..."));
+    } else {
+        m_time_elapse = m_time_elapse.addSecs(1);
+        m_time_label->setText(tr("Elapsed: ") +  m_time_elapse.toString("hh:mm:ss"));
+    }
 }
 
 int WizardPage_Progress::nextId() const

@@ -2,6 +2,7 @@
  *			   provide operation on them
  *
  * 	Copyright 1999, 2008 Neil Kang <kaikang@redflag-linux.com>
+ * 	Copyright 2014 Sian Cao <siyuan.cao@i-soft.com.cn>
  *
  *   	This program is free software; you can redistribute it and/or modify
  *   	it under the terms of the GNU General Public License as
@@ -466,7 +467,8 @@ void DisksWidget::rebuildTree()
 				}
 
 				//k show detail button
-				if ((child->text(colPartType) != "extended" && child->text(colPartType) != "free" && child->text(colFs) != "linux-swap") && child->text(colFs) != "Unknown")  
+				if ((child->text(colPartType) != "extended" && child->text(colPartType) != "free"
+                            && child->text(colFs) != "linux-swap") && child->text(colFs) != "Unknown")  
 				{
 					ItemButton *detail = new ItemButton(child, tr("detail"), realPartPath);
 					m_tree->setItemWidget(child, colDetail, detail);
@@ -513,15 +515,6 @@ void DisksWidget::editPartition()
 	if (!current)
 		return;
 
-	//k mark whether a free partition, need special operations
-//	bool isFree = false;
-//	if (current->text(colDev) == "free") {
-//		isFree = true;
-		//k XXX no time to deal, need to create new partition
-//		QMessageBox::warning(this, tr("Warning"), tr("Please new a partition first."));
-//		return;
-//	}
-
 	if (current->text(1).isEmpty()) {
 		QMessageBox::warning(this, tr("Warning"), tr("Can not edit a disk"));
 		return;
@@ -532,12 +525,6 @@ void DisksWidget::editPartition()
 		return;
 	}
 
-//	QTreeWidgetItem *parent = current->parent();
-//	int tmp = 0;
-//	while ( (tmp = m_tree->indexOfTopLevelItem(parent)) == -1)
-//		parent = parent->parent();
-//	QString disk = parent->text(colDev);
-		
 	qDebug() << current->text(colFs);
 	EditPartition *edit = new EditPartition(current, this);
 	if (QDialog::Rejected == edit->exec())
@@ -550,6 +537,8 @@ void DisksWidget::editPartition()
 		return ;
 
 	QString disk = belongedDisk(current);
+    bool isGPT = maybeGPT(disk);
+
 	//k only two option, one is format is checked, the other is unchanged
 	QString format = edit->formatComboBox->currentText();
 	if (format == "vfat")
@@ -569,14 +558,18 @@ void DisksWidget::editPartition()
 		int count = primaryCount(disk);
 		if (isPrimary(current)) {
 			bool exist = existExtended(disk);
-		//	if ((count >= 4) || (count == 3 && exist)) {
-			if (count >= 4) {
+			if (!isGPT && count >= 4) {
 				QMessageBox::warning(this, tr("Warning"), tr("You can't create primary partition any more."));
 				return ;
 			}
 			
-			//k need to create extended
-			if (count == 3 && !exist) {
+            if (isGPT || count < 3) {
+				//k count < 3 so create primary whether exists extended
+				partlist->add_by_whole(index, "primary", format.toLatin1());
+				tmp.clear();
+				tmp << disk << QString::number(index) << "primary" << format.toLatin1();
+				m_commandList.push_back(QPair<QString, QList<QString> >("conf_set_mkpart_whole", tmp));
+			} else if (count == 3 && !exist) {
 				//k create extended
 				int no = partlist->add_by_whole(index, "extended", 0);
 				index = partlist->find_index_of(no);
@@ -590,13 +583,8 @@ void DisksWidget::editPartition()
 				tmp.clear();
 				tmp << disk << QString::number(index) << "logical" << format.toLatin1();
 				m_commandList.push_back(QPair<QString, QList<QString> >("conf_set_mkpart_whole", tmp));
-			} else {
-				//k count < 3 so create primary whether exists extended
-				partlist->add_by_whole(index, "primary", format.toLatin1());
-				tmp.clear();
-				tmp << disk << QString::number(index) << "primary" << format.toLatin1();
-				m_commandList.push_back(QPair<QString, QList<QString> >("conf_set_mkpart_whole", tmp));
-			}
+			} 
+            
 		} else { 
 			//k is logic partition
 			partlist->add_by_whole(index, "logical", format.toLatin1());
@@ -651,35 +639,27 @@ void DisksWidget::editPartition()
 	m_tree->clear();
 	rebuildTree();
 
-//k debug
-#if 0
-	QList<PartitionInfo>::iterator it = m_partInfoList.begin();
-	qDebug() << "begin";
-	for ( ; it != m_partInfoList.end(); ++it) {
-		qDebug() << it->index;
-		qDebug() << it->mntPoint;
-	}
-	qDebug() << "accepted";
-#endif
-
 }//k editPartition()
 
 void DisksWidget::addPartition()
 {
 	QTreeWidgetItem *current = m_tree->currentItem();
-	
-	if (isPrimary(current)) {
-		int cnt = primaryCount(belongedDisk(current)); 
-		if ( cnt >= 4) {
-			QMessageBox::warning(this, tr("Warning"), tr("No more Primary partition can be created."));
-			return ;
-		}
-	}
+    QString disk = belongedDisk(current);
+    bool isGPT = maybeGPT(disk);
+    if (!isGPT) {
+        if (isPrimary(current)) {
+            int cnt = primaryCount(disk); 
+            if ( cnt >= 4) {
+                QMessageBox::warning(this, tr("Warning"), tr("No more Primary partition can be created."));
+                return ;
+            }
+        }
 
-	if (partitionCount(belongedDisk(current)) >= 15) {
-		QMessageBox::warning(this, tr("Warning"), tr("You can not create partitions more than 15."));
-		return ;
-	}
+        if (partitionCount(disk) >= 15) {
+            QMessageBox::warning(this, tr("Warning"), tr("You can not create partitions more than 15."));
+            return ;
+        }
+    }
 
 	if (current->text(colPartType).isEmpty()) {
 		QMessageBox::warning(this, tr("Warning"), tr("You should not do this operation with a disk."));
@@ -715,16 +695,18 @@ void DisksWidget::addPartition()
 
 	qDebug() << length;
 	//k XXX createPrimary() also record into commandlist
-	QString disk = belongedDisk(current); 
 	if (isPrimary(current)) {
 		int count = primaryCount(disk);
-		if (count >= 4) {
+		if (!isGPT && count >= 4) {
 			QMessageBox::warning(this, tr("Warning"), tr("Can not create a main partition any more."));
-			return ;
-		} else if (count < 3) { //kk create new primary
+			return;
+        }
+
+		if (count < 3 || isGPT) { //kk create new primary
 			qDebug() << length << fsType;
 			int index = createPrimary(current, fsType, length, "primary");
 			addPartInfo(index, current, mntPoint);
+
 		} else { //k count = 3
 			if (existExtended(disk) || (add->forcePrimary->isChecked())) {
 				int index = createPrimary(current, fsType, length, "primary");
@@ -742,21 +724,18 @@ void DisksWidget::addPartition()
 					no = list->add_by_whole(index, "logical", fsType.toLatin1());
 
 					QList<QString> tmp;
-					tmp << belongedDisk(current) << QString::number(index) << "logical" << fsType;
+					tmp << disk << QString::number(index) << "logical" << fsType;
 					m_commandList.push_back(QPair<QString, QList<QString> >("conf_set_mkpart_whole", tmp));
 				} else {
 					no = list->add_by_length(index, "logical", fsType.toLatin1(), length.toLatin1(), "MB");
 //					getchar();
 
 					QList<QString> tmp;
-					tmp << belongedDisk(current) << QString::number(index) << "logical" << fsType << length;
+					tmp << disk << QString::number(index) << "logical" << fsType << length;
 					m_commandList.push_back(QPair<QString, QList<QString> >("conf_set_mkpart_length", tmp));
 				}
 
 				//k delete the empty info first
-				QList<PartitionInfo>::iterator it = m_partInfoList.begin();
-//				for ( ; it != m_partInfoList.end(); ++it) 
-//					if (it->
 				int index2 = list->find_index_of(no);
 				addPartInfo(index2, current, mntPoint); //XXX format
 			}
@@ -922,20 +901,25 @@ QString DisksWidget::belongedDisk(QTreeWidgetItem *item)
 	return item->parent()->text(colDev);
 }
 
+bool DisksWidget::maybeGPT(const QString& disk)
+{
+	PartitionList *list = m_partitionListMap.value(disk);
+    qDebug() << "part table label:" << list->owner_ptable()->type_name();
+    return !list->owner_ptable()->is_support_extended_partition();
+}
+
 int DisksWidget::primaryCount(const QString &disk)
 {
 	qDebug() << __FUNCTION__ << " ------ " << disk;
 	PartitionList *list = m_partitionListMap.value(disk);
 
 	int count = 0;
-	for (int i = 0; i < list->count() && count <= 4; ++i) {
+	for (int i = 0; i < list->count(); ++i) {
 		Partition *part = list->part_index(i);
 		//k free partition is "free"
 		QString type = part->type_name();
 		if (type == "primary" || type == "extended")
 			++count;
-//		if ( !QString(part->path()).contains("-1"))
-//			++count;
 
 		if ( QString(part->type_name()) == "extended")
 			continue;
@@ -1558,15 +1542,6 @@ void DisksWidget::setNEWState(QTreeWidgetItem *current, QTreeWidgetItem *previou
 		return ;
 	}
 
-/* k move this check to when m_add clicked
-	if (isPrimary(current)) {
-		if (primaryCount(belongedDisk(current)) >= 4) {
-			m_add->setEnabled(false);
-			return ;
-		}
-	} 
-*/
-	
 	//k logical and free
 	m_add->setEnabled(true);
 }
