@@ -69,8 +69,6 @@ bool PartitionTable::isExist()
  */
 bool PartitionTable::read()
 {
-    assert( pdev_->read_only == 0 );
-
     if (disk_type_ && disk_ && part_list_) { // already loaded
         return true;
     }
