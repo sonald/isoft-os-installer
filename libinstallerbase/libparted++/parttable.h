@@ -8,7 +8,9 @@ class PartitionList;
 
 class PartitionTable 
 {
- public:
+public:
+    friend class Device;
+
     PartitionTable(Device* dev);
     ~PartitionTable();
 
@@ -16,10 +18,9 @@ class PartitionTable
     PedDisk* pdisk();
 
     bool isExist();
-    bool read();
     bool create(const char* disk_type);
 
-    const char* type_name()		{ return disk_type_->name; }
+    const char* type_name()		{ if (disk_type_) return disk_type_->name; else return NULL; }
 
     // feature support
     bool is_support_feature(PedDiskTypeFeature feature);
@@ -45,5 +46,7 @@ class PartitionTable
     
     PartitionList* part_list_;	// list of Partition, sync the list and internal part_list in PedDisk.
     				// Operations, etc add remove and edit, works on PartitionList.
+                    
+    bool read();
 };
 #endif //_PART_TABLE_H_PARTED_PLUS_

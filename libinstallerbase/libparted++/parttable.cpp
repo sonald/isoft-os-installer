@@ -16,9 +16,9 @@ PartitionTable::PartitionTable(Device* dev)
 PartitionTable::~PartitionTable()
 {
     if ( disk_ )
-	ped_disk_destroy( disk_ );
+        ped_disk_destroy( disk_ );
     if ( part_list_ )
-	delete part_list_;
+        delete part_list_;
 }
 
 PedDisk* PartitionTable::pdisk()
@@ -71,22 +71,26 @@ bool PartitionTable::read()
 {
     assert( pdev_->read_only == 0 );
 
+    if (disk_type_ && disk_ && part_list_) { // already loaded
+        return true;
+    }
+
     if ( disk_ )
-	ped_disk_destroy( disk_ );
+        ped_disk_destroy( disk_ );
     if ( part_list_ )
-	delete part_list_;
+        delete part_list_;
 
     disk_type_ = ped_disk_probe( pdev_ );
     if ( disk_type_ == NULL )
-	disk_ = NULL;
+        disk_ = NULL;
     else
-	disk_ = ped_disk_new( pdev_ );
+        disk_ = ped_disk_new( pdev_ );
 
     if ( disk_ != NULL ) {
-	part_list_ = new PartitionList( this );
-	return true;
+        part_list_ = new PartitionList( this );
+        return true;
     } else
-	return false;
+        return false;
 }
 
 /* create the new fresh parttable with disk_type.

@@ -1,4 +1,5 @@
 #include <cassert>
+#include <iostream>
 #include "devices.h"
 #include "parttable.h"
 #include "device_unit.h"
@@ -12,6 +13,10 @@ Device::Device(PedDevice* dev)
     
     dev_ = dev;
     part_table_ = new PartitionTable(this);
+    if (!part_table_->read()) {
+        delete part_table_;
+        part_table_ = NULL;
+    }
     unit_ = new DeviceUnit(this);
 }
 
@@ -30,10 +35,13 @@ Devices::Devices()
     ped_device_probe_all();
     PedDevice* ped_dev = NULL;
 
-    while( ped_dev = ped_device_get_next(ped_dev) )
-    {
-	Device* dev = new Device(ped_dev);
-	list_dev_.push_back(dev);
+    while ( (ped_dev = ped_device_get_next(ped_dev)) ) {
+        Device* dev = new Device(ped_dev);
+        if (!dev->parttable()) {
+            delete dev;
+            continue;
+        }
+        list_dev_.push_back(dev);
     }
 }
 

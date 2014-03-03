@@ -170,9 +170,12 @@ void DisksWidget::initTree()
 		PartitionTable *table = disk->parttable();
 		//kk need check readable or not?
 		//k XXX should not create label
-		if (!table->read()) 
+		if (!table->read()) {
+            qDebug() << "invalid partition table, skip";
 			continue;
+        }
 
+        qDebug() << "------" << table->type_name();
 		PartitionList *partList = table->partlist();
 		m_partitionListMap.insert(disk->path(), partList);
 
