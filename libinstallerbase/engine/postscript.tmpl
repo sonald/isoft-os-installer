@@ -42,11 +42,11 @@ else
 fi
 
 if [ ${EFI_SUPPORT} = true ]; then
-    export GRUB_DISTRIBUTOR="CETC Client OS"
+    export GRUB_DISTRIBUTOR="iSoft Client OS"
     export GRUB_DISABLE_RECOVERY=true
     export GRUB_FONT=/usr/share/grub/unicode.pf2
     export GRUB_GFXPAYLOAD_LINUX=keep
-    bootloader_id="CETC Client OS"
+    bootloader_id="iSoft Client OS"
     efi_distributor=grub
     efi_file=grubx64.efi
     efidisk="$(df /boot/efi/ | grep dev | cut -c1-8)"
@@ -72,7 +72,7 @@ if [ ${EFI_SUPPORT} = true ]; then
 else 
     # when no efi
     grub-install $GRUB_DEVICE
-    export GRUB_DISTRIBUTOR="CETC Client OS"
+    export GRUB_DISTRIBUTOR="iSoft Client OS"
     export GRUB_DISABLE_RECOVERY=true
     grub-mkconfig > /boot/grub/grub.cfg
 fi
@@ -107,4 +107,5 @@ systemctl enable NetworkManager
 systemctl enable smbd
 systemctl enable cups
 systemctl enable dkms
+systemctl enable bluetooth
 
