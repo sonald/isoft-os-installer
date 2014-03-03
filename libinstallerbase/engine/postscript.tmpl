@@ -5,8 +5,8 @@ set -x
 #mkinitrd /boot/initrd-$(uname -r).img $(uname -r) --force
 #mkinitrd /boot/$(ls /boot/ | grep initrd) $(ls /boot/ | grep initrd | sed "s%.img%%; s%initrd-%%") --force
 #use mkinitcpio instead
-sed -i 's/MODULES="/MOUDLES="i915 radeon nouveau/g' mkinitcpio.conf
-sed -i 's/HOOKS="base udev/HOOKS="base udev plymouth/g' mkinitcpio.conf
+sed -i 's/MODULES="/MOUDLES="i915/g' /etc/mkinitcpio.conf
+sed -i 's/HOOKS="base udev/HOOKS="base udev plymouth/g' /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
 ## locale has been handled by installer
@@ -22,7 +22,10 @@ cat >/etc/hosts <<EOF
 # Do not remove the following line, or various programs
 # that require network functionality will fail.
 127.0.0.1       localhost.localdomain localhost
-127.0.0.1       $HOSTNAME $HOSTNAME
+EOF
+
+cat >/etc/hostname <<EOF
+isoft
 EOF
 
 #Remember Run pwconv
@@ -88,6 +91,8 @@ sed -i '/#\[multilib\]/{N;s/#//g}' /etc/pacman.conf
 
 ln -sf vim /usr/bin/vi
 
+sed -i 's/SystemGroup sys root/SystemGroup sys root users/' /etc/cups/cups-file.conf 
+
 usermod -a -G users nobody
 mkdir -p /srv/smb
 chown root:users /srv/smb
@@ -100,3 +105,6 @@ systemctl enable kdm-plymouth
 ##systemctl enable pacman-init
 systemctl enable NetworkManager
 systemctl enable smbd
+systemctl enable cups
+systemctl enable dkms
+
