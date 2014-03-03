@@ -30,10 +30,13 @@ private:
     list<string> _groups;
     string _rootdir;
     alpm_list_t *_targets;
+    vector<string> _symlinkOrigins;
 
     int _nr_total_pkgs; // No of pkgs to install of all groups
     upstream_report_t _reporter;
     void collectPkgSize();
+    void referencingCaches();
+    void deReferencingCaches();
 };
 
 #endif

@@ -1,4 +1,7 @@
 #include <cstring>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <cerrno>
 #include <vector>
 #include <map>
 #include <unordered_map>
@@ -31,7 +34,6 @@ static void cb_progress(alpm_progress_t event, const char *pkgname, int percent,
     if (pkgname && pkgname[0] != '\0') {
         g_alpm_installer->reportUpstream(current*100/howmany);
     }
-
 }
 
 bool AlpmInstaller::reportUpstream(int percent)
@@ -110,14 +112,90 @@ bool AlpmInstaller::install(void (*progress)(int percent))
     }
 
     int ret = ipacman_refresh_databases();
+    referencingCaches();
     ret += ipacman_sync_packages(_targets);
 
     if (_reporter)
         _reporter(100);
+    deReferencingCaches();
     return true;
 }
 
 void AlpmInstaller::collectPkgSize()
 {
+}
+
+static bool is_pkg(const string &pkgname)
+{
+    string suffix {".pkg.tar.xz"};
+    string::size_type idx = pkgname.rfind(suffix);
+    return idx != string::npos && (idx == pkgname.length() - suffix.size());
+}
+
+void AlpmInstaller::referencingCaches()
+{
+    DIR *dir = opendir("/PKGS");
+    if (!dir) {
+        perror("opendir");
+        return;
+    }
+
+    _symlinkOrigins.clear();
+    errno = 0;
+    cerr << "scanning /PKGS" << endl;
+    int count = 0;
+    struct dirent *entry = NULL;
+    do {
+        entry = readdir(dir);
+        count++;
+        if (entry) {
+            string fname(entry->d_name);
+            cerr << "processing " << fname << endl;
+
+#ifdef _DIRENT_HAVE_D_TYPE 
+            if (entry->d_type != DT_UNKNOWN) {
+                if (entry->d_type != DT_REG)
+                    continue;
+            } else {
+                cerr << "d_type is unknown, check name only\n";
+            }
+#endif
+            if (!is_pkg(fname)) continue;
+            _symlinkOrigins.push_back(fname);
+        }
+    } while (entry);
+
+    closedir(dir);
+
+
+    struct stat statbuf;
+    string cachedir {_rootdir + "/var/cache/pacman/pkg"};
+
+    if (stat(cachedir.c_str(), &statbuf) != 0) {
+        if (errno == ENOENT) {
+            string cmd {"mkdir -p " + cachedir};
+            system(cmd.c_str());
+        } else 
+            return;
+    }
+
+    char *origin_cwd = getcwd(NULL, 0);
+    chdir(cachedir.c_str());
+    for(const auto& s: _symlinkOrigins) {
+        string src {"/PKGS/" + s};
+        symlink(src.c_str(), s.c_str());
+    }
+
+    chdir(origin_cwd);
+    free(origin_cwd);
+}
+
+void AlpmInstaller::deReferencingCaches()
+{
+    string cachedir {_rootdir + "/var/cache/pacman/pkg/"};
+    for(const auto& s: _symlinkOrigins) {
+        string link {cachedir + s};
+        unlink(link.c_str());
+    }
 }
 

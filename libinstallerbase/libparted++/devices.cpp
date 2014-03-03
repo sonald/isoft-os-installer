@@ -38,7 +38,7 @@ Devices::Devices()
     while ( (ped_dev = ped_device_get_next(ped_dev)) ) {
         Device* dev = new Device(ped_dev);
         if (!dev->parttable()) {
-            delete dev;
+            //delete dev;
             continue;
         }
         list_dev_.push_back(dev);

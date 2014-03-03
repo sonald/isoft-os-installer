@@ -53,8 +53,11 @@ bool NameValidator::isValid(const QChar& ch) const
 QValidator::State StrictNameValidator::validate(QString& input, int& pos) const
 {
     Q_UNUSED(pos)
+    if (input.length() == 0) // check empty user name at confirm stage
+        return QValidator::Acceptable;
+
     // limit the length of username.
-    if ( input.toUtf8().size() >= USERNAME_LENGTH )
+    if (input.toUtf8().size() >= USERNAME_LENGTH)
         return QValidator::Invalid;
 
     QRegExp reName("[a-z_][a-z0-9_]*[$]?");

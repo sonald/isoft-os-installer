@@ -481,7 +481,7 @@ int ipacman_init(const char* rootdir, alpm_cb_progress cb)
 	snprintf(path, PATH_MAX, "%s/var/cache/pacman/pkg/", rootdir);
 	alpm_option_add_cachedir(handle, path);
     //specialized for installer
-	alpm_option_add_cachedir(handle, "/PKGS");
+	/*alpm_option_add_cachedir(handle, "/PKGS");*/
 
 	alpm_option_set_default_siglevel(handle, ALPM_SIG_PACKAGE | ALPM_SIG_PACKAGE_OPTIONAL |
 			ALPM_SIG_DATABASE | ALPM_SIG_DATABASE_OPTIONAL);
@@ -628,7 +628,7 @@ int ipacman_sync_packages(alpm_list_t *targets)
 void ipacman_cleanup(void)
 {
     //specialized for installer
-    alpm_option_remove_cachedir(handle, "/PKGS");
+    /*alpm_option_remove_cachedir(handle, "/PKGS");*/
 
 	/* free alpm library resources */
 	if(handle && alpm_release(handle) == -1) {
