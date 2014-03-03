@@ -117,7 +117,7 @@ bool PartitionAutoMode::autoPartDisk()
 
     PartitionTable* ptable = m_dev->parttable();
 
-    bool ret = ptable->read();
+    bool ret = ptable != NULL;
     if ( !ret ) {
         qDebug() << "Create the partition table.";
         ret = ptable->create("msdos");
