@@ -19,7 +19,7 @@ OSIdentify::OSIdentify()
 			continue;
 
 		PartitionTable *table = disk->parttable();
-		if (!table->read())
+        if (!table)
 			continue;
 
 		PartitionList *partList = table->partlist();

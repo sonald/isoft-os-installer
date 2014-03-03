@@ -777,7 +777,7 @@ bool Engine::do_mkpart_whole(const string &devpath, const string &index, const s
         return false;
  
     PartitionTable* part_table = dev->parttable();
-    if ( !part_table->read() )
+    if (!part_table)
         return false;
     PartitionList* part_list = part_table->partlist();
     int i = atoi(index.c_str());
@@ -826,7 +826,7 @@ bool Engine::do_mkpart_length(const string &devpath, const string &index, const 
         return false;
  
     PartitionTable* part_table = dev->parttable();
-    if ( !part_table->read() )
+    if (!part_table)
         return false;
     PartitionList* part_list = part_table->partlist();
     int i = atoi(index.c_str());
@@ -892,7 +892,7 @@ bool Engine::do_rmpart(const string &partpath)
         return false;
  
     PartitionTable* part_table = dev->parttable();
-    if ( !part_table->read() )
+    if (!part_table)
         return false;
     PartitionList* part_list = part_table->partlist();
     

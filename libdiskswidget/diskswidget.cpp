@@ -168,11 +168,8 @@ void DisksWidget::initTree()
 			qDebug() << "read only";
 
 		PartitionTable *table = disk->parttable();
-		//kk need check readable or not?
-		//k XXX should not create label
-		if (!table->read()) 
-			continue;
-
+        Q_ASSERT(table != NULL);
+        qDebug() << "------" << table->type_name();
 		PartitionList *partList = table->partlist();
 		m_partitionListMap.insert(disk->path(), partList);
 
