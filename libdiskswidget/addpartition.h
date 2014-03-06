@@ -27,6 +27,7 @@ private:
 
 private slots:
 	void judgeMountEnable(const QString &text);
+    void toggleUseAll(bool val);
 };
 
 #endif

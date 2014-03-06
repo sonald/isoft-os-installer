@@ -31,12 +31,12 @@
     <name>DialogReject</name>
     <message>
         <location filename="../src/dialog_reject.cpp" line="16"/>
-        <source>Yes</source>
+        <source>&amp;Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/dialog_reject.cpp" line="17"/>
-        <source>No</source>
+        <source>&amp;No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -64,7 +64,7 @@
     </message>
     <message>
         <location filename="../src/dialog_root.cpp" line="11"/>
-        <source>Close</source>
+        <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -87,12 +87,12 @@
     </message>
     <message>
         <location filename="../src/dialog_summary.cpp" line="43"/>
-        <source>OK</source>
+        <source>&amp;OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/dialog_summary.cpp" line="44"/>
-        <source>Cancel</source>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -372,9 +372,8 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 <context>
     <name>WizardPage_Progress</name>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="164"/>
         <source>Finish</source>
-        <translation type="unfinished">Finish</translation>
+        <translation type="obsolete">Finish</translation>
     </message>
     <message>
         <location filename="../src/wizardpage_progress.cpp" line="87"/>
@@ -399,6 +398,11 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
     <message>
         <location filename="../src/wizardpage_progress.cpp" line="163"/>
         <source>Installation Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_progress.cpp" line="164"/>
+        <source>&amp;Finish</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -448,63 +452,63 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 <context>
     <name>WizardPage_UserAdd</name>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="165"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
         <source>Set password and add users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="166"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
         <source>Password for user &quot;root&quot; must be set. You can add new user also, at least one new user account should be created.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="171"/>
         <source>User &quot;root&quot; can control everything on the entire computer.
 A password MUST be set for user &quot;root&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="172"/>
         <source>Password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="170"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="173"/>
         <source>Confirm:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="172"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="175"/>
         <source>Add new users:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="195"/>
         <source>Root password needed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="195"/>
         <source>Root password should not be empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="201"/>
         <source>Root password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="201"/>
         <source>Please input password correctly twice.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="203"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="206"/>
         <source>User</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="203"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="206"/>
         <source>Please at least add one normal user.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -514,13 +518,13 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="230"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="233"/>
         <source>Please not fill the dulplicate name.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="253"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="256"/>
         <source>The username ( %1 ) had existed.</source>
         <translation type="unfinished"></translation>
     </message>

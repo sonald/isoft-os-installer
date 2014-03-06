@@ -40,8 +40,8 @@ DialogSummary::DialogSummary(QWidget* parent, bool install, bool mbr)
     m_mbr->setText( tr("install to Main Boot Record. (Recommended)" ) );
     m_root->setText( tr("install to Root Partition." ) );
     m_groupBox->setTitle( tr("Install Boot Loader") );
-    m_ok->setText( tr( "OK" ) );
-    m_cancel->setText( tr( "Cancel" ) );
+    m_ok->setText( tr( "&OK" ) );
+    m_cancel->setText( tr( "&Cancel" ) );
     setWindowTitle( tr("Advanced Setting") );
 
     m_flagInstall = install;

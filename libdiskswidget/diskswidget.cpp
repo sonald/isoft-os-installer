@@ -682,13 +682,9 @@ void DisksWidget::addPartition()
 	if (fsType == "vfat")
 		fsType = "fat32";
 
-	QString length;
-	if (add->fixedButton->isChecked())
+	QString length = "-1";
+    if (!add->chboxUseAll->isChecked())
 		length = QString::number(add->fixedSize->value());
-	else if (add->userButton->isChecked())
-		length = QString::number(add->userSize->value());
-	else
-		length = "-1";
 
 	qDebug() << length;
 	//k XXX createPrimary() also record into commandlist
@@ -705,7 +701,7 @@ void DisksWidget::addPartition()
 			addPartInfo(index, current, mntPoint);
 
 		} else { //k count = 3
-			if (existExtended(disk) || (add->forcePrimary->isChecked())) {
+			if (existExtended(disk)) {
 				int index = createPrimary(current, fsType, length, "primary");
 				addPartInfo(index, current, mntPoint);
 			} else { 
@@ -950,13 +946,11 @@ int DisksWidget::createPrimary(QTreeWidgetItem *item, const QString &fsType, con
 	QString disk = belongedDisk(item);
 	PartitionList *list = m_partitionListMap.value(disk);
 	int index = 0;
-	Partition *partition = 0;
 	for ( ; index < list->count(); ++index) {
 		Partition *tmp = list->part_index(index);
 		if (QString::number(tmp->start()) == item->text(colBeginBlock)
 			&& QString::number(tmp->end()) == item->text(colEndBlock))
 		{
-			partition = tmp;
 			break;
 		}
 	}
@@ -1087,23 +1081,6 @@ void DisksWidget::writeXML()
 //k current partition, whatever it is before, transfer to ext4, set /,
 void DisksWidget::doSimpleInstall()
 {
-/* k move to warning info
-	QList<OriginalPartsChanges>::iterator it = m_partsChangeList.begin();
-	for ( ; it != m_partsChangeList.end(); ++it) {
-		if (it->disk == belongedDisk(m_simpleInstallItem)) {
-			if (m_simpleInstallItem->text(colBeginBlock) == it->begBlock 
-				&& m_simpleInstallItem->text(colEndBlock) == it->endBlock) 
-			{
-				if (it->original == true) {
-					it->original = false;
-					it->info = "formatted";
-				}
-				break;
-			}
-		}
-	}
- */
-
 	int index = itemIndex(m_simpleInstallItem);
 	if (index == -1) {
 		qWarning() << "get partition index for " << m_simpleInstallItem->text(colDev) << " error.";

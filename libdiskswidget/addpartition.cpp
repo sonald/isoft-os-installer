@@ -10,7 +10,7 @@ AddPartition::AddPartition(DisksWidget *parent) : QDialog(parent), _tree(parent)
 	setupUi(this);
     this->retranslateUi(this);
 
-	connect(userButton, SIGNAL(toggled(bool)), userSize, SLOT(setEnabled(bool)));
+    connect(chboxUseAll, SIGNAL(toggled(bool)), this, SLOT(toggleUseAll(bool)));
 	connect(fsType, SIGNAL(currentIndexChanged(const QString &)), 
 		this, SLOT(judgeMountEnable(const QString &)));
 
@@ -21,6 +21,11 @@ AddPartition::AddPartition(DisksWidget *parent) : QDialog(parent), _tree(parent)
             this->mntPoint->removeItem(idx);
         }
     }
+}
+
+void AddPartition::toggleUseAll(bool val)
+{
+    fixedSize->setEnabled(!val);
 }
 
 void AddPartition::accept()

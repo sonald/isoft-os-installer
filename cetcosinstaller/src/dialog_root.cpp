@@ -8,7 +8,7 @@ DialogRoot::DialogRoot(QWidget *parent)
 {
     setWindowTitle( tr("Installer") );
     m_label = new QLabel( tr("Root permission is need to start installer.") );
-    m_button = new QPushButton( tr("Close") );
+    m_button = new QPushButton( tr("&Close") );
     m_layout = new QVBoxLayout();
     m_layout->addWidget(m_label);
     m_layout->addWidget(m_button);

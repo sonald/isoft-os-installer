@@ -30,14 +30,22 @@
 <context>
     <name>DialogReject</name>
     <message>
-        <location filename="../src/dialog_reject.cpp" line="16"/>
         <source>Yes</source>
-        <translation>是</translation>
+        <translation type="obsolete">是</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="obsolete">否</translation>
+    </message>
+    <message>
+        <location filename="../src/dialog_reject.cpp" line="16"/>
+        <source>&amp;Yes</source>
+        <translation>是(&amp;Y)</translation>
     </message>
     <message>
         <location filename="../src/dialog_reject.cpp" line="17"/>
-        <source>No</source>
-        <translation>否</translation>
+        <source>&amp;No</source>
+        <translation>否(&amp;N)</translation>
     </message>
     <message>
         <location filename="../src/dialog_reject.cpp" line="29"/>
@@ -64,8 +72,12 @@
     </message>
     <message>
         <location filename="../src/dialog_root.cpp" line="11"/>
+        <source>&amp;Close</source>
+        <translation>关闭(&amp;C)</translation>
+    </message>
+    <message>
         <source>Close</source>
-        <translation>关闭</translation>
+        <translation type="obsolete">关闭</translation>
     </message>
 </context>
 <context>
@@ -87,13 +99,21 @@
     </message>
     <message>
         <location filename="../src/dialog_summary.cpp" line="43"/>
-        <source>OK</source>
-        <translation>确定</translation>
+        <source>&amp;OK</source>
+        <translation>确定(&amp;O)</translation>
     </message>
     <message>
         <location filename="../src/dialog_summary.cpp" line="44"/>
+        <source>&amp;Cancel</source>
+        <translation>取消(&amp;C)</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="obsolete">确定</translation>
+    </message>
+    <message>
         <source>Cancel</source>
-        <translation>取消</translation>
+        <translation type="obsolete">取消</translation>
     </message>
     <message>
         <location filename="../src/dialog_summary.cpp" line="45"/>
@@ -485,8 +505,12 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
     </message>
     <message>
         <location filename="../src/wizardpage_progress.cpp" line="164"/>
+        <source>&amp;Finish</source>
+        <translation>完成(&amp;F)</translation>
+    </message>
+    <message>
         <source>Finish</source>
-        <translation>完成</translation>
+        <translation type="obsolete">完成</translation>
     </message>
     <message>
         <source>&amp;Game</source>
@@ -582,62 +606,62 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 				超级用户必须设置一个密码。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="172"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="175"/>
         <source>Add new users:</source>
         <translation>添加新用户：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="195"/>
         <source>Root password needed</source>
         <translation>必须输入root密码</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="195"/>
         <source>Root password should not be empty.</source>
         <translation>root密码不能为空。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="201"/>
         <source>Root password</source>
         <translation>超级用户密码：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="198"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="201"/>
         <source>Please input password correctly twice.</source>
         <translation>两次输入密码要一致。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="165"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
         <source>Set password and add users</source>
         <translation>设置密码和添加用户</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="172"/>
         <source>Password:</source>
         <translation>密码：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="170"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="173"/>
         <source>Confirm:</source>
         <translation>确认：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="166"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
         <source>Password for user &quot;root&quot; must be set. You can add new user also, at least one new user account should be created.</source>
         <translation>超级用户(root)密码必须设置。你也可以添加新用户，至少要创建一个新用户。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="203"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="206"/>
         <source>User</source>
         <translation>用户</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="203"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="206"/>
         <source>Please at least add one normal user.</source>
         <translation>请至少创建一个普通用户。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="253"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="256"/>
         <source>The username ( %1 ) had existed.</source>
         <translation>用户名(%1)已经存在。</translation>
     </message>
@@ -654,7 +678,7 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 			</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="171"/>
         <source>User &quot;root&quot; can control everything on the entire computer.
 A password MUST be set for user &quot;root&quot;.</source>
         <translation>超级用户可以控制整台计算机的所有事情。
@@ -666,7 +690,7 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="230"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="233"/>
         <source>Please not fill the dulplicate name.
 </source>
         <translation>请不要重复填写用户名。</translation>

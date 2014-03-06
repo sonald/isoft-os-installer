@@ -13,8 +13,8 @@ DialogReject::DialogReject(QWidget* parent)
     m_quest = new QLabel(this);
     
     m_spacer = new QSpacerItem( 40, 20, QSizePolicy::Expanding, QSizePolicy::Fixed );
-    m_ok = new QPushButton( tr("Yes"), this );
-    m_cancel = new QPushButton( tr("No"), this );
+    m_ok = new QPushButton( tr("&Yes"), this );
+    m_cancel = new QPushButton( tr("&No"), this );
     m_layoutButton = new QHBoxLayout();
     m_layoutButton->addItem( m_spacer );
     m_layoutButton->addWidget( m_ok );

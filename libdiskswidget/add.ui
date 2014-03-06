@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>426</width>
-    <height>338</height>
+    <width>375</width>
+    <height>213</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -86,7 +86,7 @@
        <item>
         <widget class="QComboBox" name="fsType">
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <item>
           <property name="text">
@@ -137,124 +137,54 @@
        <item>
         <widget class="QSpinBox" name="fixedSize">
          <property name="minimum">
-          <number>1</number>
+          <number>100</number>
          </property>
          <property name="maximum">
-          <number>100000</number>
+          <number>1000000</number>
          </property>
          <property name="value">
-          <number>100</number>
+          <number>1000</number>
          </property>
         </widget>
        </item>
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="Line" name="line_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
-         <property name="minimumSize">
+         <property name="sizeHint" stdset="0">
           <size>
-           <width>15</width>
-           <height>0</height>
+           <width>40</width>
+           <height>20</height>
           </size>
          </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
+        </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label_4">
+        <widget class="QCheckBox" name="chboxUseAll">
          <property name="text">
-          <string>Other Size Options</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="Line" name="line_3">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <string>Use All Available Space</string>
          </property>
         </widget>
        </item>
       </layout>
      </item>
      <item>
-      <widget class="QRadioButton" name="fixedButton">
-       <property name="text">
-        <string>&amp;Fixed Size</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QHBoxLayout">
-       <item>
-        <widget class="QRadioButton" name="userButton">
-         <property name="text">
-          <string>&amp;User Define Space Size(MB): </string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSpinBox" name="userSize">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimum">
-          <number>100</number>
-         </property>
-         <property name="maximum">
-          <number>100000</number>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="allButton">
-       <property name="text">
-        <string>Use All &amp;Available Space</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="Line" name="line">
+      <spacer name="verticalSpacer">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Vertical</enum>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="forcePrimary">
-       <property name="enabled">
-        <bool>true</bool>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
        </property>
-       <property name="text">
-        <string>Force to be Primary Partition</string>
-       </property>
-      </widget>
+      </spacer>
      </item>
      <item>
       <widget class="QDialogButtonBox" name="buttonBox">

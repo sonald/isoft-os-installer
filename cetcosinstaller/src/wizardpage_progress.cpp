@@ -161,7 +161,7 @@ void WizardPage_Progress::endProgress(bool state, QString error)
     m_bar->setValue( m_max_value );
     if ( !state ) {
         QMessageBox::critical(this, tr("Installation Error"), error);
-        wizard()->setButtonText( QWizard::CancelButton, tr("Finish") );
+        wizard()->setButtonText( QWizard::CancelButton, tr("&Finish") );
         wizard()->button( QWizard::CancelButton )->setEnabled( true );
         m_end = false;
     } else {
