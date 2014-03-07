@@ -102,72 +102,72 @@
         <translation>创建(&amp;A)</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="83"/>
+        <location filename="diskswidget.cpp" line="81"/>
         <source>&amp;Edit</source>
         <translation>编辑(&amp;E)</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="84"/>
+        <location filename="diskswidget.cpp" line="82"/>
         <source>&amp;Delete</source>
         <translation>删除(&amp;D)</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="85"/>
+        <location filename="diskswidget.cpp" line="83"/>
         <source>&amp;Reset</source>
         <translation>重置 (&amp;R)</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="222"/>
-        <location filename="diskswidget.cpp" line="470"/>
+        <location filename="diskswidget.cpp" line="224"/>
+        <location filename="diskswidget.cpp" line="472"/>
         <source>detail</source>
         <translation>详细信息</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="299"/>
-        <location filename="diskswidget.cpp" line="304"/>
-        <location filename="diskswidget.cpp" line="313"/>
-        <location filename="diskswidget.cpp" line="516"/>
-        <location filename="diskswidget.cpp" line="521"/>
-        <location filename="diskswidget.cpp" line="559"/>
-        <location filename="diskswidget.cpp" line="650"/>
-        <location filename="diskswidget.cpp" line="656"/>
-        <location filename="diskswidget.cpp" line="662"/>
-        <location filename="diskswidget.cpp" line="667"/>
-        <location filename="diskswidget.cpp" line="694"/>
-        <location filename="diskswidget.cpp" line="1228"/>
-        <location filename="diskswidget.cpp" line="1588"/>
-        <location filename="diskswidget.cpp" line="1604"/>
-        <location filename="diskswidget.cpp" line="1609"/>
+        <location filename="diskswidget.cpp" line="301"/>
+        <location filename="diskswidget.cpp" line="306"/>
+        <location filename="diskswidget.cpp" line="315"/>
+        <location filename="diskswidget.cpp" line="518"/>
+        <location filename="diskswidget.cpp" line="523"/>
+        <location filename="diskswidget.cpp" line="561"/>
+        <location filename="diskswidget.cpp" line="652"/>
+        <location filename="diskswidget.cpp" line="658"/>
+        <location filename="diskswidget.cpp" line="664"/>
+        <location filename="diskswidget.cpp" line="669"/>
+        <location filename="diskswidget.cpp" line="696"/>
+        <location filename="diskswidget.cpp" line="1230"/>
+        <location filename="diskswidget.cpp" line="1594"/>
+        <location filename="diskswidget.cpp" line="1610"/>
+        <location filename="diskswidget.cpp" line="1615"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="299"/>
+        <location filename="diskswidget.cpp" line="301"/>
         <source>You aren&apos;t permitted to delete a disk</source>
         <translation>不被允许删除一块磁盘</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="305"/>
+        <location filename="diskswidget.cpp" line="307"/>
         <source>You aren&apos;t permitted to delete a free partition</source>
         <translation>不被允许删除空闲分区</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="314"/>
+        <location filename="diskswidget.cpp" line="316"/>
         <source>There are logical partition(s) on this extended partition.</source>
         <translation>在此扩展分区上还有逻辑分区。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="516"/>
+        <location filename="diskswidget.cpp" line="518"/>
         <source>Can not edit a disk</source>
         <translation>不能编辑磁盘</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="521"/>
+        <location filename="diskswidget.cpp" line="523"/>
         <source>Can not edit extended partition</source>
         <translation>不能编辑扩展分区</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="559"/>
+        <location filename="diskswidget.cpp" line="561"/>
         <source>You can&apos;t create primary partition any more.</source>
         <translation>不能再创建主分区。</translation>
     </message>
@@ -176,40 +176,40 @@
         <translation type="obsolete">创建的分区不能多于16个。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="662"/>
+        <location filename="diskswidget.cpp" line="664"/>
         <source>You should not do this operation with a disk.</source>
         <translation>不能在该磁盘上进行操作。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="667"/>
+        <location filename="diskswidget.cpp" line="669"/>
         <source>Please select a free partition to operate.</source>
         <translation>请选择一空闲分区操作。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="694"/>
+        <location filename="diskswidget.cpp" line="696"/>
         <source>Can not create a main partition any more.</source>
         <translation>不能再创建主分区。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1228"/>
+        <location filename="diskswidget.cpp" line="1230"/>
         <source>Please select a primary partition or logical partition to install.</source>
         <translation>请选择一个主分区或逻辑分区进行安装。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1240"/>
+        <location filename="diskswidget.cpp" line="1242"/>
         <source>%1 will be formatted to ext4 as / directory
 </source>
         <translation>%1将被格式化为ext3格式作为根(&quot;/&quot;)分区
  {1 ?} {4 ?}</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1313"/>
+        <location filename="diskswidget.cpp" line="1315"/>
         <source>%1 will be formatted.
 </source>
         <translation>%1将被格式化。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1327"/>
+        <location filename="diskswidget.cpp" line="1329"/>
         <source>%1 will be %2.
 </source>
         <translation>%1将被%2.</translation>
@@ -242,60 +242,60 @@
 </translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1250"/>
-        <location filename="diskswidget.cpp" line="1260"/>
+        <location filename="diskswidget.cpp" line="1252"/>
+        <location filename="diskswidget.cpp" line="1262"/>
         <source>%1 is %2 file system , and set as %3
 </source>
         <translation>%1是%2文件系统，并被设置为%3
 </translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1337"/>
+        <location filename="diskswidget.cpp" line="1339"/>
         <source>You need to select a partition which at least has %1MB!</source>
         <translation>您需要选择一个大小至少为%1MB的分区作为根挂载点。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1345"/>
+        <location filename="diskswidget.cpp" line="1347"/>
         <source>You have to set a &quot;/&quot; mount point.</source>
         <translation>请设置一个根(&quot;/&quot;)挂载点。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1351"/>
+        <location filename="diskswidget.cpp" line="1353"/>
         <source>You need to set a &quot;/boot/efi&quot; mount point for a fat32 partition.</source>
         <translation>您需要设置一个文件系统为fat32分区作为/boot/efi挂载点。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1588"/>
+        <location filename="diskswidget.cpp" line="1594"/>
         <source>Do you want to create partition table for %1?</source>
         <translation>你要为%1创建分区表吗？</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1604"/>
+        <location filename="diskswidget.cpp" line="1610"/>
         <source>Can not create partition table on a readonly device.</source>
         <translation>不能在只读设备上创建分区表。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1609"/>
+        <location filename="diskswidget.cpp" line="1615"/>
         <source>Create partition table failed.</source>
         <translation>创建分区表失败。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="370"/>
+        <location filename="diskswidget.cpp" line="372"/>
         <source>deleted</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="650"/>
+        <location filename="diskswidget.cpp" line="652"/>
         <source>No more Primary partition can be created.</source>
         <translation>不可以再创建主分区。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="656"/>
+        <location filename="diskswidget.cpp" line="658"/>
         <source>You can not create partitions more than 15.</source>
         <translation>创建的分区不能多于15个。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="631"/>
+        <location filename="diskswidget.cpp" line="633"/>
         <source>formatted</source>
         <translation>格式化</translation>
     </message>
@@ -339,8 +339,9 @@
     </message>
     <message>
         <location filename="edit.ui" line="97"/>
-        <source>Size(MB): </source>
-        <translation>大小(MB):</translation>
+        <source>Size: </source>
+        <oldsource>Size(MB): </oldsource>
+        <translation>大小:</translation>
     </message>
     <message>
         <location filename="edit.ui" line="123"/>
