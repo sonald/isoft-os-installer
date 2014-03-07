@@ -4,34 +4,40 @@
 <context>
     <name>AddPartition</name>
     <message>
-        <location filename="addpartition.cpp" line="46"/>
-        <location filename="addpartition.cpp" line="51"/>
-        <location filename="addpartition.cpp" line="56"/>
-        <location filename="addpartition.cpp" line="66"/>
+        <location filename="addpartition.cpp" line="50"/>
+        <location filename="addpartition.cpp" line="55"/>
+        <location filename="addpartition.cpp" line="60"/>
+        <location filename="addpartition.cpp" line="70"/>
+        <location filename="addpartition.cpp" line="76"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="addpartition.cpp" line="46"/>
+        <location filename="addpartition.cpp" line="50"/>
         <source>Please set a valid directory as mount point.</source>
         <translation>设置一个有效目录作为挂载点。</translation>
     </message>
     <message>
-        <location filename="addpartition.cpp" line="51"/>
+        <location filename="addpartition.cpp" line="55"/>
         <source>Please select a mount point.</source>
         <translation>请选择挂载点。</translation>
     </message>
     <message>
-        <location filename="addpartition.cpp" line="56"/>
+        <location filename="addpartition.cpp" line="60"/>
         <source>There already has a %1 mount point.</source>
         <translation>已存在一个%1挂载点。</translation>
+    </message>
+    <message>
+        <location filename="addpartition.cpp" line="77"/>
+        <source>The &apos;efi&apos; partition needs to be formatted as fat32.</source>
+        <translation>efi分区需要格式化为&quot;fat32&quot;格式。</translation>
     </message>
     <message>
         <source>The &apos;/&apos; partition at least need 4GB disk capacity.</source>
         <translation type="obsolete">根分区至少需要4G的磁盘空间。</translation>
     </message>
     <message>
-        <location filename="addpartition.cpp" line="67"/>
+        <location filename="addpartition.cpp" line="71"/>
         <source>The &apos;/&apos; partition needs to be formatted to one of the ext filesystems.</source>
         <translation>根分区需要格式化为一个ext文件系统。</translation>
     </message>
@@ -128,10 +134,10 @@
         <location filename="diskswidget.cpp" line="662"/>
         <location filename="diskswidget.cpp" line="667"/>
         <location filename="diskswidget.cpp" line="694"/>
-        <location filename="diskswidget.cpp" line="1238"/>
-        <location filename="diskswidget.cpp" line="1598"/>
-        <location filename="diskswidget.cpp" line="1614"/>
-        <location filename="diskswidget.cpp" line="1619"/>
+        <location filename="diskswidget.cpp" line="1228"/>
+        <location filename="diskswidget.cpp" line="1588"/>
+        <location filename="diskswidget.cpp" line="1604"/>
+        <location filename="diskswidget.cpp" line="1609"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -185,25 +191,25 @@
         <translation>不能再创建主分区。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1238"/>
+        <location filename="diskswidget.cpp" line="1228"/>
         <source>Please select a primary partition or logical partition to install.</source>
         <translation>请选择一个主分区或逻辑分区进行安装。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1250"/>
+        <location filename="diskswidget.cpp" line="1240"/>
         <source>%1 will be formatted to ext4 as / directory
 </source>
         <translation>%1将被格式化为ext3格式作为根(&quot;/&quot;)分区
  {1 ?} {4 ?}</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1323"/>
+        <location filename="diskswidget.cpp" line="1313"/>
         <source>%1 will be formatted.
 </source>
         <translation>%1将被格式化。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1337"/>
+        <location filename="diskswidget.cpp" line="1327"/>
         <source>%1 will be %2.
 </source>
         <translation>%1将被%2.</translation>
@@ -236,40 +242,40 @@
 </translation>
     </message>
     <message>
+        <location filename="diskswidget.cpp" line="1250"/>
         <location filename="diskswidget.cpp" line="1260"/>
-        <location filename="diskswidget.cpp" line="1270"/>
         <source>%1 is %2 file system , and set as %3
 </source>
         <translation>%1是%2文件系统，并被设置为%3
 </translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1347"/>
+        <location filename="diskswidget.cpp" line="1337"/>
         <source>You need to select a partition which at least has %1MB!</source>
         <translation>您需要选择一个大小至少为%1MB的分区作为根挂载点。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1355"/>
+        <location filename="diskswidget.cpp" line="1345"/>
         <source>You have to set a &quot;/&quot; mount point.</source>
         <translation>请设置一个根(&quot;/&quot;)挂载点。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1361"/>
+        <location filename="diskswidget.cpp" line="1351"/>
         <source>You need to set a &quot;/boot/efi&quot; mount point for a fat32 partition.</source>
         <translation>您需要设置一个文件系统为fat32分区作为/boot/efi挂载点。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1598"/>
+        <location filename="diskswidget.cpp" line="1588"/>
         <source>Do you want to create partition table for %1?</source>
         <translation>你要为%1创建分区表吗？</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1614"/>
+        <location filename="diskswidget.cpp" line="1604"/>
         <source>Can not create partition table on a readonly device.</source>
         <translation>不能在只读设备上创建分区表。</translation>
     </message>
     <message>
-        <location filename="diskswidget.cpp" line="1619"/>
+        <location filename="diskswidget.cpp" line="1609"/>
         <source>Create partition table failed.</source>
         <translation>创建分区表失败。</translation>
     </message>
@@ -373,11 +379,6 @@
     </message>
     <message>
         <location filename="edit.ui" line="176"/>
-        <source>reiserfs</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="edit.ui" line="181"/>
         <source>linux-swap</source>
         <translation></translation>
     </message>
@@ -385,18 +386,20 @@
 <context>
     <name>EditPartition</name>
     <message>
-        <location filename="editpartition.cpp" line="50"/>
-        <location filename="editpartition.cpp" line="57"/>
+        <location filename="editpartition.cpp" line="51"/>
+        <location filename="editpartition.cpp" line="58"/>
+        <location filename="editpartition.cpp" line="64"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="editpartition.cpp" line="50"/>
+        <location filename="editpartition.cpp" line="51"/>
         <source>There already has a %1 mount point.</source>
         <translation>已经有一个%1 挂载点了。</translation>
     </message>
     <message>
-        <location filename="editpartition.cpp" line="57"/>
+        <location filename="editpartition.cpp" line="58"/>
+        <location filename="editpartition.cpp" line="64"/>
         <source>The &apos;/&apos; partition needs to be formatted to one of ext filesystem.</source>
         <translation>根分区需要格式化为一个ext文件系统。</translation>
     </message>
@@ -485,21 +488,16 @@
     </message>
     <message>
         <location filename="add.ui" line="113"/>
-        <source>reiserfs</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="add.ui" line="118"/>
         <source>linux-swap</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="add.ui" line="130"/>
+        <location filename="add.ui" line="125"/>
         <source>&amp;Size(MB):</source>
         <translation>大小(MB)(&amp;S):</translation>
     </message>
     <message>
-        <location filename="add.ui" line="170"/>
+        <location filename="add.ui" line="165"/>
         <source>Use All Available Space</source>
         <translation>使用所有空闲的空间</translation>
     </message>

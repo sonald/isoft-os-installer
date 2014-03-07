@@ -13,6 +13,8 @@ AddPartition::AddPartition(DisksWidget *parent) : QDialog(parent), _tree(parent)
     connect(chboxUseAll, SIGNAL(toggled(bool)), this, SLOT(toggleUseAll(bool)));
 	connect(fsType, SIGNAL(currentIndexChanged(const QString &)), 
 		this, SLOT(judgeMountEnable(const QString &)));
+	connect(mntPoint, SIGNAL(currentIndexChanged(const QString &)), 
+		this, SLOT(updateFsTypeList(const QString &)));
 
     if (!_tree->isEfiEnabled()) {
         //remove efi mount point
@@ -21,6 +23,8 @@ AddPartition::AddPartition(DisksWidget *parent) : QDialog(parent), _tree(parent)
             this->mntPoint->removeItem(idx);
         }
     }
+    
+    fsType->setCurrentIndex(2);
 }
 
 void AddPartition::toggleUseAll(bool val)
@@ -67,9 +71,25 @@ void AddPartition::accept()
                     tr("The '/' partition needs to be formatted to one of the ext filesystems."));
 			return;
 		}
-	}
+	} else if (mnt == "/boot/efi") {
+        if (fsType->currentText() != "fat32") {
+            QMessageBox::warning(this, tr("Warning"), 
+                    tr("The 'efi' partition needs to be formatted as fat32."));
+            return;
+        }
+    }
 			
 	QDialog::accept();
+}
+
+void AddPartition::updateFsTypeList(const QString &mntpoint)
+{
+    if (mntpoint == "/boot/efi") {
+        int idx = fsType->findText("fat32");
+        if (idx != -1) {
+            fsType->setCurrentIndex(idx);
+        }
+    }
 }
 
 void AddPartition::judgeMountEnable(const QString &text)

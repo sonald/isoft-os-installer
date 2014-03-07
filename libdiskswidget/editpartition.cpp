@@ -16,6 +16,7 @@ EditPartition::EditPartition(QTreeWidgetItem *currentItem, DisksWidget *parent)
     this->retranslateUi(this);
 
 	fsTypeLabel->setText(currentItem->text(colFs));
+    formatComboBox->setCurrentIndex(2); // ext4
 	sizeLabel->setText(currentItem->text(colSize));
 	
 	if (m_cur->text(colDev) == "free" || m_cur->text(colFs) == "Unknown"
@@ -54,6 +55,12 @@ void EditPartition::accept()
 	if (mnt == "/") {
         if (!((formatButton->isChecked() && formatComboBox->currentText().startsWith("ext")) 
                 || (unchangeButton->isChecked() && fsTypeLabel->text().startsWith("ext")))) {
+			QMessageBox::warning(this, tr("Warning"), QString(tr("The '/' partition needs to be formatted to one of ext filesystem.")));
+			return ;
+		}
+			
+	} else if (mnt == "/boot/efi") {
+        if (formatButton->isChecked() && formatComboBox->currentText() != "fat32") {
 			QMessageBox::warning(this, tr("Warning"), QString(tr("The '/' partition needs to be formatted to one of ext filesystem.")));
 			return ;
 		}

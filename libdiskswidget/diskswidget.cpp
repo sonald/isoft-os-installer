@@ -78,12 +78,14 @@ DisksWidget::DisksWidget(QWidget *parent, const Modes &mode, QString locale)
 
 	QHBoxLayout *bottom = new QHBoxLayout;
 	m_add = new QPushButton(tr("Cre&ate"), this);
-	m_add->setEnabled(false);
-
 	m_edit = new QPushButton(tr("&Edit"), this);
 	m_del = new QPushButton(tr("&Delete"), this);
 	QPushButton *m_reset = new QPushButton(tr("&Reset"), this);
 	QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Fixed);
+
+	m_add->setEnabled(false);
+    m_del->setEnabled(false);
+    m_edit->setEnabled(false);
 
 	bottom->addItem(spacer);
 	bottom->addWidget(m_reset);
@@ -1020,16 +1022,6 @@ QString DisksWidget::osOnDevice(const QString &device)
 
 void DisksWidget::writeXML()
 {
-//	installOnPartition();
-//	qDebug() << finalPartitionsInfo();
-//	qDebug() << __LINE__;
-//
-//	QString result = warningInfo();
-//	qDebug() << result;
-//	qDebug() << __LINE__;
-
-//	QString tmp;
-//	qDebug() << validate(tmp);
 
 	Engine *engine = Engine::instance();
 	if ( !engine)
@@ -1491,6 +1483,11 @@ void DisksWidget::setNEWState(QTreeWidgetItem *current, QTreeWidgetItem *previou
 {
 	previous = previous;
 
+	//k logical and free
+	m_add->setEnabled(true);
+    m_del->setEnabled(true);
+    m_edit->setEnabled(true);
+
 	if (current == NULL) {
 		m_add->setEnabled(false);
 		return;
@@ -1508,6 +1505,8 @@ void DisksWidget::setNEWState(QTreeWidgetItem *current, QTreeWidgetItem *previou
 
 	if (isDisk) {
 		m_add->setEnabled(false);
+        m_del->setEnabled(false);
+        m_edit->setEnabled(false);
 		return ;
 	}
 
@@ -1515,9 +1514,6 @@ void DisksWidget::setNEWState(QTreeWidgetItem *current, QTreeWidgetItem *previou
 		m_add->setEnabled(false);
 		return ;
 	}
-
-	//k logical and free
-	m_add->setEnabled(true);
 }
 
 bool DisksWidget::hasWindows()
