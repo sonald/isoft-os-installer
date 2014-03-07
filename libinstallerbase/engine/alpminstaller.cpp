@@ -118,6 +118,15 @@ bool AlpmInstaller::install(void (*progress)(int percent))
     if (_reporter)
         _reporter(100);
     deReferencingCaches();
+
+    char buf[128];
+    snprintf(buf, sizeof buf - 1,
+            "cp -r /PKGS/sync %s/var/lib/pacman", _rootdir.c_str());
+    if (system(buf) < 0) {
+        cerr << string(buf) << " failed\n";
+        return false;
+    }
+
     return true;
 }
 
