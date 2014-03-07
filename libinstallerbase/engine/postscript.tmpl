@@ -62,7 +62,6 @@ if [ ${EFI_SUPPORT} = true ]; then
     efibootmgr -c -q -d "$efidisk" -p "$efipart" -w \
         -L "$bootloader_id" -l "\\EFI\\$efi_distributor\\$efi_file"
     grub-mkconfig > "${grubdir}"/grub.cfg
-    sed -i -e 's%lang=en_US%lang=zh_CN%g' "${grubdir}"/grub.cfg
     mkdir -p "${grubdir}"/locale/
     for dir in "${localedir}"/*; do
         if test -f "$dir/LC_MESSAGES/grub.mo"; then
