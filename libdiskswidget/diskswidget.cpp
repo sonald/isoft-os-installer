@@ -1334,7 +1334,8 @@ QString DisksWidget::warningInfo()
 
 bool DisksWidget::validate(QString &err, int requiredSizeMB)
 {
-    int size = targetRootSize();
+    int size = targetRootSize() * 1000 / 1024;
+    qDebug() << "real: " << size << ", Needed: " << requiredSizeMB;
     if (size < requiredSizeMB) {
         err = tr("You need to select a partition which at least has %1MB!").arg(requiredSizeMB);
         return false;
@@ -1428,7 +1429,7 @@ int DisksWidget::targetRootSize()
 				for (int k = 0; k < item->childCount(); ++k) {
 					QTreeWidgetItem *grand = item->child(k);
 					if (grand->text(colMount) == "/") {
-                        target_size = humanToSizeMB(item->text(colSize));
+                        target_size = humanToSizeMB(grand->text(colSize));
 					}
 				}
 			}
@@ -1571,6 +1572,7 @@ int DisksWidget::humanToSizeMB(QString size)
 	    realSize /= (1024 * 1024);
 	}
 		
+    qDebug() << __FUNCTION__ << size << " -> " << realSize;
 	return realSize;
 }
 

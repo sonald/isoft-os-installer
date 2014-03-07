@@ -298,6 +298,8 @@ bool Engine::postscript(void)
             ofstream script(post.c_str(), ios::out);
             script << "#!/bin/bash" << endl;
             script << "set -x" << endl;
+            script << "export LC_ALL=" + _locale << endl;
+            script << "export LANG=" + _locale << endl;
             script << "export GRUB_DEVICE=" << _grub_install_device << endl;
             list<string>::const_iterator ci = _new_user_names.begin();
             int i = 1;
@@ -1092,7 +1094,6 @@ bool Engine::do_set_lang(const string &locale)
     _locale = locale;
     string cmd = "echo \"LANG=" + _locale + "\" > /etc/locale.conf";
     _postscript.push_back(cmd);
-
     return true;
 }
 

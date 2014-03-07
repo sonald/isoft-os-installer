@@ -117,16 +117,10 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     m_labelLayout->addWidget(m_userLabel);
 
     m_user1 = new QLineEdit(this);
-    m_user2 = new QLineEdit(this);
-    m_user3 = new QLineEdit(this);
     m_user1->setMaxLength(USERNAME_LENGTH);
-    m_user2->setMaxLength(USERNAME_LENGTH);
-    m_user3->setMaxLength(USERNAME_LENGTH);
 
     QValidator* nameValidator = new StrictNameValidator(this);
     m_user1->setValidator( nameValidator );
-    m_user2->setValidator( nameValidator );
-    m_user3->setValidator( nameValidator );
 
     m_warningLabel = new QLabel(this);
 
@@ -135,8 +129,6 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     m_userLayout->addWidget(m_user1, 1, 0);
     m_star = new QLabel("*");
     m_userLayout->addWidget(m_star, 1, 1);
-    m_userLayout->addWidget(m_user2, 2, 0);
-    m_userLayout->addWidget(m_user3, 3, 0);
     m_userLayout->addWidget(m_warningLabel, 4, 0, 1, 2);
 
     m_spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Minimum );
@@ -148,11 +140,7 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     setLayout(m_formLayout);
 
     connect( m_user1, SIGNAL( textChanged(const QString&) ), this, SLOT( checkUser1(const QString&) ) );
-    connect( m_user2, SIGNAL( textChanged(const QString&) ), this, SLOT( checkUser2(const QString&) ) );
-    connect( m_user3, SIGNAL( textChanged(const QString&) ), this, SLOT( checkUser3(const QString&) ) );
     connect( m_user1, SIGNAL( editingFinished() ), this, SLOT( showWarningLabel() ) );
-    connect( m_user2, SIGNAL( editingFinished() ), this, SLOT( showWarningLabel() ) );
-    connect( m_user3, SIGNAL( editingFinished() ), this, SLOT( showWarningLabel() ) );
 
     // init the stringlist of names in /etc/passwd.
     m_listSysUsers = QStringList();
@@ -179,9 +167,7 @@ void WizardPage_UserAdd::initializePage()
     // read the /etc/passwd, fulfill the list.
     readSysUsers(&m_listSysUsers);
 
-    // m_legal: 0 all ok; 1, user1; 2, user2; 4 user3; 3, user1 and user2.
     m_illegal = 0;
-    m_dual = false;
 }
 
 int WizardPage_UserAdd::nextId() const
@@ -214,13 +200,11 @@ void WizardPage_UserAdd::setPasswdUser()
 {
     g_engine->cmdSetRootPassword( m_passwd->text().toLatin1() );
     if (!m_user1->text().isEmpty()) g_engine->cmdAddUser( m_user1->text().toUtf8() );
-    if (!m_user2->text().isEmpty()) g_engine->cmdAddUser(m_user2->text().toUtf8() );
-    if (!m_user3->text().isEmpty()) g_engine->cmdAddUser(m_user3->text().toUtf8() );
 }
 
 bool WizardPage_UserAdd::isComplete() const
 {
-    if ( !m_illegal && !m_dual )
+    if ( !m_illegal )
         return true;
     else
         return false;
@@ -229,26 +213,9 @@ bool WizardPage_UserAdd::isComplete() const
 void WizardPage_UserAdd::showWarningLabel()
 {
     QString warning = tr("");
-    if ( m_dual ) {
-        warning += tr("Please not fill the dulplicate name.\n");
-        if ( m_user1->text() == m_user2->text()
-             || m_user1->text() == m_user3->text() )
-            m_illegal = m_illegal & 0xFFFE ;
-        if ( m_user2->text() == m_user3->text() )
-            m_illegal = m_illegal & 0xFFFD ;
-    }
-
     QString name = tr("");
     if ( m_illegal & 0x0001 ) {
         name += m_user1->text();
-        name += " ";
-    }
-    if ( m_illegal & 0x0002 ) {
-        name += m_user2->text();
-        name += " ";
-    }
-    if ( m_illegal & 0x0004 ) {
-        name += m_user3->text();
         name += " ";
     }
     if ( !name.isEmpty() ) {
@@ -270,52 +237,8 @@ void WizardPage_UserAdd::checkUser1(const QString& name)
     if ( m_listSysUsers.contains( name ) ) {
         m_illegal = m_illegal | 0x0001 ;
     }
-    m_dual = checkUserNameDual();
 
     emit completeChanged();
-}
-
-void WizardPage_UserAdd::checkUser2(const QString& name)
-{
-    m_warningLabel->hide();
-
-    m_illegal = m_illegal & 0xFFFD ;
-    m_dual = m_dual & 0xFFFD ;
-
-    if ( m_listSysUsers.contains( name ) ) {
-        m_illegal = m_illegal | 0x0002 ;
-    }
-    m_dual = checkUserNameDual();
-
-    emit completeChanged();
-}
-
-void WizardPage_UserAdd::checkUser3(const QString& name)
-{
-    m_warningLabel->hide();
-
-    m_illegal = m_illegal & 0xFFFB ;
-    m_dual = m_dual & 0xFFFB ;
-
-    if ( m_listSysUsers.contains( name ) ) {
-        m_illegal = m_illegal | 0x0004 ;
-    }
-    m_dual = checkUserNameDual();
-
-    emit completeChanged();
-}
-
-bool WizardPage_UserAdd::checkUserNameDual()
-{
-    bool ret = false;
-
-    if ( m_user1->text() == m_user2->text() || m_user1->text() == m_user3->text() )
-        if ( !m_user1->text().isEmpty() )
-            ret = true;
-    if ( m_user2->text() == m_user3->text() )
-        if ( !m_user2->text().isEmpty() )
-            ret = true;
-    return ret;
 }
 
 void WizardPage_UserAdd::readSysUsers(QStringList* list)

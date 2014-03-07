@@ -27,17 +27,13 @@ public:
 
 private slots:
     void checkUser1(const QString& text);
-    void checkUser2(const QString& text);
-    void checkUser3(const QString& text);
     void showWarningLabel();
 
 private:
-    bool checkUserNameDual();
     void readSysUsers(QStringList* list);
 
     QStringList         m_listSysUsers;
     int                 m_illegal;
-    bool                m_dual;
 
     QLabel* 		m_rootDescript;
     QLabel* 		m_rootPicture;
@@ -52,8 +48,6 @@ private:
     QLabel*		    m_userPicture;
     QLabel*		    m_userLabel;
     QLineEdit*		m_user1;
-    QLineEdit*		m_user2;
-    QLineEdit*		m_user3;
     QLabel*         m_star;
     QLabel*         m_warningLabel;
     QHBoxLayout*	m_labelLayout;
