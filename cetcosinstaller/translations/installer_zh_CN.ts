@@ -484,27 +484,56 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 <context>
     <name>WizardPage_Progress</name>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="87"/>
+        <location filename="../src/wizardpage_progress.cpp" line="88"/>
         <source>Installation Progress</source>
         <translation>安装进度</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="88"/>
+        <location filename="../src/wizardpage_progress.cpp" line="89"/>
         <source>Please wait for a while. Enjoy a cup of coffee maybe a good idea.</source>
         <translation>请等待一段时间。享受一杯咖啡也许是一个好主意。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="126"/>
-        <source>preparing for installation...</source>
-        <translation>正在准备安装...</translation>
+        <location filename="../src/wizardpage_progress.cpp" line="129"/>
+        <source>checking available disk space...</source>
+        <translation>正在检测可用磁盘空间...</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="163"/>
+        <location filename="../src/wizardpage_progress.cpp" line="132"/>
+        <source>checking for file conflicts...</source>
+        <translation>正在检查文件冲突....</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_progress.cpp" line="135"/>
+        <source>checking package integrity...</source>
+        <translation>正在检查包完整性...</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_progress.cpp" line="138"/>
+        <source>checking keys in keyring...</source>
+        <translation>正在检查密钥环里的密钥...</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_progress.cpp" line="141"/>
+        <source>loading package files...</source>
+        <translation>正在加载软件包文件...</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_progress.cpp" line="148"/>
+        <source>installing packages, elapsed: </source>
+        <translation>正在安装软件包，已安装时间：</translation>
+    </message>
+    <message>
+        <source>preparing for installation...</source>
+        <translation type="obsolete">正在准备安装...</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_progress.cpp" line="185"/>
         <source>Installation Error</source>
         <translation>安装过程错误</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="164"/>
+        <location filename="../src/wizardpage_progress.cpp" line="186"/>
         <source>&amp;Finish</source>
         <translation>完成(&amp;F)</translation>
     </message>
@@ -525,9 +554,8 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation type="obsolete">请等待一段时间。享受一杯咖啡也许是一个好主意。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_progress.cpp" line="129"/>
         <source>Elapsed: </source>
-        <translation>已安装时间：</translation>
+        <translation type="obsolete">已安装时间：</translation>
     </message>
 </context>
 <context>

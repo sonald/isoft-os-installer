@@ -22,7 +22,6 @@
 InstallThread* InstallThread::s_this = NULL;
 void InstallThread::s_setProgressByEngine(Engine::Stage stage, int value)
 {
-    qDebug() << "setProgress: " << value;
     emit s_this->updateProgress(stage, value);
 }
 
@@ -76,7 +75,7 @@ WizardPage_Progress::WizardPage_Progress(QWidget *parent)
 
     // create the thread, and set connect.
     m_thread = new InstallThread();
-    qRegisterMetaType<Engine::Stage>("Stage");
+    qRegisterMetaType<Engine::Stage>("Engine::Stage");
     connect( m_thread, SIGNAL( updateProgress(Engine::Stage, int) ), 
             this, SLOT( updateProgress(Engine::Stage, int) ) );
     connect( m_thread, SIGNAL( endProgress(bool, QString) ), this, SLOT( endProgress(bool, QString) ) );
