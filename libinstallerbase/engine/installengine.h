@@ -64,7 +64,7 @@ class Engine
     void cmdSetBootEntry(const char *todevpath);
     void cmdSetKernelParam(const char* param);
     void cmdSetLang(const char *locale);
-    void cmdAddUser(const char *username);
+    void cmdAddUser(const char *username, const char * = NULL);
     void cmdSetRootPassword(const char *passwd);
     void cmdSetKL(const char *kxkb);
     void cmdSetTZ(const char *kzoneinfo);
@@ -152,7 +152,7 @@ class Engine
     bool do_boot_install(const string &devpath);
     bool do_set_kernel_param(const string &param);
     bool do_set_lang(const string &locale);
-    bool do_add_user(const string &username);
+    bool do_add_user(const string &username, const string &passwd);
     bool do_set_root_passwd(const string &passwd);
     bool do_set_kl(const string &kxkb);
     bool do_set_tz(const string &kzoneinfo);

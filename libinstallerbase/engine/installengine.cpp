@@ -522,7 +522,7 @@ bool Engine::runCmd(const vector<Cmd> &cmds)
             }
             break;
         case ADD_USER:
-            ret = do_add_user(currcmd.args[0]);
+            ret = do_add_user(currcmd.args[0], currcmd.args[1]);
             if(!ret){
                 _errstr = "Run add_user Failed.";
                 return false;
@@ -685,9 +685,12 @@ void Engine::cmdSetLang(const char *locale)
 {
     appendCmd(POST, SET_LANG, locale);
 }
-void Engine::cmdAddUser(const char *username)
+void Engine::cmdAddUser(const char *username, const char *passwd)
 {
-    appendCmd(POST, ADD_USER, username);
+    if (passwd == NULL)
+        appendCmd(POST, ADD_USER, username, "");
+    else
+        appendCmd(POST, ADD_USER, username, passwd);
 }
 void Engine::cmdSetRootPassword(const char *passwd)
 {
@@ -1097,12 +1100,19 @@ bool Engine::do_set_lang(const string &locale)
     return true;
 }
 
-bool Engine::do_add_user(const string &username)
+bool Engine::do_add_user(const string &username, const string &passwd)
 {
     static bool setPreUser_flag = false;
 
     _postscript.push_back(string("/usr/bin/useradd -g users -G wheel,sys,video,audio,disk -m ") + username);
-    _postscript.push_back(string("passwd -d ") + username);
+
+    if (passwd.size() == 0) {
+        _postscript.push_back(string("passwd -d ") + username);
+    } else {
+        char cmd[512];
+        sprintf(cmd, "echo -e '%s\n%s' | passwd %s", 
+                passwd.c_str(), passwd.c_str(), username.c_str());
+    }
     _new_user_names.push_back(username);
 
     if (setPreUser_flag == false) {    
