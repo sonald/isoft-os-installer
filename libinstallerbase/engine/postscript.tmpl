@@ -1,11 +1,11 @@
 set -x
 # set timezone to CST
-/bin/cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+/usr/bin/ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 #mkinitrd /boot/initrd-$(uname -r).img $(uname -r) --force
 #mkinitrd /boot/$(ls /boot/ | grep initrd) $(ls /boot/ | grep initrd | sed "s%.img%%; s%initrd-%%") --force
 #use mkinitcpio instead
-sed -i 's/MODULES="/MOUDLES="i915/g' /etc/mkinitcpio.conf
+sed -i 's/^MODULES="/MOUDLES="i915 radeon nouveau /g' /etc/mkinitcpio.conf
 sed -i 's/HOOKS="base udev/HOOKS="base udev plymouth/g' /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
@@ -14,8 +14,8 @@ mkinitcpio -p linux
 ##echo "LANG=zh_CN.utf8" >/etc/locale.conf
 
 #network configuration
-echo "NETWORKING=yes" >/etc/sysconfig/network
-echo "HOSTNAME=$HOSTNAME" >>/etc/sysconfig/network
+#echo "NETWORKING=yes" >/etc/sysconfig/network
+#echo "HOSTNAME=$HOSTNAME" >>/etc/sysconfig/network
 
 
 cat >/etc/hosts <<EOF
