@@ -30,16 +30,32 @@ AlpmInstaller::~AlpmInstaller()
 static void cb_progress(alpm_progress_t event, const char *pkgname, int percent,
                        size_t howmany, size_t current)
 {
-    printf("pkgname=%s, percent=%d, howmany=%ld, current=%ld\n", pkgname, percent, howmany, current);
+    const char *stage_str[] = {
+        "ADD", "UPGRADE", "CONFLICTS", "DISKSPACE", "INTEGRITY", "LOAD", "KEYRING"
+    };
+
+    Engine::Stage stage = Engine::ADD;
+    switch(event) {
+        case ALPM_PROGRESS_ADD_START: stage = Engine::ADD; break;
+        case ALPM_PROGRESS_UPGRADE_START: stage = Engine::UPGRADE; break;
+        case ALPM_PROGRESS_CONFLICTS_START: stage = Engine::CONFLICTS; break;
+        case ALPM_PROGRESS_DISKSPACE_START: stage = Engine::DISKSPACE; break;
+        case ALPM_PROGRESS_INTEGRITY_START: stage = Engine::INTEGRITY; break;
+        case ALPM_PROGRESS_LOAD_START: stage = Engine::LOAD; break;
+        case ALPM_PROGRESS_KEYRING_START: stage = Engine::KEYRING; break;
+        default: break;
+    }
+    printf("stage=%s, pkgname=%s, percent=%d, howmany=%ld, current=%ld\n",
+            stage_str[stage], pkgname, percent, howmany, current);
     if (pkgname && pkgname[0] != '\0') {
-        g_alpm_installer->reportUpstream(current*100/howmany);
+        g_alpm_installer->reportUpstream(stage, current*100/howmany);
     }
 }
 
-bool AlpmInstaller::reportUpstream(int percent)
+bool AlpmInstaller::reportUpstream(Engine::Stage stage, int percent)
 {
     if (_reporter)
-        _reporter(percent);
+        _reporter(stage, percent);
     return true;
 }
 
@@ -99,7 +115,7 @@ bool AlpmInstaller::preprocess()
     return true;
 }
 
-bool AlpmInstaller::install(void (*progress)(int percent))
+bool AlpmInstaller::install(void (*progress)(Engine::Stage stage, int percent))
 {
     _reporter = progress;
 
@@ -116,7 +132,7 @@ bool AlpmInstaller::install(void (*progress)(int percent))
     ret += ipacman_sync_packages(_targets);
 
     if (_reporter)
-        _reporter(100);
+        _reporter(Engine::UPGRADE, 100);
     deReferencingCaches();
 
     char buf[128];

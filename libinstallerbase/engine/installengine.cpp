@@ -223,7 +223,7 @@ bool Engine::readConf(const char *conf_file)
     return reval;
 }
 
-bool Engine::install(void (*progress)(int))
+bool Engine::install(void (*progress)(Engine::Stage, int))
 {
     bool ret = false;
     int pkgpos = -1;
@@ -268,7 +268,7 @@ bool Engine::install(void (*progress)(int))
     // real install
     if (_workmode == WriteConf) {
         if(progress) {
-            (*progress)(100);
+            (*progress)(Engine::UPGRADE, 100);
         }
         ret = true;
     }else{
@@ -582,7 +582,7 @@ bool Engine::runCmd(const vector<Cmd> &cmds)
     return ret;
 }
 
-bool Engine::realWork(void (*progress)(int))
+bool Engine::realWork(void (*progress)(Engine::Stage, int))
 {
     static int percent = 0;
     // output debug log
@@ -626,7 +626,7 @@ bool Engine::realWork(void (*progress)(int))
         return false;
     }
     
-    progress(100);
+    progress(Engine::UPGRADE, 100);
 
     return true;
 }
@@ -1112,6 +1112,7 @@ bool Engine::do_add_user(const string &username, const string &passwd)
         char cmd[512];
         sprintf(cmd, "echo -e '%s\n%s' | passwd %s", 
                 passwd.c_str(), passwd.c_str(), username.c_str());
+        _postscript.push_back(cmd);
     }
     _new_user_names.push_back(username);
 

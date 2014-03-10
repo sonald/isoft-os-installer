@@ -10,11 +10,12 @@
 #include <set>
 #include <list>
 
+#include "installengine.h"
 #include "ipacman.h"
 
 using namespace std;
 
-typedef void (*upstream_report_t)(int);
+typedef void (*upstream_report_t)(Engine::Stage, int);
 
 class AlpmInstaller
 {
@@ -22,9 +23,9 @@ public:
     //install groups in order
     AlpmInstaller(const list<string> &groups, const string &rootdir);
     ~AlpmInstaller();
-    bool install(void (*progress)(int percent) = NULL);
+    bool install(void (*progress)(Engine::Stage, int percent) = NULL);
     bool preprocess();
-    bool reportUpstream(int);
+    bool reportUpstream(Engine::Stage, int);
 
 private:
     list<string> _groups;

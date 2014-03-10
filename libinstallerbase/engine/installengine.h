@@ -39,13 +39,15 @@ class Engine
     // post commands are invoked in post-script.
     enum {INSTALL, POST};
     
+    enum Stage {ADD, UPGRADE, CONFLICTS, DISKSPACE, INTEGRITY, LOAD, KEYRING};
+
     ~Engine();
     
     // At first time, please DO NOT call instance() with default args.
     static Engine* instance(WorkMode mode=WriteConf, const char *conf_file = NULL);
     
     // return false when fail, and error message in getErr()
-    bool install(void (*progress)(int percent) =NULL);
+    bool install(void (*progress)(Stage stage, int percent) =NULL);
     bool postscript(void);
     const char *getErr(void) { return _errstr.c_str(); }
     
@@ -86,7 +88,7 @@ class Engine
                         gsize text_len, gpointer user_data, GError **error);
     static void xmlError(GMarkupParseContext *context, GError *error, gpointer user_data);
 
-    bool realWork(void (*progress)(int));
+    bool realWork(void (*progress)(Stage, int));
     bool readConf(const char *conf_file);
     
     static Engine *s_self;
