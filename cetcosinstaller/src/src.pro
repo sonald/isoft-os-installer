@@ -10,7 +10,7 @@ QT += xml
 # Input
 HEADERS += dialog_reject.h \
            dialog_root.h \
-	   dialog_postscript.h \
+           dialog_postscript.h \
            dialog_summary.h \
            installer_global.h \
            parser_locale.h \
@@ -30,11 +30,12 @@ HEADERS += dialog_reject.h \
            wizardpage_packages_query.h \
            wizardpage_useradd.h \
            wizardpage_choosegroup.h \
+           wizardpage_install_mode.h \
            archinfo.h
 
 SOURCES += dialog_reject.cpp \
            dialog_root.cpp \
-	   dialog_postscript.cpp \
+           dialog_postscript.cpp \
            dialog_summary.cpp \
            main.cpp \
            parser_locale.cpp \
@@ -52,10 +53,12 @@ SOURCES += dialog_reject.cpp \
            wizardpage_packages_query.cpp \
            wizardpage_useradd.cpp \
            wizardpage_choosegroup.cpp \
+           wizardpage_install_mode.cpp \
            archinfo.cpp
 
 target.path = /usr/bin
 INSTALLS += target
 
 FORMS += \
-    wizardpage_choosegroup.ui
+    wizardpage_choosegroup.ui \
+    wizardpage_install_mode.ui 

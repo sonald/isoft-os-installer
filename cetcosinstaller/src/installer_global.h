@@ -25,6 +25,7 @@ enum Page_ID {
     Page_KeyboardLayout,
     Page_Licence,
     Page_Mach_Type,
+    Page_InstallMode,
     Page_ChooseGroup,
     Page_Partition_Mode,
     Page_Partition_Auto, 

@@ -5,6 +5,7 @@
 #include "wizardpage_partition_mode.h"
 #include "wizardpage_partition_auto.h"
 #include "wizardpage_partition_simple.h"
+#include "wizardpage_install_mode.h"
 #include "wizardpage_partition_advanced.h"
 #include "wizardpage_choosegroup.h"
 #include "wizardpage_summary.h"
@@ -29,11 +30,10 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     WizardPage_Welcome * 	page_welcome		= new WizardPage_Welcome;
 //    WizardPage_Licence * 	page_licence 		= new WizardPage_Licence;
 
-//    WizardPage_Mach_Type*		page_mach_type 	= new WizardPage_Mach_Type;
-
 //    WizardPage_Partition_Mode*		page_partition_mode = new WizardPage_Partition_Mode;
 //    WizardPage_Partition_Auto*		page_partition_auto = new WizardPage_Partition_Auto;
 //    WizardPage_Partition_Simple*	page_partition_simple = new WizardPage_Partition_Simple;
+    WizardPage_installmode * page_install_mode = new WizardPage_installmode;
     WizardPage_Partition_Advanced * 	page_partition_advanced = new WizardPage_Partition_Advanced;
 
     WizardPage_chooseGroup * page_choosegroup = new WizardPage_chooseGroup;
@@ -44,6 +44,7 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     WizardPage_Finish * page_finish = new WizardPage_Finish;
     
     setPage(Page_Welcome, page_welcome);
+    setPage(Page_InstallMode, page_install_mode);
 //    setPage(Page_Licence, page_licence);
 //    setPage(Page_Mach_Type, page_mach_type);
 //    setPage(Page_Partition_Mode, page_partition_mode);

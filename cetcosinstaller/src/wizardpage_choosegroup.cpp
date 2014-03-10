@@ -9,6 +9,7 @@ WizardPage_chooseGroup::WizardPage_chooseGroup(QWidget *parent) :
     ui(new Ui::WizardPage_chooseGroup)
 {
     ui->setupUi(this);
+
     //unit MB
     m_groupCapacities.insert("core", 1500);
     m_groupCapacities.insert("base", 4000);

@@ -201,33 +201,33 @@
 <context>
     <name>WizardInstaller</name>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="87"/>
+        <location filename="../src/wizard_installer.cpp" line="85"/>
         <source>Installer Wizard</source>
         <translation>安装程序向导</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="89"/>
+        <location filename="../src/wizard_installer.cpp" line="87"/>
         <source>&lt; &amp;Back</source>
         <translation>后退(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="90"/>
-        <location filename="../src/wizard_installer.cpp" line="91"/>
+        <location filename="../src/wizard_installer.cpp" line="88"/>
+        <location filename="../src/wizard_installer.cpp" line="89"/>
         <source>&amp;Next &gt;</source>
         <translation>下一步(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="92"/>
+        <location filename="../src/wizard_installer.cpp" line="90"/>
         <source>&amp;Finish</source>
         <translation>完成(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="93"/>
+        <location filename="../src/wizard_installer.cpp" line="91"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="114"/>
+        <location filename="../src/wizard_installer.cpp" line="112"/>
         <source>The installation is not start yet, anything is not happened on your computer, you can quit the installer safely in this moment.</source>
         <translation>安装过程还没有开始，在你的计算机上没有发生任何改变，此刻你可以安全的退出安装程序。</translation>
     </message>
@@ -236,7 +236,7 @@
         <translation type="obsolete">系统已经被安装而没有配置，如果现在退出，系统将不可用。</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="117"/>
+        <location filename="../src/wizard_installer.cpp" line="115"/>
         <source>The system already had been installed but not configured.The system will be unusable if you quit now.</source>
         <translation>系统已经被安装而没有配置，如果现在退出，系统将不可用。</translation>
     </message>
@@ -606,62 +606,62 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 				超级用户必须设置一个密码。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="175"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="163"/>
         <source>Add new users:</source>
         <translation>添加新用户：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="195"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="181"/>
         <source>Root password needed</source>
         <translation>必须输入root密码</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="195"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="181"/>
         <source>Root password should not be empty.</source>
         <translation>root密码不能为空。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="201"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="187"/>
         <source>Root password</source>
         <translation>超级用户密码：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="201"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="187"/>
         <source>Please input password correctly twice.</source>
         <translation>两次输入密码要一致。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="168"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="156"/>
         <source>Set password and add users</source>
         <translation>设置密码和添加用户</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="172"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="160"/>
         <source>Password:</source>
         <translation>密码：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="173"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="161"/>
         <source>Confirm:</source>
         <translation>确认：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="157"/>
         <source>Password for user &quot;root&quot; must be set. You can add new user also, at least one new user account should be created.</source>
         <translation>超级用户(root)密码必须设置。你也可以添加新用户，至少要创建一个新用户。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="206"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
         <source>User</source>
         <translation>用户</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="206"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="192"/>
         <source>Please at least add one normal user.</source>
         <translation>请至少创建一个普通用户。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="256"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="223"/>
         <source>The username ( %1 ) had existed.</source>
         <translation>用户名(%1)已经存在。</translation>
     </message>
@@ -678,7 +678,7 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 			</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="171"/>
+        <location filename="../src/wizardpage_useradd.cpp" line="159"/>
         <source>User &quot;root&quot; can control everything on the entire computer.
 A password MUST be set for user &quot;root&quot;.</source>
         <translation>超级用户可以控制整台计算机的所有事情。
@@ -690,10 +690,9 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="233"/>
         <source>Please not fill the dulplicate name.
 </source>
-        <translation>请不要重复填写用户名。</translation>
+        <translation type="obsolete">请不要重复填写用户名。</translation>
     </message>
 </context>
 <context>
@@ -756,9 +755,37 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation>现在安装所需要的最小磁盘空间为</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_choosegroup.cpp" line="149"/>
+        <location filename="../src/wizardpage_choosegroup.cpp" line="150"/>
         <source>minimal disk space required now is %1MB</source>
         <translation>现在安装所需要的最小磁盘空间为%1MB</translation>
+    </message>
+</context>
+<context>
+    <name>WizardPage_install_mode</name>
+    <message>
+        <location filename="../src/wizardpage_install_mode.ui" line="14"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_install_mode.ui" line="26"/>
+        <source>Default Mode (Recommended)</source>
+        <translation>默认模式（推荐）</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_install_mode.ui" line="54"/>
+        <source>Install all packages contained in this ISO, which is recommended. It contains full desktop experience.</source>
+        <translation>安装在ISO中的所有包，此为推荐安装模式。此选项包含完整的桌面体验。</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_install_mode.ui" line="78"/>
+        <source>Custom Mode</source>
+        <translation>自定义模式</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_install_mode.ui" line="103"/>
+        <source>Select this mode, you can choose different groups to install.</source>
+        <translation>选择此模式，可选择不同的分组进行安装。</translation>
     </message>
 </context>
 </TS>
