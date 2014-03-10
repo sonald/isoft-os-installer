@@ -6,7 +6,7 @@ set -x
 #mkinitrd /boot/$(ls /boot/ | grep initrd) $(ls /boot/ | grep initrd | sed "s%.img%%; s%initrd-%%") --force
 #use mkinitcpio instead
 sed -i 's/^MODULES="/MOUDLES="i915 radeon nouveau /g' /etc/mkinitcpio.conf
-sed -i 's/HOOKS="base udev/HOOKS="base udev plymouth/g' /etc/mkinitcpio.conf
+sed -i 's/^HOOKS="base udev/HOOKS="base udev plymouth/g' /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
 ## locale has been handled by installer
