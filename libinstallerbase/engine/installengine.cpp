@@ -268,7 +268,7 @@ bool Engine::install(void (*progress)(Engine::Stage, int))
     // real install
     if (_workmode == WriteConf) {
         if(progress) {
-            (*progress)(Engine::UPGRADE, 100);
+            (*progress)(Engine::ADD, 100);
         }
         ret = true;
     }else{
@@ -626,7 +626,7 @@ bool Engine::realWork(void (*progress)(Engine::Stage, int))
         return false;
     }
     
-    progress(Engine::UPGRADE, 100);
+    progress(Engine::ADD, 100);
 
     return true;
 }

@@ -126,9 +126,6 @@ void WizardPage_Progress::updateProgress()
 {
     QString msg;
     switch(m_stage) {
-        case Engine::ADD:
-            msg = tr("installing packages...");
-            break;
         case Engine::DISKSPACE:
             msg = tr("checking available disk space...");
             break;
@@ -145,10 +142,11 @@ void WizardPage_Progress::updateProgress()
             msg = tr("loading package files...");
             break;
 
+        case Engine::ADD:
         case Engine::UPGRADE: /* passthrough */
         default: 
             m_time_elapse = m_time_elapse.addSecs(1);
-            msg = tr("Elapsed: ") +  m_time_elapse.toString("hh:mm:ss");
+            msg = tr("installing packages, elapsed: ") +  m_time_elapse.toString("hh:mm:ss");
             break;
             
     }

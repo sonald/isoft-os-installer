@@ -47,9 +47,9 @@ static void cb_progress(alpm_progress_t event, const char *pkgname, int percent,
     }
     printf("stage=%s, pkgname=%s, percent=%d, howmany=%ld, current=%ld\n",
             stage_str[stage], pkgname, percent, howmany, current);
-    if (pkgname && pkgname[0] != '\0') {
-        g_alpm_installer->reportUpstream(stage, current*100/howmany);
-    }
+    if (stage == Engine::ADD || stage == Engine::UPGRADE)
+        percent = current*100/howmany;
+    g_alpm_installer->reportUpstream(stage, percent);
 }
 
 bool AlpmInstaller::reportUpstream(Engine::Stage stage, int percent)
@@ -132,7 +132,7 @@ bool AlpmInstaller::install(void (*progress)(Engine::Stage stage, int percent))
     ret += ipacman_sync_packages(_targets);
 
     if (_reporter)
-        _reporter(Engine::UPGRADE, 100);
+        _reporter(Engine::ADD, 100);
     deReferencingCaches();
 
     char buf[128];
