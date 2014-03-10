@@ -3,8 +3,8 @@
 #include <installengine.h>
 #include "wizardpage_useradd.h"
 
-const int PASSWORD_LENGTH =128;
-const int USERNAME_LENGTH =32;	// this magic number is relative to KDM. 
+const int PASSWORD_LENGTH = 128;
+const int USERNAME_LENGTH = 32;  // this magic number is relative to KDM. 
 
 QValidator::State NameValidator::validate(QString& input, int& pos) const
 {
@@ -91,16 +91,11 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     m_confirm->setEchoMode(QLineEdit::Password);
     m_confirm->setMaxLength(PASSWORD_LENGTH);
 
-    m_passwdLabel = new QLabel(this);
-    m_confirmLabel = new QLabel(this);
-
     m_passwdLayout = new QGridLayout();
-    m_passwdLayout->addWidget( m_passwdLabel, 0,0,1,1 );
+    m_passwdLayout->addWidget( new QLabel(tr("Password:")), 0,0,1,1 );
     m_passwdLayout->addWidget( m_passwd, 0,1,1,1 );
-    m_passwdLayout->addWidget( new QLabel("*"), 0,2,1,1 );
-    m_passwdLayout->addWidget( m_confirmLabel, 1,0,1,1 );
+    m_passwdLayout->addWidget( new QLabel(tr("Confirm:")), 1,0,1,1 );
     m_passwdLayout->addWidget( m_confirm, 1,1,1,1 );
-    m_passwdLayout->addWidget( new QLabel("*"), 1,2,1,1 );
 
     m_rootLayout = new QVBoxLayout();
     m_rootLayout->addLayout( m_descriptLayout );
@@ -119,6 +114,16 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     m_user1 = new QLineEdit(this);
     m_user1->setMaxLength(USERNAME_LENGTH);
 
+    m_userPasswd = new QLineEdit(this);
+    m_userPasswd->setDragEnabled(false);
+    m_userPasswd->setEchoMode(QLineEdit::Password);
+    m_userPasswd->setMaxLength(PASSWORD_LENGTH);
+
+    m_userConfirm = new QLineEdit(this);
+    m_userConfirm->setDragEnabled(false);
+    m_userConfirm->setEchoMode(QLineEdit::Password);
+    m_userConfirm->setMaxLength(PASSWORD_LENGTH);
+
     QValidator* nameValidator = new StrictNameValidator(this);
     m_user1->setValidator( nameValidator );
 
@@ -126,9 +131,12 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
 
     m_userLayout = new QGridLayout();
     m_userLayout->addLayout(m_labelLayout, 0, 0, 1, 2);
-    m_userLayout->addWidget(m_user1, 1, 0);
-    m_star = new QLabel("*");
-    m_userLayout->addWidget(m_star, 1, 1);
+    m_userLayout->addWidget(new QLabel(tr("Username:")), 1, 0);
+    m_userLayout->addWidget(m_user1, 1, 1);
+    m_userLayout->addWidget(new QLabel(tr("Password:")), 2, 0, Qt::AlignRight);
+    m_userLayout->addWidget(m_userPasswd, 2, 1);
+    m_userLayout->addWidget(new QLabel(tr("Confirm:")), 3, 0, Qt::AlignRight);
+    m_userLayout->addWidget(m_userConfirm, 3, 1);
     m_userLayout->addWidget(m_warningLabel, 4, 0, 1, 2);
 
     m_spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Minimum );
@@ -153,12 +161,10 @@ void WizardPage_UserAdd::initializePage()
     m_passwd->setText( QString("") );
     m_confirm->setText( QString("") );
 
-    setTitle( tr("Set password and add users") );
-    setSubTitle( tr("Password for user \"root\" must be set. You can add new user also, at least one new user account should be created.") );
+    setTitle( tr("Set password and add normal user") );
+    setSubTitle( tr("Password for user \"root\" must be set and you should add normal user for daily usage.") );
 
     m_rootDescript->setText( tr("User \"root\" can control everything on the entire computer.\nA password MUST be set for user \"root\".") );
-    m_passwdLabel->setText( tr("Password:" ) );
-    m_confirmLabel->setText( tr("Confirm:" ) );
 
     m_userLabel->setText( tr("Add new users:") );
     m_warningLabel->setText( "" );
@@ -189,17 +195,22 @@ bool WizardPage_UserAdd::validatePage()
     }
 
     if (m_user1->text().isEmpty()) {
-        QMessageBox::warning(this, tr("User"), tr("Please at least add one normal user.") );
+        QMessageBox::warning(this, tr("User"), tr("Please add normal user.") );
         return false;
     }
 
+    if (m_userPasswd->text() != m_userConfirm->text()) {
+        QMessageBox::warning(this, tr("User password"), tr("Please input password correctly twice.") );
+        return false;
+    }
     return true;
 }
 
 void WizardPage_UserAdd::setPasswdUser()
 {
     g_engine->cmdSetRootPassword( m_passwd->text().toLatin1() );
-    if (!m_user1->text().isEmpty()) g_engine->cmdAddUser( m_user1->text().toUtf8() );
+    if (!m_user1->text().isEmpty()) 
+        g_engine->cmdAddUser( m_user1->text().toUtf8(), m_userPasswd->text().toUtf8() );
 }
 
 bool WizardPage_UserAdd::isComplete() const

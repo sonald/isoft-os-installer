@@ -37,8 +37,6 @@ private:
 
     QLabel* 		m_rootDescript;
     QLabel* 		m_rootPicture;
-    QLabel* 		m_passwdLabel;
-    QLabel*		    m_confirmLabel; 
     QLineEdit* 		m_passwd;
     QLineEdit*		m_confirm;
     QHBoxLayout*	m_descriptLayout;
@@ -48,7 +46,8 @@ private:
     QLabel*		    m_userPicture;
     QLabel*		    m_userLabel;
     QLineEdit*		m_user1;
-    QLabel*         m_star;
+    QLineEdit* 		m_userPasswd;
+    QLineEdit*		m_userConfirm;
     QLabel*         m_warningLabel;
     QHBoxLayout*	m_labelLayout;
     QGridLayout*	m_userLayout;
