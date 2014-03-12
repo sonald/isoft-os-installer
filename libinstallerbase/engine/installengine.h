@@ -59,7 +59,7 @@ class Engine
     void cmdMakePartLength(const char *devpath, const char *index, const char *parttype, const char *fstype, const char *length, const char *flag = NULL);
     void cmdRemovePart(const char *partpath);
     void cmdRemoveAllPart(const char *devpath);
-    void cmdMakeFileSystem(const char *partpath, const char *fstype);
+    void cmdMakeFileSystem(const char *partpath, const char *fstype, const char *flag);
     void cmdSetMountPoint(const char *devpath, const char *mountpoint, const char *fstype);
     void cmdChooseGroups(const char *groups);
     void cmdAddPackage(const char *package);
@@ -148,7 +148,7 @@ class Engine
     bool do_mkpart_length(const string &devpath, const string &index, const string &parttype, const string &fstype, const string &length, const string& flag);
     bool do_rmpart(const string &partpath);
     bool do_rmallpart(const string &devpath);
-    bool do_mkfs(const string &partpath, const string &fstype);
+    bool do_mkfs(const string &partpath, const string &fstype, const string& flag="");
     bool do_set_mountpoint(const string &devpath, const string &mountpoint, const string &fstype);
     bool do_choosegroups(const string &groups);
     bool do_add_package(const string package);

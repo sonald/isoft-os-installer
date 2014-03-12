@@ -38,6 +38,7 @@ public:
 	QString		rootPartitionPath();
 	bool		existMntPoint(const QString &mnt, QTreeWidgetItem *current = 0);
 	bool		existMntPointWithFstype(const QString &mnt, const QString &fstype);
+    bool    checkLegacyGptBootable();
     int         targetRootSize();
     bool hasEfipart(); // check if efi partition exists in GPT mode
 	void		setCurrentIndex(int index);

@@ -19,6 +19,7 @@ public:
 
     int nextId() const;
     bool validatePage();
+    void cleanupPage();
 
     int requiredSize() const { return m_requiredSize; }
     void setRequiredSize(int val) { m_requiredSize = val; emit requiredSizeChanged(val); }

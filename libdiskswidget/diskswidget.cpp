@@ -200,7 +200,7 @@ void DisksWidget::initTree()
 			child->setText(colDev, partPath);
 			child->setText(colPartType, partition->type_name());
 			child->setText(colFs, is_bios_grub?"bios_grub":partition->fs_type_name());
-			if (child->text(colFs) == "linux-swap")
+			if (child->text(colFs).contains("linux-swap"))
 				child->setText(colMount, "swap");
 
 			child->setText(colSize, partition->length_str());
@@ -216,13 +216,12 @@ void DisksWidget::initTree()
 					child->setText(colUsed, used);
 			}
 
-			child->setText(colOs, osOnDevice(partPath));
 
 			if (child->text(1) != "extended" && child->text(1) != "free" 
-				&& child->text(colFs) != "linux-swap" && child->text(colFs) != "Unknown") 
-			{
+				&& !child->text(colFs).contains("linux-swap") && child->text(colFs) != "Unknown") {
 				ItemButton *detail = new ItemButton(child, tr("detail"));
 				m_tree->setItemWidget(child, colDetail, detail);
+                child->setText(colOs, osOnDevice(partPath));
 			}
 
 			child->setText(colBeginBlock, QString::number(partition->start()));
@@ -249,7 +248,7 @@ void DisksWidget::initTree()
 			partInfo.begBlock = QString::number(partition->start());
 			partInfo.endBlock = QString::number(partition->end());
 			partInfo.format = false;
-			if (child->text(colFs) == "linux-swap")
+			if (child->text(colFs).contains("linux-swap"))
 				partInfo.mntPoint = "swap";
 			m_partInfoList.push_back(partInfo);
 
@@ -451,7 +450,7 @@ void DisksWidget::rebuildTree()
 				}
 			}
 
-			if (orig && child->text(colFs) != "linux-swap") {
+			if (orig && !child->text(colFs).contains("linux-swap")) {
 				//k show OS
 				child->setText(colOs, osOnDevice(realPartPath));
 
@@ -468,7 +467,7 @@ void DisksWidget::rebuildTree()
 
 				//k show detail button
 				if ((child->text(colPartType) != "extended" && child->text(colPartType) != "free"
-                            && child->text(colFs) != "linux-swap") && child->text(colFs) != "Unknown")  
+                            && !child->text(colFs).contains("linux-swap")) && child->text(colFs) != "Unknown")  
 				{
 					ItemButton *detail = new ItemButton(child, tr("detail"), realPartPath);
 					m_tree->setItemWidget(child, colDetail, detail);
@@ -487,7 +486,9 @@ void DisksWidget::rebuildTree()
 				{
 					if (child->text(colDev) != "free") {
 						child->setText(colMount, it->mntPoint); 
-						if (it->format)
+                        if (it->flag == "bios_grub")
+                            child->setText(colFs, it->flag);
+						else if (it->format)
 							child->setText(colFormat, checkMark);
 					}
 					break;
@@ -544,6 +545,12 @@ void DisksWidget::editPartition()
 	if (format == "vfat")
 		format = "fat32";
 
+    PedPartitionFlag partFlag = PED_PARTITION_LBA;
+    if (format == "bios_grub") {
+        partFlag = PED_PARTITION_BIOS_GRUB;
+        format = "fat32";
+    } 
+
 	PartitionList *partlist = m_partitionListMap.value(disk);
 	int index = itemIndex(current);
 	if (index == -1) {
@@ -565,10 +572,12 @@ void DisksWidget::editPartition()
 			
             if (isGPT || count < 3) {
 				//k count < 3 so create primary whether exists extended
-				partlist->add_by_whole(index, "primary", format.toLatin1());
+
+				partlist->add_by_whole(index, "primary", format.toLatin1(), partFlag);
 				tmp.clear();
-				tmp << disk << QString::number(index) << "primary" << format.toLatin1();
+				tmp << disk << QString::number(index) << "primary" << format.toLatin1() << QString::number(partFlag);
 				m_commandList.push_back(QPair<QString, QList<QString> >("conf_set_mkpart_whole", tmp));
+
 			} else if (count == 3 && !exist) {
 				//k create extended
 				int no = partlist->add_by_whole(index, "extended", 0);
@@ -600,7 +609,8 @@ void DisksWidget::editPartition()
 		// else not free part
 		if (!unChanged) {
 			partlist->set_part_fstype(index, format.toLatin1());
-			tmp << partlist->part_index(index)->path() << format;
+			tmp << partlist->part_index(index)->path() << format 
+                << QString::number(partFlag);
 			m_commandList.push_back(QPair<QString, QList<QString> >("conf_set_mkfs", tmp));
 		}
 
@@ -612,7 +622,10 @@ void DisksWidget::editPartition()
 			{
 				it->mntPoint = edit->mntPointComboBox->currentText();
 				if (edit->formatButton->isChecked()) {
-					it->format = true;
+                    if (partFlag == PED_PARTITION_BIOS_GRUB) 
+                        it->flag = "bios_grub";
+                    else 
+                        it->format = true;
 					if (edit->formatComboBox->currentText() == "linux-swap")
 						it->mntPoint = "swap";
 				}
@@ -1056,14 +1069,17 @@ void DisksWidget::writeXML()
 		if (it->first == "conf_set_mkpart_whole") {
 			QList<QString> tmp = it->second;
             QString flag = tmp.length() == 4? QString::number(PED_PARTITION_LBA): tmp[4];
-			engine->cmdMakePartWhole(tmp[0].toLatin1(), tmp[1].toLatin1(), tmp[2].toLatin1(), tmp[3].toLatin1(), flag.toLatin1());
+			engine->cmdMakePartWhole(tmp[0].toLatin1(), tmp[1].toLatin1(),
+                    tmp[2].toLatin1(), tmp[3].toLatin1(), flag.toLatin1());
 			continue;
 		}
 
 		if (it->first == "conf_set_mkpart_length") {
 			QList<QString> tmp = it->second;
-            QString flag = tmp.length() == 5? QString::number(PED_PARTITION_LBA): tmp[4];
-			engine->cmdMakePartLength(tmp[0].toLatin1(), tmp[1].toLatin1(), tmp[2].toLatin1(), tmp[3].toLatin1(), tmp[4].toLatin1(), flag.toLatin1());
+            QString flag = tmp.length() == 5? QString::number(PED_PARTITION_LBA): tmp[5];
+			engine->cmdMakePartLength(tmp[0].toLatin1(), tmp[1].toLatin1(), 
+                    tmp[2].toLatin1(), tmp[3].toLatin1(), tmp[4].toLatin1(),
+                    flag.toLatin1());
 			continue;
 		}
 
@@ -1075,7 +1091,9 @@ void DisksWidget::writeXML()
 			
 		if (it->first == "conf_set_mkfs") {
 			QList<QString> tmp = it->second;
-			engine->cmdMakeFileSystem(tmp[0].toLatin1(), tmp[1].toLatin1());
+            QString flag = tmp.length() == 2? QString::number(PED_PARTITION_LBA): tmp[2];
+			engine->cmdMakeFileSystem(tmp[0].toLatin1(), tmp[1].toLatin1(), 
+                    flag.toLatin1());
 			continue;
 		}
 			
@@ -1356,8 +1374,6 @@ bool DisksWidget::validate(QString &err, int requiredSizeMB)
     if (size < requiredSizeMB) {
         err = tr("You need to select a partition which at least has %1MB!").arg(requiredSizeMB);
         return false;
-    } else {
-        return true;
     } 
 
 	if (m_mode == Advanced) {
@@ -1370,6 +1386,12 @@ bool DisksWidget::validate(QString &err, int requiredSizeMB)
             if (!existMntPointWithFstype("/boot/efi", "vfat")) {
                 err = tr("You need to set a \"/boot/efi\" mount point for a fat32 partition.");
                 return false;
+            }
+        } else {
+            if (!checkLegacyGptBootable()) {
+                err = tr("a bios_grub partition is needed to boot system after finishing installation.");
+                return false;
+
             }
         }
 	}
@@ -1427,6 +1449,40 @@ bool DisksWidget::existMntPointWithFstype(const QString &mnt, const QString &fst
 	}
 
 	return false;
+}
+
+//precondition: isEfiEnabled == false
+//if '/' is on non-gpt disk, it's ok. 
+//else make sure bios_grub and root are at the same disk.
+bool DisksWidget::checkLegacyGptBootable()
+{
+    QString root_dev, bios_grub_dev;
+	for (int i = 0; i < m_tree->topLevelItemCount(); ++i) {
+		QTreeWidgetItem *disk = m_tree->topLevelItem(i);
+        
+        QString dev = disk->text(colDev);
+        bool is_gpt = maybeGPT(dev);
+
+		for (int j = 0; j < disk->childCount(); ++j) {
+			QTreeWidgetItem *item = disk->child(j);
+			if (item->text(colPartType) == "extended") {
+				for (int k = 0; k < item->childCount(); ++k) {
+					QTreeWidgetItem *logical = item->child(k);
+					if (logical->text(colMount) == "/") {
+                        return true;
+					}
+				}
+			} else if (item->text(colFs) == "bios_grub") {
+                bios_grub_dev = dev;
+            } else if (item->text(colMount) == "/") {
+                root_dev = dev;
+                if (!is_gpt) return true;
+			}
+		}
+	}
+
+    qDebug() << "root_dev, bios_grub_dev" << root_dev << bios_grub_dev;
+    return (root_dev == bios_grub_dev && !bios_grub_dev.isEmpty());
 }
 
 //TODO: consider all mountpoints from all disks

@@ -460,7 +460,7 @@ bool Engine::runCmd(const vector<Cmd> &cmds)
             }
             break;
         case PARTITION_MKFS:
-            ret = do_mkfs(currcmd.args[0], currcmd.args[1]);
+            ret = do_mkfs(currcmd.args[0], currcmd.args[1], currcmd.args[2]);
             if(!ret){
                 _errstr = "Run mkfs Failed.";
                 return false;
@@ -665,9 +665,9 @@ void Engine::cmdRemoveAllPart(const char *devpath)
 {
     appendCmd(INSTALL, PARTITION_RMALLPART, {devpath});
 }
-void Engine::cmdMakeFileSystem(const char *partpath, const char *fstype)
+void Engine::cmdMakeFileSystem(const char *partpath, const char *fstype, const char *flag)
 {
-    appendCmd(INSTALL, PARTITION_MKFS, {partpath, fstype});
+    appendCmd(INSTALL, PARTITION_MKFS, {partpath, fstype, flag});
 }
 void Engine::cmdSetMountPoint(const char *devpath, const char *mountpoint, const char *fstype)
 {
@@ -940,7 +940,8 @@ bool Engine::do_rmallpart(const string &devpath)
     //XXX not implemented
 }
 
-bool Engine::do_mkfs(const string &partpath, const string &fstype)
+bool Engine::do_mkfs(const string &partpath, const string &fstype, 
+        const string& flag)
 {
     string cmd = "";
 
@@ -951,7 +952,7 @@ bool Engine::do_mkfs(const string &partpath, const string &fstype)
 	
     cmd = "";	
 
-    if (fstype == "swap" || fstype == "linux-swap")	{
+    if (fstype == "swap" || fstype.find("linux-swap") == 0) {
 	    cmd = "mkswap ";
 	} else {
 	    cmd = "mkfs -t ";
@@ -981,45 +982,31 @@ bool Engine::do_mkfs(const string &partpath, const string &fstype)
         return false;
     }
 	
-    cmd = "";
-    string num = "";
-    string dev = "";
-    int size = partpath.size();
+    if (flag.size()) {
+        cmd = "";
+        string num = "";
+        string dev = "";
+        int size = partpath.size();
 
-    if ((partpath[size-2] >='1') && (partpath[size-2] <= '9')) {
-        num = partpath.substr(size-2, 2);
-        dev = partpath.substr(0, size-2);
-    }
-    else if ((partpath[size-1] >='1') && (partpath[size-1] <= '9')) {
-        num = partpath.substr(size-1);
-        dev = partpath.substr(0, size-1);
-    }
+        if ((partpath[size-2] >='1') && (partpath[size-2] <= '9')) {
+            num = partpath.substr(size-2, 2);
+            dev = partpath.substr(0, size-2);
+        }
+        else if ((partpath[size-1] >='1') && (partpath[size-1] <= '9')) {
+            num = partpath.substr(size-1);
+            dev = partpath.substr(0, size-1);
+        }
+        PedPartitionFlag ppf = (PedPartitionFlag)atoi(flag.c_str());
+        if (ppf == PED_PARTITION_LBA) 
+            return true;
 
-    /*FIXME: sfdisk does not suppor GPT
-    cmd = "sfdisk --id ";
-    cmd += dev;
-    cmd += " ";
-    cmd += num;
-    cmd += " ";
-
-
-    if (fstype == "swap" || fstype == "linux-swap") {
-        cmd += "82";
-    } else if (fstype == "ext2" || fstype == "ext3" || fstype == "ext4") {
-        cmd += "83";
-    } else if (fstype == "fat32") {
-        cmd += "c";
-    } else if (fstype == "fat16") {
-        cmd += "e";
+        string flag_str = ped_partition_flag_get_name(ppf);
+        cmd = "parted " + dev + " set " + num + " " + flag_str +" on";
+        if (system(cmd.c_str()) != 0) {
+            cerr << "failed to set flag: " << cmd << endl;
+            return false;
+        }
     }
-		
-    cerr<<"sfdisk command line is:"<<cmd<<endl;
-		
-    if (system(cmd.c_str()) != 0) {
-        cerr<<"sfdisk error"<<endl;
-        return false;
-    }
-  */
     return true;
 }
 
