@@ -30,6 +30,10 @@ bool WizardPage_installmode::validatePage()
 {
     if (ui->rbDefault->isChecked()) {
         //registerField("requiredSize", this, "requiredSize");
+        //registerField("selectedGroups", this, "selectedGroups");
+        QString groups("core,base,desktop");
+        setField("selectedGroups", groups);
+        g_engine->cmdChooseGroups(groups.toUtf8().constData());
         setField("requiredSize", 7500);
     }
     return true;
