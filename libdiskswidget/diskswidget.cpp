@@ -149,8 +149,6 @@ DisksWidget::DisksWidget(QWidget *parent, const Modes &mode, QString locale)
 		break;
 	}
 
-//	setMinimumSize(800, 300);
-
 	QList<QString> tmp;
 	m_commandList.push_back(QPair<QString, QList<QString> >("start_partition_section", tmp));
 }
@@ -182,6 +180,8 @@ void DisksWidget::initTree()
 			if (partition == NULL)
 				continue;
 
+            
+            bool is_bios_grub = partition->has_flag(PED_PARTITION_BIOS_GRUB);
 			QString partPath = partition->path();
 			if (m_mode == Linux) {
 				if (!isLinux(partPath))
@@ -199,7 +199,7 @@ void DisksWidget::initTree()
 			QTreeWidgetItem *child = new QTreeWidgetItem(parent);
 			child->setText(colDev, partPath);
 			child->setText(colPartType, partition->type_name());
-			child->setText(colFs, partition->fs_type_name());
+			child->setText(colFs, is_bios_grub?"bios_grub":partition->fs_type_name());
 			if (child->text(colFs) == "linux-swap")
 				child->setText(colMount, "swap");
 
@@ -414,6 +414,7 @@ void DisksWidget::rebuildTree()
 			if (partition == NULL)
 				continue;
 
+            bool is_bios_grub = partition->has_flag(PED_PARTITION_BIOS_GRUB);
 			//k if primary partition beyond extended, reset parent
 			if (parent->text(1) == "extended" && partition->isPrimary())
 				parent = parent->parent();
@@ -427,7 +428,7 @@ void DisksWidget::rebuildTree()
 				partPath = "free";
 			child->setText(colDev, partPath);
 			child->setText(colPartType, partition->type_name());
-			child->setText(colFs, partition->fs_type_name());         
+			child->setText(colFs, is_bios_grub?"bios_grub":partition->fs_type_name());         
 			child->setText(colSize, partition->length_str());
 
 			child->setText(colBeginBlock, QString::number(partition->start()));
@@ -684,6 +685,12 @@ void DisksWidget::addPartition()
 	if (fsType == "vfat")
 		fsType = "fat32";
 
+    PedPartitionFlag partFlag = PED_PARTITION_LBA;
+    if (fsType == "bios_grub") {
+        partFlag = PED_PARTITION_BIOS_GRUB;
+        fsType == "";
+    }
+
 	QString length = "-1";
     if (!add->chboxUseAll->isChecked())
 		length = QString::number(add->fixedSize->value());
@@ -699,16 +706,16 @@ void DisksWidget::addPartition()
 
 		if (count < 3 || isGPT) { //kk create new primary
 			qDebug() << length << fsType;
-			int index = createPrimary(current, fsType, length, "primary");
-			addPartInfo(index, current, mntPoint);
+			int index = createPrimary(current, fsType, length, "primary", partFlag);
+			addPartInfo(index, current, mntPoint, partFlag != PED_PARTITION_BIOS_GRUB);
 
 		} else { //k count = 3
 			if (existExtended(disk)) {
-				int index = createPrimary(current, fsType, length, "primary");
+				int index = createPrimary(current, fsType, length, "primary", partFlag);
 				addPartInfo(index, current, mntPoint);
 			} else { 
 				//k create extended
-				int index = createPrimary(current, 0, "-1", "extended");
+				int index = createPrimary(current, 0, "-1", "extended", partFlag);
 				PartitionList *list = m_partitionListMap.value(disk);
 
 				//k create logical
@@ -887,6 +894,11 @@ bool DisksWidget::isPrimary(const QTreeWidgetItem *item)
 	return false;
 }
 
+QString DisksWidget::currentDevPath()
+{
+    return belongedDisk(m_tree->currentItem());
+}
+
 //k XXX take care : item must pay attention
 //k the INCOMING item should NOT be disk
 QString DisksWidget::belongedDisk(QTreeWidgetItem *item)
@@ -900,7 +912,8 @@ bool DisksWidget::maybeGPT(const QString& disk)
 {
 	PartitionList *list = m_partitionListMap.value(disk);
     qDebug() << "part table label:" << list->owner_ptable()->type_name();
-    return !list->owner_ptable()->is_support_extended_partition();
+    return strcasecmp(list->owner_ptable()->type_name(), "gpt") == 0;
+    //return !list->owner_ptable()->is_support_extended_partition();
 }
 
 int DisksWidget::primaryCount(const QString &disk)
@@ -943,7 +956,7 @@ int DisksWidget::itemIndex(QTreeWidgetItem *item)
 }
 
 //k create primary partition, and return index of partition list
-int DisksWidget::createPrimary(QTreeWidgetItem *item, const QString &fsType, const QString &length, const QString &type)
+int DisksWidget::createPrimary(QTreeWidgetItem *item, const QString &fsType, const QString &length, const QString &type, PedPartitionFlag flag)
 {
 	QString disk = belongedDisk(item);
 	PartitionList *list = m_partitionListMap.value(disk);
@@ -963,19 +976,21 @@ int DisksWidget::createPrimary(QTreeWidgetItem *item, const QString &fsType, con
 
 	int no = 0;
 	if (length == "-1") {
-		no = list->add_by_whole(index, type.toLatin1(), fsType.toLatin1());
+		no = list->add_by_whole(index, type.toLatin1(), fsType.toLatin1(), flag);
 		QList<QString> tmp;
-		tmp << belongedDisk(item) << QString::number(index) << type << fsType;
+		tmp << belongedDisk(item) << QString::number(index) << type 
+            << fsType << QString::number((int)flag);
 		m_commandList.push_back(QPair<QString, QList<QString> >("conf_set_mkpart_whole", tmp));
 
 		//k find the index
 		int index = list->find_index_of(no);
 		return index;
 	} else {
-		no = list->add_by_length(index, type.toLatin1(), fsType.toLatin1(), length.toLatin1(), "MB");
+		no = list->add_by_length(index, type.toLatin1(), fsType.toLatin1(), length.toLatin1(), "MB", flag);
 
 		QList<QString> tmp;
-		tmp << belongedDisk(item) << QString::number(index) << type << fsType << length+"MB";
+		tmp << belongedDisk(item) << QString::number(index) << type << fsType 
+            << length+"MB" << QString::number((int)flag);
 		m_commandList.push_back(QPair<QString, QList<QString> >("conf_set_mkpart_length", tmp));
 		int index = list->find_index_of(no);
 		return index;
@@ -983,7 +998,7 @@ int DisksWidget::createPrimary(QTreeWidgetItem *item, const QString &fsType, con
 }
 
 //k call by addPartition when create partition on a free
-void DisksWidget::addPartInfo(const int index, QTreeWidgetItem *item, const QString &mntPoint)
+void DisksWidget::addPartInfo(const int index, QTreeWidgetItem *item, const QString &mntPoint, bool format)
 {
 	QString disk = belongedDisk(item);
 	PartitionList *list = m_partitionListMap.value(disk);
@@ -995,7 +1010,7 @@ void DisksWidget::addPartInfo(const int index, QTreeWidgetItem *item, const QStr
 	partInfo.begBlock = QString::number(partition->start());
 	partInfo.endBlock = QString::number(partition->end());
 	partInfo.mntPoint = mntPoint;
-	partInfo.format = true;
+	partInfo.format = format;
 	m_partInfoList.push_back(partInfo);
 }
 
@@ -1030,7 +1045,7 @@ void DisksWidget::writeXML()
 	recordStatus();
 	QList<QPair<QString, QList<QString> > >::iterator it;
 	for (it = m_commandList.begin(); it != m_commandList.end(); ++it) {
-		qDebug() << it->first;
+		qDebug() << it->first << it->second;
 		
 		if (it->first == "conf_set_mklabel") {
 			QList<QString> tmp = it->second;
@@ -1040,13 +1055,15 @@ void DisksWidget::writeXML()
 
 		if (it->first == "conf_set_mkpart_whole") {
 			QList<QString> tmp = it->second;
-			engine->cmdMakePartWhole(tmp[0].toLatin1(), tmp[1].toLatin1(), tmp[2].toLatin1(), tmp[3].toLatin1());
+            QString flag = tmp.length() == 4? QString::number(PED_PARTITION_LBA): tmp[4];
+			engine->cmdMakePartWhole(tmp[0].toLatin1(), tmp[1].toLatin1(), tmp[2].toLatin1(), tmp[3].toLatin1(), flag.toLatin1());
 			continue;
 		}
 
 		if (it->first == "conf_set_mkpart_length") {
 			QList<QString> tmp = it->second;
-			engine->cmdMakePartLength(tmp[0].toLatin1(), tmp[1].toLatin1(), tmp[2].toLatin1(), tmp[3].toLatin1(), tmp[4].toLatin1());
+            QString flag = tmp.length() == 5? QString::number(PED_PARTITION_LBA): tmp[4];
+			engine->cmdMakePartLength(tmp[0].toLatin1(), tmp[1].toLatin1(), tmp[2].toLatin1(), tmp[3].toLatin1(), tmp[4].toLatin1(), flag.toLatin1());
 			continue;
 		}
 
@@ -1377,9 +1394,9 @@ bool DisksWidget::isEfiEnabled()
 bool DisksWidget::hasEfipart()
 {
 	for (int i = 0; i < m_tree->topLevelItemCount(); ++i) {
-		QTreeWidgetItem *parent = m_tree->topLevelItem(i);
-		for (int j = 0; j < parent->childCount(); ++j) {
-			QTreeWidgetItem *item = parent->child(j);
+		QTreeWidgetItem *disk = m_tree->topLevelItem(i);
+		for (int j = 0; j < disk->childCount(); ++j) {
+			QTreeWidgetItem *item = disk->child(j);
 			if (item->text(colMount) == "/boot/efi") {
 				return true;
 			}
@@ -1448,7 +1465,6 @@ bool DisksWidget::existMntPoint(const QString &mnt, QTreeWidgetItem *current)
 			if (item == current)
 				continue;
 			if (item->text(colMount) == mnt) {
-//				found = item;
 				return true;
 			}
 
@@ -1458,7 +1474,6 @@ bool DisksWidget::existMntPoint(const QString &mnt, QTreeWidgetItem *current)
 					if (grand == current)
 						continue;
 					if (grand->text(colMount) == mnt) {
-//						found = grand;
 						return true;
 					}
 				}

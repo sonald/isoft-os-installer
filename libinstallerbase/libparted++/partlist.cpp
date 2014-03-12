@@ -323,19 +323,21 @@ int PartitionList::add_by_length(int index,
         const char* part_type_name,
         const char* fs_type_name,
         const char* length,
-        const char* unit_name)
+        const char* unit_name,
+        PedPartitionFlag flag)
 {
     PedUnit unit = ped_unit_get_by_name( unit_name );
     if ( unit == -1 )
         return 0;
-    return add_by_length( index, part_type_name, fs_type_name, length, unit );
+    return add_by_length( index, part_type_name, fs_type_name, length, unit, flag );
 }
 
 int PartitionList::add_by_length(int index,
         const char* part_type_name,
         const char* fs_type_name,
         const char* length,
-        PedUnit unit)
+        PedUnit unit,
+        PedPartitionFlag flag)
 {
     assert( part_type_name != NULL );
 
@@ -350,14 +352,15 @@ int PartitionList::add_by_length(int index,
     if ( part_type & PED_PARTITION_EXTENDED )
         fs_type = NULL;
 
-    return add_by_length( index, (PedPartitionType)part_type, fs_type, length, unit);
+    return add_by_length( index, (PedPartitionType)part_type, fs_type, length, unit, flag);
 }
 
 int PartitionList::add_by_length(int index,
         PedPartitionType part_type,
         PedFileSystemType* fs_type,
         const char* length,
-        PedUnit unit)
+        PedUnit unit,
+        PedPartitionFlag flag)
 {
     Partition* part = part_index(index);
 
@@ -473,8 +476,8 @@ int PartitionList::add_by_length(int index,
     ped_disk_print( disk_ );
 
     ped_partition_set_system( part_new, fs_type );
-    if( ped_partition_is_flag_available( part_new, PED_PARTITION_LBA ) )
-        ped_partition_set_flag( part_new, PED_PARTITION_LBA, 1);
+    if( ped_partition_is_flag_available(part_new, flag) )
+        ped_partition_set_flag(part_new, flag, 1);
     update_list();
 
     // cleanup
@@ -501,91 +504,12 @@ error_part_new:
     return 0;
 }
 
-/* add the partition with exact length.
- * hide it because no one use it.
- bool PartitionList::add_by_length(int index, 
- PedPartitionType part_type, 
- PedFileSystemType* fs_type,
- PedSector length)
- {
- Partition* part = part_index(index);
-
- if ( part == NULL )
- return false;
- if ( ! ( part->type() & PED_PARTITION_FREESPACE ) )
- return false;
-// NOT permit create non-logical part in extended freespace.
-if ( ( part->type() & PED_PARTITION_LOGICAL ) && !( part_type & PED_PARTITION_LOGICAL ) )
-return false;
-if ( !( part->type() & PED_PARTITION_LOGICAL ) && ( part_type & PED_PARTITION_LOGICAL ) )
-return false;
-
-if ( length > part->length() )
-return false;
-
-PedDevice* dev = disk_->dev;
-PedSector start_sector = part->start();
-PedSector end_sector = start_sector + length - 1;
-PedGeometry* range_start = ped_geometry_new( dev, start_sector, 1 );
-PedGeometry* range_end = ped_geometry_new( dev, end_sector, 1 );
-
-PedPartition* part_new = ped_partition_new( disk_, part_type, fs_type, start_sector, end_sector );
-if ( !part_new )
-goto error_part_new;
-
-::snap_to_boundaries( &part_new->geom, NULL, disk_, range_start, range_end );
-
-PedConstraint* user_constraint;
-user_constraint = ped_constraint_new( ped_alignment_any, ped_alignment_any,
-range_start, range_end, 1, dev->length );
-PedConstraint* dev_constraint;
-dev_constraint = ped_device_get_constraint( dev );
-PedConstraint* final_constraint;
-final_constraint = ped_constraint_intersect( user_constraint, dev_constraint );
-if( !final_constraint )
-goto error_final_constraint;
-
-int ret;
-ret = ped_disk_add_partition( disk_, part_new, final_constraint );
-if ( !ret )
-ret = ped_disk_add_partition( disk_, part_new, ped_constraint_any( dev ) );
-if ( !ret )
-goto error_add_partition;
-
-ped_partition_set_system( part_new, fs_type );
-if( ped_partition_is_flag_available( part_new, PED_PARTITION_LBA ) )
-ped_partition_set_flag( part_new, PED_PARTITION_LBA, 1);
-update_list();
-// cleanup
-ped_constraint_destroy(final_constraint);
-ped_constraint_destroy(user_constraint);
-ped_constraint_destroy(dev_constraint);
-if ( range_start )
-ped_geometry_destroy( range_start );
-if ( range_end )
-ped_geometry_destroy( range_end );
-return true;
-
-error_add_partition:
-ped_constraint_destroy(final_constraint);
-error_final_constraint:
-ped_constraint_destroy(user_constraint);
-ped_constraint_destroy(dev_constraint);
-ped_partition_destroy(part_new);
-error_part_new:
-if ( range_start )
-    ped_geometry_destroy( range_start );
-if ( range_end )
-    ped_geometry_destroy( range_end );
-    return false;
-    }
-*/
-
 /* convenient function for add_by_whole
 */
 int PartitionList::add_by_whole(int index,
         const char * part_type_name,
-        const char * fs_type_name)
+        const char * fs_type_name,
+        PedPartitionFlag flag)
 {
     assert( part_type_name != NULL );
 
@@ -600,14 +524,15 @@ int PartitionList::add_by_whole(int index,
     if ( part_type & PED_PARTITION_EXTENDED )
         fs_type = NULL;
 
-    return add_by_whole( index, (PedPartitionType)part_type, fs_type );
+    return add_by_whole( index, (PedPartitionType)part_type, fs_type, flag );
 }
 
 /* add the new Partition() with whole space in freespace part(index).
 */
 int PartitionList::add_by_whole(int index, 
         PedPartitionType part_type, 
-        PedFileSystemType* fs_type)
+        PedFileSystemType* fs_type,
+        PedPartitionFlag flag)
 {
     Partition* part = part_index(index);
 
@@ -715,8 +640,8 @@ int PartitionList::add_by_whole(int index,
     ped_disk_print( disk_ );
 
     ped_partition_set_system( part_new, fs_type );
-    if( ped_partition_is_flag_available( part_new, PED_PARTITION_LBA ) )
-        ped_partition_set_flag( part_new, PED_PARTITION_LBA, 1);
+    if( ped_partition_is_flag_available( part_new, flag ) )
+        ped_partition_set_flag( part_new, flag, 1);
     update_list();
     // cleanup 
     ped_constraint_destroy(final_constraint);

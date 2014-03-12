@@ -18,10 +18,10 @@ EditPartition::EditPartition(QTreeWidgetItem *currentItem, DisksWidget *parent)
 	fsTypeLabel->setText(currentItem->text(colFs));
     formatComboBox->setCurrentIndex(2); // ext4
 	sizeLabel->setText(currentItem->text(colSize));
-	
-	if (m_cur->text(colDev) == "free" || m_cur->text(colFs) == "Unknown"
-		|| m_cur->text(colFs) == "linux-swap" )
+
+    if (!allowMount()) {
 		mntPointComboBox->setEnabled(false);
+    }
 
 	connect(formatButton, SIGNAL(toggled(bool )), formatComboBox, SLOT(setEnabled(bool )));
 	connect(formatButton, SIGNAL(toggled(bool )), this, SLOT(setMountByFormatButton(bool )));
@@ -41,7 +41,19 @@ EditPartition::EditPartition(QTreeWidgetItem *currentItem, DisksWidget *parent)
         if (idx != -1) {
             this->mntPointComboBox->removeItem(idx);
         }
+
+        // in legacy mode, bios_grub partition is needed for grub to embed when 
+        // disk has gpt table.
+        if (m_parent->maybeGPT(m_parent->currentDevPath())) {
+            formatComboBox->addItem("bios_grub");
+        }
     }
+}
+
+bool EditPartition::allowMount()
+{
+	return !(m_cur->text(colDev) == "free" || m_cur->text(colFs) == "Unknown"
+		|| m_cur->text(colFs) == "linux-swap" || m_cur->text(colFs) == "bios_grub");
 }
 
 void EditPartition::accept()
@@ -72,7 +84,7 @@ void EditPartition::accept()
 
 void EditPartition::checkSwap(const QString &text)
 {
-	if (text == "linux-swap") {
+	if (text == "linux-swap" || text == "bios_grub") {
 		mntPointComboBox->setCurrentIndex(-1);
 		mntPointComboBox->setEnabled(false);
 	} else {
@@ -85,9 +97,7 @@ void EditPartition::checkFree(bool checked)
 	qDebug() << __FUNCTION__;
 	//k only Unchanged button check, disable mount combo
 	if (checked) {
-		if (m_cur->text(colDev) == "free" || m_cur->text(colFs) == "Unknown"
-			|| m_cur->text(colFs) == "linux-swap" )
-		{
+		if (!allowMount()) {
 			mntPointComboBox->setEnabled(false);
 			mntPointComboBox->setCurrentIndex(-1);
 		} else {
@@ -99,7 +109,7 @@ void EditPartition::checkFree(bool checked)
 void EditPartition::setMountByFormatButton(bool checked)
 {
 	if (checked) {
-		if (formatComboBox->currentText() == "linux-swap") {
+		if (formatComboBox->currentText() == "linux-swap" || formatComboBox->currentText() == "bios_grub") {
 			mntPointComboBox->setCurrentIndex(-1);
 			mntPointComboBox->setEnabled(false);
 		 } else

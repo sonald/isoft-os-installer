@@ -73,7 +73,8 @@ class PartitionList
 		      const char* part_type_name,
 		      const char* fs_type_name,
 		      const char* length,
-		      const char* unit_name = "compact");
+		      const char* unit_name = "compact",
+              PedPartitionFlag flag = PED_PARTITION_LBA);
     /*
       bool add_by_length(int index,
       PedPartitionType part_type,
@@ -86,7 +87,8 @@ class PartitionList
     // return the num of created partition, 0 when failed.
     int add_by_whole(int index,
 		     const char* part_type_name,
-		     const char* fs_type_name);
+		     const char* fs_type_name,
+              PedPartitionFlag flag = PED_PARTITION_LBA);
    
     // misc
     bool set_part_fstype(int index,
@@ -97,18 +99,21 @@ class PartitionList
  private:
     int add_by_whole(int index,
 		     PedPartitionType part_type,
-		     PedFileSystemType* fs_type);
+		     PedFileSystemType* fs_type,
+             PedPartitionFlag flag = PED_PARTITION_LBA);
 
     int add_by_length(int index,
 		      const char* part_type_name,
 		      const char* fs_type_name,
 		      const char* length,
-		      PedUnit unit );
+		      PedUnit unit,
+              PedPartitionFlag flag = PED_PARTITION_LBA);
     int add_by_length(int index,
 		      PedPartitionType part_type,
 		      PedFileSystemType* fs_type,
 		      const char* length,
-		      PedUnit unit );
+		      PedUnit unit,
+              PedPartitionFlag flag = PED_PARTITION_LBA);
 
     void build_list();
     void clear_list();

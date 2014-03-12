@@ -18,12 +18,19 @@ AddPartition::AddPartition(DisksWidget *parent) : QDialog(parent), _tree(parent)
 
     if (!_tree->isEfiEnabled()) {
         //remove efi mount point
-        int idx = this->mntPoint->findText("/boot/efi");
+        int idx = this->mntPoint->findText(efiMountPoint);
         if (idx != -1) {
             this->mntPoint->removeItem(idx);
         }
+
+        // in legacy mode, bios_grub partition is needed for grub to embed when 
+        // disk has gpt table.
+        
+        if (_tree->maybeGPT(_tree->currentDevPath())) {
+            fsType->addItem("bios_grub");
+        }
     }
-    
+
     fsType->setCurrentIndex(2);
 }
 
@@ -71,7 +78,7 @@ void AddPartition::accept()
                     tr("The '/' partition needs to be formatted to one of the ext filesystems."));
 			return;
 		}
-	} else if (mnt == "/boot/efi") {
+	} else if (mnt == efiMountPoint) {
         if (fsType->currentText() != "fat32") {
             QMessageBox::warning(this, tr("Warning"), 
                     tr("The 'efi' partition needs to be formatted as fat32."));
@@ -84,7 +91,7 @@ void AddPartition::accept()
 
 void AddPartition::updateFsTypeList(const QString &mntpoint)
 {
-    if (mntpoint == "/boot/efi") {
+    if (mntpoint == efiMountPoint) {
         int idx = fsType->findText("fat32");
         if (idx != -1) {
             fsType->setCurrentIndex(idx);
@@ -95,7 +102,7 @@ void AddPartition::updateFsTypeList(const QString &mntpoint)
 void AddPartition::judgeMountEnable(const QString &text)
 {
 	qDebug() << __FUNCTION__;
-	if (text == "linux-swap") {
+	if (text == "linux-swap" || text == "bios_grub") {
 		mntPoint->setCurrentIndex(-1);
 		mntPoint->setEnabled(false);
 	} else {

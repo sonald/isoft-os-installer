@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <list>
+#include <parted/parted.h>
 
 using namespace std;
 
@@ -54,8 +55,8 @@ class Engine
     // cmd interfaces. 
     // the external program call these interface to order the commands.
     void cmdMakeLabel(const char *devpath, const char *labeltype);
-    void cmdMakePartWhole(const char *devpath, const char *index, const char *parttype, const char *fstype);
-    void cmdMakePartLength(const char *devpath, const char *index, const char *parttype, const char *fstype, const char *length);
+    void cmdMakePartWhole(const char *devpath, const char *index, const char *parttype, const char *fstype, const char *flag = NULL);
+    void cmdMakePartLength(const char *devpath, const char *index, const char *parttype, const char *fstype, const char *length, const char *flag = NULL);
     void cmdRemovePart(const char *partpath);
     void cmdRemoveAllPart(const char *devpath);
     void cmdMakeFileSystem(const char *partpath, const char *fstype);
@@ -102,8 +103,9 @@ class Engine
     void copyXorgConf();
     */
     // classify the xml command into static commands vector.
-    void appendCmd(int type, int cmdid, const char *arg0=NULL, const char *arg1=NULL,
-                   const char *arg2=NULL, const char *arg3=NULL, const char *arg4=NULL);
+    void appendCmd(int type, int cmdid, const vector<string>& args);
+    //void appendCmd(int type, int cmdid, const char *arg0=NULL, const char *arg1=NULL,
+                   //const char *arg2=NULL, const char *arg3=NULL, const char *arg4=NULL, const char *arg5 = NULL);
     // ids of commands
     enum {
         SET_PARTITION = 0,
@@ -142,8 +144,8 @@ class Engine
 
     bool runCmd(const vector<Cmd> &cmds);
     bool do_mklabel(const string &devpath, const string &labeltype);
-    bool do_mkpart_whole(const string &devpath, const string &index, const string &parttype, const string &fstype);
-    bool do_mkpart_length(const string &devpath, const string &index, const string &parttype, const string &fstype, const string &length);
+    bool do_mkpart_whole(const string &devpath, const string &index, const string &parttype, const string &fstype, const string& flag);
+    bool do_mkpart_length(const string &devpath, const string &index, const string &parttype, const string &fstype, const string &length, const string& flag);
     bool do_rmpart(const string &partpath);
     bool do_rmallpart(const string &devpath);
     bool do_mkfs(const string &partpath, const string &fstype);
