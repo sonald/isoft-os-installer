@@ -92,11 +92,6 @@ ln -sf vim /usr/bin/vi
 
 sed -i 's/SystemGroup sys root/SystemGroup sys root users/' /etc/cups/cups-file.conf 
 
-usermod -a -G users nobody
-mkdir -p /srv/smb
-chown root:users /srv/smb
-chmod 1775  /srv/smb
-
 pacman-key --init && pacman-key --populate archlinux
 
 systemctl enable kdm-plymouth
