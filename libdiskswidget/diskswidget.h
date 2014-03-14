@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QMap>
 #include <QTreeWidget>
+#include <parted++/parted++.h>
 
 class QVBoxLayout;
 class QTreeWidget;
@@ -22,6 +23,7 @@ enum Columns {
 
 const QString checkMark(QChar(0x2713));
 const QString AppPath = "/usr/share/libdiskswidget/";
+const QString efiMountPoint = "/boot/efi";
 
 class DisksWidget : public QWidget
 {
@@ -36,10 +38,11 @@ public:
 	QString		rootPartitionPath();
 	bool		existMntPoint(const QString &mnt, QTreeWidgetItem *current = 0);
 	bool		existMntPointWithFstype(const QString &mnt, const QString &fstype);
+    bool    checkLegacyGptBootable();
     int         targetRootSize();
     bool hasEfipart(); // check if efi partition exists in GPT mode
 	void		setCurrentIndex(int index);
-	QString		currentDevPath()	{ return m_tree->currentItem()->text(0); }
+	QString		currentDevPath();
 	QTreeWidgetItem *getCurrentItem() { return m_tree->currentItem(); }
 
 	//k only use for mode _windows
@@ -51,7 +54,9 @@ public:
     int humanToSizeMB(QString size);
 
 	QString osOnDevice(const QString &device);
+
     bool isEfiEnabled();
+    bool maybeGPT(const QString& disk);
 
 public slots:
 	void 	reset();
@@ -73,12 +78,11 @@ private:
 
 	//k is it primary partition
 	bool 	isPrimary(const QTreeWidgetItem *item);
-    bool    maybeGPT(const QString& disk);
 	int 	primaryCount(const QString &disk);
 	int 	itemIndex(QTreeWidgetItem *item);
-	int 	createPrimary(QTreeWidgetItem *item, const QString &fsType, const QString &length, const QString &type);
+	int 	createPrimary(QTreeWidgetItem *item, const QString &fsType, const QString &length, const QString &type, PedPartitionFlag flag);
 	bool	existExtended(const QString &disk);
-	void 	addPartInfo(const int index, QTreeWidgetItem *item, const QString &mntPoint);
+	void 	addPartInfo(const int index, QTreeWidgetItem *item, const QString &mntPoint, bool format = false);
 	void 	recordStatus();
 	bool	isWindows(const QString &dev);
 	bool	isLinux(const QString &dev);
@@ -130,6 +134,9 @@ private:
 		QString	mntPoint;
 		bool 	format;
 		QString fsType;		//k fs type after format
+        // right now, only special-handle `bios_grub` flag,
+        // maybe `boot` in the future.
+        QString flag; 
 	};
 	//k info from user input, without free partition
 	QList<PartitionInfo> 		m_partInfoList;

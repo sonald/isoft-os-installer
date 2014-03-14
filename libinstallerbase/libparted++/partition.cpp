@@ -19,20 +19,6 @@ PartitionList* Partition::owner_plist()
     return plist_;
 }
 
-/* create a partition.
- */
-/*
-bool Partition::created(PedDisk* disk, PedPartitionType type, PedFileSystemType* fs_type, 
-	PedSector start, PedSector end)
-{
-    assert( part_ == NULL );
-
-    PedPartition* part_ = ped_partition_new(disk, type, fs_type, start, end);
-    disk_ = disk;
-    return ( part_ == NULL ) ? false : true ;
-}
-*/
-
 const char* Partition::fs_type_name()
 {
     if ( part_->fs_type == NULL )
@@ -76,4 +62,11 @@ const char* Partition::str_sector(PedSector sec)
 	unit = PED_UNIT_BYTE;
 
     return ped_unit_format_custom( dev->pdev(), sec, unit);
+}
+
+bool Partition::has_flag(PedPartitionFlag flag) const 
+{
+    if ( !part_ || (part_->type & PED_PARTITION_FREESPACE) )
+        return false;
+    return ped_partition_get_flag(part_, flag); 
 }

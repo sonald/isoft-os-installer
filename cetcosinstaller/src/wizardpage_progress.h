@@ -25,7 +25,7 @@ public:
     bool isComplete() const;
 
 public slots:
-    void updateProgress(int value);
+    void updateProgress(Engine::Stage, int value);
     void startProgress();
     void endProgress(bool state, QString error);
 
@@ -52,6 +52,7 @@ private:
     int 		m_max_value;
     int 		m_min_value;
     InstallThread*	m_thread;
+    Engine::Stage m_stage;
 };
 
 class InstallThread : public QThread 
@@ -59,13 +60,13 @@ class InstallThread : public QThread
     Q_OBJECT
 public:
     InstallThread();
-    static void s_setProgressByEngine(int value);
+    static void s_setProgressByEngine(Engine::Stage, int);
     static InstallThread* s_this;
 protected:
     void run();
 
 signals:
-    void updateProgress(int);
+    void updateProgress(Engine::Stage, int);
     void endProgress(bool, QString);
 };
 #endif // RFINSTALLER_WIZARDPAGE_PROGRESS_H_

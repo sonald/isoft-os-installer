@@ -223,7 +223,7 @@ bool Engine::readConf(const char *conf_file)
     return reval;
 }
 
-bool Engine::install(void (*progress)(int))
+bool Engine::install(void (*progress)(Engine::Stage, int))
 {
     bool ret = false;
     int pkgpos = -1;
@@ -268,7 +268,7 @@ bool Engine::install(void (*progress)(int))
     // real install
     if (_workmode == WriteConf) {
         if(progress) {
-            (*progress)(100);
+            (*progress)(Engine::ADD, 100);
         }
         ret = true;
     }else{
@@ -426,7 +426,8 @@ bool Engine::runCmd(const vector<Cmd> &cmds)
             ret = do_mkpart_whole(currcmd.args[0],
                                   currcmd.args[1],
                                   currcmd.args[2],
-                                  currcmd.args[3]);
+                                  currcmd.args[3],
+                                  currcmd.args[4]);
             if(!ret){
                 _errstr = "Run mkpart_whole Failed.";
                 return false;
@@ -437,7 +438,8 @@ bool Engine::runCmd(const vector<Cmd> &cmds)
                                    currcmd.args[1],
                                    currcmd.args[2],
                                    currcmd.args[3],
-                                   currcmd.args[4]);
+                                   currcmd.args[4],
+                                   currcmd.args[5]);
             if(!ret){
                 _errstr = "Run mkpart_length Failed.";
                 return false;
@@ -458,7 +460,7 @@ bool Engine::runCmd(const vector<Cmd> &cmds)
             }
             break;
         case PARTITION_MKFS:
-            ret = do_mkfs(currcmd.args[0], currcmd.args[1]);
+            ret = do_mkfs(currcmd.args[0], currcmd.args[1], currcmd.args[2]);
             if(!ret){
                 _errstr = "Run mkfs Failed.";
                 return false;
@@ -582,7 +584,7 @@ bool Engine::runCmd(const vector<Cmd> &cmds)
     return ret;
 }
 
-bool Engine::realWork(void (*progress)(int))
+bool Engine::realWork(void (*progress)(Engine::Stage, int))
 {
     static int percent = 0;
     // output debug log
@@ -626,130 +628,123 @@ bool Engine::realWork(void (*progress)(int))
         return false;
     }
     
-    progress(100);
+    progress(Engine::ADD, 100);
 
     return true;
 }
 
 void Engine::cmdMakeLabel(const char *devpath, const char *labeltype)
 {
-    appendCmd(INSTALL, PARTITION_MKLABEL, devpath, labeltype);
+    appendCmd(INSTALL, PARTITION_MKLABEL, {devpath, labeltype});
 }
 
-void Engine::cmdMakePartWhole(const char *devpath, const char *index, const char *parttype, const char *fstype)
+void Engine::cmdMakePartWhole(const char *devpath, const char *index, const char *parttype, const char *fstype, const char *flag)
 {
-    appendCmd(INSTALL, PARTITION_MKPART_WHOLE, devpath, index, parttype, fstype);
+    if (!flag) {
+        char s[10];
+        snprintf(s, sizeof s -1, "%d", PED_PARTITION_LBA);
+        flag = strdup(s);
+    }
+    appendCmd(INSTALL, PARTITION_MKPART_WHOLE, {devpath, index, parttype, fstype, flag});
 }
 void Engine::cmdMakePartLength(const char *devpath, const char *index, const char *parttype,
-                            const char *fstype, const char *length)
+                            const char *fstype, const char *length, const char* flag)
 {
-    appendCmd(INSTALL, PARTITION_MKPART_LENGTH, devpath, index, parttype, fstype, length);
+    if (!flag) {
+        char s[10];
+        snprintf(s, sizeof s -1, "%d", PED_PARTITION_LBA);
+        flag = strdup(s);
+    }
+    appendCmd(INSTALL, PARTITION_MKPART_LENGTH, {devpath, index, parttype, fstype, length, flag});
 }
 void Engine::cmdRemovePart(const char *partpath)
 {
-    appendCmd(INSTALL, PARTITION_RMPART, partpath);
+    appendCmd(INSTALL, PARTITION_RMPART, {partpath});
 }
 void Engine::cmdRemoveAllPart(const char *devpath)
 {
-    appendCmd(INSTALL, PARTITION_RMALLPART, devpath);
+    appendCmd(INSTALL, PARTITION_RMALLPART, {devpath});
 }
-void Engine::cmdMakeFileSystem(const char *partpath, const char *fstype)
+void Engine::cmdMakeFileSystem(const char *partpath, const char *fstype, const char *flag)
 {
-    appendCmd(INSTALL, PARTITION_MKFS, partpath, fstype);
+    appendCmd(INSTALL, PARTITION_MKFS, {partpath, fstype, flag});
 }
 void Engine::cmdSetMountPoint(const char *devpath, const char *mountpoint, const char *fstype)
 {
-    appendCmd(INSTALL, PARTITION_SET_MOUNTPOINT, devpath, mountpoint, fstype);
+    appendCmd(INSTALL, PARTITION_SET_MOUNTPOINT, {devpath, mountpoint, fstype});
 }
 void Engine::cmdChooseGroups(const char *groups)
 {
-    appendCmd(INSTALL, CHOOSE_GROUPS, groups);
+    appendCmd(INSTALL, CHOOSE_GROUPS, {groups});
 }
 void Engine::cmdAddPackage(const char *package)
 {
-    appendCmd(INSTALL, ADD_PACKAGE, package);
+    appendCmd(INSTALL, ADD_PACKAGE, {package});
 }
 void Engine::cmdAddGroup(const char *group)
 {
-    appendCmd(INSTALL, ADD_GROUP, group);
+    appendCmd(INSTALL, ADD_GROUP, {group});
 }
 void Engine::cmdSetBootEntry(const char *todevpath)
 {
-    appendCmd(POST, SET_BOOT_ENTRY, todevpath);
+    appendCmd(POST, SET_BOOT_ENTRY, {todevpath});
 }
 void Engine::cmdSetKernelParam(const char *param)
 {
-    appendCmd(POST, SET_KERNEL_PARAM, param);
+    appendCmd(POST, SET_KERNEL_PARAM, {param});
 }
 void Engine::cmdSetLang(const char *locale)
 {
-    appendCmd(POST, SET_LANG, locale);
+    appendCmd(POST, SET_LANG, {locale});
 }
 void Engine::cmdAddUser(const char *username, const char *passwd)
 {
     if (passwd == NULL)
-        appendCmd(POST, ADD_USER, username, "");
+        appendCmd(POST, ADD_USER, {username, ""});
     else
-        appendCmd(POST, ADD_USER, username, passwd);
+        appendCmd(POST, ADD_USER, {username, passwd});
 }
 void Engine::cmdSetRootPassword(const char *passwd)
 {
-    appendCmd(POST, SET_ROOT, passwd);
+    appendCmd(POST, SET_ROOT, {passwd});
 }
 
 void Engine::cmdSetKL(const char *kxkb)
 {
-    appendCmd(POST, SET_KL, kxkb);
+    appendCmd(POST, SET_KL, {kxkb});
 }
 
 void Engine::cmdSetTZ(const char *kzoneinfo)
 {
-    appendCmd(POST, SET_TZ, kzoneinfo);
+    appendCmd(POST, SET_TZ, {kzoneinfo});
 }
 
 void Engine::cmdSetXorgConf(const char *xorgconf)
 {
-    appendCmd(POST, SET_XORG_CONF, xorgconf);
+    appendCmd(POST, SET_XORG_CONF, {xorgconf});
 }
 
 void Engine::cmdSetGlobals(const char *kglobals)
 {
-    appendCmd(POST, SET_KGLOBALS, kglobals);
+    appendCmd(POST, SET_KGLOBALS, {kglobals});
 }
 
 void Engine::cmdSetHostname(const char *hostname)
 {
-    appendCmd(POST, SET_HOSTNAME, hostname);
+    appendCmd(POST, SET_HOSTNAME, {hostname});
 }
 
 void Engine::cmdSetMachine(const char* mach_type)
 {
-    appendCmd(POST, SET_MACHINE, mach_type);
+    appendCmd(POST, SET_MACHINE, {mach_type});
 }
 
-void Engine::appendCmd(int type, int cmdid, const char *arg0, const char *arg1, const char *arg2, const char *arg3, const char *arg4)
+void Engine::appendCmd(int type, int cmdid, const vector<string>& args)
 {
     Cmd cmd;
-    vector<string> arglist;
-    
-    if(arg0 != NULL) {
-        arglist.push_back(arg0);
-        if(arg1 != NULL) {
-            arglist.push_back(arg1);
-            if(arg2 != NULL) {
-                arglist.push_back(arg2);
-                if(arg3 != NULL) {
-                    arglist.push_back(arg3);
-                    if(arg4 != NULL) {
-                        arglist.push_back(arg4);
-                    }
-                }
-            }
-        }
-    }
     
     cmd.id = cmdid;
-    cmd.args = arglist;
+    cmd.args = args;
 
     cerr << "appendCmd: " << s_tags[cmdid] << endl;
     if(type == INSTALL){
@@ -758,6 +753,38 @@ void Engine::appendCmd(int type, int cmdid, const char *arg0, const char *arg1, 
         s_postcmds.push_back(cmd);
     }
 }
+
+//void Engine::appendCmd(int type, int cmdid, const char *arg0, const char *arg1, const char *arg2, const char *arg3, const char *arg4, const char *arg5)
+//{
+    //Cmd cmd;
+    //vector<string> arglist;
+    
+    //if(arg0 != NULL) {
+        //arglist.push_back(arg0);
+        //if(arg1 != NULL) {
+            //arglist.push_back(arg1);
+            //if(arg2 != NULL) {
+                //arglist.push_back(arg2);
+                //if(arg3 != NULL) {
+                    //arglist.push_back(arg3);
+                    //if(arg4 != NULL) {
+                        //arglist.push_back(arg4);
+                    //}
+                //}
+            //}
+        //}
+    //}
+    
+    //cmd.id = cmdid;
+    //cmd.args = arglist;
+
+    //cerr << "appendCmd: " << s_tags[cmdid] << endl;
+    //if(type == INSTALL){
+        //s_installcmds.push_back(cmd);
+    //}else{
+        //s_postcmds.push_back(cmd);
+    //}
+//}
 
 bool Engine::do_mklabel(const string &devpath, const string &labeltype)
 {
@@ -774,7 +801,7 @@ bool Engine::do_mklabel(const string &devpath, const string &labeltype)
     return ret;
 }
 
-bool Engine::do_mkpart_whole(const string &devpath, const string &index, const string &parttype, const string &fstype)
+bool Engine::do_mkpart_whole(const string &devpath, const string &index, const string &parttype, const string &fstype, const string& flag)
 {
     PartedDevices all_dev;
     Device* dev = all_dev.device( devpath.c_str() );
@@ -786,7 +813,8 @@ bool Engine::do_mkpart_whole(const string &devpath, const string &index, const s
         return false;
     PartitionList* part_list = part_table->partlist();
     int i = atoi(index.c_str());
-    int num = part_list->add_by_whole( i, parttype.c_str(), fstype.c_str() );
+    PedPartitionFlag part_flag = (PedPartitionFlag)atoi(flag.c_str());
+    int num = part_list->add_by_whole( i, parttype.c_str(), fstype.c_str(), part_flag );
     bool ret = false;
     if ( num )
         ret = part_table->commit();
@@ -823,7 +851,7 @@ bool Engine::do_mkpart_whole(const string &devpath, const string &index, const s
 }
 
 bool Engine::do_mkpart_length(const string &devpath, const string &index, const string &parttype,
-                              const string &fstype, const string &length)
+                              const string &fstype, const string &length, const string& flag)
 {
     PartedDevices all_dev;
     Device* dev = all_dev.device( devpath.c_str() );
@@ -835,8 +863,8 @@ bool Engine::do_mkpart_length(const string &devpath, const string &index, const 
         return false;
     PartitionList* part_list = part_table->partlist();
     int i = atoi(index.c_str());
-
-    int num = part_list->add_by_length( i, parttype.c_str(), fstype.c_str(), length.c_str() );
+    PedPartitionFlag part_flag = (PedPartitionFlag)atoi(flag.c_str());
+    int num = part_list->add_by_length( i, parttype.c_str(), fstype.c_str(), length.c_str(), "compact", part_flag );
     bool ret = false;
     if ( num )
         ret = part_table->commit();
@@ -912,7 +940,8 @@ bool Engine::do_rmallpart(const string &devpath)
     //XXX not implemented
 }
 
-bool Engine::do_mkfs(const string &partpath, const string &fstype)
+bool Engine::do_mkfs(const string &partpath, const string &fstype, 
+        const string& flag)
 {
     string cmd = "";
 
@@ -923,7 +952,7 @@ bool Engine::do_mkfs(const string &partpath, const string &fstype)
 	
     cmd = "";	
 
-    if (fstype == "swap" || fstype == "linux-swap")	{
+    if (fstype == "swap" || fstype.find("linux-swap") == 0) {
 	    cmd = "mkswap ";
 	} else {
 	    cmd = "mkfs -t ";
@@ -953,45 +982,31 @@ bool Engine::do_mkfs(const string &partpath, const string &fstype)
         return false;
     }
 	
-    cmd = "";
-    string num = "";
-    string dev = "";
-    int size = partpath.size();
+    if (flag.size()) {
+        cmd = "";
+        string num = "";
+        string dev = "";
+        int size = partpath.size();
 
-    if ((partpath[size-2] >='1') && (partpath[size-2] <= '9')) {
-        num = partpath.substr(size-2, 2);
-        dev = partpath.substr(0, size-2);
-    }
-    else if ((partpath[size-1] >='1') && (partpath[size-1] <= '9')) {
-        num = partpath.substr(size-1);
-        dev = partpath.substr(0, size-1);
-    }
+        if ((partpath[size-2] >='1') && (partpath[size-2] <= '9')) {
+            num = partpath.substr(size-2, 2);
+            dev = partpath.substr(0, size-2);
+        }
+        else if ((partpath[size-1] >='1') && (partpath[size-1] <= '9')) {
+            num = partpath.substr(size-1);
+            dev = partpath.substr(0, size-1);
+        }
+        PedPartitionFlag ppf = (PedPartitionFlag)atoi(flag.c_str());
+        if (ppf == PED_PARTITION_LBA) 
+            return true;
 
-    /*FIXME: sfdisk does not suppor GPT
-    cmd = "sfdisk --id ";
-    cmd += dev;
-    cmd += " ";
-    cmd += num;
-    cmd += " ";
-
-
-    if (fstype == "swap" || fstype == "linux-swap") {
-        cmd += "82";
-    } else if (fstype == "ext2" || fstype == "ext3" || fstype == "ext4") {
-        cmd += "83";
-    } else if (fstype == "fat32") {
-        cmd += "c";
-    } else if (fstype == "fat16") {
-        cmd += "e";
+        string flag_str = ped_partition_flag_get_name(ppf);
+        cmd = "parted " + dev + " set " + num + " " + flag_str +" on";
+        if (system(cmd.c_str()) != 0) {
+            cerr << "failed to set flag: " << cmd << endl;
+            return false;
+        }
     }
-		
-    cerr<<"sfdisk command line is:"<<cmd<<endl;
-		
-    if (system(cmd.c_str()) != 0) {
-        cerr<<"sfdisk error"<<endl;
-        return false;
-    }
-  */
     return true;
 }
 
@@ -1112,6 +1127,7 @@ bool Engine::do_add_user(const string &username, const string &passwd)
         char cmd[512];
         sprintf(cmd, "echo -e '%s\n%s' | passwd %s", 
                 passwd.c_str(), passwd.c_str(), username.c_str());
+        _postscript.push_back(cmd);
     }
     _new_user_names.push_back(username);
 

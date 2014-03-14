@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <list>
+#include <parted/parted.h>
 
 using namespace std;
 
@@ -39,24 +40,26 @@ class Engine
     // post commands are invoked in post-script.
     enum {INSTALL, POST};
     
+    enum Stage {ADD, UPGRADE, CONFLICTS, DISKSPACE, INTEGRITY, LOAD, KEYRING};
+
     ~Engine();
     
     // At first time, please DO NOT call instance() with default args.
     static Engine* instance(WorkMode mode=WriteConf, const char *conf_file = NULL);
     
     // return false when fail, and error message in getErr()
-    bool install(void (*progress)(int percent) =NULL);
+    bool install(void (*progress)(Stage stage, int percent) =NULL);
     bool postscript(void);
     const char *getErr(void) { return _errstr.c_str(); }
     
     // cmd interfaces. 
     // the external program call these interface to order the commands.
     void cmdMakeLabel(const char *devpath, const char *labeltype);
-    void cmdMakePartWhole(const char *devpath, const char *index, const char *parttype, const char *fstype);
-    void cmdMakePartLength(const char *devpath, const char *index, const char *parttype, const char *fstype, const char *length);
+    void cmdMakePartWhole(const char *devpath, const char *index, const char *parttype, const char *fstype, const char *flag = NULL);
+    void cmdMakePartLength(const char *devpath, const char *index, const char *parttype, const char *fstype, const char *length, const char *flag = NULL);
     void cmdRemovePart(const char *partpath);
     void cmdRemoveAllPart(const char *devpath);
-    void cmdMakeFileSystem(const char *partpath, const char *fstype);
+    void cmdMakeFileSystem(const char *partpath, const char *fstype, const char *flag);
     void cmdSetMountPoint(const char *devpath, const char *mountpoint, const char *fstype);
     void cmdChooseGroups(const char *groups);
     void cmdAddPackage(const char *package);
@@ -86,7 +89,7 @@ class Engine
                         gsize text_len, gpointer user_data, GError **error);
     static void xmlError(GMarkupParseContext *context, GError *error, gpointer user_data);
 
-    bool realWork(void (*progress)(int));
+    bool realWork(void (*progress)(Stage, int));
     bool readConf(const char *conf_file);
     
     static Engine *s_self;
@@ -100,8 +103,9 @@ class Engine
     void copyXorgConf();
     */
     // classify the xml command into static commands vector.
-    void appendCmd(int type, int cmdid, const char *arg0=NULL, const char *arg1=NULL,
-                   const char *arg2=NULL, const char *arg3=NULL, const char *arg4=NULL);
+    void appendCmd(int type, int cmdid, const vector<string>& args);
+    //void appendCmd(int type, int cmdid, const char *arg0=NULL, const char *arg1=NULL,
+                   //const char *arg2=NULL, const char *arg3=NULL, const char *arg4=NULL, const char *arg5 = NULL);
     // ids of commands
     enum {
         SET_PARTITION = 0,
@@ -140,11 +144,11 @@ class Engine
 
     bool runCmd(const vector<Cmd> &cmds);
     bool do_mklabel(const string &devpath, const string &labeltype);
-    bool do_mkpart_whole(const string &devpath, const string &index, const string &parttype, const string &fstype);
-    bool do_mkpart_length(const string &devpath, const string &index, const string &parttype, const string &fstype, const string &length);
+    bool do_mkpart_whole(const string &devpath, const string &index, const string &parttype, const string &fstype, const string& flag);
+    bool do_mkpart_length(const string &devpath, const string &index, const string &parttype, const string &fstype, const string &length, const string& flag);
     bool do_rmpart(const string &partpath);
     bool do_rmallpart(const string &devpath);
-    bool do_mkfs(const string &partpath, const string &fstype);
+    bool do_mkfs(const string &partpath, const string &fstype, const string& flag="");
     bool do_set_mountpoint(const string &devpath, const string &mountpoint, const string &fstype);
     bool do_choosegroups(const string &groups);
     bool do_add_package(const string package);

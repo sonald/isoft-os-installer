@@ -5,7 +5,7 @@
 TEMPLATE = lib
 TARGET = diskswidget
 DEPENDPATH += .
-CONFIG += link_pkgconfig
+CONFIG += link_pkgconfig debug
 
 PKGCONFIG += glib-2.0
 INCLUDEPATH += . /usr/include/parted++

@@ -24,6 +24,7 @@ public:
     bool isPrimary()                            { return ((part_->type & 0x01) == 0) ? true : false ; } 
     const char * type_name()			{ return ped_partition_type_get_name( part_->type ); }
     const char * fs_type_name();		
+    bool has_flag(PedPartitionFlag flag) const;
 
     // return the string form of start, end and length 
     const char* start_str()                     { return str_sector(part_->geom.start); }

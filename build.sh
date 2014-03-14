@@ -19,7 +19,7 @@ function do_build() {
         pushd $BUILD_ROOT/$sub
         if [ "$sub" == libinstallerbase ]; then
             # cmake build
-            cmake -DCMAKE_INSTALL_PREFIX=/usr ../../$sub
+            cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug ../../$sub
         else
             if which qtchooser > /dev/null; then
                 qmake -qt=4 ../../$sub

@@ -13,7 +13,7 @@ QValidator::State NameValidator::validate(QString& input, int& pos) const
     int index = 0;
 
     // limit the length of username.
-    if ( input.toUtf8().size() >= USERNAME_LENGTH )
+    if ( input.toUtf8().size() > USERNAME_LENGTH )
         return QValidator::Invalid;
 
     // not begin with -

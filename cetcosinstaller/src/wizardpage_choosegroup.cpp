@@ -22,6 +22,7 @@ WizardPage_chooseGroup::WizardPage_chooseGroup(QWidget *parent) :
 void WizardPage_chooseGroup::initializePage()
 {
     ui->retranslateUi(this);
+    qDebug() << __FUNCTION__ << m_selectedGroups;
     if (!m_selectedGroups.count())
         loadGroupInfo();
     emit completeChanged();
@@ -64,6 +65,7 @@ void WizardPage_chooseGroup::cleanupPage()
         box->deleteLater();
     }
     m_chkBoxes.clear();
+    disconnect(&m_sigMap);
 }
 
 WizardPage_chooseGroup::~WizardPage_chooseGroup()

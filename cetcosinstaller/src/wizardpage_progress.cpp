@@ -20,10 +20,9 @@
 // s_setProgressByEngine called by g_engine, 
 // the function and pointer should be static.
 InstallThread* InstallThread::s_this = NULL;
-void InstallThread::s_setProgressByEngine(int value)
+void InstallThread::s_setProgressByEngine(Engine::Stage stage, int value)
 {
-    qDebug() << "setProgress: " << value;
-    emit s_this->updateProgress(value);
+    emit s_this->updateProgress(stage, value);
 }
 
 // construct the thread, init the static data.
@@ -76,7 +75,9 @@ WizardPage_Progress::WizardPage_Progress(QWidget *parent)
 
     // create the thread, and set connect.
     m_thread = new InstallThread();
-    connect( m_thread, SIGNAL( updateProgress(int) ), this, SLOT( updateProgress(int) ) );
+    qRegisterMetaType<Engine::Stage>("Engine::Stage");
+    connect( m_thread, SIGNAL( updateProgress(Engine::Stage, int) ), 
+            this, SLOT( updateProgress(Engine::Stage, int) ) );
     connect( m_thread, SIGNAL( endProgress(bool, QString) ), this, SLOT( endProgress(bool, QString) ) );
 }
 
@@ -122,12 +123,33 @@ void WizardPage_Progress::updatePic()
 
 void WizardPage_Progress::updateProgress()
 {
-    if (m_bar->value() < 1) {
-        m_time_label->setText(tr("preparing for installation..."));
-    } else {
-        m_time_elapse = m_time_elapse.addSecs(1);
-        m_time_label->setText(tr("Elapsed: ") +  m_time_elapse.toString("hh:mm:ss"));
+    QString msg;
+    switch(m_stage) {
+        case Engine::DISKSPACE:
+            msg = tr("checking available disk space...");
+            break;
+        case Engine::CONFLICTS:
+            msg = tr("checking for file conflicts...");
+            break;
+        case Engine::INTEGRITY:
+            msg = tr("checking package integrity...");
+            break;
+        case Engine::KEYRING:
+            msg = tr("checking keys in keyring...");
+            break;
+        case Engine::LOAD:
+            msg = tr("loading package files...");
+            break;
+
+        case Engine::ADD:
+        case Engine::UPGRADE: /* passthrough */
+        default: 
+            m_time_elapse = m_time_elapse.addSecs(1);
+            msg = tr("installing packages, elapsed: ") +  m_time_elapse.toString("hh:mm:ss");
+            break;
+            
     }
+    m_time_label->setText(msg);
 }
 
 int WizardPage_Progress::nextId() const
@@ -135,8 +157,9 @@ int WizardPage_Progress::nextId() const
     return QWizardPage::nextId();
 }
 
-void WizardPage_Progress::updateProgress(int value)
+void WizardPage_Progress::updateProgress(Engine::Stage stage, int value)
 {
+    m_stage = stage;
     m_bar->setValue( value );
 }
 
@@ -145,7 +168,6 @@ void WizardPage_Progress::startProgress()
     printf("startProgress\n");
     srand( unsigned( time( NULL ) ) );
     m_indexPic = static_cast<int> ( m_picsNameList.size() * ( rand() / ( RAND_MAX + 1.0 ) ) );
-    // updatePic();
     m_timerPic->start();
     m_thread->start();
 }

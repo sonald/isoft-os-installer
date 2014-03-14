@@ -34,7 +34,7 @@ bool WizardPage_Partition_Advanced::validatePage()
     qDebug() << "requiredSize:" << field("requiredSize").toInt();
     bool ret = m_advanced->validate(error, field("requiredSize").toInt());
     if ( !ret )
-	QMessageBox::warning(this, tr("Partition: Advanced Mode"), error );
+        QMessageBox::warning(this, tr("Partition: Advanced Mode"), error );
     return ret;
 }
 
