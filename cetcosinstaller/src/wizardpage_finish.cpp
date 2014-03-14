@@ -11,8 +11,8 @@
 #include "wizardpage_finish.h"
 #include "wizardpage_useradd.h"
 
-WizardPage_Finish::WizardPage_Finish(QWidget *parent)
-    : QWizardPage(parent)
+    WizardPage_Finish::WizardPage_Finish(QWidget *parent)
+: QWizardPage(parent)
 {
     setFinalPage(true);
     m_topSpacerItem = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
@@ -23,12 +23,6 @@ WizardPage_Finish::WizardPage_Finish(QWidget *parent)
     m_layout->addItem( m_bottomSpacerItem );
 
     setLayout(m_layout);
-    m_thread = new PostThread();
-    m_dialog = new DialogPostscript(this);
-    m_dialog->setModal( true );
-    connect( m_thread, SIGNAL( poststate(bool, QString) ), this, SLOT( setPostState(bool, QString) ) );
-    connect( m_thread, SIGNAL( finished() ), m_dialog, SLOT( accept() ) );
-    connect( m_thread, SIGNAL( finished() ), this, SLOT( restorePage() ) );
 }
 
 void WizardPage_Finish::initializePage()
@@ -41,7 +35,7 @@ void WizardPage_Finish::initializePage()
     // locale
     QString locale = field("locale").toString();
     locale = QLocale(locale).name();
-    
+
     locale = locale + ".UTF-8";
     qDebug() << locale;
     g_engine->cmdSetLang( locale.toLatin1() );
@@ -55,10 +49,17 @@ void WizardPage_Finish::initializePage()
 
     // useradd
     ( static_cast<WizardPage_UserAdd*>(wizard()->page(Page_UserAdd)) )->setPasswdUser();
-    
-    //TODO: install new kernel here.
+
 
     // start the postscript dialog.
+    m_thread = new PostThread();
+    connect( m_thread, SIGNAL( poststate(bool, QString) ), this, SLOT( setPostState(bool, QString) ) );
+    connect( m_thread, SIGNAL( finished() ), this, SLOT( restorePage() ) );
+
+    m_dialog = new DialogPostscript(this);
+    m_dialog->setModal( true );
+    connect( m_thread, SIGNAL( finished() ), m_dialog, SLOT( accept() ) );
+
     m_dialog->setLabelText();
     m_dialog->show();
     QApplication::setOverrideCursor( QCursor(Qt::WaitCursor) );
@@ -69,9 +70,9 @@ void WizardPage_Finish::restorePage()
 {
     QApplication::restoreOverrideCursor();
     if ( m_poststate ) {
-	setSubTitle( tr("Congratulation! Enjoy it.") );
+        setSubTitle( tr("Congratulation! Enjoy it.") );
     } else {
-	setSubTitle( tr("PostInstall is failed.") );
+        setSubTitle( tr("PostInstall is failed.") );
     }
     wizard()->button( QWizard::FinishButton )->setEnabled( true );
 }
@@ -79,14 +80,14 @@ void WizardPage_Finish::restorePage()
 bool WizardPage_Finish::validatePage()
 {
     system("systemctl reboot");
-	return true;
+    return true;
 }
 
 void WizardPage_Finish::setPostState(bool state, QString errStr)
 {
     m_poststate = state;
     if ( !state ) {
-	QMessageBox::critical(this, tr("PostInstall Error"), errStr);
+        QMessageBox::critical(this, tr("PostInstall Error"), errStr);
     }
     emit exitstate(state);
 }
