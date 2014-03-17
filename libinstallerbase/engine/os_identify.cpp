@@ -1,6 +1,8 @@
 #include "parted++.h"
 
 #include <iostream>
+#include <fstream>
+#include <algorithm>
 #include <sys/types.h>
 #include <dirent.h>
 #include <sys/mount.h>
@@ -104,20 +106,16 @@ int OSIdentify::get_os_type_str(const char *device, char *os_type)
 	}
 
 	// linux first
-	if (find_linux_by_issue(os_type, mountPath) == 0)
-	{
+	if (find_linux_by_release(os_type, mountPath) == 0) {
+        ret = 0;
+    } else if (find_linux_by_issue(os_type, mountPath) == 0) {
 		ret = 0;
-	}
-	else
-	{	// windows second
+	} else {	// windows second
 		//k 2 - 2 types of windows/system
-		for(int i = 0; i < 2; i++ ) 
-		{
+		for(int i = 0; i < 2; i++ ) {
 			string tmp = mountPath + prefix_alternats[i];
-			if ( _stat_insensitive( tmp.c_str(), &found ) >= 0 ) 
-			{
-				if (find_windows_by_register(os_type, mountPath.c_str()) == 0)
-				{
+			if ( _stat_insensitive( tmp.c_str(), &found ) >= 0 ) {
+				if (find_windows_by_register(os_type, mountPath.c_str()) == 0) {
 					ret = 1;
 				}
 			}
@@ -126,13 +124,11 @@ int OSIdentify::get_os_type_str(const char *device, char *os_type)
 
 	// not found
 	cmd = "umount " + mountPath;
-	if (system(cmd.c_str()) != 0)
-	{
+	if (system(cmd.c_str()) != 0) {
 		fprintf(stderr, "%s error\n", cmd.c_str());
 	}
 
-	if (rmdir(mountPath.c_str()) != 0)
-	{
+	if (rmdir(mountPath.c_str()) != 0) {
 		fprintf(stderr, "rmdir %s error\n", mountPath.c_str());
 	}
 	
@@ -254,7 +250,27 @@ bool OSIdentify::mount_fs(const char *device, string& mountPath)
 	return true;
 }
 
-// find linux by issue file, just for cetcosinstaller diaplay.
+int OSIdentify::find_linux_by_release(char *os_type, const string &mountPath)
+{
+	string release_file = mountPath + "/etc/os-release";
+    ifstream ifs;
+    ifs.open(release_file, ::ios_base::in);
+
+    for (string line; getline(ifs, line); ) {
+        if (line.find("NAME=") == 0) {
+            string release = line.substr(5, line.size()-1);
+            auto end = ::remove_if(release.begin(), release.end(),
+                    [](char c) { return c == '"' || c == '\''; });
+            strncpy(os_type, release.substr(0, end - release.begin()).c_str(), 
+                    OS_TYPE_LENGTH-1);
+            return 0;
+        }
+    }
+
+    return -1;
+}
+
+// find linux by issue file, just for cetcosinstaller display.
 int OSIdentify::find_linux_by_issue(char *os_type, const string &mountPath)
 {
 	FILE *fp;

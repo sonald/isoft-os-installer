@@ -76,6 +76,7 @@ public:
 
 private:
 	int 	find_linux_by_issue(char *os_type, const string &mountPath);
+	int 	find_linux_by_release(char *os_type, const string &mountPath);
 	int 	find_windows_by_register(char *os_type, const string mountPath);
 
 	int 	find_linux_grub_entry(struct os_info *os_info_p, const string mountPath);

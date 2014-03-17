@@ -103,7 +103,7 @@ systemctl enable cups
 systemctl enable dkms
 systemctl enable bluetooth
 
-ret=`lspci -nD | awk '{ if($2 == "0300:" && $3 ~ /^8086/ ) print $3}'`
+ret=`lspci -nD | awk '{ if($2 == "0300:" && $3 ~ /^15ad/ ) print $3}'`
 if [ -z "$ret" ];then
 	pacman -Rcs xf86-video-vmware open-vm-tools || true
 fi
