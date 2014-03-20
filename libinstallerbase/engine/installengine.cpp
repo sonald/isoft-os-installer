@@ -18,7 +18,6 @@
 
 #include <parted/parted.h>
 #include "parted++.h"
-#include "gen_grub_conf.h"
 #include "os_identify.h"
 #include "alpminstaller.h"
 #include "installengine.h"
@@ -72,7 +71,6 @@ Engine::Engine(WorkMode mode, const char *conf_file)
     s_tags[ADD_PACKAGE]              = "ADD_PACKAGE";
     s_tags[ADD_GROUP]                = "ADD_GROUP";
     s_tags[SET_BOOT_ENTRY]           = "SET_BOOT_ENTRY";
-    s_tags[SET_KERNEL_PARAM]         = "SET_KERNEL_PARAM";
     s_tags[SET_LANG]                 = "SET_LANG";
     s_tags[ADD_USER]                 = "ADD_USER";
     s_tags[SET_ROOT]                 = "SET_ROOT";
@@ -509,13 +507,6 @@ bool Engine::runCmd(const vector<Cmd> &cmds)
                 return false;
             }
             break;
-        case SET_KERNEL_PARAM:
-            ret = do_set_kernel_param(currcmd.args[0]);
-            if(!ret){
-                _errstr = "Run set kernel param Failed.";
-                return false;
-            }
-            break;
         case SET_LANG:
             ret = do_set_lang(currcmd.args[0]);
             if(!ret){
@@ -688,10 +679,6 @@ void Engine::cmdAddGroup(const char *group)
 void Engine::cmdSetBootEntry(const char *todevpath)
 {
     appendCmd(POST, SET_BOOT_ENTRY, {todevpath});
-}
-void Engine::cmdSetKernelParam(const char *param)
-{
-    appendCmd(POST, SET_KERNEL_PARAM, {param});
 }
 void Engine::cmdSetLang(const char *locale)
 {
@@ -1095,15 +1082,6 @@ bool Engine::do_boot_install(const string &devpath)
 {
     // postpone grub install at postscript stage to handle EFI
     _grub_install_device = devpath;
-    return true;
-}
-
-bool Engine::do_set_kernel_param(const string &param)
-{
-    if ( set_grub_args( param.c_str() ) != 0 ) {
-        debuglog("set kernel param error\n");
-        return false;
-    }
     return true;
 }
 

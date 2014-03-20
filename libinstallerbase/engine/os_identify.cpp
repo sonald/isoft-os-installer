@@ -40,38 +40,30 @@ OSIdentify::OSIdentify()
 
 // judge if it's linux
 // if it's linux return 0 else -1
-int OSIdentify::judge_linux(const char *device)
+bool OSIdentify::judge_linux(const char *device)
 {
 	char os[OS_TYPE_LENGTH];
 
-	if (device == NULL)
-	{
+	if (device == NULL) {
 		fprintf(stderr, "device is NULL\n");
-		return -1;
+		return false;
 	}
 		
-	if (get_os_type_str(device, os) == 0)
-		return 0;
-	else
-		return -1;
+	return (get_os_type_str(device, os) == OS_LINUX);
 }
 
 // judge if it's windows
 // if it's windows return 0 else -1
-int OSIdentify::judge_windows(const char *device)
+bool OSIdentify::judge_windows(const char *device)
 {
 	char os[OS_TYPE_LENGTH];
 
-	if (device == NULL)
-	{
+	if (device == NULL) {
 		fprintf(stderr, "device is NULL\n");
-		return -1;
+		return false;
 	}
 		
-	if (get_os_type_str(device, os) == 1)
-		return 0;
-	else
-		return -1;
+	return (get_os_type_str(device, os) == OS_WINDOWS);
 }
 
 // get an os type string
@@ -80,9 +72,9 @@ int OSIdentify::judge_windows(const char *device)
 // if find linux, return 0;
 // if find windows, return 1;
 // if find nothing, return -1;
-int OSIdentify::get_os_type_str(const char *device, char *os_type)
+OSIdentify::OSType OSIdentify::get_os_type_str(const char *device, char *os_type)
 {
-	int ret = -1;
+	OSType ret = OS_UNKNOWN;
 	string mountPath;
 	string cmd;
 	char *found = NULL;
@@ -91,32 +83,30 @@ int OSIdentify::get_os_type_str(const char *device, char *os_type)
 		"/windows/system32/config"
 	};
 
-	if (device == NULL || os_type == NULL)
-	{
+	if (device == NULL || os_type == NULL) {
 		fprintf(stderr, "device or os_type is NULL\n");
-		return -1;
+		return ret;
 	}
 	
 	memset(os_type, '\0', OS_TYPE_LENGTH);
 
-	if (mount_fs(device, mountPath) == false)
-	{
+	if (mount_fs(device, mountPath) == false) {
 		std::cerr << "mount error\n";
-		return -1;
+		return ret;
 	}
 
 	// linux first
 	if (find_linux_by_release(os_type, mountPath) == 0) {
-        ret = 0;
+        ret = OS_LINUX;
     } else if (find_linux_by_issue(os_type, mountPath) == 0) {
-		ret = 0;
+		ret = OS_LINUX;
 	} else {	// windows second
 		//k 2 - 2 types of windows/system
 		for(int i = 0; i < 2; i++ ) {
 			string tmp = mountPath + prefix_alternats[i];
 			if ( _stat_insensitive( tmp.c_str(), &found ) >= 0 ) {
 				if (find_windows_by_register(os_type, mountPath.c_str()) == 0) {
-					ret = 1;
+					ret = OS_WINDOWS;
 				}
 			}
 		}
@@ -135,79 +125,6 @@ int OSIdentify::get_os_type_str(const char *device, char *os_type)
 	return ret;
 }
 
-// get an os type struct
-// if find an grub entry, return 0 else -1
-int OSIdentify::get_os_info(const char *device, struct os_info *os_info_p)
-{
-	int ret = 0;
-	int value = -1;
-	string mountPath;
-
-	if (device == NULL || os_info_p == NULL )
-	{
-		std::cerr << "device or os_info_p is NULL\n";
-		return -1;
-	}
-
-	// iniatialize struct os_info 	
-	os_info_p->is_linux = 0;
-	os_info_p->is_windows = 0;
-	os_info_p->is_boot = 0;
-	os_info_p->os_num = 0;
-	memset(os_info_p->os_type, '\0', OS_TYPE_LENGTH);
-	memset(os_info_p->device_name, '\0', OS_TYPE_LENGTH);
-	strncpy(os_info_p->device_name, device, DEVICE_NAME_LENGTH);
-	os_info_p->kernel_info_p = NULL;
-
-	if (mount_fs(device, mountPath) == false)
-	{
-		std::cerr << "mount error\n";
-		return -1;
-	}
-	
-	ret = get_os_type_str(device, os_info_p->os_type);
-	
-	switch (ret) 
-	{
-		case 1: 
-				value = find_windows_grub_entry(os_info_p, mountPath);
-				break;
-		default:
-				value = find_linux_grub_entry(os_info_p, mountPath);
-				break;
-	}
-				
-	string cmd = "umount " + mountPath;
-	system(cmd.c_str());
-	rmdir(mountPath.c_str());
-
-	return value;
-}
-
-// free a os_info struct, to save memory 
-void OSIdentify::free_os_info(struct os_info *os_info_p)
-{
-	struct kernel_info *p = NULL;
-	struct kernel_info *p_del = NULL;
-	
-	if (os_info_p == NULL )
-		return;
-	
-	if (os_info_p->kernel_info_p == NULL )
-		return;
-	
-	p = os_info_p->kernel_info_p;
-
-	while(p != NULL)
-	{
-		p_del = p;
-		p = p->next;
-		free(p_del);		
-	}	
-
-	return;
-}
-
 // try to mount a device 
 //k success return dir in parameter mountParth, FAIL return NULL
 bool OSIdentify::mount_fs(const char *device, string& mountPath)
@@ -217,14 +134,14 @@ bool OSIdentify::mount_fs(const char *device, string& mountPath)
 	char temp[] = "/tmp/osidentify.XXXXXX"; 
 	char *dir = mkdtemp(temp);
 	if (dir == NULL) {
-		fprintf(stderr, "Make temporary directory failed.\n");
+        std::cerr << "Make temporary directory failed.\n";
 		return false;
 	}
 	string fs_type = m_partsType[device];
 	string mountType;
 	if ("fat16" == fs_type || "fat32" == fs_type)
 		mountType = "vfat";
-	else if (fs_type == "linux-swap")
+	else if (fs_type.find("linux-swap") != fs_type.npos)
 		return false;
 	else if (fs_type == "sun-ufs" || fs_type == "hp_ufs")
 		mountType = "ufs";
@@ -237,10 +154,9 @@ bool OSIdentify::mount_fs(const char *device, string& mountPath)
 		return false;
 
 	cmd = "/bin/mount  -t " + mountType + " " + device + " " + dir;
+    std::cerr << cmd << endl;
 	int status = system(cmd.c_str()); 
-
-	if (!(WIFEXITED(status) && WEXITSTATUS(status) == 0)) 
-	{
+	if (!(WIFEXITED(status) && WEXITSTATUS(status) == 0)) {
 		std::cerr << "mount partition " << device << " failed.";
 		rmdir(dir);
 		return false;
@@ -278,11 +194,9 @@ int OSIdentify::find_linux_by_issue(char *os_type, const string &mountPath)
 	char buf[BUF_LENGTH_LINE] = {'\0'};
 
 	string mount = mountPath + "/etc/issue";
-	if ((fp = fopen(mount.c_str(), "r")) != NULL)
-	{
+	if ((fp = fopen(mount.c_str(), "r")) != NULL) {
 		// skip blank line
-		while (!feof(fp))
-		{	
+		while (!feof(fp)) {	
 			fgets(buf, BUF_LENGTH_LINE, fp);
 			if (strcmp(buf, "\n") != 0)
 				break;
@@ -300,9 +214,7 @@ int OSIdentify::find_linux_by_issue(char *os_type, const string &mountPath)
 
 		fclose(fp);
 		return 0;	
-	}
-	else
-	{
+	} else {
 		fprintf(stderr, "fopen issue error\n");	
 		return -1;
 	}
@@ -322,120 +234,6 @@ int OSIdentify::find_windows_by_register(char *os_type, string mountPath)
    	
 	return -1;
 }
-
-// find linux initrd file
-int OSIdentify::find_linux_initrd_file_name(const char *str, string mountPath, bool has_boot_partition)
-{
-	DIR *pdir = NULL;
-	struct dirent *pent = NULL;
-	
-	if (has_boot_partition == 1)
-	{	
-		if ((pdir = opendir((mountPath + "/boot").c_str())) == NULL)
-		{
-			return -1;
-		}
-	}
-	else if (has_boot_partition == 0)
-		{	
-		 	if ((pdir = opendir((mountPath).c_str())) == NULL)
-			{
-				return -1;
-			}
-		}
-		else
-			return -1;
-	
-	string tmp = string("initrd-") + str + ".img";
-
-	while (1)
-	{
-		if ((pent = readdir(pdir)) == NULL)
-			break;
-	
-		if (strcmp(pent->d_name, tmp.c_str()) == 0)
-		{
-			closedir(pdir);
-			return 0;
-		}
-	}
-
-	closedir(pdir);
-	return -1;
-}
-
-// find linux kernel file
-int OSIdentify::find_linux_vmlinuz_file_name(struct os_info *os_info_p, string mountPath, bool has_boot_partition)
-{
-	char *p = NULL;
-	char *tmp = NULL;
-	DIR *pdir = NULL;
-	struct dirent *pent = NULL;
-
-	struct kernel_info **kernel_p = &os_info_p->kernel_info_p;
-
-	if (has_boot_partition == true)
-	{ 
-		if ((pdir = opendir((mountPath + "/boot").c_str())) == NULL)
-		{
-			return -1;
-		}
-	}
-	else if ((pdir = opendir((mountPath).c_str())) == NULL)
-		{
-			return -1;
-		}
-
-	while (1)
-	{
-		if ((pent = readdir(pdir)) == NULL)
-			break;
-
-		if ((p = strstr(pent->d_name, "vmlinuz-")) != NULL)	
-		{
-			p += strlen("vmlinuz-");  		
-			if (find_linux_initrd_file_name(p, mountPath, has_boot_partition) == 0)
-			{
-				// find a grub entry
-				(*kernel_p) = (struct kernel_info *) malloc(sizeof(struct kernel_info));
-				
-				if ((*kernel_p) == NULL)
-				{
-					fprintf(stderr, "malloc kernel_p error\n");
-					return -1;
-				}
-
-				(*kernel_p)->next = NULL;
-				memset((*kernel_p)->vmlinuz_file_name, 0, BUF_LENGTH_LINE);
-				memset((*kernel_p)->initrd_file_name , 0, BUF_LENGTH_LINE);
-		
-				strcpy((*kernel_p)->kernel_release, p);
-
-				tmp = (*kernel_p)->initrd_file_name;
-				strcpy(tmp, "initrd-");
-				tmp += strlen("initrd-");
-				strcpy(tmp, p);
-				tmp += strlen(p);
-				strcpy(tmp, ".img");
-
-				tmp = (*kernel_p)->vmlinuz_file_name;
-				strncpy(tmp, pent->d_name, BUF_LENGTH_LINE);
-				
-				os_info_p->is_linux = 1;
-				os_info_p->is_windows = 0;
-				os_info_p->is_boot = (has_boot_partition == true) ? 0 : 1;
-				os_info_p->os_num++;
-				kernel_p = &((*kernel_p)->next);
-				continue;
-			}	
-		}
-	}
-
-	closedir(pdir);
-
-	return  (os_info_p->os_num > 0) ? 0 : -1;
-}
-
 
 int OSIdentify::_stat_insensitive(const char* in_path, char** out_path) 
 {
@@ -488,68 +286,3 @@ int OSIdentify::_stat_insensitive(const char* in_path, char** out_path)
 	return 0;
 }
 
-int OSIdentify::find_linux_grub_entry(struct os_info *os_info_p, const string mountPath)
-{
-	bool has_boot_partition = false;
-	DIR *pdir = NULL;
-
-	if ((pdir = opendir((mountPath + "/boot").c_str())) != NULL)
-	{
-		has_boot_partition = true;
-	}
-	else if ((pdir = opendir((mountPath).c_str())) != NULL)
-		{
-			has_boot_partition = false;
-		}
-		else 
-		{
-			fprintf(stderr, "can't open mountPath %s\n", mountPath.c_str());			
-			closedir(pdir);
-			return -1;	
-		}
-
-	if (find_linux_vmlinuz_file_name(os_info_p, mountPath, has_boot_partition) == 0)
-	{
-		if (os_info_p->is_boot == 1)
-		{
-			memset(os_info_p->os_type, '\0', OS_TYPE_LENGTH);
-			strcpy(os_info_p->os_type, "Linux ");
-		}
-			
-		closedir(pdir);
-		return 0;
-	}
-	else
-	{
-		closedir(pdir);
-		return -1;
-	}
-}
-
-int OSIdentify::find_windows_grub_entry(struct os_info *os_info_p, const string mountPath)
-{
-	char *found = NULL;
-	const char* prefix_alternats[] = {
-		"/winnt/system32/config",
-		"/windows/system32/config"
-	};
-	
-	//k 2 - 2 types of windows/system
-	for(int i = 0; i < 2; i++ ) 
-	{
-		string tmp = mountPath + prefix_alternats[i];
-		if ( _stat_insensitive( tmp.c_str(), &found ) >= 0 ) 
-		{
-			if (find_windows_by_register(os_info_p->os_type, mountPath.c_str()) == 0) 
-			{
-				os_info_p->is_linux = 0;
-				os_info_p->is_windows = 1;
-				os_info_p->is_boot = 0;
-				os_info_p->os_num = 1;
-				return 0;
-			}
-		}
-	}
-
-	return -1;
-}

@@ -35,6 +35,7 @@
 #include <sys/vfs.h>
 #include <sys/mount.h>
 #include <cassert>
+#include <errno.h>
 
 #include <parted++/parted++.h>
 #include <installengine.h>
@@ -817,19 +818,22 @@ bool DisksWidget::calcSize(const QString &dev, const QString &mntType, QString &
 		return false;
 
 	QString mntPath = dir;
-	QString cmd = "/bin/mount -t " + mntType + " " + dev + " " + mntPath;
-	int ret = system(cmd.toLatin1());
-	if (ret)
-		return false;
+    int ret = mount(dev.toUtf8().constData(), mntPath.toUtf8().constData(), 
+            mntType.toUtf8().constData(), MS_RDONLY, NULL);
+	if (ret) {
+        qDebug() << QString::fromUtf8(strerror(errno));
+        system(("/bin/rmdir " + mntPath).toLatin1());
+        return false;
+    }
 	
 	struct statfs buf;
-	if (statfs(mntPath.toLatin1(), &buf) == -1) {
-		return false;
+    if (statfs(mntPath.toLatin1(), &buf) == -1) {
+        umount(mntPath.toUtf8().constData());
+        system(("/bin/rmdir " + mntPath).toLatin1());
+        return false;
 	}
 
 	qDebug() << dev << "reach here" << __LINE__;
-//	long lsize = (buf.f_blocks * (buf.f_bsize / 1024 )) / 1024;
-//	long lused = ((buf.f_blocks - buf.f_bfree) * (buf.f_bsize / 1024) ) / 1024;
 	double size = (buf.f_blocks - buf.f_bfree) * (buf.f_bsize / 1024.0);
 	qDebug() << "size " << size;
 	int i = 0;
@@ -849,9 +853,8 @@ bool DisksWidget::calcSize(const QString &dev, const QString &mntType, QString &
 	used += unit[i];
 	qDebug() << used << "used";
 
-	system(("/bin/umount " + mntPath).toLatin1());
-	system(("/bin/rmdir " + mntPath).toLatin1());
-
+    umount(mntPath.toUtf8().constData());
+    system(("/bin/rmdir " + mntPath).toLatin1());
 	return true;
 }
 
@@ -1223,16 +1226,12 @@ void DisksWidget::doRecord(QTreeWidgetItem *cur)
 
 bool DisksWidget::isLinux(const QString &dev)
 {
-	if (m_osIdent->judge_linux(dev.toLatin1()) == 0)
-		return true;
-
-	return false;
-	
+	return m_osIdent->judge_linux(dev.toLatin1());
 }
 
 bool DisksWidget::isWindows(const QString &dev)
 {
-	if (m_osIdent->judge_windows(dev.toLatin1()) == 0) {
+	if (m_osIdent->judge_windows(dev.toLatin1())) {
 		qDebug() << dev << " has a windows";
 		return true;
 	}

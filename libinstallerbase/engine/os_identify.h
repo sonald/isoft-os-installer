@@ -52,38 +52,32 @@ struct os_info
 class OSIdentify
 {
 public:
+    enum OSType {
+        OS_LINUX,
+        OS_WINDOWS,
+        OS_MACOSX,
+        OS_LOONGSON,
+        OS_UNKNOWN = -1
+    };
+
 	OSIdentify();
 
 	// judge if it's linux
-	// if it's linux return 0 else -1
-	int judge_linux(const char *device);
+	bool judge_linux(const char *device);
 
 	// judge if it's windows
-	// if it's windows return 0 else -1
-	int judge_windows(const char *device);
+	bool judge_windows(const char *device);
 
 	// get an os type string, for cetcosinstaller use
 	// if find, return 0, and store os type info into char *os_type;
 	// else return -1
-	int get_os_type_str(const char *device, char *os_type);
+	OSType get_os_type_str(const char *device, char *os_type);
 
-	// get an os type struct, for gen_grub_conf use
-	// if find an os return 0 else -1
-	int get_os_info(const char *device, struct os_info *os_info_p);
-
-	// free os_info struct
-	void free_os_info(struct os_info *os_info_p);
 
 private:
 	int 	find_linux_by_issue(char *os_type, const string &mountPath);
 	int 	find_linux_by_release(char *os_type, const string &mountPath);
 	int 	find_windows_by_register(char *os_type, const string mountPath);
-
-	int 	find_linux_grub_entry(struct os_info *os_info_p, const string mountPath);
-	int 	find_windows_grub_entry(struct os_info *os_info_p, const string mountPath);
-
-	int 	find_linux_vmlinuz_file_name(struct os_info *os_info_p, const string mountPath, bool has_boot_partition);
-	int 	find_linux_initrd_file_name(const char *str, const string mountPath, bool has_boot_partition);
 
 	bool 	mount_fs(const char *device, string &mountPath);
 	int 	_stat_insensitive(const char* in_path, char** out_path); 
