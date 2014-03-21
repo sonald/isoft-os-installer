@@ -138,38 +138,38 @@
 <context>
     <name>WizardInstaller</name>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="88"/>
+        <location filename="../src/wizard_installer.cpp" line="87"/>
         <source>Installer Wizard</source>
         <translation type="unfinished">Spanish Installer Wizard</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="90"/>
+        <location filename="../src/wizard_installer.cpp" line="89"/>
         <source>&lt; &amp;Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/wizard_installer.cpp" line="90"/>
         <location filename="../src/wizard_installer.cpp" line="91"/>
-        <location filename="../src/wizard_installer.cpp" line="92"/>
         <source>&amp;Next &gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="93"/>
+        <location filename="../src/wizard_installer.cpp" line="92"/>
         <source>&amp;Finish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="94"/>
+        <location filename="../src/wizard_installer.cpp" line="93"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="118"/>
+        <location filename="../src/wizard_installer.cpp" line="117"/>
         <source>The system already had been installed but not configured.The system will be unusable if you quit now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="115"/>
+        <location filename="../src/wizard_installer.cpp" line="114"/>
         <source>The installation is not start yet, anything is not happened on your computer, you can quit the installer safely in this moment.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -177,27 +177,27 @@
 <context>
     <name>WizardPage_Finish</name>
     <message>
-        <location filename="../src/wizardpage_finish.cpp" line="36"/>
+        <location filename="../src/wizardpage_finish.cpp" line="30"/>
         <source>Finish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_finish.cpp" line="37"/>
+        <location filename="../src/wizardpage_finish.cpp" line="31"/>
         <source>Configuring...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_finish.cpp" line="72"/>
+        <location filename="../src/wizardpage_finish.cpp" line="73"/>
         <source>Congratulation! Enjoy it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_finish.cpp" line="74"/>
+        <location filename="../src/wizardpage_finish.cpp" line="75"/>
         <source>PostInstall is failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_finish.cpp" line="89"/>
+        <location filename="../src/wizardpage_finish.cpp" line="90"/>
         <source>PostInstall Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -205,23 +205,23 @@
 <context>
     <name>WizardPage_Licence</name>
     <message>
-        <location filename="../src/wizardpage_licence.cpp" line="35"/>
+        <location filename="../src/wizardpage_licence.cpp" line="38"/>
         <source>Licence Declaration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_licence.cpp" line="36"/>
-        <source>Please read Red Flag Linux Licence.</source>
+        <location filename="../src/wizardpage_licence.cpp" line="39"/>
+        <source>Please read %1 Licence.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_licence.cpp" line="37"/>
-        <source>Decline Red Flag Linux Licence</source>
+        <location filename="../src/wizardpage_licence.cpp" line="40"/>
+        <source>Decline %1 Licence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_licence.cpp" line="38"/>
-        <source>Accept Red Flag Linux Licence</source>
+        <location filename="../src/wizardpage_licence.cpp" line="41"/>
+        <source>Accept %1 Licence</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -588,7 +588,7 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_choosegroup.cpp" line="150"/>
+        <location filename="../src/wizardpage_choosegroup.cpp" line="152"/>
         <source>minimal disk space required now is %1MB</source>
         <translation type="unfinished"></translation>
     </message>

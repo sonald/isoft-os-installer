@@ -4,6 +4,7 @@
 #include <QSpacerItem>
 #include <QTextBrowser>
 #include "wizardpage_licence.h"
+#include "archinfo.h"
 
 WizardPage_Licence::WizardPage_Licence(QWidget *parent)
     : QWizardPage(parent)
@@ -32,10 +33,12 @@ WizardPage_Licence::WizardPage_Licence(QWidget *parent)
 
 void WizardPage_Licence::initializePage()
 {
+    ArchInfo ai;
+    qDebug() << ai.os();
     setTitle( tr("Licence Declaration") );
-    setSubTitle( tr("Please read Red Flag Linux Licence.") );
-    m_radiobuttonDecline->setText( tr("Decline Red Flag Linux Licence") );
-    m_radiobuttonAccept->setText( tr("Accept Red Flag Linux Licence") );
+    setSubTitle( tr("Please read %1 Licence.").arg(ai.os()) );
+    m_radiobuttonDecline->setText( tr("Decline %1 Licence").arg(ai.os()) );
+    m_radiobuttonAccept->setText( tr("Accept %1 Licence").arg(ai.os()) );
 
     QString locale = field("locale").toString();
     QString licenceFilename = "licence_" + locale + ".html" ;

@@ -23,12 +23,11 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     setWindowFlags(Qt::FramelessWindowHint);
     setOption(NoBackButtonOnStartPage);
     setOption(NoBackButtonOnLastPage);
-//    setOption(HaveCustomButton1);
     setWizardStyle(MacStyle);
 
     // create all wizard page now.
     WizardPage_Welcome * 	page_welcome		= new WizardPage_Welcome;
-//    WizardPage_Licence * 	page_licence 		= new WizardPage_Licence;
+    WizardPage_Licence * 	page_licence 		= new WizardPage_Licence;
 
 //    WizardPage_Partition_Mode*		page_partition_mode = new WizardPage_Partition_Mode;
 //    WizardPage_Partition_Auto*		page_partition_auto = new WizardPage_Partition_Auto;
@@ -44,8 +43,8 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     WizardPage_Finish * page_finish = new WizardPage_Finish;
     
     setPage(Page_Welcome, page_welcome);
+    setPage(Page_Licence, page_licence);
     setPage(Page_InstallMode, page_install_mode);
-//    setPage(Page_Licence, page_licence);
 //    setPage(Page_Mach_Type, page_mach_type);
 //    setPage(Page_Partition_Mode, page_partition_mode);
 //    setPage(Page_Partition_Auto, page_partition_auto);

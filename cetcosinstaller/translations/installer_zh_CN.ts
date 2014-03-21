@@ -201,33 +201,33 @@
 <context>
     <name>WizardInstaller</name>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="88"/>
+        <location filename="../src/wizard_installer.cpp" line="87"/>
         <source>Installer Wizard</source>
         <translation>安装程序向导</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="90"/>
+        <location filename="../src/wizard_installer.cpp" line="89"/>
         <source>&lt; &amp;Back</source>
         <translation>后退(&amp;B)</translation>
     </message>
     <message>
+        <location filename="../src/wizard_installer.cpp" line="90"/>
         <location filename="../src/wizard_installer.cpp" line="91"/>
-        <location filename="../src/wizard_installer.cpp" line="92"/>
         <source>&amp;Next &gt;</source>
         <translation>下一步(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="93"/>
+        <location filename="../src/wizard_installer.cpp" line="92"/>
         <source>&amp;Finish</source>
         <translation>完成(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="94"/>
+        <location filename="../src/wizard_installer.cpp" line="93"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="115"/>
+        <location filename="../src/wizard_installer.cpp" line="114"/>
         <source>The installation is not start yet, anything is not happened on your computer, you can quit the installer safely in this moment.</source>
         <translation>安装过程还没有开始，在你的计算机上没有发生任何改变，此刻你可以安全的退出安装程序。</translation>
     </message>
@@ -236,7 +236,7 @@
         <translation type="obsolete">系统已经被安装而没有配置，如果现在退出，系统将不可用。</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="118"/>
+        <location filename="../src/wizard_installer.cpp" line="117"/>
         <source>The system already had been installed but not configured.The system will be unusable if you quit now.</source>
         <translation>系统已经被安装而没有配置，如果现在退出，系统将不可用。</translation>
     </message>
@@ -252,12 +252,12 @@
 <context>
     <name>WizardPage_Finish</name>
     <message>
-        <location filename="../src/wizardpage_finish.cpp" line="36"/>
+        <location filename="../src/wizardpage_finish.cpp" line="30"/>
         <source>Finish</source>
         <translation>完成</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_finish.cpp" line="72"/>
+        <location filename="../src/wizardpage_finish.cpp" line="73"/>
         <source>Congratulation! Enjoy it.</source>
         <translation>恭喜你！安装成功，可以使用了。</translation>
     </message>
@@ -266,17 +266,17 @@
         <translation type="obsolete">重新启动计算机</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_finish.cpp" line="37"/>
+        <location filename="../src/wizardpage_finish.cpp" line="31"/>
         <source>Configuring...</source>
         <translation>配置中...</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_finish.cpp" line="74"/>
+        <location filename="../src/wizardpage_finish.cpp" line="75"/>
         <source>PostInstall is failed.</source>
         <translation>安装后配置失败</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_finish.cpp" line="89"/>
+        <location filename="../src/wizardpage_finish.cpp" line="90"/>
         <source>PostInstall Error</source>
         <translation>安装后配置错误</translation>
     </message>
@@ -284,24 +284,36 @@
 <context>
     <name>WizardPage_Licence</name>
     <message>
-        <location filename="../src/wizardpage_licence.cpp" line="35"/>
+        <location filename="../src/wizardpage_licence.cpp" line="38"/>
         <source>Licence Declaration</source>
         <translation>证书声明</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_licence.cpp" line="36"/>
+        <location filename="../src/wizardpage_licence.cpp" line="39"/>
+        <source>Please read %1 Licence.</source>
+        <translation>请阅读%1许可证书。</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_licence.cpp" line="40"/>
+        <source>Decline %1 Licence</source>
+        <translation>不接受%1证书</translation>
+    </message>
+    <message>
+        <location filename="../src/wizardpage_licence.cpp" line="41"/>
+        <source>Accept %1 Licence</source>
+        <translation>接受%1证书</translation>
+    </message>
+    <message>
         <source>Please read Red Flag Linux Licence.</source>
-        <translation>请阅读红旗Linux许可证书。</translation>
+        <translation type="obsolete">请阅读红旗Linux许可证书。</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_licence.cpp" line="37"/>
         <source>Decline Red Flag Linux Licence</source>
-        <translation>不接受红旗Linux证书</translation>
+        <translation type="obsolete">不接受红旗Linux证书</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_licence.cpp" line="38"/>
         <source>Accept Red Flag Linux Licence</source>
-        <translation>接受红旗Linux证书</translation>
+        <translation type="obsolete">接受红旗Linux证书</translation>
     </message>
 </context>
 <context>
@@ -808,7 +820,7 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation>现在安装所需要的最小磁盘空间为</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_choosegroup.cpp" line="150"/>
+        <location filename="../src/wizardpage_choosegroup.cpp" line="152"/>
         <source>minimal disk space required now is %1MB</source>
         <translation>现在安装所需要的最小磁盘空间为%1MB</translation>
     </message>
