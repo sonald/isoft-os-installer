@@ -68,7 +68,6 @@ public slots:
 	bool	validate(QString &err, int requiredSizeMB);
 
 signals:
-//	void	sigLinuxInfo(QString dev, QString fsType);
 	void	currentChanged(QString dev, QString partType, QString fsType);
 
 private:
@@ -101,10 +100,6 @@ private slots:
 
 	//k count current partitions
 	int	partitionCount(const QString &diskName);
-
-	//k check /dev/sdxx in fstab and mtab, if exists, return mount path
-	//k else return QString()
-	QString	searchMountInFstab(const QString &basename);
 
 private:
 	Modes		m_mode;

@@ -227,8 +227,7 @@ int OSIdentify::find_windows_by_register(char *os_type, string mountPath)
 	char *found = NULL;
 
     string tmp = string(mountPath) + kern_path;
-    if (_stat_insensitive( tmp.c_str(), &found ) >= 0) 
-    {
+    if (_stat_insensitive( tmp.c_str(), &found ) >= 0) {
         return 0;
     }
    	

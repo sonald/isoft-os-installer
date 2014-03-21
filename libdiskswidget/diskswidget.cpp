@@ -858,39 +858,6 @@ bool DisksWidget::calcSize(const QString &dev, const QString &mntType, QString &
 	return true;
 }
 
-//k XXX Make sure mntType is valid
-//k mount -t mntType /dev/basename mountPointInFStab | /mnt/basename
-QString DisksWidget::searchMountInFstab(const QString &device)
-{
-	QString mnt = "";
-
-	QFile fstab("/etc/fstab");
-	if (!fstab.open(QIODevice::ReadWrite | QIODevice::Text)) 
-		//k I think won't occur error
-		return QString();
-
-	QTextStream ts(&fstab);
-	QString line = ts.readLine();
-	while (!line.isNull()) {
-		if (line.contains(device)) {
-			qDebug() << line;
-			QStringList list = line.split(QRegExp("\\s+"));
-			mnt = list.at(1);
-			break;
-		}
-		line = ts.readLine();
-	}
-
-	qDebug() << device << "mount point in fstab " << mnt;
-//	getchar();
-
-	//k not in fstab
-	if (!mnt.isEmpty())
-		system("/bin/mount -a");
-
-	return mnt;
-}
-
 //k whether is a primary partition
 bool DisksWidget::isPrimary(const QTreeWidgetItem *item)
 {
