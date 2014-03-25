@@ -11,9 +11,9 @@ WizardPage_chooseGroup::WizardPage_chooseGroup(QWidget *parent) :
     ui->setupUi(this);
 
     //unit MB
-    m_groupCapacities.insert("core", 1500);
-    m_groupCapacities.insert("base", 4000);
-    m_groupCapacities.insert("desktop", 2000);
+    m_groupCapacities.insert("core", 1000);
+    m_groupCapacities.insert("base", 1000);
+    m_groupCapacities.insert("desktop", 3000);
 
     registerField("selectedGroups", this, "selectedGroups");
     registerField("requiredSize", this, "requiredSize");

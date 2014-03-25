@@ -14,6 +14,7 @@
 #include "wizardpage_finish.h"
 #include "installer_global.h"
 #include "dialog_reject.h"
+#include "stage_indicator.h"
 #include <QDebug>
 #include <QtGui/QMessageBox>
 
@@ -29,9 +30,6 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     WizardPage_Welcome * 	page_welcome		= new WizardPage_Welcome;
     WizardPage_Licence * 	page_licence 		= new WizardPage_Licence;
 
-//    WizardPage_Partition_Mode*		page_partition_mode = new WizardPage_Partition_Mode;
-//    WizardPage_Partition_Auto*		page_partition_auto = new WizardPage_Partition_Auto;
-//    WizardPage_Partition_Simple*	page_partition_simple = new WizardPage_Partition_Simple;
     WizardPage_installmode * page_install_mode = new WizardPage_installmode;
     WizardPage_Partition_Advanced * 	page_partition_advanced = new WizardPage_Partition_Advanced;
 
@@ -45,10 +43,6 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     setPage(Page_Welcome, page_welcome);
     setPage(Page_Licence, page_licence);
     setPage(Page_InstallMode, page_install_mode);
-//    setPage(Page_Mach_Type, page_mach_type);
-//    setPage(Page_Partition_Mode, page_partition_mode);
-//    setPage(Page_Partition_Auto, page_partition_auto);
-//    setPage(Page_Partition_Simple, page_partition_simple);
     setPage(Page_Partition_Advanced, page_partition_advanced);
     setPage(Page_ChooseGroup, page_choosegroup);
     setPage(Page_Summary, page_summary);
@@ -61,24 +55,13 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     connect( page_finish, SIGNAL( exitstate(bool) ), this, SLOT( setExitState(bool) ) );
     
     m_exitstate = true;
-
     reTranslateUi();
-
-    // set the pixmap of wizard: watermark, logo, banner.
-    // logo used in modern and classic style.
-    // background used in mac style.
-    // watermark used in modern and classic style.
-    // banner used in modern style.
-
-    //QPixmap watermark( g_appImgPath + "/watermark1.png");
-    //setPixmap(QWizard::WatermarkPixmap, watermark);
-    //QPixmap banner("./images/banner.png");
-    //setPixmap(QWizard::BannerPixmap, banner);
-    //QPixmap logo( g_appImgPath + "/installer-logo.png");
-    //setPixmap(QWizard::LogoPixmap, logo);
-    
     QPixmap background( g_appImgPath + "/installer-background.png" );
     setPixmap( QWizard::BackgroundPixmap, background );
+
+    StageIndicator *ind = new StageIndicator(this);
+    ind->move(10, 80);
+    ind->show();
 }
 
 // retranslate text of UI element.

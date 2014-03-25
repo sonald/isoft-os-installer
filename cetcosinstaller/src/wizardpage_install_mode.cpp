@@ -40,7 +40,7 @@ bool WizardPage_installmode::validatePage()
         groups << "core" << "base" << "desktop";
         setField("selectedGroups", groups);
         g_engine->cmdChooseGroups(groups.join(",").toUtf8().constData());
-        setField("requiredSize", 7500);
+        setField("requiredSize", 5000);
     } else {
         setField("selectedGroups", QStringList());
     }
