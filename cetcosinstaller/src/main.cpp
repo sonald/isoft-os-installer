@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <installengine.h>
 
+#include "archinfo.h"
 #include "dialog_root.h"
 #include "installer_global.h"
 #include "wizard_installer.h"
@@ -87,8 +88,12 @@ int main(int argc, char* argv[])
 	else
 	    g_engine = Engine::instance(Engine::Install);
 
+    ArchInfo ai;
+    app.setWindowIcon(QIcon(g_appImgPath + "/cetcosinstaller.png"));
+
 	// show the app.
 	WizardInstaller wizard_installer; 
+    wizard_installer.setWindowTitle(ai.os());
     wizard_installer.setFixedSize(780, 560);
     QRect dr = qApp->desktop()->geometry();
     wizard_installer.move((dr.width()-wizard_installer.width())/2,

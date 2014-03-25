@@ -2,6 +2,7 @@
 #include <QMessageBox>
 #include <QString>
 #include <QVBoxLayout>
+#include "archinfo.h"
 #include "wizardpage_partition_advanced.h"
 
 WizardPage_Partition_Advanced::WizardPage_Partition_Advanced(QWidget *parent)
@@ -19,6 +20,8 @@ void WizardPage_Partition_Advanced::initializePage()
     
     QString locale = field("locale").toString();
     m_advanced = new DisksWidget( this, DisksWidget::Advanced, locale );
+    ArchInfo ai;
+    m_advanced->setWindowTitle(ai.os());
     m_layout->addWidget( m_advanced );
 }
 

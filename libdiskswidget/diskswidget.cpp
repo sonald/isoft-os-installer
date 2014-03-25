@@ -529,6 +529,7 @@ void DisksWidget::editPartition()
 
 	qDebug() << current->text(colFs);
 	EditPartition *edit = new EditPartition(current, this);
+    edit->setWindowTitle(this->windowTitle());
 	if (QDialog::Rejected == edit->exec())
 		return ;
 
@@ -686,6 +687,7 @@ void DisksWidget::addPartition()
 	}
 
 	AddPartition *add = new AddPartition(this);
+    add->setWindowTitle(this->windowTitle());
 	if (add->exec() == QDialog::Rejected)
 		return;
 //	else too much more indentation

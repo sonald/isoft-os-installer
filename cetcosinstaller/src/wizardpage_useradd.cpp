@@ -184,7 +184,7 @@ int WizardPage_UserAdd::nextId() const
 bool WizardPage_UserAdd::validatePage()
 {
     if (m_passwd->text().isEmpty()) {
-        QMessageBox::warning(this, tr("Root password needed"), tr("Root password should not be empty."));
+        QMessageBox::warning(this, tr("Root password"), tr("Root password should not be empty."));
         return false;
     }
 
