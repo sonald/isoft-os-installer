@@ -164,7 +164,7 @@ void WizardPage_UserAdd::initializePage()
     setTitle( tr("Set password and add normal user") );
     setSubTitle( tr("Password for user \"root\" must be set and you should add normal user for daily usage.") );
 
-    m_rootDescript->setText( tr("User \"root\" can control everything on the entire computer.\nA password MUST be set for user \"root\".") );
+    m_rootDescript->setText( tr("User \"root\" can control everything on the entire computer.\nA set password for \"root\" here.") );
 
     m_userLabel->setText( tr("Add new users:") );
     m_warningLabel->setText( "" );

@@ -3,6 +3,8 @@
 
 #include <QWizard>
 
+class StageIndicator;
+
 class WizardInstaller : public QWizard 
 {
     Q_OBJECT
@@ -15,8 +17,10 @@ public slots:
 
 private slots:
     void reTranslateUi();
+    void updateIndicator(int id);
 
 private:
     bool m_exitstate;
+    StageIndicator* _indicator;
 };
 #endif // RFINSTALLER_WIZARD_INSTALLER_H_

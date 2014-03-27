@@ -930,12 +930,17 @@ bool Engine::do_rmallpart(const string &devpath)
 bool Engine::do_mkfs(const string &partpath, const string &fstype, 
         const string& flag)
 {
+    if ( fstype == "bios_grub") {
+        cerr << "fstype is bios_grub, skip mkfs " << endl;
+        return true;
+    }
+
     string cmd = "";
 
     // umount partpath
     cmd = "/bin/umount " + partpath;
     cerr<<"do_mkfs umount command line is:"<<cmd<<endl;
-    system(cmd.c_str()); 
+    system(cmd.c_str());  // may fail if not mounted yet
 	
     cmd = "";	
 

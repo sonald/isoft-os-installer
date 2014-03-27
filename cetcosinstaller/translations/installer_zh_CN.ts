@@ -199,35 +199,78 @@
     </message>
 </context>
 <context>
+    <name>StageIndicator</name>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="39"/>
+        <source>welcome</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="39"/>
+        <source>license</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="39"/>
+        <source>mode select</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="40"/>
+        <source>partition</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="40"/>
+        <source>summary</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="40"/>
+        <source>install</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="41"/>
+        <source>configure</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="41"/>
+        <source>finish</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>WizardInstaller</name>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="87"/>
+        <location filename="../src/wizard_installer.cpp" line="85"/>
         <source>Installer Wizard</source>
         <translation>安装程序向导</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="89"/>
+        <location filename="../src/wizard_installer.cpp" line="87"/>
         <source>&lt; &amp;Back</source>
         <translation>后退(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="90"/>
-        <location filename="../src/wizard_installer.cpp" line="91"/>
+        <location filename="../src/wizard_installer.cpp" line="88"/>
+        <location filename="../src/wizard_installer.cpp" line="89"/>
         <source>&amp;Next &gt;</source>
         <translation>下一步(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="92"/>
+        <location filename="../src/wizard_installer.cpp" line="90"/>
         <source>&amp;Finish</source>
         <translation>完成(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="93"/>
+        <location filename="../src/wizard_installer.cpp" line="91"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="114"/>
+        <location filename="../src/wizard_installer.cpp" line="112"/>
         <source>The installation is not start yet, anything is not happened on your computer, you can quit the installer safely in this moment.</source>
         <translation>安装过程还没有开始，在你的计算机上没有发生任何改变，此刻你可以安全的退出安装程序。</translation>
     </message>
@@ -236,7 +279,7 @@
         <translation type="obsolete">系统已经被安装而没有配置，如果现在退出，系统将不可用。</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="117"/>
+        <location filename="../src/wizard_installer.cpp" line="115"/>
         <source>The system already had been installed but not configured.The system will be unusable if you quit now.</source>
         <translation>系统已经被安装而没有配置，如果现在退出，系统将不可用。</translation>
     </message>
@@ -413,13 +456,13 @@
 <context>
     <name>WizardPage_Partition_Advanced</name>
     <message>
-        <location filename="../src/wizardpage_partition_advanced.cpp" line="17"/>
-        <location filename="../src/wizardpage_partition_advanced.cpp" line="37"/>
+        <location filename="../src/wizardpage_partition_advanced.cpp" line="18"/>
+        <location filename="../src/wizardpage_partition_advanced.cpp" line="40"/>
         <source>Partition: Advanced Mode</source>
         <translation>分区：高级方式</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_partition_advanced.cpp" line="18"/>
+        <location filename="../src/wizardpage_partition_advanced.cpp" line="19"/>
         <source>You can create, delete, edit partition or view the directory tree of partition, set the mount point, file system and whether formatted.</source>
         <translation>你可以创建、删除、编辑分区，查看分区目录树。也可以设置挂载点、文件系统类型以及决定是否格式化文件系统。</translation>
     </message>
@@ -661,14 +704,20 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation>超级用户(root)密码必须设置。必须添加一个新的普通用户作为日常使用。</translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_useradd.cpp" line="167"/>
+        <source>User &quot;root&quot; can control everything on the entire computer.
+A set password for &quot;root&quot; here.</source>
+        <translation type="unfinished">超级用户可以控制整台计算机的所有事情。
+请在此设置超级用户密码。</translation>
+    </message>
+    <message>
         <location filename="../src/wizardpage_useradd.cpp" line="169"/>
         <source>Add new users:</source>
         <translation>添加新用户：</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="187"/>
         <source>Root password needed</source>
-        <translation>必须输入root密码</translation>
+        <translation type="obsolete">必须输入root密码</translation>
     </message>
     <message>
         <location filename="../src/wizardpage_useradd.cpp" line="187"/>
@@ -676,6 +725,7 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
         <translation>root密码不能为空。</translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_useradd.cpp" line="187"/>
         <location filename="../src/wizardpage_useradd.cpp" line="193"/>
         <source>Root password</source>
         <translation>超级用户密码：</translation>
@@ -743,10 +793,9 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 			</translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="167"/>
         <source>User &quot;root&quot; can control everything on the entire computer.
 A password MUST be set for user &quot;root&quot;.</source>
-        <translation>超级用户可以控制整台计算机的所有事情。
+        <translation type="obsolete">超级用户可以控制整台计算机的所有事情。
 超级用户必须设置一个密码。</translation>
     </message>
     <message>

@@ -105,6 +105,6 @@ systemctl enable bluetooth
 
 ret=`lspci -nD | awk '{ if($2 == "0300:" && $3 ~ /^15ad/ ) print $3}'`
 if [ -z "$ret" ];then
-	pacman -Rcs xf86-video-vmware open-vm-tools || true
+	pacman -Rcs xf86-video-vmware open-vm-tools --noconfirm || true
 fi
 
