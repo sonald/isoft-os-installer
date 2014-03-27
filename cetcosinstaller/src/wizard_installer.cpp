@@ -60,7 +60,7 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     setPixmap( QWizard::BackgroundPixmap, background );
 
     _indicator = new StageIndicator(this);
-    _indicator->move(10, 80);
+    _indicator->move(80, 80);
     _indicator->show();
     connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(updateIndicator(int)));
 }

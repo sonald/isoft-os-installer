@@ -7,11 +7,7 @@ class StageItem: public QWidget
 {
     Q_OBJECT
     public:
-        StageItem(QWidget *parent, int stageId, const QString& desc)
-            :QWidget(parent), _stageId(stageId), _description(desc), _isPivot(false)
-        {
-            setAttribute(Qt::WA_TranslucentBackground);
-        }
+        StageItem(QWidget *parent, int stageId, const QString& desc);
 
         int id() const { return _stageId; }
         QString desc() const { return _description; }
@@ -24,6 +20,8 @@ class StageItem: public QWidget
         int _stageId;
         QString _description;
         bool _isPivot;
+        QPixmap _activePixmap;
+        QPixmap _inactivePixmap;
 };
 
 class StageIndicator: public QWidget
@@ -43,6 +41,11 @@ class StageIndicator: public QWidget
     private:
         QList<StageItem*> _stages;
         int _current;
+        QPixmap _background;
+        QPixmap _completeBar;
+        QPixmap _ongoingBar;
+        QPixmap _activePixmap;
+        QPixmap _completePixmap;
 };
 
 #endif
