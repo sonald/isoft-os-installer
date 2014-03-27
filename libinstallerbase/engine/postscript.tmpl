@@ -80,45 +80,33 @@ if [ ${EFI_SUPPORT} = true ]; then
     done
 elif [ ${arch} == "mipsel" ]; then
 cat > /boot.cfg << _EOF
-#iSoft Client OS Add For LoongSon
-timeout 8
+#iSoft Client OS For LoongSon
+timeout 5
 default 0
 
-title   iSoft Client OS USB-CD Install
-    kernel /dev/fs/iso9660@usb0/isoft/boot/mipsel/vmlinuz
-    initrd /dev/fs/iso9660@usb0/isoft/boot/mipsel/isoftiso.img
-    args console=tty rdinit=/sbin/init quiet splash loglevel=1
-
-title   iSoft Client OS SATA-CD Install
-    kernel /dev/fs/iso9660@cd0/isoft/boot/mipsel/vmlinuz
-    initrd /dev/fs/iso9660@cd0/isoft/boot/mipsel/isoftiso.img
-    args console=tty rdinit=/sbin/init quiet splash loglevel=1
-
-title   iSoft Client OS USB Install
-    kernel /dev/fs/ext2@usb0/isoft/boot/mipsel/vmlinuz
-    initrd /dev/fs/ext2@usb0/isoft/boot/mipsel/isoftiso.img
-    args console=tty rdinit=/sbin/init quiet splash loglevel=1
+title   iSoft Client OS
+    kernel /dev/fs/ext2@wd0/boot/vmlinuz-linux
+    initrd /dev/fs/ext2@wd0/boot/initramfs-linux.img
+    args console=tty root=${ROOT_DIVICE} quiet splash loglevel=1
+title   iSoft Client OS (fallback)
+    kernel /dev/fs/ext2@wd0/boot/vmlinuz-linux
+    initrd /dev/fs/ext2@wd0/boot/initramfs-linux-fallback.img
+    args console=tty root=${ROOT_DIVICE} quiet splash loglevel=1
 _EOF
 
     cp /boot.cfg /boot/
 
 cat > /boot.conf << _EOF
-#iSoft Client OS Add For LoongSon
-timeout 8
+#iSoft Client OS For LoongSon
+timeout 5
 default 0
 
-title   iSoft Client OS USB-CD Install 
-    kernel (cd0)/isoft/boot/mipsel/vmlinuz console=tty rdinit=/sbin/init quiet splash loglevel=1
-    initrd (cd0)/isoft/boot/mipsel/isoftiso.img
-    root (cd0)
-title   iSoft Client OS SATA-CD Install 
-    kernel (cd0)/isoft/boot/mipsel/vmlinuz console=tty rdinit=/sbin/init quiet splash loglevel=1
-    initrd (cd0)/isoft/boot/mipsel/isoftiso.img
-    root (cd0)
-title   iSoft Client OS USB Install
-    kernel (usb0,0)/isoft/boot/mipsel/vmlinuz console=tty rdinit=/sbin/init quiet splash loglevel=1
-    initrd (usb0,0)/isoft/boot/mipsel/isoftiso.img
-    root (usb0,0)
+title   iSoft Client OS
+    kernel (wd0)/boot/vmlinuz-linux console=tty root=${ROOT_DIVICE} quiet splash loglevel=1
+    initrd /dev/fs/ext2@wd0/boot/initramfs-linux.img
+title   iSoft Client OS (fallback)
+    kernel (wd0)/boot/vmlinuz-linux console=tty root=${ROOT_DIVICE} quiet splash loglevel=1
+    initrd (wd0)/boot/initramfs-linux-fallback.img
 _EOF
 
     cp /boot.conf /boot/
