@@ -59,9 +59,24 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     QPixmap background( g_appImgPath + "/installer-background.png" );
     setPixmap( QWizard::BackgroundPixmap, background );
 
-    StageIndicator *ind = new StageIndicator(this);
-    ind->move(10, 80);
-    ind->show();
+    _indicator = new StageIndicator(this);
+    _indicator->move(10, 80);
+    _indicator->show();
+    connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(updateIndicator(int)));
+}
+
+void WizardInstaller::updateIndicator(int id)
+{
+    static int previd = -1;
+    qDebug() << "change id to " << id;
+    if (id > previd) {
+        if (id != Page_ChooseGroup)
+            _indicator->nextStage();
+    } else if (id < previd) {
+        if (!(previd == Page_ChooseGroup && id == Page_InstallMode))
+            _indicator->prevStage();
+    }
+    previd = id;
 }
 
 // retranslate text of UI element.

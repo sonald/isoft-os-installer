@@ -136,40 +136,83 @@
     </message>
 </context>
 <context>
+    <name>StageIndicator</name>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="39"/>
+        <source>welcome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="39"/>
+        <source>license</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="39"/>
+        <source>mode select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="40"/>
+        <source>partition</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="40"/>
+        <source>summary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="40"/>
+        <source>install</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="41"/>
+        <source>configure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/stage_indicator.cpp" line="41"/>
+        <source>finish</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>WizardInstaller</name>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="87"/>
+        <location filename="../src/wizard_installer.cpp" line="85"/>
         <source>Installer Wizard</source>
         <translation type="unfinished">Spanish Installer Wizard</translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="89"/>
+        <location filename="../src/wizard_installer.cpp" line="87"/>
         <source>&lt; &amp;Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="90"/>
-        <location filename="../src/wizard_installer.cpp" line="91"/>
+        <location filename="../src/wizard_installer.cpp" line="88"/>
+        <location filename="../src/wizard_installer.cpp" line="89"/>
         <source>&amp;Next &gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="92"/>
+        <location filename="../src/wizard_installer.cpp" line="90"/>
         <source>&amp;Finish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="93"/>
+        <location filename="../src/wizard_installer.cpp" line="91"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="117"/>
+        <location filename="../src/wizard_installer.cpp" line="115"/>
         <source>The system already had been installed but not configured.The system will be unusable if you quit now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizard_installer.cpp" line="114"/>
+        <location filename="../src/wizard_installer.cpp" line="112"/>
         <source>The installation is not start yet, anything is not happened on your computer, you can quit the installer safely in this moment.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -314,13 +357,13 @@
 <context>
     <name>WizardPage_Partition_Advanced</name>
     <message>
-        <location filename="../src/wizardpage_partition_advanced.cpp" line="17"/>
-        <location filename="../src/wizardpage_partition_advanced.cpp" line="37"/>
+        <location filename="../src/wizardpage_partition_advanced.cpp" line="18"/>
+        <location filename="../src/wizardpage_partition_advanced.cpp" line="40"/>
         <source>Partition: Advanced Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_partition_advanced.cpp" line="18"/>
+        <location filename="../src/wizardpage_partition_advanced.cpp" line="19"/>
         <source>You can create, delete, edit partition or view the directory tree of partition, set the mount point, file system and whether formatted.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -468,12 +511,6 @@ The partition(%1) on which LiveCD iso file put must not be used.</source>
 <context>
     <name>WizardPage_UserAdd</name>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="167"/>
-        <source>User &quot;root&quot; can control everything on the entire computer.
-A password MUST be set for user &quot;root&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/wizardpage_useradd.cpp" line="95"/>
         <location filename="../src/wizardpage_useradd.cpp" line="136"/>
         <source>Password:</source>
@@ -501,13 +538,14 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
-        <source>Add new users:</source>
+        <location filename="../src/wizardpage_useradd.cpp" line="167"/>
+        <source>User &quot;root&quot; can control everything on the entire computer.
+A set password for &quot;root&quot; here.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/wizardpage_useradd.cpp" line="187"/>
-        <source>Root password needed</source>
+        <location filename="../src/wizardpage_useradd.cpp" line="169"/>
+        <source>Add new users:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -516,6 +554,7 @@ A password MUST be set for user &quot;root&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/wizardpage_useradd.cpp" line="187"/>
         <location filename="../src/wizardpage_useradd.cpp" line="193"/>
         <source>Root password</source>
         <translation type="unfinished"></translation>
