@@ -299,6 +299,7 @@ bool Engine::postscript(void)
             script << "export LC_ALL=" + _locale << endl;
             script << "export LANG=" + _locale << endl;
             script << "export GRUB_DEVICE=" << _grub_install_device << endl;
+            script << "export ROOT_DEVICE=" << _rootdev << endl;
             list<string>::const_iterator ci = _new_user_names.begin();
             int i = 1;
             while (ci != _new_user_names.end()) {
