@@ -1,9 +1,10 @@
 set -x
 arch=`uname -m`
+BOOT_PART=""
 [[ ${arch} == "mips" ]] || [[ ${arch} == "mips64" ]] && arch=mipsel
 
 # for loongson
-if[ ${arch} == "mipsel" ]; then
+if [ ${arch} == "mipsel" ]; then
     _modules='MODULES=${MOUDLES}" radeon"'
 else
     _modules='MODULES=${MODULES}" i915 radeon nouveau"'
@@ -85,13 +86,13 @@ timeout 5
 default 0
 
 title   iSoft Client OS
-    kernel /dev/fs/ext2@wd0/boot/vmlinuz-linux
-    initrd /dev/fs/ext2@wd0/boot/initramfs-linux.img
-    args console=tty root=${ROOT_DIVICE} quiet splash loglevel=1
+    kernel /dev/fs/ext2@wd0/${BOOT_PART}/vmlinuz-linux
+    initrd /dev/fs/ext2@wd0/${BOOT_PART}/initramfs-linux.img
+    args console=tty root=${ROOT_DIVICE} rw quiet splash loglevel=1
 title   iSoft Client OS (fallback)
-    kernel /dev/fs/ext2@wd0/boot/vmlinuz-linux
-    initrd /dev/fs/ext2@wd0/boot/initramfs-linux-fallback.img
-    args console=tty root=${ROOT_DIVICE} quiet splash loglevel=1
+    kernel /dev/fs/ext2@wd0/${BOOT_PART}/vmlinuz-linux
+    initrd /dev/fs/ext2@wd0/${BOOT_PART}/initramfs-linux-fallback.img
+    args console=tty root=${ROOT_DIVICE} rw quiet splash loglevel=1
 _EOF
 
     cp /boot.cfg /boot/
@@ -102,11 +103,11 @@ timeout 5
 default 0
 
 title   iSoft Client OS
-    kernel (wd0)/boot/vmlinuz-linux console=tty root=${ROOT_DIVICE} quiet splash loglevel=1
-    initrd /dev/fs/ext2@wd0/boot/initramfs-linux.img
+    kernel (wd0)/${BOOT_PART}/vmlinuz-linux console=tty root=${ROOT_DIVICE}  rw quiet splash loglevel=1
+    initrd /dev/fs/ext2@wd0/${BOOT_PART}/initramfs-linux.img
 title   iSoft Client OS (fallback)
-    kernel (wd0)/boot/vmlinuz-linux console=tty root=${ROOT_DIVICE} quiet splash loglevel=1
-    initrd (wd0)/boot/initramfs-linux-fallback.img
+    kernel (wd0)/${BOOT_PART}/vmlinuz-linux console=tty root=${ROOT_DIVICE} rw quiet splash loglevel=1
+    initrd (wd0)/${BOOT_PART}/initramfs-linux-fallback.img
 _EOF
 
     cp /boot.conf /boot/
@@ -133,11 +134,11 @@ sed -i 's%#Server = http://ftp%Server = http://ftp%g' /etc/pacman.d/mirrorlist
 
 ln -sf vim /usr/bin/vi
 
-sed -i 's/SystemGroup sys root/SystemGroup sys root users/' /etc/cups/cups-file.conf 
+test -f /etc/cups/cups-file.conf && sed -i 's/SystemGroup sys root/SystemGroup sys root users/' /etc/cups/cups-file.conf 
+test -f /usr/lib/systemd/system/kdm-plymouth.service && systemctl enable kdm-plymouth || systemctl enable kdm
 
 pacman-key --init && pacman-key --populate archlinux
 
-systemctl enable kdm-plymouth || systemctl enable kdm
 ##no pacman-init.service file
 ##systemctl enable pacman-init
 systemctl enable NetworkManager
