@@ -87,17 +87,17 @@ default 0
 title   iSoft Client OS USB-CD Install
     kernel /dev/fs/iso9660@usb0/isoft/boot/mipsel/vmlinuz
     initrd /dev/fs/iso9660@usb0/isoft/boot/mipsel/isoftiso.img
-    args console=tty rdinit=/init quiet splash loglevel=1
+    args console=tty rdinit=/sbin/init quiet splash loglevel=1
 
 title   iSoft Client OS SATA-CD Install
     kernel /dev/fs/iso9660@cd0/isoft/boot/mipsel/vmlinuz
     initrd /dev/fs/iso9660@cd0/isoft/boot/mipsel/isoftiso.img
-    args console=tty rdinit=/init quiet splash loglevel=1
+    args console=tty rdinit=/sbin/init quiet splash loglevel=1
 
 title   iSoft Client OS USB Install
     kernel /dev/fs/ext2@usb0/isoft/boot/mipsel/vmlinuz
     initrd /dev/fs/ext2@usb0/isoft/boot/mipsel/isoftiso.img
-    args console=tty rdinit=/init quiet splash loglevel=1
+    args console=tty rdinit=/sbin/init quiet splash loglevel=1
 _EOF
 
     cp /boot.cfg /boot/
@@ -108,15 +108,15 @@ timeout 8
 default 0
 
 title   iSoft Client OS USB-CD Install 
-    kernel (cd0)/isoft/boot/mipsel/vmlinuz console=tty rdinit=/init quiet splash loglevel=1
+    kernel (cd0)/isoft/boot/mipsel/vmlinuz console=tty rdinit=/sbin/init quiet splash loglevel=1
     initrd (cd0)/isoft/boot/mipsel/isoftiso.img
     root (cd0)
 title   iSoft Client OS SATA-CD Install 
-    kernel (cd0)/isoft/boot/mipsel/vmlinuz console=tty rdinit=/init quiet splash loglevel=1
+    kernel (cd0)/isoft/boot/mipsel/vmlinuz console=tty rdinit=/sbin/init quiet splash loglevel=1
     initrd (cd0)/isoft/boot/mipsel/isoftiso.img
     root (cd0)
 title   iSoft Client OS USB Install
-    kernel (usb0,0)/isoft/boot/mipsel/vmlinuz console=tty rdinit=/init quiet splash loglevel=1
+    kernel (usb0,0)/isoft/boot/mipsel/vmlinuz console=tty rdinit=/sbin/init quiet splash loglevel=1
     initrd (usb0,0)/isoft/boot/mipsel/isoftiso.img
     root (usb0,0)
 _EOF
