@@ -6,6 +6,7 @@
 
 #include "editpartition.h"
 #include "diskswidget.h"
+#include "archinfo.h"
 
 EditPartition::EditPartition(QTreeWidgetItem *currentItem, DisksWidget *parent) 
 	: QDialog(parent), 
@@ -47,6 +48,11 @@ EditPartition::EditPartition(QTreeWidgetItem *currentItem, DisksWidget *parent)
         if (m_parent->maybeGPT(m_parent->currentDevPath())) {
             formatComboBox->addItem("bios_grub");
         }
+    }
+
+    ArchInfo ai;
+    if (ai.arch() == ArchInfo::Loongson) {
+        this->mntPointComboBox->addItem("/boot");
     }
 }
 

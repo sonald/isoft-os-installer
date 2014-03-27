@@ -16,12 +16,14 @@ HEADERS += addpartition.h \
            directorytree.h \
            diskswidget.h \
            editpartition.h \
+           archinfo.h \
            itembutton.h
 FORMS += add.ui edit.ui
 SOURCES += addpartition.cpp \
            directorytree.cpp \
            diskswidget.cpp \
            editpartition.cpp \
+           archinfo.cpp \
            itembutton.cpp
 RESOURCES = diskswidget.qrc
 

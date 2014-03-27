@@ -4,6 +4,7 @@
 
 #include "addpartition.h"
 #include "diskswidget.h"
+#include "archinfo.h"
 
 AddPartition::AddPartition(DisksWidget *parent) : QDialog(parent), _tree(parent)
 {
@@ -29,6 +30,11 @@ AddPartition::AddPartition(DisksWidget *parent) : QDialog(parent), _tree(parent)
         if (_tree->maybeGPT(_tree->currentDevPath())) {
             fsType->addItem("bios_grub");
         }
+    }
+
+    ArchInfo ai;
+    if (ai.arch() == ArchInfo::Loongson) {
+        this->mntPoint->addItem("/boot");
     }
 
     fsType->setCurrentIndex(2);
