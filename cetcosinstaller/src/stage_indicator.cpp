@@ -1,26 +1,37 @@
+#include "installer_global.h"
 #include "stage_indicator.h"
+
+StageItem::StageItem(QWidget *parent, int stageId, const QString& desc)
+    :QWidget(parent), _stageId(stageId), _description(desc), _isPivot(false)
+{
+    setAttribute(Qt::WA_TranslucentBackground);
+    _activePixmap = QPixmap(g_appImgPath + "/ongoingNode.png");
+    _inactivePixmap = QPixmap(g_appImgPath + "/completedNode.png");
+    setFixedSize(28, 28);
+}
 
 void StageItem::paintEvent(QPaintEvent *pe)
 {
     QPainter p(this);
     
-    int h = height();
-    QPoint center(h/2, h/2);
-    QRadialGradient gradient(center, h/2, center);
-    if (_isPivot) {
-        gradient.setColorAt(0, QColor::fromRgbF(1, 1, 0, 1));
-        gradient.setColorAt(1, QColor::fromRgbF(1, 0.4, 0, 0.4));
+    if (_activePixmap.isNull()) {
+        int h = height();
+        QPoint center(h/2, h/2);
+        QRadialGradient gradient(center, h/2, center);
+        if (_isPivot) {
+            gradient.setColorAt(0, QColor::fromRgbF(1, 1, 0, 1));
+            gradient.setColorAt(1, QColor::fromRgbF(1, 0.4, 0, 0.4));
+        } else {
+            gradient.setColorAt(0, QColor::fromRgbF(1, 0, 1, 1));
+            gradient.setColorAt(1, QColor::fromRgbF(1, 0, 0.4, 0.4));
+        }
+        QBrush brush(gradient);
+        p.setBrush(brush);
+        p.setPen(Qt::transparent);
+        p.drawEllipse(0, 0, h, h);
     } else {
-        gradient.setColorAt(0, QColor::fromRgbF(1, 0, 1, 1));
-        gradient.setColorAt(1, QColor::fromRgbF(1, 0, 0.4, 0.4));
+        //p.drawPixmap(0, 0, _isPivot?_activePixmap:_inactivePixmap);
     }
-    QBrush brush(gradient);
-    p.setBrush(brush);
-    p.setPen(Qt::transparent);
-    p.drawEllipse(0, 0, h, h);
-
-    p.setPen(Qt::darkRed);
-    p.drawText(h, h/2, _description);
 }
 
 void StageItem::asPivot(bool set)
@@ -34,6 +45,12 @@ void StageItem::asPivot(bool set)
 StageIndicator::StageIndicator(QWidget* parent)
     :QWidget(parent)
 {
+    _background = QPixmap(g_appImgPath + "/progressBackground.png");
+    _completeBar = QPixmap(g_appImgPath + "/completedGantt.png");;
+    _ongoingBar = QPixmap(g_appImgPath + "/ongoingGantt.png");;
+    _activePixmap = QPixmap(g_appImgPath + "/ongoingNode.png");
+    _completePixmap = QPixmap(g_appImgPath + "/completedNode.png");
+
     setWindowOpacity(0.0);
     QStringList stages;
     stages << tr("welcome") << tr("license") << tr("mode select")
@@ -44,6 +61,7 @@ StageIndicator::StageIndicator(QWidget* parent)
     }
     adjustItems();
     _current = -1;
+    setFixedSize(32, 414);
 }
 
 void StageIndicator::prevStage()
@@ -52,6 +70,7 @@ void StageIndicator::prevStage()
 
     _stages[_current--]->asPivot(false);
     _stages[_current]->asPivot(true);
+    update();
 }
 
 void StageIndicator::nextStage()
@@ -63,6 +82,7 @@ void StageIndicator::nextStage()
     } else 
         _current = 0;
     _stages[_current]->asPivot(true);
+    update();
 }
 
 void StageIndicator::addStage(const QString& desc)
@@ -73,15 +93,43 @@ void StageIndicator::addStage(const QString& desc)
 
 void StageIndicator::adjustItems()
 {
-    int h = 32;
+    int h = 28;
     for (int i = 0; i < _stages.length(); ++i) {
         StageItem *si = _stages[i];
-        si->resize(120, h);
-        si->move(0, i*h + i*2);
+        si->move(-1, -1);
+        si->move(2, 2 + i*h + i*27);
     }
 }
 
 void StageIndicator::paintEvent(QPaintEvent *pe)
 {
-    QWidget::paintEvent(pe);
+    QPainter p(this);
+
+    QFont f("sans serif", 12, 2, false);
+    //f.setPixelSize(11);
+    p.setPen(Qt::white);
+    p.setFont(f);
+    QFontMetrics fm(f);
+
+    p.drawPixmap(0, 0, _background);
+    int h = 28;
+    for (int i = 0; i <= _current; ++i) {
+        QPoint pos(2, 2 + i*h + i*27);
+        if (i < _current) {
+            p.drawPixmap(pos, _completePixmap);
+        } else if (i == _current)
+            p.drawPixmap(pos, _activePixmap);
+
+        QRect r = fm.boundingRect(QString::number(i+1));
+        p.drawText(pos.x() + (h-r.width())/2, pos.y() + r.height(),
+                QString::number(i+1));
+
+        if (i) {
+            QPoint pos_bar((32-3)/2, pos.y() - 28);
+            if (i == _current) {
+                p.drawPixmap(pos_bar, _ongoingBar);
+            } else 
+                p.drawPixmap(pos_bar, _completeBar);
+        }
+    }
 }
