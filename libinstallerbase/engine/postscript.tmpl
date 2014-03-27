@@ -1,11 +1,21 @@
 set -x
+arch=`uname -m`
+[[ ${arch} == "mips" ]] || [[ ${arch} == "mips64" ]] && arch=mipsel
+
+# for loongson
+if[ ${arch} == "mipsel" ]; then
+    _modules='MODULES=${MOUDLES}" radeon"'
+else
+    _modules='MODULES=${MODULES}" i915 radeon nouveau"'
+fi
+
 # set timezone to CST
 /usr/bin/ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 #mkinitrd /boot/initrd-$(uname -r).img $(uname -r) --force
 #mkinitrd /boot/$(ls /boot/ | grep initrd) $(ls /boot/ | grep initrd | sed "s%.img%%; s%initrd-%%") --force
 #use mkinitcpio instead
-sed -i 's/^MODULES="/MOUDLES="i915 radeon nouveau /g' /etc/mkinitcpio.conf
+echo $_modules >> /etc/mkinitcpio.conf
 sed -i 's/^HOOKS="base udev/HOOKS="base udev plymouth/g' /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
@@ -68,7 +78,52 @@ if [ ${EFI_SUPPORT} = true ]; then
            cp -vf "$dir/LC_MESSAGES/grub.mo" "${grubdir}/locale/${dir##*/}.mo"
         fi
     done
-else 
+elif [ ${arch} == "mipsel" ]; then
+cat > /boot.cfg << _EOF
+#iSoft Client OS Add For LoongSon
+timeout 8
+default 0
+
+title   iSoft Client OS USB-CD Install
+    kernel /dev/fs/iso9660@usb0/isoft/boot/mipsel/vmlinuz
+    initrd /dev/fs/iso9660@usb0/isoft/boot/mipsel/isoftiso.img
+    args console=tty rdinit=/init quiet splash loglevel=1
+
+title   iSoft Client OS SATA-CD Install
+    kernel /dev/fs/iso9660@cd0/isoft/boot/mipsel/vmlinuz
+    initrd /dev/fs/iso9660@cd0/isoft/boot/mipsel/isoftiso.img
+    args console=tty rdinit=/init quiet splash loglevel=1
+
+title   iSoft Client OS USB Install
+    kernel /dev/fs/ext2@usb0/isoft/boot/mipsel/vmlinuz
+    initrd /dev/fs/ext2@usb0/isoft/boot/mipsel/isoftiso.img
+    args console=tty rdinit=/init quiet splash loglevel=1
+_EOF
+
+    cp /boot.cfg /boot/
+
+cat > /boot.conf << _EOF
+#iSoft Client OS Add For LoongSon
+timeout 8
+default 0
+
+title   iSoft Client OS USB-CD Install 
+    kernel (cd0)/isoft/boot/mipsel/vmlinuz console=tty rdinit=/init quiet splash loglevel=1
+    initrd (cd0)/isoft/boot/mipsel/isoftiso.img
+    root (cd0)
+title   iSoft Client OS SATA-CD Install 
+    kernel (cd0)/isoft/boot/mipsel/vmlinuz console=tty rdinit=/init quiet splash loglevel=1
+    initrd (cd0)/isoft/boot/mipsel/isoftiso.img
+    root (cd0)
+title   iSoft Client OS USB Install
+    kernel (usb0,0)/isoft/boot/mipsel/vmlinuz console=tty rdinit=/init quiet splash loglevel=1
+    initrd (usb0,0)/isoft/boot/mipsel/isoftiso.img
+    root (usb0,0)
+_EOF
+
+    cp /boot.conf /boot/
+
+else
     # when no efi
     grub-install $GRUB_DEVICE
     export GRUB_DISTRIBUTOR="iSoft Client OS"
@@ -86,7 +141,7 @@ sed -i 's/#en_US/en_US/g' /etc/locale.gen
 locale-gen
 
 sed -i 's%#Server = http://ftp%Server = http://ftp%g' /etc/pacman.d/mirrorlist
-sed -i '/#\[multilib\]/{N;s/#//g}' /etc/pacman.conf
+[[ ${arch} == "x86_64" ]] && sed -i '/#\[multilib\]/{N;s/#//g}' /etc/pacman.conf
 
 ln -sf vim /usr/bin/vi
 
@@ -94,7 +149,7 @@ sed -i 's/SystemGroup sys root/SystemGroup sys root users/' /etc/cups/cups-file.
 
 pacman-key --init && pacman-key --populate archlinux
 
-systemctl enable kdm-plymouth
+systemctl enable kdm-plymouth || systemctl enable kdm
 ##no pacman-init.service file
 ##systemctl enable pacman-init
 systemctl enable NetworkManager
