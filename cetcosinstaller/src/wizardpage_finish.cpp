@@ -61,9 +61,9 @@ void WizardPage_Finish::initializePage()
     connect( m_thread, SIGNAL( finished() ), m_dialog, SLOT( accept() ) );
 
     m_dialog->setLabelText();
-    m_dialog->show();
     QApplication::setOverrideCursor( QCursor(Qt::WaitCursor) );
     m_thread->start();
+    m_dialog->show();
 }
 
 void WizardPage_Finish::restorePage()
