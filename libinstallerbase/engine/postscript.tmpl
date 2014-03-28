@@ -88,7 +88,7 @@ elif [ "${arch}" == "mipsel" ]; then
         mount /dev/sda1 /boot
         mv /boot_tmp_bak/* /boot/ || cp -a /boot_tmp_bak/* /boot/
         rmdir /boot_tmp_bak || rm -rf /boot_tmp_bak
-        echo "/dev/sda1     /boot   rw  0   0" >> /etc/fstab
+        echo "/dev/sda1     /boot   ext4   rw  0   0" >> /etc/fstab
         UMOUNT_BOOT="umount /boot"
     fi
 
