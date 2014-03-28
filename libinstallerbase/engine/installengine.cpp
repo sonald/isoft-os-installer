@@ -300,6 +300,7 @@ bool Engine::postscript(void)
             script << "export LANG=" + _locale << endl;
             script << "export GRUB_DEVICE=" << _grub_install_device << endl;
             script << "export ROOT_DEVICE=" << _rootdev << endl;
+            script << "export BOOT_DEVICE=" << _bootdev << endl;
             list<string>::const_iterator ci = _new_user_names.begin();
             int i = 1;
             while (ci != _new_user_names.end()) {
@@ -1011,20 +1012,19 @@ bool Engine::do_set_mountpoint(const string &devpath, const string &mountpoint, 
     tmp.devpath = devpath;
     tmp.mountpoint = mountpoint;
 
-    if (fstype == "linux-swap")
-        {
-            tmp.mountpoint = "swap";
-            tmp.fstype = "swap";
-        }
-    else if (fstype == "fat32" || fstype == "fat16")
-		{
-			tmp.fstype = "vfat";
-		}
-		else
-        	{
-				tmp.fstype = fstype;
-			}
+    if (fstype == "linux-swap") {
+        tmp.mountpoint = "swap";
+        tmp.fstype = "swap";
+    } else if (fstype == "fat32" || fstype == "fat16") {
+        tmp.fstype = "vfat";
+    } else {
+        tmp.fstype = fstype;
+    }
 		
+    if (mountpoint == "/boot"){
+        _bootdev = devpath;
+    }
+
     if (mountpoint == "/"){
         _rootdir = "/tmp/rootdir/";
         _rootdev = devpath;
