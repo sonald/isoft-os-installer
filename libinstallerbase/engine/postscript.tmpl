@@ -1,7 +1,7 @@
 set -x
 arch=`uname -m`
-BOOT_PART=""
 [[ ${arch} == "mips" ]] || [[ ${arch} == "mips64" ]] && arch=mipsel
+BOOT_PART=""
 
 # for loongson
 if [ ${arch} == "mipsel" ]; then
@@ -79,7 +79,19 @@ if [ ${EFI_SUPPORT} = true ]; then
            cp -vf "$dir/LC_MESSAGES/grub.mo" "${grubdir}/locale/${dir##*/}.mo"
         fi
     done
-elif [ ${arch} == "mipsel" ]; then
+elif [ "${arch}" == "mipsel" ]; then
+    if [ "${ROOT_DEVICE}" == "/dev/sda1" ]; then
+        BOOT_PART="boot"
+    elif [ "${BOOT_DEVICE}" != "/dev/sda1" ] ; then
+        mv /boot /boot_tmp_bak || cp -a /boot /boot_tmp_bak
+        install -d -m644 /boot
+        mount /dev/sda1 /boot
+        mv /boot_tmp_bak/* /boot/ || cp -a /boot_tmp_bak/* /boot/
+        rmdir /boot_tmp_bak || rm -rf /boot_tmp_bak
+        echo "/dev/sda1     /boot   rw  0   0" >> /etc/fstab
+        UMOUNT_BOOT="umount /boot"
+    fi
+
 cat > /boot.cfg << _EOF
 #iSoft Client OS For LoongSon
 timeout 5
@@ -88,11 +100,11 @@ default 0
 title   iSoft Client OS
     kernel /dev/fs/ext2@wd0/${BOOT_PART}/vmlinuz-linux
     initrd /dev/fs/ext2@wd0/${BOOT_PART}/initramfs-linux.img
-    args console=tty root=${ROOT_DIVICE} rw quiet splash loglevel=1
+    args console=tty root=${ROOT_DEVICE} rw quiet splash loglevel=1
 title   iSoft Client OS (fallback)
     kernel /dev/fs/ext2@wd0/${BOOT_PART}/vmlinuz-linux
     initrd /dev/fs/ext2@wd0/${BOOT_PART}/initramfs-linux-fallback.img
-    args console=tty root=${ROOT_DIVICE} rw quiet splash loglevel=1
+    args console=tty root=${ROOT_DEVICE} rw quiet splash loglevel=1
 _EOF
 
     cp /boot.cfg /boot/
@@ -103,14 +115,15 @@ timeout 5
 default 0
 
 title   iSoft Client OS
-    kernel (wd0)/${BOOT_PART}/vmlinuz-linux console=tty root=${ROOT_DIVICE}  rw quiet splash loglevel=1
+    kernel (wd0)/${BOOT_PART}/vmlinuz-linux console=tty root=${ROOT_DEVICE}  rw quiet splash loglevel=1
     initrd /dev/fs/ext2@wd0/${BOOT_PART}/initramfs-linux.img
 title   iSoft Client OS (fallback)
-    kernel (wd0)/${BOOT_PART}/vmlinuz-linux console=tty root=${ROOT_DIVICE} rw quiet splash loglevel=1
+    kernel (wd0)/${BOOT_PART}/vmlinuz-linux console=tty root=${ROOT_DEVICE} rw quiet splash loglevel=1
     initrd (wd0)/${BOOT_PART}/initramfs-linux-fallback.img
 _EOF
 
     cp /boot.conf /boot/
+    ${UMOUNT_BOOT}
 
 else
     # when no efi
