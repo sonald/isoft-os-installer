@@ -494,7 +494,11 @@ int ipacman_init(const char* rootdir, alpm_cb_progress cb)
 
 	struct utsname un;
 	uname(&un);
-	alpm_option_set_arch(handle, un.machine);
+	if (strcmp(un.machine, "mips64") == 0)
+		alpm_option_set_arch(handle, "mipsel");
+	else
+		alpm_option_set_arch(handle, un.machine);
+
 	alpm_option_set_checkspace(handle, 1);
 	alpm_option_set_usesyslog(handle, 1);
 	alpm_option_set_deltaratio(handle, 0.7);
