@@ -119,6 +119,8 @@ void WizardPage_Progress::updatePic()
         return;
     }
     m_picture->setPixmap(pic);
+    WizardInstaller *installer = qobject_cast<WizardInstaller*>(wizard());
+    installer->updateDashboard(pic);
 }
 
 void WizardPage_Progress::updateProgress()

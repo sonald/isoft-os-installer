@@ -15,6 +15,7 @@
 #include "installer_global.h"
 #include "dialog_reject.h"
 #include "stage_indicator.h"
+#include "dashboard.h"
 #include <QDebug>
 #include <QtGui/QMessageBox>
 
@@ -63,6 +64,16 @@ WizardInstaller::WizardInstaller(QWidget* parent)
     _indicator->move(80, 80);
     _indicator->show();
     connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(updateIndicator(int)));
+
+    _board = new DashBoard(0);
+    _board->move(0, 0);
+    _board->show();
+    _board->lower();
+}
+
+void WizardInstaller::updateDashboard(const QPixmap& pix)
+{
+    _board->updateWith(pix);    
 }
 
 void WizardInstaller::updateIndicator(int id)
