@@ -58,6 +58,10 @@ void AddPartition::accept()
 		QDialog::accept();
 		return ;
 	}
+
+    if (!chboxUseAll->isChecked()) {
+        fixedSize->setValue(_tree->clampNewPartitionSize(fixedSize->value()));
+    }
 		
 	if (!isValidMountPath(mnt)) {
 		QMessageBox::warning(this, tr("Warning"), tr("Please set a valid directory as mount point."));
