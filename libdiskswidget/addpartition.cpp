@@ -60,7 +60,10 @@ void AddPartition::accept()
 	}
 
     if (!chboxUseAll->isChecked()) {
-        fixedSize->setValue(_tree->clampNewPartitionSize(fixedSize->value()));
+        int newVal = _tree->clampNewPartitionSize(fixedSize->value());
+        if (newVal != fixedSize->value()) {
+            chboxUseAll->setChecked(true);
+        }
     }
 		
 	if (!isValidMountPath(mnt)) {
