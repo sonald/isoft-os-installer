@@ -31,6 +31,7 @@ HEADERS += dialog_reject.h \
            wizardpage_useradd.h \
            wizardpage_choosegroup.h \
            wizardpage_install_mode.h \
+           dashboard.h \
            stage_indicator.h \
            archinfo.h
 
@@ -56,6 +57,7 @@ SOURCES += dialog_reject.cpp \
            wizardpage_choosegroup.cpp \
            wizardpage_install_mode.cpp \
            stage_indicator.cpp \
+           dashboard.cpp \
            archinfo.cpp
 
 target.path = /usr/bin

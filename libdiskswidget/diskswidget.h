@@ -44,6 +44,7 @@ public:
 	void		setCurrentIndex(int index);
 	QString		currentDevPath();
 	QTreeWidgetItem *getCurrentItem() { return m_tree->currentItem(); }
+    int clampNewPartitionSize(int length);
 
 	//k only use for mode _windows
 	bool	hasWindows();

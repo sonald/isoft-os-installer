@@ -20,6 +20,8 @@ public:
     WizardPage_Finish(QWidget * parent =0);
     void initializePage();
     bool validatePage();
+    bool isComplete();
+
 public slots:
     void restorePage();
     void setPostState(bool state, QString errStr);

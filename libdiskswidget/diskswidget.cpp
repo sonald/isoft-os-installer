@@ -941,7 +941,8 @@ int DisksWidget::itemIndex(QTreeWidgetItem *item)
 }
 
 //k create primary partition, and return index of partition list
-int DisksWidget::createPrimary(QTreeWidgetItem *item, const QString &fsType, const QString &length, const QString &type, PedPartitionFlag flag)
+int DisksWidget::createPrimary(QTreeWidgetItem *item, const QString &fsType,
+        const QString &length, const QString &type, PedPartitionFlag flag)
 {
 	QString disk = belongedDisk(item);
 	PartitionList *list = m_partitionListMap.value(disk);
@@ -1337,7 +1338,7 @@ QString DisksWidget::warningInfo()
 
 bool DisksWidget::validate(QString &err, int requiredSizeMB)
 {
-    int size = targetRootSize() * 1000 / 1024;
+    int size = targetRootSize();
     qDebug() << "real: " << size << ", Needed: " << requiredSizeMB;
     if (size < requiredSizeMB) {
         err = tr("You need to select a partition which at least has %1MB!").arg(requiredSizeMB);
@@ -1600,15 +1601,15 @@ int DisksWidget::humanToSizeMB(QString size)
 	if (unit.isLetter()) {
 		realSize = size.left(size.size() - 2).toDouble();
 		if (unit == 'K' || unit == 'k') {
-            realSize /= 1024;
+            realSize /= 1000;
 		}
 
 		if (unit == 'G' || unit == 'g') {
-            realSize *= 1024;
+            realSize *= 1000;
 		}
 	} else {
 		realSize = size.left(size.size() - 1).toDouble();
-	    realSize /= (1024 * 1024);
+	    realSize /= (1000 * 1000);
 	}
 		
     qDebug() << __FUNCTION__ << size << " -> " << realSize;
@@ -1668,4 +1669,20 @@ void DisksWidget::create_fs_table(QTreeWidgetItem *current, int )
 			return ;
 		}
 	}
+}
+
+int DisksWidget::clampNewPartitionSize(int length)
+{
+	QTreeWidgetItem *current = m_tree->currentItem();
+	if (!current)
+		return length;
+
+    int target_size = humanToSizeMB(current->text(colSize));
+    qDebug() << __PRETTY_FUNCTION__ << "length = " << length << ", target = "
+        << target_size;
+    if (length > target_size) {
+        length = target_size;
+    }
+
+    return length;
 }

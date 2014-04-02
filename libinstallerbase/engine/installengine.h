@@ -169,6 +169,7 @@ class Engine
 
     string _rootdir;
     string _rootdev;
+    string _bootdev; // for loongson, device for /boot mount point
     string _filename;
 
     list<fstab_struct> _fstablist;

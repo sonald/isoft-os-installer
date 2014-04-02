@@ -4,6 +4,7 @@
 #include <QWizard>
 
 class StageIndicator;
+class DashBoard;
 
 class WizardInstaller : public QWizard 
 {
@@ -14,6 +15,7 @@ public:
     void reject();
 public slots:
     void setExitState(bool state);
+    void updateDashboard(const QPixmap& pix);
 
 private slots:
     void reTranslateUi();
@@ -22,5 +24,6 @@ private slots:
 private:
     bool m_exitstate;
     StageIndicator* _indicator;
+    DashBoard* _board;
 };
 #endif // RFINSTALLER_WIZARD_INSTALLER_H_

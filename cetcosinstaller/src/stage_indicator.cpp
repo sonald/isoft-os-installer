@@ -105,8 +105,7 @@ void StageIndicator::paintEvent(QPaintEvent *pe)
 {
     QPainter p(this);
 
-    QFont f("sans serif", 12, 2, false);
-    //f.setPixelSize(11);
+    QFont f("mono", 12, QFont::Black, false);
     p.setPen(Qt::white);
     p.setFont(f);
     QFontMetrics fm(f);
@@ -115,18 +114,29 @@ void StageIndicator::paintEvent(QPaintEvent *pe)
     int h = 28;
     for (int i = 0; i <= _current; ++i) {
         QPoint pos(2, 2 + i*h + i*27);
+
+        //HACK: material image have problem
+        if (i == 5) pos.ry() -= 1;
+        else if (i == 6) pos.ry() -= 2;
+        else if (i == 7) pos.ry() -= 4;
+
         if (i < _current) {
             p.drawPixmap(pos, _completePixmap);
         } else if (i == _current)
             p.drawPixmap(pos, _activePixmap);
 
         QRect r = fm.boundingRect(QString::number(i+1));
-        p.drawText(pos.x() + (h-r.width())/2, pos.y() + r.height(),
+        p.drawText((32-r.width())/2, pos.y() + (h+fm.ascent())/2,
                 QString::number(i+1));
 
         if (i) {
             QPoint pos_bar((32-3)/2, pos.y() - 28);
             if (i == _current) {
+                //HACK: material image have problem
+                if (i == 5) pos_bar.ry() += 1;
+                else if (i == 6) pos_bar.ry() += 2;
+                else if (i == 7) pos_bar.ry() += 3;
+
                 p.drawPixmap(pos_bar, _ongoingBar);
             } else 
                 p.drawPixmap(pos_bar, _completeBar);

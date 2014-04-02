@@ -15,6 +15,7 @@
 : QWizardPage(parent)
 {
     setFinalPage(true);
+    m_poststate = false;
     m_topSpacerItem = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     m_bottomSpacerItem = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     m_layout = new QVBoxLayout(this);
@@ -27,10 +28,11 @@
 
 void WizardPage_Finish::initializePage()
 {
+    emit completeChanged();
     setTitle( tr("Finish") );
     setSubTitle( tr("Configuring...") );
     wizard()->button( QWizard::CancelButton )->hide();
-    wizard()->button( QWizard::FinishButton )->setEnabled( false );
+    //wizard()->button( QWizard::FinishButton )->setEnabled( false );
 
     // locale
     QString locale = field("locale").toString();
@@ -61,9 +63,9 @@ void WizardPage_Finish::initializePage()
     connect( m_thread, SIGNAL( finished() ), m_dialog, SLOT( accept() ) );
 
     m_dialog->setLabelText();
-    m_dialog->show();
     QApplication::setOverrideCursor( QCursor(Qt::WaitCursor) );
     m_thread->start();
+    m_dialog->show();
 }
 
 void WizardPage_Finish::restorePage()
@@ -74,7 +76,9 @@ void WizardPage_Finish::restorePage()
     } else {
         setSubTitle( tr("PostInstall is failed.") );
     }
-    wizard()->button( QWizard::FinishButton )->setEnabled( true );
+
+    emit completeChanged();
+    //wizard()->button( QWizard::FinishButton )->setEnabled( true );
 }
 
 bool WizardPage_Finish::validatePage()
@@ -90,6 +94,11 @@ void WizardPage_Finish::setPostState(bool state, QString errStr)
         QMessageBox::critical(this, tr("PostInstall Error"), errStr);
     }
     emit exitstate(state);
+}
+
+bool WizardPage_Finish::isComplete()
+{
+    return m_poststate;
 }
 
 void PostThread::run()

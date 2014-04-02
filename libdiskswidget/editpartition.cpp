@@ -79,7 +79,7 @@ void EditPartition::accept()
 			
 	} else if (mnt == "/boot/efi") {
         if (formatButton->isChecked() && formatComboBox->currentText() != "fat32") {
-			QMessageBox::warning(this, tr("Warning"), QString(tr("The '/' partition needs to be formatted to one of ext filesystem.")));
+			QMessageBox::warning(this, tr("Warning"), QString(tr("The '/boot/efi' partition needs to be formatted to fat32.")));
 			return ;
 		}
 			
