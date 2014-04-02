@@ -25,6 +25,8 @@ public:
 public slots:
     void restorePage();
     void setPostState(bool state, QString errStr);
+    void start();
+
 signals:
     void exitstate(bool state);
 

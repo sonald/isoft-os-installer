@@ -1,10 +1,4 @@
-#include <QApplication>
-#include <QCheckBox>
-#include <QDebug>
-#include <QLocale>
-#include <QMessageBox>
-#include <QVBoxLayout>
-#include <QVariant>
+#include <QtGui>
 #include <stdlib.h>
 #include "installer_global.h"
 #include "dialog_postscript.h"
@@ -14,8 +8,8 @@
     WizardPage_Finish::WizardPage_Finish(QWidget *parent)
 : QWizardPage(parent)
 {
-    setFinalPage(true);
     m_poststate = false;
+
     m_topSpacerItem = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     m_bottomSpacerItem = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     m_layout = new QVBoxLayout(this);
@@ -28,11 +22,11 @@
 
 void WizardPage_Finish::initializePage()
 {
-    emit completeChanged();
+    setFinalPage(true);
+
     setTitle( tr("Finish") );
     setSubTitle( tr("Configuring...") );
     wizard()->button( QWizard::CancelButton )->hide();
-    //wizard()->button( QWizard::FinishButton )->setEnabled( false );
 
     // locale
     QString locale = field("locale").toString();
@@ -64,7 +58,14 @@ void WizardPage_Finish::initializePage()
 
     m_dialog->setLabelText();
     QApplication::setOverrideCursor( QCursor(Qt::WaitCursor) );
-    m_thread->start();
+    QTimer::singleShot(0, this, SLOT(start()));
+}
+
+void WizardPage_Finish::start()
+{
+    wizard()->button(QWizard::FinishButton)->setEnabled(false);
+    QTimer::singleShot(40, m_thread, SLOT(start()));
+    //m_thread->start();
     m_dialog->show();
 }
 
