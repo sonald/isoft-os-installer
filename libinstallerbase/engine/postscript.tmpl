@@ -5,7 +5,7 @@ BOOT_PART=""
 
 # for loongson
 if [ ${arch} == "mipsel" ]; then
-    _modules='MODULES=${MOUDLES}" radeon"'
+    _modules='MODULES=${MODULES}" radeon"'
 else
     _modules='MODULES=${MODULES}" i915 radeon nouveau"'
 fi
