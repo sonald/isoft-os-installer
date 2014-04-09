@@ -95,11 +95,11 @@ void WizardInstaller::reTranslateUi()
 {
     setWindowTitle( tr("Installer Wizard") ); 
     
-    setButtonText( QWizard::BackButton, tr("< &Back") );
-    setButtonText( QWizard::NextButton, tr("&Next >") );
-    setButtonText( QWizard::CommitButton, tr("&Next >") );
-    setButtonText( QWizard::FinishButton, tr("&Finish") );
-    setButtonText( QWizard::CancelButton, tr("&Cancel") );
+    setButtonText(QWizard::BackButton, tr("< &Back"));
+    setButtonText(QWizard::NextButton, tr("&Next >"));
+    setButtonText(QWizard::CommitButton, tr("&Next >"));
+    setButtonText(QWizard::FinishButton, tr("&Finish"));
+    setButtonText(QWizard::CancelButton, tr("&Cancel"));
 }
 
 // exitstate: false stand for error exit.

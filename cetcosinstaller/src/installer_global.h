@@ -31,8 +31,6 @@ enum Page_ID {
     Page_Partition_Auto, 
     Page_Partition_Simple, 
     Page_Partition_Advanced,
-//    Page_Packages_Query,
-//    Page_Packages,
     Page_Summary,
     Page_Progress,
     Page_UserAdd,

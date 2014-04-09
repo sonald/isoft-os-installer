@@ -73,15 +73,14 @@ DisksWidget::DisksWidget(QWidget *parent, const Modes &mode, QString locale)
 	m_tree->hideColumn(colBeginBlock);
 	m_tree->hideColumn(colEndBlock);
 	m_tree->setMinimumHeight(200);
-//	m_tree->setUniformRowHeights(true);
 	
 	initTree();
 
 	QHBoxLayout *bottom = new QHBoxLayout;
-	m_add = new QPushButton(tr("Cre&ate"), this);
-	m_edit = new QPushButton(tr("&Edit"), this);
-	m_del = new QPushButton(tr("&Delete"), this);
 	QPushButton *m_reset = new QPushButton(tr("&Reset"), this);
+	m_edit = new QPushButton(tr("&Edit"), this);
+	m_add = new QPushButton(tr("Cre&ate"), this);
+	m_del = new QPushButton(tr("&Delete"), this);
 	QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Fixed);
 
 	m_add->setEnabled(false);

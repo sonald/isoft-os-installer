@@ -93,9 +93,12 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
 
     m_passwdLayout = new QGridLayout();
     m_passwdLayout->addWidget( new QLabel(tr("Password:")), 0,0,1,1 );
+    //m_passwdLayout->addWidget( new QLabel(tr("Password:")), 0,0,1,1 );
     m_passwdLayout->addWidget( m_passwd, 0,1,1,1 );
+    m_passwdLayout->addWidget( new QLabel("*"), 0,2 );
     m_passwdLayout->addWidget( new QLabel(tr("Confirm:")), 1,0,1,1 );
     m_passwdLayout->addWidget( m_confirm, 1,1,1,1 );
+    m_passwdLayout->addWidget( new QLabel("*"), 1,2 );
 
     m_rootLayout = new QVBoxLayout();
     m_rootLayout->addLayout( m_descriptLayout );
@@ -133,6 +136,7 @@ WizardPage_UserAdd::WizardPage_UserAdd(QWidget *parent)
     m_userLayout->addLayout(m_labelLayout, 0, 0, 1, 2);
     m_userLayout->addWidget(new QLabel(tr("Username:")), 1, 0);
     m_userLayout->addWidget(m_user1, 1, 1);
+    m_userLayout->addWidget( new QLabel("*"), 1, 2 );
     m_userLayout->addWidget(new QLabel(tr("Password:")), 2, 0, Qt::AlignRight);
     m_userLayout->addWidget(m_userPasswd, 2, 1);
     m_userLayout->addWidget(new QLabel(tr("Confirm:")), 3, 0, Qt::AlignRight);

@@ -13,6 +13,7 @@ const int colFsType = 4;
 ItemButton::ItemButton(QTreeWidgetItem *item, const QString &text, const QString &originPath)
 	: QPushButton(text)
 {
+    setFocusPolicy(Qt::NoFocus);
 	parentItem = item;
 	if (originPath.isEmpty())
 		device = item->text(0);
