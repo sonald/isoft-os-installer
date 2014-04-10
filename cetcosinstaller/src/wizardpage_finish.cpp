@@ -66,7 +66,6 @@ void WizardPage_Finish::start()
 {
     wizard()->button(QWizard::FinishButton)->setEnabled(false);
     QTimer::singleShot(40, m_thread, SLOT(start()));
-    //m_thread->start();
     m_dialog->show();
 }
 
@@ -76,6 +75,7 @@ void WizardPage_Finish::restorePage()
     WizardInstaller *installer = qobject_cast<WizardInstaller*>(wizard());
     //busy wait until keys is ready and copied
     installer->copyGpgKeys();
+    m_dialog->accept();
 
     QApplication::restoreOverrideCursor();
     if ( m_poststate ) {

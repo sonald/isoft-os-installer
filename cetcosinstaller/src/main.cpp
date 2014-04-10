@@ -98,9 +98,8 @@ int main(int argc, char* argv[])
     QRect dr = qApp->desktop()->geometry();
     wizard_installer.move((dr.width()-wizard_installer.width())/2,
                           (dr.height()-wizard_installer.height())/2);
-    wizard_installer.show();
-
     wizard_installer.doPacmanInit();
+    wizard_installer.show();
 
 	// run the app.
 	int ret;

@@ -163,6 +163,9 @@ void WizardInstaller::copyGpgKeys()
     }
 
     qDebug() << "do copyGpgKeys";
+    string cmd("cp -ar /tmp/gnupg /tmp/rootdir/etc/pacman.d/gnupg");
+    system(cmd.c_str());
+
     keysCopied = true;
     delete _pacmanInitProc;
     delete _pacmanPopulateProc;
