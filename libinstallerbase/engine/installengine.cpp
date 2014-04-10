@@ -87,7 +87,7 @@ Engine::Engine(WorkMode mode, const char *conf_file)
     
     if (_workmode == ReadConf) {
         readConf(_filename.c_str());
-    }else if((_workmode == WriteConf) || (_workmode == Install)) {
+    }else if (_workmode == WriteConf ) {
         ofstream out(_filename.c_str(), ios::trunc); // empty the file
     }
     
@@ -359,7 +359,7 @@ bool Engine::postscript(void)
     }// run post cmds end
     
     // write to configure file
-    if(_workmode == Install || _workmode == WriteConf) {
+    if(_workmode == WriteConf) {
         ofstream out(_filename.c_str(), ios::app);
         if(out) {
             Cmd cmd;

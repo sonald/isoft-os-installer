@@ -150,7 +150,7 @@ void WizardInstaller::doPacmanInit()
 
 void WizardInstaller::copyGpgKeys()
 {
-    bool keysCopied = false;
+    static bool keysCopied = false;
 
     while (!_pacmanInitDone) {
         qDebug() << "busy wait here";
@@ -170,7 +170,7 @@ void WizardInstaller::copyGpgKeys()
 
 void WizardInstaller::onProcessFinished(int exitCode, QProcess::ExitStatus status)
 {
-    int stage = 1;
+    static int stage = 1;
     if (stage == 1) {
         qDebug() << "key init done";
         _pacmanPopulateProc = new QProcess;
