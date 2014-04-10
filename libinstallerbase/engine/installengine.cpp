@@ -351,7 +351,10 @@ bool Engine::postscript(void)
         }
 
         // umount /dev /sys /proc
+        system(("umount " + _rootdir + "/dev/shm").c_str());
+        system(("umount " + _rootdir + "/dev/pts").c_str());
         system(("umount " + _rootdir + "/dev").c_str());
+        system(("umount " + _rootdir + "/run").c_str());
         system(("umount " + _rootdir + "/sys/fs/fuse/connections").c_str());
         system(("umount " + _rootdir + "/sys").c_str());
         system(("umount " + _rootdir + "/proc").c_str());

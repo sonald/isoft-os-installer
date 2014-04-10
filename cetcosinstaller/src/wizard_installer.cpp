@@ -185,7 +185,6 @@ void WizardInstaller::onProcessFinished(int exitCode, QProcess::ExitStatus statu
     if (stage == 2) {
         _pacmanInitDone = true;
         qDebug() << "key populate done";
-        copyGpgKeys();
     }
     stage++;
 }
