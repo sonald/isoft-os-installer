@@ -150,7 +150,7 @@ ln -sf vim /usr/bin/vi
 test -f /etc/cups/cups-file.conf && sed -i 's/SystemGroup sys root/SystemGroup sys root users/' /etc/cups/cups-file.conf 
 test -f /usr/lib/systemd/system/kdm-plymouth.service && systemctl enable kdm-plymouth || systemctl enable kdm
 
-pacman-key --init && pacman-key --populate archlinux
+##pacman-key --init && pacman-key --populate archlinux
 
 ##no pacman-init.service file
 ##systemctl enable pacman-init

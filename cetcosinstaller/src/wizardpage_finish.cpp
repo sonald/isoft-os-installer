@@ -4,6 +4,7 @@
 #include "dialog_postscript.h"
 #include "wizardpage_finish.h"
 #include "wizardpage_useradd.h"
+#include "wizard_installer.h"
 
     WizardPage_Finish::WizardPage_Finish(QWidget *parent)
 : QWizardPage(parent)
@@ -54,7 +55,7 @@ void WizardPage_Finish::initializePage()
 
     m_dialog = new DialogPostscript(this);
     m_dialog->setModal( true );
-    connect( m_thread, SIGNAL( finished() ), m_dialog, SLOT( accept() ) );
+    //connect( m_thread, SIGNAL( finished() ), m_dialog, SLOT( accept() ) );
 
     m_dialog->setLabelText();
     QApplication::setOverrideCursor( QCursor(Qt::WaitCursor) );
@@ -71,6 +72,11 @@ void WizardPage_Finish::start()
 
 void WizardPage_Finish::restorePage()
 {
+    // copy pacman gpg keys into installed root here
+    WizardInstaller *installer = qobject_cast<WizardInstaller*>(wizard());
+    //busy wait until keys is ready and copied
+    installer->copyGpgKeys();
+
     QApplication::restoreOverrideCursor();
     if ( m_poststate ) {
         setSubTitle( tr("Congratulation! Enjoy it.") );
@@ -79,7 +85,6 @@ void WizardPage_Finish::restorePage()
     }
 
     emit completeChanged();
-    //wizard()->button( QWizard::FinishButton )->setEnabled( true );
 }
 
 bool WizardPage_Finish::validatePage()

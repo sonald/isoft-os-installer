@@ -100,6 +100,8 @@ int main(int argc, char* argv[])
                           (dr.height()-wizard_installer.height())/2);
     wizard_installer.show();
 
+    wizard_installer.doPacmanInit();
+
 	// run the app.
 	int ret;
 	ret = app.exec();

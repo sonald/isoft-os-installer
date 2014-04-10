@@ -134,3 +134,55 @@ void WizardInstaller::reject()
         }
     }
 }
+
+void WizardInstaller::doPacmanInit()
+{
+    //pacman-key --init && pacman-key --populate archlinux
+    _pacmanInitDone = false;
+    _pacmanPopulateProc = NULL;
+
+    _pacmanInitProc = new QProcess;
+    connect(_pacmanInitProc, SIGNAL(finished(int, QProcess::ExitStatus)),
+            this, SLOT(onProcessFinished(int, QProcess::ExitStatus)));
+    _pacmanInitProc->start("pacman-key --gpgdir /tmp/gnupg --init");
+
+}
+
+void WizardInstaller::copyGpgKeys()
+{
+    bool keysCopied = false;
+
+    while (!_pacmanInitDone) {
+        qDebug() << "busy wait here";
+        qApp->processEvents();
+    }
+
+    if (keysCopied) {
+        qDebug() << "keys already copied, escape";
+        return;
+    }
+
+    qDebug() << "do copyGpgKeys";
+    keysCopied = true;
+    delete _pacmanInitProc;
+    delete _pacmanPopulateProc;
+}
+
+void WizardInstaller::onProcessFinished(int exitCode, QProcess::ExitStatus status)
+{
+    int stage = 1;
+    if (stage == 1) {
+        qDebug() << "key init done";
+        _pacmanPopulateProc = new QProcess;
+        connect(_pacmanPopulateProc, SIGNAL(finished(int, QProcess::ExitStatus)),
+                this, SLOT(onProcessFinished(int, QProcess::ExitStatus)));
+        _pacmanPopulateProc->start("pacman-key --gpgdir /tmp/gnupg --populate archlinux");
+    }
+
+    if (stage == 2) {
+        _pacmanInitDone = true;
+        qDebug() << "key populate done";
+        copyGpgKeys();
+    }
+    stage++;
+}
